@@ -65,7 +65,7 @@ html {
 }
 
 body {
-  @include main-text();
+  @include main-text;
   color: $color-text-dark;
 
   display: flex;

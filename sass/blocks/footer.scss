@@ -7,7 +7,7 @@
 
 .footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-bottom: 10px;
 
   width: $layout-width;
@@ -15,6 +15,7 @@
 
 // Блок копирайта в футере сайта
 .copyright {
+  text-align: right;
   color: $color-beige;
   white-space: nowrap;
 }

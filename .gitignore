@@ -1,12 +1,13 @@
-# Файлы и директории операционной системы
+# Файлы OS
 .DS_Store
 Thumbs.db
 
-# Файлы редактора
+# Файлы IDE
 .idea
+.vscode
 *.sublime*
 
-# Вспомогательные файлы и директории
+# Log and NPM files
 *.log*
 node_modules/
 npm-debug.*
