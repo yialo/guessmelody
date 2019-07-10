@@ -18,7 +18,7 @@ gulp.task(`style`, () => {
     .pipe(sass())
     .pipe(postcss([
       autoprefixer(),
-      mqpacker({sort: true})
+      mqpacker({sort: true}),
     ]))
     .pipe(gulp.dest(`build/css`))
     .pipe(server.stream())

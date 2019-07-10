@@ -6,7 +6,7 @@
     "last 2 Opera versions",
     "last 2 Edge versions"
   ],
-  "description": "Личный проект «{{projectTitle}}» от HTML Academy",
+  "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
     "autoprefixer": "9.6.1",
     "browser-sync": "2.26.7",
@@ -29,12 +29,16 @@
   },
   "name": "guessmelody",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:yialo/guessmelody.git"
+  },
   "scripts": {
     "build": "gulp build",
     "editorconfig": "editorconfig-cli",
-    "eslint": "eslint ./gulpfile.js js/",
+    "eslint": "eslint gulpfile.js \"js/**/*.js\"",
     "start": "gulp",
-    "stylelint": "stylelint 'sass/**/*.scss' --syntax scss",
+    "stylelint": "stylelint \"sass/**/*.scss\" --syntax scss",
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "version": "5.0.0"
