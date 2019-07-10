@@ -1,4 +1,11 @@
 {
+  "browserslist": [
+    "last 1 version",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Opera versions",
+    "last 2 Edge versions"
+  ],
   "description": "Личный проект «{{projectTitle}}» от HTML Academy",
   "devDependencies": {
     "autoprefixer": "9.6.1",
@@ -26,7 +33,7 @@
     "build": "gulp build",
     "editorconfig": "editorconfig-cli",
     "eslint": "eslint ./gulpfile.js js/",
-    "start": "gulp serve",
+    "start": "gulp",
     "stylelint": "stylelint 'sass/**/*.scss' --syntax scss",
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
