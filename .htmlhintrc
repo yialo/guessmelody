@@ -10,7 +10,6 @@
   "space-tab-mixed-disabled": "space",
   "spec-char-escape": true,
   "src-not-empty": true,
-  "style-disabled": true,
   "tag-pair": true,
   "title-require": true
 }
