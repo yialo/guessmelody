@@ -30,7 +30,8 @@ gulp.task('style', () => {
 gulp.task('scripts', () => {
   return gulp.src(`js/**/*.js`)
     .pipe(plumber())
-    .pipe(gulp.dest(`build/js/`));
+    .pipe(gulp.dest(`build/js/`))
+    .pipe(server.stream());
 });
 
 gulp.task('copy-html', () => {
@@ -57,6 +58,8 @@ gulp.task('copy', gulp.parallel(
     'copy-binary'
 ));
 
+
+// TODO: add as separate task, do not use in standard deploy
 gulp.task('imagemin', () => {
   return gulp.src(`build/img/**/*.{jpg,png,gif}`)
     .pipe(imagemin([
@@ -78,7 +81,7 @@ gulp.task('js-watch', gulp.series(
     }
 ));
 
-gulp.task('assemble', gulp.series('clean', 'copy'));
+gulp.task('build', gulp.series('clean', 'copy'));
 
 gulp.task('serve', () => {
   server.init({
@@ -89,16 +92,10 @@ gulp.task('serve', () => {
     ui: false
   });
 
+  gulp.watch(`*.html`, gulp.series('copy-html'));
   gulp.watch(`sass/**/*.{scss,sass}`, gulp.series('style'));
-  gulp.watch(`*.html`).on('change', (evt) => {
-    if (evt.type !== 'deleted') {
-      gulp.series('copy-html');
-    }
-  });
   gulp.watch(`js/**/*.js`, gulp.series('js-watch'));
 });
-
-gulp.task('build', gulp.series('assemble', 'imagemin'));
 
 gulp.task('test', () => {});
 
