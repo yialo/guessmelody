@@ -38,6 +38,7 @@
     "build": "gulp build",
     "editorconfig": "editorconfig-cli",
     "eslint": "eslint gulpfile.js \"js/**/*.js\"",
+    "imagemin": "gulp imagemin",
     "start": "gulp",
     "stylelint": "stylelint \"sass/**/*.scss\" --syntax scss",
     "test": "npm run eslint && npm run stylelint && gulp test"

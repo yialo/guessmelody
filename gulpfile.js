@@ -43,7 +43,7 @@ gulp.task('copy-html', () => {
 gulp.task('copy-binary', () => {
   return gulp.src(
       [
-        `fonts/**/*.{woff,woff2}`,
+        `fonts/*.{woff,woff2}`,
         `img/*.*`,
       ],
       {base: `.`}
@@ -57,17 +57,6 @@ gulp.task('copy', gulp.parallel(
     'style',
     'copy-binary'
 ));
-
-
-// TODO: add as separate task, do not use in standard deploy
-gulp.task('imagemin', () => {
-  return gulp.src(`build/img/**/*.{jpg,png,gif}`)
-    .pipe(imagemin([
-      imagemin.optipng({optimizationLevel: 3}),
-      imagemin.jpegtran({progressive: true})
-    ]))
-    .pipe(gulp.dest(`build/img`));
-});
 
 gulp.task('clean', () => {
   return del(`build`);
@@ -95,6 +84,15 @@ gulp.task('serve', () => {
   gulp.watch(`*.html`, gulp.series('copy-html'));
   gulp.watch(`sass/**/*.{scss,sass}`, gulp.series('style'));
   gulp.watch(`js/**/*.js`, gulp.series('js-watch'));
+});
+
+gulp.task('imagemin', () => {
+  return gulp.src(`resources/raw/**/*.{gif,jpeg,jpg,png,svg}`)
+    .pipe(imagemin([
+      imagemin.optipng({optimizationLevel: 3}),
+      imagemin.jpegtran({progressive: true})
+    ]))
+    .pipe(gulp.dest(`img`));
 });
 
 gulp.task('test', () => {});
