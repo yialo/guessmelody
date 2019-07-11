@@ -7,8 +7,11 @@ Thumbs.db
 .vscode
 *.sublime*
 
-# Log and NPM files
+# Service files
 *.log*
+bash.exe.stackdump
+
+# NPM files
 node_modules/
 npm-debug.*
 package-lock.json
