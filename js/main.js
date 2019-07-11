@@ -1,5 +1,10 @@
 'use strict';
 
+const Keycode = {
+  LEFT: 37,
+  RIGHT: 39,
+};
+
 function getScreenTemplates() {
   const templateContainers = document.querySelectorAll('template');
   const templates = [];
@@ -19,33 +24,51 @@ function renderScreen(index) {
 
 renderScreen(currentScreenIndex);
 
-function addScreenToggleHandlers() {
-  const Buttons = {
-    previous: appEl.querySelector(`.js-arrow-previous`),
-    next: appEl.querySelector(`.js-arrow-next`),
-  };
-
-  Buttons.previous.addEventListener('click', () => {
-    if (currentScreenIndex === 0) {
-      currentScreenIndex = screenTemplates.length - 1;
-    } else {
-      currentScreenIndex -= 1;
-    }
+const ArrowButton = function (direction) {
+  this.direction = direction;
+  this.getEl();
+  this.el.addEventListener('click', this.changeScreen.bind(this));
+  document.addEventListener('keydown', this.keyPressHandler.bind(this));
+};
+ArrowButton.prototype = {
+  screenCheckerMap: {
+    'previous': () => {
+      if (currentScreenIndex === 0) {
+        currentScreenIndex = screenTemplates.length - 1;
+      } else {
+        currentScreenIndex -= 1;
+      }
+    },
+    'next': () => {
+      if (currentScreenIndex === screenTemplates.length - 1) {
+        currentScreenIndex = 0;
+      } else {
+        currentScreenIndex += 1;
+      }
+    },
+  },
+  keyMap: {
+    'previous': 'LEFT',
+    'next': 'RIGHT',
+  },
+  getEl() {
+    this.el = appEl.querySelector(`.js-arrow-${this.direction}`);
+  },
+  changeScreen() {
+    const checkScreen = this.screenCheckerMap[this.direction];
+    checkScreen();
     const newScreenEl = screenTemplates[currentScreenIndex].cloneNode(true);
     mainEl.removeChild(mainEl.children[0]);
     mainEl.appendChild(newScreenEl);
-  });
-
-  Buttons.next.addEventListener('click', () => {
-    if (currentScreenIndex === screenTemplates.length - 1) {
-      currentScreenIndex = 0;
-    } else {
-      currentScreenIndex += 1;
+  },
+  keyPressHandler(evt) {
+    const keyName = this.keyMap[this.direction];
+    if (evt.keyCode === Keycode[keyName]) {
+      evt.preventDefault();
+      this.changeScreen();
     }
-    const newScreenEl = screenTemplates[currentScreenIndex].cloneNode(true);
-    mainEl.removeChild(mainEl.children[0]);
-    mainEl.appendChild(newScreenEl);
-  });
-}
+  },
+};
 
-addScreenToggleHandlers();
+const previousScreenButton = new ArrowButton('previous');
+const nextScreenButton = new ArrowButton('next');
