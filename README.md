@@ -4,3 +4,14 @@
 
 [travis-image]: https://travis-ci.com/htmlacademy/ecmascript-hackathon-guessmelody.svg?branch=master
 [travis-url]: https://travis-ci.com/htmlacademy/ecmascript-hackathon-guessmelody
+
+### Install project
+    npm install
+### Compile and hot-reload for development
+    npm start
+### Compile and minify for production
+    npm run prod
+### Lint CSS and JS code
+    npm run test
+### Minimize images
+    npm run imagemin

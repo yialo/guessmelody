@@ -35,7 +35,6 @@
   },
   "scripts": {
     "build": "gulp build",
-    "editorconfig": "editorconfig-cli",
     "eslint": "eslint gulpfile.js \"js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "start": "gulp",
