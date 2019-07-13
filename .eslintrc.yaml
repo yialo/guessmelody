@@ -3,6 +3,12 @@ env:
   commonjs: true
   es6: true
 extends: htmlacademy/es6
+parserOptions:
+  sourceType: module
+overrides:
+  - files: [gulpfile.js, ./gulp/**/*.js]
+    parserOptions:
+      sourceType: 'script'
 rules:
   max-len:
     - error
