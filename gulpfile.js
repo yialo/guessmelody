@@ -14,68 +14,23 @@ global.$ = {
   sass: require('gulp-sass'),
   server: require('browser-sync').create(),
   sourcemaps: require('gulp-sourcemaps'),
-
-  paths: require('./gulp/paths/tasks'),
+  paths: require('./gulp/paths/tasks.js'),
 };
 
-$.paths.forEach((taskPath) => require(taskPath));
+require('./gulp/tasks/clean');
+require('./gulp/tasks/copy');
+require('./gulp/tasks/imagemin');
+require('./gulp/tasks/js-watch');
+require('./gulp/tasks/scripts');
+require('./gulp/tasks/serve');
+require('./gulp/tasks/style');
 
-$.gulp.task('scripts', () => $.gulp
-  .src(`js/**/*.js`)
-  .pipe($.plumber())
-  .pipe($.sourcemaps.init())
-  .pipe($.rollup({}, {format: 'iife'}))
-  .pipe($.sourcemaps.write(``))
-  .pipe($.gulp.dest(`build/js/`))
-  .pipe($.server.stream())
-);
+// $.paths.forEach((taskPath) => require(taskPath));
 
-$.gulp.task('copy-html', () => $.gulp
-  .src(`*.{html,ico}`)
-  .pipe($.gulp.dest(`build`))
-  .pipe($.server.stream())
-);
-
-$.gulp.task('copy-binary', () => $.gulp
-  .src(
-      [`fonts/*.{woff,woff2}`, `img/*.*`],
-      {base: `.`}
-  )
-    .pipe($.gulp.dest(`build`))
-);
-
-$.gulp.task('copy', $.gulp.parallel(
-    'copy-html',
-    'scripts',
-    'style',
-    'copy-binary'
+$.gulp.task('build', $.gulp.series(
+    'clean',
+    $.gulp.parallel('copy', 'scripts', 'style')
 ));
-
-$.gulp.task('clean', () => $.del(`build`));
-
-$.gulp.task('js-watch', $.gulp.series(
-    'scripts',
-    (done) => {
-      $.server.reload();
-      done();
-    }
-));
-
-$.gulp.task('build', $.gulp.series('clean', 'copy'));
-
-$.gulp.task('serve', () => {
-  $.server.init({
-    server: `./build`,
-    notify: false,
-    open: true,
-    port: 3502,
-    ui: false
-  });
-
-  $.gulp.watch(`*.html`, $.gulp.series('copy-html'));
-  $.gulp.watch(`sass/**/*.{scss,sass}`, $.gulp.series('style'));
-  $.gulp.watch(`js/**/*.js`, $.gulp.series('js-watch'));
-});
 
 $.gulp.task('test', () => {});
 

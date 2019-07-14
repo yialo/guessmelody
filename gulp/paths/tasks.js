@@ -1,6 +1,8 @@
 // const base = '../tasks/';
 
 module.exports = [
-  './gulp/tasks/imagemin',
-  './gulp/tasks/style',
+  './gulp/tasks/clean.js',
+  './gulp/tasks/imagemin.js',
+  './gulp/tasks/scripts.js',
+  './gulp/tasks/style.js',
 ];

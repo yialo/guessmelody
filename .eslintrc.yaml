@@ -1,15 +1,16 @@
 env:
   browser: true
-  commonjs: true
   es6: true
   node: true
 extends: htmlacademy/es6
-parserOptions:
-  sourceType: module
+globals:
+  $: readonly
 overrides:
   - files: [gulpfile.js]
     parserOptions:
       sourceType: 'script'
+parserOptions:
+  sourceType: module
 rules:
   max-len:
     - error
