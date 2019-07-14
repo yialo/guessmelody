@@ -2,11 +2,12 @@ env:
   browser: true
   commonjs: true
   es6: true
+  node: true
 extends: htmlacademy/es6
 parserOptions:
   sourceType: module
 overrides:
-  - files: [gulpfile.js, ./gulp/**/*.js]
+  - files: [gulpfile.js]
     parserOptions:
       sourceType: 'script'
 rules:
