@@ -7,9 +7,9 @@ const appElement = document.querySelector('.app');
 const mainElement = appElement.querySelector('.main');
 
 export function render(template) {
-  const container = document.createElement('div');
-  container.innerHTML = template;
-  return container;
+  const tempElement = document.createElement('template');
+  tempElement.innerHTML = template;
+  return tempElement.content;
 }
 
 export function changeScreen(screenElement) {
