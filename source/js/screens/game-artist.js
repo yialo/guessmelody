@@ -60,4 +60,6 @@ const template =
   </section>
 </section>`;
 
-export default render(template);
+const container = render(template);
+
+export default container;

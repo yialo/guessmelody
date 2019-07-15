@@ -1,4 +1,5 @@
-import {render} from '../lib/util';
+import {render, changeScreen} from '../lib/util';
+import gameArtistScreen from './game-artist';
 
 const template =
 `<section class="game game--genre">
@@ -78,4 +79,15 @@ const template =
   </section>
 </section>`;
 
-export default render(template);
+const container = render(template);
+
+const submitButton = container.querySelector('.game__submit');
+// submitButton.setAttribute('disabled', 'disabled');
+submitButton.addEventListener('click', () => changeScreen(gameArtistScreen));
+
+/* const checkboxes = container.querySelectorAll('.game__input');
+checkboxes.forEach((el) => el.addEventListener('change', () =>
+  if // TODO: добавить проверку состояний
+)); */
+
+export default container;
