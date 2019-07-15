@@ -64,7 +64,7 @@ ArrowButton.prototype = {
     const checkScreen = this.screenCheckerMap[this.direction];
     checkScreen();
     const newScreenEl = screenTemplates[currentScreenIndex].cloneNode(true);
-    mainEl.removeChild(mainEl.children[0]);
+    mainEl.innerHTML = ``;
     mainEl.appendChild(newScreenEl);
   },
   keyPressHandler(evt) {

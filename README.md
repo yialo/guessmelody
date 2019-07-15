@@ -9,8 +9,6 @@
     npm install
 ### Compile and hot-reload for development
     npm start
-### Compile and minify for production
-    npm run prod
 ### Lint CSS and JS code
     npm run test
 ### Minimize images

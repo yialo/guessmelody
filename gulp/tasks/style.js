@@ -3,13 +3,14 @@
 module.exports = () =>
   $.gulp.task('style', () =>
     $.gulp
-      .src(`sass/style.scss`)
-      .pipe($.plumber())
-      .pipe($.sass())
-      .pipe($.postcss([$.autoprefixer()]))
-      .pipe($.gulp.dest(`build/css`))
+      .src($.path.source['style-output'])
+      .pipe($.pl.plumber())
+      .pipe($.pl.sourcemaps.init())
+      .pipe($.pl.sass())
+      .pipe($.pl.postcss([$.autoprefixer()]))
+      .pipe($.pl.csso())
+      .pipe($.pl.rename(`style.min.css`))
+      .pipe($.pl.sourcemaps.write(``))
+      .pipe($.gulp.dest(`${$.path.output.root}/css`))
       .pipe($.server.stream())
-      .pipe($.minify())
-      .pipe($.rename(`style.min.css`))
-      .pipe($.gulp.dest(`build/css`))
   );

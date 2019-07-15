@@ -3,11 +3,11 @@
 module.exports = () =>
   $.gulp.task('scripts', () =>
     $.gulp
-      .src(`js/**/*.js`)
-      .pipe($.plumber())
-      .pipe($.sourcemaps.init())
-      .pipe($.rollup({}, {format: 'iife'}))
-      .pipe($.sourcemaps.write(``))
-      .pipe($.gulp.dest(`build/js/`))
+      .src($.path.source.scripts)
+      .pipe($.pl.plumber())
+      .pipe($.pl.sourcemaps.init())
+      .pipe($.pl.betterRollup({}, {format: 'iife'}))
+      .pipe($.pl.sourcemaps.write(``))
+      .pipe($.gulp.dest(`${$.path.output.root}/js`))
       .pipe($.server.stream())
   );
