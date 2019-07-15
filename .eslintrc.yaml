@@ -5,11 +5,11 @@ extends: htmlacademy/es6
 globals:
   $: readonly
 overrides:
-  - files: [gulpfile.js, ./gulp/**/*.js]
+  - files: [./gulpfile.js, ./gulp/**/*.js]
     env:
       node: true
     parserOptions:
-      sourceType: 'script'
+      sourceType: script
 parserOptions:
   ecmaVersion: 2015
   sourceType: module

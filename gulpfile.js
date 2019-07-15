@@ -2,7 +2,7 @@
 
 const paths = `./gulp/paths/`;
 
-global.$ = {
+global['$'] = {
   autoprefixer: require('autoprefixer'),
   del: require('del'),
   gulp: require('gulp'),
