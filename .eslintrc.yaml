@@ -1,12 +1,13 @@
 env:
   browser: true
   es6: true
-  node: true
 extends: htmlacademy/es6
 globals:
   $: readonly
 overrides:
-  - files: [gulpfile.js]
+  - files: [gulpfile.js, ./gulp/**/*.js]
+    env:
+      node: true
     parserOptions:
       sourceType: 'script'
 parserOptions:

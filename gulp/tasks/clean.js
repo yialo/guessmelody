@@ -1,4 +1,3 @@
-module.exports = () => $.gulp.task(
-    'clean',
-    () => $.del(`build`)
-);
+'use strict';
+
+module.exports = () => $.gulp.task('clean', () => $.del(`build`));

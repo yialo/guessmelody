@@ -1,5 +1,3 @@
-'use strict';
-
 const Keycode = {
   LEFT: 37,
   RIGHT: 39,
@@ -58,7 +56,7 @@ ArrowButton.prototype = {
   createEl() {
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
-    button.classList.add(`arrows__btn`, `.js-arrow-${this.direction}`);
+    button.classList.add(`arrows__btn`, `js-arrow-${this.direction}`);
     button.innerHTML = this.text[this.direction];
     this.el = button;
   },
