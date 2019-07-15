@@ -2,12 +2,8 @@
  * Общие стили для кнопок
  */
 
-
-@import "../variables/colors";
-@import "../mixins/text";
-
 .button {
-  @include bold-text;
+  @include bold-text();
   padding: 5px 20px;
 
   color: $color-text-dark;

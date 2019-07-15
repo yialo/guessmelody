@@ -1,0 +1,40 @@
+.content-box-component {
+  box-sizing: content-box;
+}
+
+.visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.app {
+  position: relative;
+  margin-bottom: 50px;
+  padding-top: 10px;
+
+  width: $layout-width;
+}
+
+.main {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  height: $layout-height;
+  width: $layout-width;
+}

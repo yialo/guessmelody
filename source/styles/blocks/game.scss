@@ -2,8 +2,6 @@
  * Игровые экраны
  */
 
-@import "../mixins/text";
-
 .game {
   display: flex;
   flex-direction: column;
@@ -72,7 +70,7 @@
 }
 
 .game__title {
-  @include italic-title;
+  @include italic-title();
 
   margin-bottom: 30px;
 }
@@ -106,7 +104,7 @@
 }
 
 .game__submit {
-  @include italic-text;
+  @include italic-text();
   margin-top: 30px;
   padding: 5px 20px;
 

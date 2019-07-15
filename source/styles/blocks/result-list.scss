@@ -3,10 +3,6 @@
  * Список всех треков.
  */
 
-@import "../mixins/general";
-@import "../mixins/text";
-@import "../variables/colors";
-
 // Переопределяю стили для текста и кнопки
 .result--list {
   .result__title {
@@ -16,7 +12,7 @@
   }
 
   .result__text {
-    @include italic-text;
+    @include italic-text();
 
     margin: 0;
     margin-bottom: 5px;
@@ -48,7 +44,7 @@
 
 // Стилизую список исполнителей
 .result__list {
-  @include list-unstyled;
+  @include list-unstyled();
 
   width: 450px;
   margin-top: 10px;

@@ -2,11 +2,6 @@
  * Общие стили для экранов с результатами игры
  */
 
-@import "../variables/colors";
-@import "../variables/layout";
-@import "../mixins/text";
-
-
 .result {
   display: flex;
   align-items: center;
@@ -23,14 +18,14 @@
 }
 
 .result__title {
-  @include italic-title;
+  @include italic-title();
   text-align: center;
 
   margin-top: 50px;
 }
 
 .result__total {
-  @include italic-title;
+  @include italic-title();
   text-align: center;
   font-size: 30px;
 

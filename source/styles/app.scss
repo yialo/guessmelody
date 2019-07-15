@@ -1,6 +1,18 @@
+// Переенные
+@import "variables/colors";
+@import "variables/fonts";
+@import "variables/layout";
+
+// Примеси
+@import "mixins/general";
+@import "mixins/text";
+
 // Общие стили
-@import "normalize";
-@import "scaffolding";
+@import "~normalize.css";
+@import "scaffold/fonts";
+@import "scaffold/tags";
+@import "scaffold/animations";
+@import "scaffold/common";
 
 // Стили основных блоков
 @import "blocks/footer";
