@@ -3,7 +3,7 @@
 module.exports = () =>
   $.gulp.task('style', () =>
     $.gulp
-      .src($.path.source['style-output'])
+      .src($.path.source['style-main'])
       .pipe($.pl.plumber())
       .pipe($.pl.sourcemaps.init())
       .pipe($.pl.sass())

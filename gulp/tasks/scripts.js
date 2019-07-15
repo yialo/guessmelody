@@ -3,7 +3,7 @@
 module.exports = () =>
   $.gulp.task('scripts', () =>
     $.gulp
-      .src($.path.source.scripts)
+      .src($.path.source['scripts-main'])
       .pipe($.pl.plumber())
       .pipe($.pl.sourcemaps.init())
       .pipe($.pl.betterRollup({}, {format: 'iife'}))

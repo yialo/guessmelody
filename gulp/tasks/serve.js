@@ -4,7 +4,7 @@ const getWatchTask = require('./watch.js');
 getWatchTask();
 
 const {watch} = $.gulp;
-const {binary, html, scripts, 'style-all': style} = $.path.source;
+const {binary, html, 'scripts-all': scripts, 'style-all': style} = $.path.source;
 
 module.exports = () =>
   $.gulp.task('serve', () => {
