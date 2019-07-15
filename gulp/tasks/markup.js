@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = () =>
-  $.gulp.task('html', () =>
+  $.gulp.task('markup', () =>
     $.gulp
-      .src($.path.source.html)
+      .src($.path.markup)
       .pipe($.gulp.dest($.path.output.root))
       .pipe($.server.stream())
   );

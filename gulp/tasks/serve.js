@@ -1,10 +1,17 @@
 'use strict';
 
-const getWatchTask = require('./watch.js');
-getWatchTask();
+(function getWatchTasks() {
+  require('./watch.js')();
+}());
 
 const {watch} = $.gulp;
-const {fonts, images, html, 'scripts-all': scripts, 'style-all': style} = $.path.source;
+const {
+  fonts,
+  images: {bitmap, vector},
+  markup,
+  scripts: {all: scripts},
+  styles: {all: styles},
+} = $.path;
 
 module.exports = () =>
   $.gulp.task('serve', () => {
@@ -16,9 +23,10 @@ module.exports = () =>
       ui: false,
     });
 
-    watch(html, $.gulp.series('html'));
-    watch(style, $.gulp.series('style'));
+    watch(markup, $.gulp.series('markup'));
+    watch(styles, $.gulp.series('styles'));
     watch(scripts, $.gulp.series('scripts'));
     watch(fonts, $.gulp.series('watch-fonts'));
-    watch(images, $.gulp.series('watch-images'));
+    watch(bitmap, $.gulp.series('watch-bitmaps'));
+    watch(vector, $.gulp.series('watch-vector'));
   });

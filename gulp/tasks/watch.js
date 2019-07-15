@@ -1,7 +1,8 @@
 'use strict';
 
-const getReloadTask = require('./reload.js');
-getReloadTask();
+(function getReloadTask() {
+  require('./reload.js')();
+}());
 
 module.exports = () => {
   $.gulp.task(
@@ -9,7 +10,11 @@ module.exports = () => {
       $.gulp.series('fonts', 'reload')
   );
   $.gulp.task(
-      'watch-images',
-      $.gulp.series('images', 'reload')
+      'watch-bitmaps',
+      $.gulp.series('images-bitmap', 'reload')
+  );
+  $.gulp.task(
+      'watch-vector',
+      $.gulp.series('images-vector', 'reload')
   );
 };

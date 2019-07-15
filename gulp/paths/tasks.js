@@ -2,10 +2,11 @@
 
 const base = './gulp/tasks/';
 
+// Order matters!
 module.exports = [
-  `${base}html.js`,
+  `${base}markup.js`,
   `${base}scripts.js`,
-  `${base}style.js`,
+  `${base}styles.js`,
   `${base}clean.js`,
   `${base}fonts.js`,
   `${base}images.js`,

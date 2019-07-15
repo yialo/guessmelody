@@ -7,9 +7,13 @@ global.$ = {
   del: require('del'),
   gulp: require('gulp'),
   path: {
-    output: require(`${paths}output.js`),
-    source: require(`${paths}source.js`),
-    tasks: require(`${paths}tasks.js`),
+    'fonts': require(`${paths}fonts.js`),
+    'markup': require(`${paths}markup.js`),
+    'images': require(`${paths}images.js`),
+    'output': require(`${paths}output.js`),
+    'scripts': require(`${paths}scripts.js`),
+    'styles': require(`${paths}styles.js`),
+    'tasks': require(`${paths}tasks.js`),
   },
   pl: require('gulp-load-plugins')(),
   server: require('browser-sync').create(),
@@ -22,10 +26,11 @@ $.gulp.task(
         'clean',
         $.gulp.parallel(
             'fonts',
-            'images',
-            'html',
+            'images-bitmap',
+            'images-vector',
+            'markup',
             'scripts',
-            'style'
+            'styles'
         )
     )
 );

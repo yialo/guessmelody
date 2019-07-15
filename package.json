@@ -38,10 +38,10 @@
   },
   "scripts": {
     "build": "gulp build",
-    "eslint": "eslint gulpfile.js \"js/**/*.js\"",
+    "eslint": "eslint gulpfile.js \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "start": "gulp",
-    "stylelint": "stylelint \"sass/**/*.scss\" --syntax scss",
+    "stylelint": "stylelint \"./source/sass/**/*.scss\" --syntax scss",
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "version": "5.0.0"

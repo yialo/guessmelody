@@ -2,5 +2,5 @@
 
 module.exports = {
   'root': './build',
-  'images': './img',
+  'images': './source/img',
 };

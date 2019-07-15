@@ -3,7 +3,7 @@
 module.exports = () =>
   $.gulp.task('imagemin', () =>
     $.gulp
-      .src($.path.source['raw-images'])
+      .src($.path.images.raw)
       .pipe(
           $.pl.imagemin([
             $.pl.imagemin.optipng({optimizationLevel: 3}),
