@@ -16,6 +16,7 @@ global.$ = {
     'tasks': require(`${paths}tasks.js`),
   },
   pl: require('gulp-load-plugins')(),
+  sassImporter: require('node-sass-magic-importer'),
   server: require('browser-sync').create(),
 };
 

@@ -6,7 +6,7 @@ module.exports = () =>
       .src($.path.styles.main)
       .pipe($.pl.plumber())
       .pipe($.pl.sourcemaps.init())
-      .pipe($.pl.sass())
+      .pipe($.pl.sass({importer: $.sassImporter()}))
       .pipe($.pl.postcss([$.autoprefixer()]))
       .pipe($.pl.csso())
       .pipe($.pl.sourcemaps.write(``))
