@@ -21,7 +21,8 @@ $.gulp.task(
     $.gulp.series(
         'clean',
         $.gulp.parallel(
-            'binary',
+            'fonts',
+            'images',
             'html',
             'scripts',
             'style'

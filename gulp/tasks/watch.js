@@ -5,15 +5,11 @@ getReloadTask();
 
 module.exports = () => {
   $.gulp.task(
-      'watch-html',
-      $.gulp.series('html', 'reload')
+      'watch-fonts',
+      $.gulp.series('fonts', 'reload')
   );
   $.gulp.task(
-      'watch-scripts',
-      $.gulp.series('scripts', 'reload')
-  );
-  $.gulp.task(
-      'watch-binary',
-      $.gulp.series('binary', 'reload')
+      'watch-images',
+      $.gulp.series('images', 'reload')
   );
 };
