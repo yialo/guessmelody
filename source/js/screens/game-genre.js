@@ -1,5 +1,5 @@
 import {render, changeScreen} from '../lib/util';
-import gameArtistScreen from './game-artist';
+import getGameArtistScreen from './game-artist';
 
 const template =
 `<section class="game game--genre">
@@ -79,29 +79,32 @@ const template =
   </section>
 </section>`;
 
-const container = render(template);
+export default () => {
+  const container = render(template);
 
-const form = container.querySelector('.game__tracks');
-const checkboxes = [...form.querySelectorAll('.game__input')];
-const submitButton = form.querySelector('.game__submit');
+  const form = container.querySelector('.game__tracks');
+  const checkboxes = [...form.querySelectorAll('.game__input')];
+  const submitButton = form.querySelector('.game__submit');
 
-submitButton.setClickabilityState = function (isClickable) {
-  if (isClickable) this.removeAttribute('disabled');
-  else this.setAttribute('disabled', 'disabled');
+  submitButton.setClickabilityState = function (isClickable) {
+    if (isClickable) this.removeAttribute('disabled');
+    else this.setAttribute('disabled', 'disabled');
+  };
+  submitButton.setClickabilityState(false);
+
+  const checkSelectedCheckboxPresence = () => checkboxes.some((el) => el.checked);
+
+  const onCheckboxChange = () => {
+    if (checkSelectedCheckboxPresence()) submitButton.setClickabilityState(true);
+    else submitButton.setClickabilityState(false);
+  };
+  checkboxes.forEach((el) => el.addEventListener('change', onCheckboxChange));
+
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const gameArtistScreen = getGameArtistScreen();
+    changeScreen(gameArtistScreen);
+  });
+
+  return container;
 };
-submitButton.setClickabilityState(false);
-
-const checkSelectedCheckboxPresence = () => checkboxes.some((el) => el.checked);
-
-const onCheckboxChange = () => {
-  if (checkSelectedCheckboxPresence()) submitButton.setClickabilityState(true);
-  else submitButton.setClickabilityState(false);
-};
-checkboxes.forEach((el) => el.addEventListener('change', onCheckboxChange));
-
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  changeScreen(gameArtistScreen);
-});
-
-export default container;

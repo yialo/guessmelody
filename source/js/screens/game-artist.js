@@ -1,4 +1,7 @@
-import {render} from '../lib/util';
+import {render, changeScreen, getRandomArrayElement} from '../lib/util';
+import getResultsSuccessScreen from './result-success';
+import getFailTimeScreen from './result-fail-time';
+import getFailTriesScreen from './result-fail-tries';
 
 const template =
 `<section class="game game--artist">
@@ -60,6 +63,18 @@ const template =
   </section>
 </section>`;
 
-const container = render(template);
+export default () => {
+  const resultScreens = [getResultsSuccessScreen(), getFailTimeScreen(), getFailTriesScreen()];
+  const getRandomResultScreen = () => getRandomArrayElement(resultScreens);
 
-export default container;
+  const container = render(template);
+  const radioButtons = container.querySelectorAll('.artist__input');
+
+  const onRadioButtonClick = () => {
+    const newScreen = getRandomResultScreen();
+    changeScreen(newScreen);
+  };
+  radioButtons.forEach((el) => el.addEventListener('click', onRadioButtonClick));
+
+  return container;
+};

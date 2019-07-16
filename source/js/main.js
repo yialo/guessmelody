@@ -1,4 +1,4 @@
-import welcomeScreen from './screens/welcome';
+import getWelcomeScreen from './screens/welcome';
 import {changeScreen} from './lib/util';
 
-changeScreen(welcomeScreen);
+changeScreen(getWelcomeScreen());

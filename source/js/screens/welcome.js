@@ -1,5 +1,5 @@
 import {render, changeScreen} from '../lib/util';
-import gameGenreScreen from './game-genre';
+import getGameGenreScreen from './game-genre';
 
 const template =
 `<section class="welcome">
@@ -14,10 +14,10 @@ const template =
   <p class="welcome__text">Удачи!</p>
 </section>`;
 
-const container = render(template);
-
-const playButton = container.querySelector('.welcome__button');
-
-playButton.addEventListener('click', () => changeScreen(gameGenreScreen));
-
-export default container;
+export default () => {
+  const container = render(template);
+  const gameGenreScreen = getGameGenreScreen();
+  const playButton = container.querySelector('.welcome__button');
+  playButton.addEventListener('click', () => changeScreen(gameGenreScreen));
+  return container;
+};
