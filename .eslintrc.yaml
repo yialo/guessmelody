@@ -14,6 +14,9 @@ parserOptions:
   ecmaVersion: 2015
   sourceType: module
 rules:
+  curly:
+    - error
+    - multi-line
   max-len:
     - error
     - code: 100
