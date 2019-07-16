@@ -1,7 +1,4 @@
-import {render, changeScreen} from '../lib/util';
-import getGameArtistScreen from './game-artist';
-
-const template =
+export default
 `<section class="game game--genre">
   <header class="game__header">
     <a class="game__back" href="#">
@@ -78,33 +75,3 @@ const template =
     </form>
   </section>
 </section>`;
-
-export default () => {
-  const container = render(template);
-
-  const form = container.querySelector('.game__tracks');
-  const checkboxes = [...form.querySelectorAll('.game__input')];
-  const submitButton = form.querySelector('.game__submit');
-
-  submitButton.setClickabilityState = function (isClickable) {
-    if (isClickable) this.removeAttribute('disabled');
-    else this.setAttribute('disabled', 'disabled');
-  };
-  submitButton.setClickabilityState(false);
-
-  const checkSelectedCheckboxPresence = () => checkboxes.some((el) => el.checked);
-
-  const onCheckboxChange = () => {
-    if (checkSelectedCheckboxPresence()) submitButton.setClickabilityState(true);
-    else submitButton.setClickabilityState(false);
-  };
-  checkboxes.forEach((el) => el.addEventListener('change', onCheckboxChange));
-
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const gameArtistScreen = getGameArtistScreen();
-    changeScreen(gameArtistScreen);
-  });
-
-  return container;
-};

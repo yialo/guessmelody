@@ -1,6 +1,4 @@
-import {getResultsScreen} from '../lib/replay';
-
-const template =
+export default
 `<section class="result">
   <div class="result__logo">
     <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
@@ -9,5 +7,3 @@ const template =
   <p class="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий раз!</p>
   <button class="result__replay" type="button">Попробовать ещё раз</button>
 </section>`;
-
-export default () => getResultsScreen(template);
