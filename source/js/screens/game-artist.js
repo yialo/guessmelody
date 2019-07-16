@@ -1,5 +1,5 @@
 import {render, changeScreen, getRandomArrayElement} from '../lib/util';
-import getResultsSuccessScreen from './result-success';
+import getSuccessScreen from './result-success';
 import getFailTimeScreen from './result-fail-time';
 import getFailTriesScreen from './result-fail-tries';
 
@@ -64,7 +64,7 @@ const template =
 </section>`;
 
 export default () => {
-  const resultScreens = [getResultsSuccessScreen(), getFailTimeScreen(), getFailTriesScreen()];
+  const resultScreens = [getSuccessScreen(), getFailTimeScreen(), getFailTriesScreen()];
   const getRandomResultScreen = () => getRandomArrayElement(resultScreens);
 
   const container = render(template);

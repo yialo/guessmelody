@@ -1,5 +1,4 @@
-import {render} from '../lib/util';
-import addReplayButtonHandler from '../lib/replay';
+import {getResultsScreen} from '../lib/replay';
 
 const template =
 `<section class="result">
@@ -12,8 +11,4 @@ const template =
   <button class="result__replay" type="button">Сыграть ещё раз</button>
 </section>`;
 
-export default () => {
-  const container = render(template);
-  addReplayButtonHandler(container);
-  return container;
-};
+export default () => getResultsScreen(template);
