@@ -1,16 +1,15 @@
 import template from '../../templates/game/artist';
-import addBackListener from '../../listeners/game-back';
-import {getScreen} from '../../lib/util';
+import {getScreen, addBackLinkClickHandler} from '../../lib/util';
 
 export default (handler) => {
-  const {goBack, goNext} = handler;
+  const {goBack, goForward} = handler;
   const container = getScreen(template);
 
-  addBackListener(container, goBack);
+  addBackLinkClickHandler(container, goBack);
 
   const radioButtons = container.querySelectorAll('.artist__input');
 
-  radioButtons.forEach((el) => el.addEventListener('click', goNext));
+  radioButtons.forEach((el) => el.addEventListener('click', goForward));
 
   return container;
 };

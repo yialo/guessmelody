@@ -16,3 +16,8 @@ export function getRandomArrayElement(arr) {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
+
+export function addBackLinkClickHandler(containerElement, handler) {
+  const resetLink = containerElement.querySelector('.game__back');
+  resetLink.addEventListener('click', () => handler());
+}
