@@ -5,7 +5,7 @@ import failTriesTemplate from '../templates/result/fail-tries';
 
 const templates = [successTemplate, failTimeTemplate, failTriesTemplate];
 
-export default (buttonClickHandler) => {
+export default function (buttonClickHandler) {
   const template = getRandomArrayElement(templates);
   const container = getScreen(template);
 
@@ -13,4 +13,6 @@ export default (buttonClickHandler) => {
   button.addEventListener('click', buttonClickHandler);
 
   changeScreen(container);
-};
+}
+
+export {changeScreen};

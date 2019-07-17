@@ -1,7 +1,7 @@
 import template from '../../templates/game/genre';
 import {getScreen, addBackLinkClickHandler} from '../../lib/utils';
 
-export default (handler) => {
+export default function (handler) {
   const {goBack, goForward} = handler;
   const container = getScreen(template);
 
@@ -31,4 +31,4 @@ export default (handler) => {
   });
 
   return container;
-};
+}
