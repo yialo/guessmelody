@@ -6,6 +6,9 @@
     "last 2 Opera versions",
     "last 2 Edge versions"
   ],
+  "dependencies": {
+    "normalize.css": "8.0.1"
+  },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
     "autoprefixer": "9.6.1",
@@ -45,8 +48,5 @@
     "stylelint": "stylelint \"./source/sass/**/*.scss\" --syntax scss",
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
-  "version": "5.0.0",
-  "dependencies": {
-    "normalize.css": "8.0.1"
-  }
+  "version": "5.0.0"
 }
