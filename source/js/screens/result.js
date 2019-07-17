@@ -14,5 +14,3 @@ export default function (buttonClickHandler) {
 
   changeScreen(container);
 }
-
-export {changeScreen};
