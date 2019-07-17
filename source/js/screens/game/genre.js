@@ -1,5 +1,5 @@
 import template from '../../templates/game/genre';
-import {getScreen, addBackLinkClickHandler} from '../../lib/util';
+import {getScreen, addBackLinkClickHandler} from '../../lib/utils';
 
 export default (handler) => {
   const {goBack, goForward} = handler;

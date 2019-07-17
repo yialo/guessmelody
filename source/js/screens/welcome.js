@@ -1,5 +1,5 @@
 import template from '../templates/welcome';
-import {getScreen} from '../lib/util';
+import {getScreen} from '../lib/utils';
 
 export default (buttonClickHandler) => {
   const container = getScreen(template);
