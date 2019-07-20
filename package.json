@@ -13,6 +13,7 @@
   "devDependencies": {
     "autoprefixer": "9.6.1",
     "browser-sync": "2.26.7",
+    "chai": "4.2.0",
     "del": "5.0.0",
     "eslint": "6.0.1",
     "eslint-config-htmlacademy": "0.5.x",
@@ -21,6 +22,7 @@
     "gulp-csso": "3.0.1",
     "gulp-imagemin": "6.0.0",
     "gulp-load-plugins": "2.0.0",
+    "gulp-mocha": "6.0.0",
     "gulp-plumber": "1.2.1",
     "gulp-postcss": "8.0.0",
     "gulp-rename": "1.4.0",
@@ -28,6 +30,7 @@
     "gulp-sourcemaps": "2.6.5",
     "node-sass-magic-importer": "5.3.2",
     "rollup": "1.17.0",
+    "rollup-plugin-commonjs": "10.0.1",
     "stylelint": "10.1.0",
     "stylelint-scss": "3.9.1"
   },
@@ -45,8 +48,8 @@
     "eslint": "eslint gulpfile.js \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "start": "gulp",
-    "stylelint": "stylelint \"./source/sass/**/*.scss\" --syntax scss",
-    "test": "npm run eslint && npm run stylelint && gulp test"
+    "stylelint": "stylelint \"./source/styles/**/*.scss\" --syntax scss",
+    "test": "npm run stylelint && npm run eslint && gulp test"
   },
   "version": "5.0.0"
 }
