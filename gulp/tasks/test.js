@@ -5,7 +5,7 @@ module.exports = () =>
     $.gulp
       .src([`./source/js/**/*.test.js`])
       .pipe($.pl.betterRollup(
-          {plugins: [$.rollupPl.commonjs()]},
+          {plugins: [$.rp.commonjs()]},
           {format: 'cjs'}
       ))
       .pipe($.gulp.dest(`${$.path.output.root}/test`))
