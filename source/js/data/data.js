@@ -17,3 +17,7 @@ export function calculateScore(answers, attemptsRemain) {
 
   return pointsSum - AnswerCost.MISTAKE * mistakesDone;
 }
+
+export function getPlayerResult() {
+
+}
