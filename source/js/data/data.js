@@ -1,12 +1,18 @@
-export function calculateScore(answers) {
-  const points = answers.map((answer) => {
-    if (answer.isGuessed) return 1;
-    return 0;
-  });
+const FAILURE_CODE = -1;
+const ATTEMPTS = 3;
+const AnswerCost = {RIGHT: 1, MISTAKE: 2};
 
-  const pointsSum = points.reduce((sum, it) => sum + it);
+export function calculateScore(answers, attemptsRemain) {
+  const pointsSum = answers
+    .map((answer) => {
+      if (answer.isGuessed) return AnswerCost.RIGHT;
+      return 0;
+    })
+    .reduce((sum, it) => sum + it);
 
-  if (pointsSum < 10) return -1;
+  if (pointsSum < 10) return FAILURE_CODE;
 
-  return pointsSum;
+  const mistakesDone = ATTEMPTS - attemptsRemain;
+
+  return pointsSum - AnswerCost.MISTAKE * mistakesDone;
 }
