@@ -1,15 +1,15 @@
-const appElement = document.querySelector('.app');
-const mainElement = appElement.querySelector('.main');
+const $app = document.querySelector('.app');
+const $main = $app.querySelector('.main');
 
 export function getScreen(template) {
-  const tempElement = document.createElement('template');
-  tempElement.innerHTML = template;
-  return tempElement.content.firstChild.cloneNode(true);
+  const $template = document.createElement('template');
+  $template.innerHTML = template;
+  return $template.content.firstChild;
 }
 
-export function changeScreen(screenElement) {
-  mainElement.innerHTML = ``;
-  mainElement.appendChild(screenElement);
+export function changeScreen($screen) {
+  $main.innerHTML = ``;
+  $main.appendChild($screen);
 }
 
 export function getRandomArrayElement(arr) {
@@ -17,7 +17,7 @@ export function getRandomArrayElement(arr) {
   return arr[randomIndex];
 }
 
-export function addBackLinkClickHandler(containerElement, handler) {
-  const resetLink = containerElement.querySelector('.game__back');
+export function addBackLinkClickHandler($container, handler) {
+  const resetLink = $container.querySelector('.game__back');
   resetLink.addEventListener('click', () => handler());
 }
