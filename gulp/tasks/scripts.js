@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = () =>
-  $.gulp.task('scripts', () =>
+module.exports = () => (
+  $.gulp.task('scripts', () => (
     $.gulp
       .src($.path.scripts.main)
       .pipe($.pl.plumber())
@@ -10,4 +10,5 @@ module.exports = () =>
       .pipe($.pl.sourcemaps.write(``))
       .pipe($.gulp.dest(`${$.path.output.root}/js`))
       .pipe($.server.stream())
-  );
+  ))
+);

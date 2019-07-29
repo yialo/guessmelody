@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = () =>
-  $.gulp.task('imagemin', () =>
+module.exports = () => (
+  $.gulp.task('imagemin', () => (
     $.gulp
       .src($.path.images.raw)
       .pipe(
@@ -11,4 +11,5 @@ module.exports = () =>
           ])
       )
       .pipe($.gulp.dest($.path.output.images))
-  );
+  ))
+);

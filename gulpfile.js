@@ -23,7 +23,8 @@ global.$ = {
   server: require('browser-sync').create(),
 };
 
-$.path.tasks.forEach((taskPath) => require(taskPath)());
+$.path.tasks.forEach((taskPath) => require(`./gulp/tasks/${taskPath}`)());
+
 $.gulp.task(
     'build',
     $.gulp.series(

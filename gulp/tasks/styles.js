@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = () =>
-  $.gulp.task('styles', () =>
+module.exports = () => (
+  $.gulp.task('styles', () => (
     $.gulp
       .src($.path.styles.main)
       .pipe($.pl.plumber())
@@ -12,4 +12,5 @@ module.exports = () =>
       .pipe($.pl.sourcemaps.write(``))
       .pipe($.gulp.dest(`${$.path.output.root}/css`))
       .pipe($.server.stream())
-  );
+  ))
+);

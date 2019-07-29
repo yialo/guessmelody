@@ -1,16 +1,14 @@
 'use strict';
 
-const base = './gulp/tasks/';
-
 // Order matters!
 module.exports = [
-  `${base}markup.js`,
-  `${base}scripts.js`,
-  `${base}styles.js`,
-  `${base}clean.js`,
-  `${base}fonts.js`,
-  `${base}images.js`,
-  `${base}serve.js`,
-  `${base}imagemin.js`,
-  `${base}test.js`,
+  `markup.js`,
+  `scripts.js`,
+  `styles.js`,
+  `clean.js`,
+  `fonts.js`,
+  `images.js`,
+  `serve.js`,
+  `imagemin.js`,
+  `test.js`,
 ];

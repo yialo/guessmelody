@@ -30,8 +30,9 @@ const serverOptions = {
   ui: false,
 };
 
-module.exports = () =>
+module.exports = () => (
   $.gulp.task('serve', () => {
     $.server.init(serverOptions);
     addWatchers();
-  });
+  })
+);
