@@ -1,14 +1,17 @@
 'use strict';
 
+// const testPaths = [`./source/js/**/*.test.js`];
+const testPaths = [`./source/js/data/maze.test.js`];
+
 module.exports = () => (
   $.gulp.task('test', () => (
     $.gulp
-      .src([`./source/js/**/*.test.js`])
+      .src(testPaths)
       .pipe($.pl.betterRollup(
           {plugins: [$.rp.commonjs()]},
           {format: 'cjs'}
       ))
       .pipe($.gulp.dest(`${$.path.output.root}/test`))
-      .pipe($.pl.mocha())
+      .pipe($.pl.mocha({ui: 'bdd'}))
   ))
 );
