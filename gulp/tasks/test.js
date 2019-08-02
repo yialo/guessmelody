@@ -1,7 +1,6 @@
 'use strict';
 
-// const testPaths = [`./source/js/**/*.test.js`];
-const testPaths = [`./source/js/data/maze.test.js`];
+const testPaths = [`./source/js/**/*.test.js`];
 
 module.exports = () => (
   $.gulp.task('test', () => (
