@@ -2,7 +2,7 @@ const FAILURE_CODE = -1;
 const ATTEMPTS = 3;
 const AnswerCost = {RIGHT: 1, MISTAKE: 2, QUICK: 1};
 
-export function calculateScore(answers, attemptsRemain) {
+export default function (answers, attemptsRemain) {
   if (!answers.every((it) => it.isGuessed)) return FAILURE_CODE;
 
   const pointsSum = answers
@@ -16,8 +16,4 @@ export function calculateScore(answers, attemptsRemain) {
   const mistakesDone = ATTEMPTS - attemptsRemain;
 
   return pointsSum - AnswerCost.MISTAKE * mistakesDone;
-}
-
-export function getPlayerResult() {
-
 }

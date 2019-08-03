@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {calculateScore, getPlayerResult} from './data';
+import calculateScore from './calculate-score';
 
 describe('Player score calculator', () => {
   const Answer = function (isGuessed, time) {
