@@ -32,7 +32,7 @@ describe('Player result', () => {
     const playerResult1 = new Result(9, 2, 100);
 
     const otherResults1 = [new Result(8, 1, 150)];
-    assert.deepEqual(
+    assert.strictEqual(
         getPlayerResult(playerResult1, otherResults1),
         'Вы заняли 1 место из 2 игроков. Это лучше, чем у 50% игроков.'
     );
@@ -49,4 +49,21 @@ describe('Player result', () => {
         'Вы заняли 1 место из 4 игроков. Это лучше, чем у 75% игроков.'
     );
   });
+  it(
+      'Show win results and statistics even if there are several players with the same score',
+      () => {
+        const playerResult1 = new Result(8, 2, 100);
+
+        const otherResults1 = [
+          new Result(7, 1, 150),
+          new Result(9, 2, 250),
+          new Result(6, 3, 120),
+          new Result(8, 1, 200),
+        ];
+        assert.strictEqual(
+            getPlayerResult(playerResult1, otherResults1),
+            'Вы заняли 2 место из 5 игроков. Это лучше, чем у 40% игроков.'
+        );
+      }
+  );
 });
