@@ -1,7 +1,7 @@
 import {assert} from 'chai';
-import getPlayerResult from './get-player-result';
+import getPlayerResult from './get-game-result';
 
-describe('Player result', () => {
+describe('Game result', () => {
   const Result = function (score, attemptsRemain, timeRemain) {
     this.score = score;
     this.attemptsRemain = attemptsRemain;

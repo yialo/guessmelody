@@ -5,8 +5,8 @@ export default function (playerResult, otherResults) {
   }
 
   const sortedScores = [...otherResults, playerResult]
-    .sort((left, right) => right.score - left.score)
-    .map((it) => it.score);
+    .map((it) => it.score)
+    .sort((left, right) => right - left);
 
   const playersAmount = sortedScores.length;
   const placement = sortedScores.indexOf(playerResult.score) + 1;
