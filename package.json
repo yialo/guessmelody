@@ -29,10 +29,10 @@
     "gulp-sass": "4.0.2",
     "gulp-sourcemaps": "2.6.5",
     "node-sass-magic-importer": "5.3.2",
-    "rollup": "1.18.0",
-    "rollup-plugin-commonjs": "10.0.1",
+    "rollup": "1.19.3",
+    "rollup-plugin-commonjs": "10.0.2",
     "stylelint": "10.1.0",
-    "stylelint-scss": "3.9.2"
+    "stylelint-scss": "3.9.3"
   },
   "engines": {
     "node": "10"
