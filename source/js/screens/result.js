@@ -1,7 +1,7 @@
 import {getScreen, changeScreen, getRandomArrayElement} from '../lib/utils';
-import successTemplate from '../templates/result/success';
-import failTimeTemplate from '../templates/result/fail-time';
-import failTriesTemplate from '../templates/result/fail-tries';
+import successTemplate from '../templates/result-success';
+import failTimeTemplate from '../templates/result-fail-time';
+import failTriesTemplate from '../templates/result-fail-tries';
 
 const templates = [successTemplate, failTimeTemplate, failTriesTemplate];
 
