@@ -2,7 +2,7 @@ import getWelcomeScreen from './screens/welcome';
 import getGameGenreScreen from './screens/game-genre';
 import getGameArtistScreen from './screens/game-artist';
 import renderResultScreen from './screens/result';
-import {changeScreen} from './lib/utils';
+import { changeScreen } from './lib/utils';
 
 (function init() {
   const welcomeScreen = getWelcomeScreen(() => {

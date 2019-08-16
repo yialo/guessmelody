@@ -1,6 +1,12 @@
 const $app = document.querySelector('.app');
 const $main = $app.querySelector('.main');
 
+export const renderElementFromTemplate = (template) => {
+  const $template = document.createElement('template');
+  $template.innerHTML = template;
+  return $template.content.firstChild;
+}
+
 export function getScreen(template) {
   const $template = document.createElement('template');
   $template.innerHTML = template;
