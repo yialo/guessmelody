@@ -1,7 +1,7 @@
 import { renderElementFromTemplate } from '../lib/utils';
 
-export default () => {
-  const template = (
+export default (state) => {
+  const getTemplate = ({ minutes = '05', seconds = '00', mistakes = 0 } = {}) => (
     `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
@@ -13,17 +13,15 @@ export default () => {
       </svg>
 
       <div class="timer__value">
-        <span class="timer__mins">05</span>
+        <span class="timer__mins">${minutes}</span>
         <span class="timer__dots">:</span>
-        <span class="timer__secs">00</span>
+        <span class="timer__secs">${seconds}</span>
       </div>
 
       <div class="game__mistakes">
-        <div class="wrong"></div>
-        <div class="wrong"></div>
-        <div class="wrong"></div>
+        ${new Array(mistakes).fill(`<div class="wrong"></div>`).join('')}
       </div>
     </header>`
   );
-  return renderElementFromTemplate(template);
+  return renderElementFromTemplate(getTemplate(state));
 };
