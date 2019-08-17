@@ -1,4 +1,4 @@
-import { getScreen, changeScreen, getRandomArrayElement } from '../lib/utils';
+import { renderElementFromTemplate, changeScreen, getRandomArrayElement } from '../lib/utils';
 
 const template = {
   success: (
@@ -34,7 +34,7 @@ const templates = [template.succes, template.failTime, template.failTries];
 
 export default (buttonClickHandler) => {
   const resultTemplate = getRandomArrayElement(templates);
-  const container = getScreen(resultTemplate);
+  const container = renderElementFromTemplate(resultTemplate);
 
   const button = container.querySelector('.result__replay');
   button.addEventListener('click', buttonClickHandler);

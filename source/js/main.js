@@ -1,17 +1,17 @@
 import getWelcomeScreen from './screens/welcome';
-import questionScreen from './screens/question';
-import renderResultScreen from './screens/result';
+import getQuestionScreen from './screens/question';
+import getResultScreen from './screens/result';
 import { changeScreen } from './lib/utils';
 
 (function init() {
   const welcomeScreen = getWelcomeScreen(() => {
-    (function renderGameGenreScreen() {
-      const gameGenreScreen = questionScreen.getGenre({
+    (function getGameGenreScreen() {
+      const gameGenreScreen = getQuestionScreen('genre', {
         goBack: init,
         goForward: () => {
-          const gameArtistScreen = questionScreen.getArtist({
+          const gameArtistScreen = getQuestionScreen('artist', {
             goBack: init,
-            goForward: () => renderResultScreen(renderGameGenreScreen),
+            goForward: () => getResultScreen(getGameGenreScreen),
           });
           changeScreen(gameArtistScreen);
         },
