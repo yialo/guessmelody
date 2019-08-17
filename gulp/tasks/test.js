@@ -1,16 +1,14 @@
 'use strict';
 
-const testPaths = [`./source/js/**/*.test.js`];
-
 module.exports = () => (
   $.gulp.task('test', () => (
     $.gulp
-      .src(testPaths)
+      .src($.path.test)
       .pipe($.pl.betterRollup(
-          {plugins: [$.rp.commonjs()]},
-          {format: 'cjs'}
+        { plugins: [$.rp.commonjs()] },
+        { format: 'cjs' }
       ))
       .pipe($.gulp.dest(`${$.path.output.root}/test`))
-      .pipe($.pl.mocha({ui: 'bdd'}))
+      .pipe($.pl.mocha({ ui: 'bdd' }))
   ))
 );

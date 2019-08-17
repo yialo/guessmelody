@@ -1,25 +1,21 @@
 'use strict';
 
-(function getWatchTasks() {
-  require('./watch.js')();
-}());
-
-const {watch} = $.gulp;
+const { series, task, watch } = $.gulp;
 const {
   fonts,
-  images: {bitmap, vector},
+  images: { bitmap, vector },
   markup,
-  scripts: {all: scripts},
-  styles: {all: styles},
+  scripts: { all: scripts },
+  styles: { all: styles },
 } = $.path;
 
 const addWatchers = () => {
-  watch(markup, $.gulp.series('markup'));
-  watch(styles, $.gulp.series('styles'));
-  watch(scripts, $.gulp.series('scripts'));
-  watch(fonts, $.gulp.series('watch-fonts'));
-  watch(bitmap, $.gulp.series('watch-bitmaps'));
-  watch(vector, $.gulp.series('watch-vector'));
+  watch(markup, series('markup'));
+  watch(styles, series('styles'));
+  watch(scripts, series('scripts'));
+  watch(fonts, series('watch-fonts'));
+  watch(bitmap, series('watch-bitmaps'));
+  watch(vector, series('watch-vector'));
 };
 
 const serverOptions = {
@@ -31,7 +27,7 @@ const serverOptions = {
 };
 
 module.exports = () => (
-  $.gulp.task('serve', () => {
+  task('serve', () => {
     $.server.init(serverOptions);
     addWatchers();
   })

@@ -5,25 +5,25 @@ export const renderElementFromTemplate = (template) => {
   const $template = document.createElement('template');
   $template.innerHTML = template;
   return $template.content.firstChild;
-}
+};
 
-export function getScreen(template) {
+export const getScreen = (template) => {
   const $template = document.createElement('template');
   $template.innerHTML = template;
   return $template.content.firstChild;
-}
+};
 
-export function changeScreen($screen) {
+export const changeScreen = ($screen) => {
   $main.innerHTML = ``;
   $main.appendChild($screen);
-}
+};
 
-export function getRandomArrayElement(arr) {
+export const getRandomArrayElement = (arr) => {
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
-}
+};
 
-export function addBackLinkClickHandler($container, handler) {
+export const addBackLinkClickHandler = ($container, handler) => {
   const resetLink = $container.querySelector('.game__back');
   resetLink.addEventListener('click', () => handler());
-}
+};
