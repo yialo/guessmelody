@@ -1,6 +1,6 @@
-import getWelcomeScreen from './screens/welcome';
-import getQuestionScreen from './screens/question';
-import getResultScreen from './screens/result';
+import getWelcomeScreen from './elements/welcome';
+import getQuestionScreen from './elements/question';
+import getResultScreen from './elements/result';
 import { changeScreen } from './lib/utils';
 
 (function init() {

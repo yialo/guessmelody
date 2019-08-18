@@ -1,7 +1,11 @@
 import { renderElementFromTemplate } from '../lib/utils';
 
-export default (state) => {
-  const getTemplate = ({ minutes = '05', seconds = '00', mistakes = 0 } = {}) => (
+const getTemplate = (state) => {
+  const { minutes: rawMinutes, seconds: rawSeconds, mistakes } = state;
+  const minutes = String(rawMinutes).padStart(2, '0');
+  const seconds = String(rawSeconds).padStart(2, '0');
+
+  return (
     `<header class="game__header">
       <a class="game__back" href="#">
         <span class="visually-hidden">Сыграть ещё раз</span>
@@ -23,5 +27,12 @@ export default (state) => {
       </div>
     </header>`
   );
-  return renderElementFromTemplate(getTemplate(state));
 };
+
+const getHeader = (state) => {
+  const headerTemplate = getTemplate(state);
+
+  return renderElementFromTemplate(headerTemplate);
+};
+
+export default getHeader;

@@ -1,4 +1,5 @@
 import { renderElementFromTemplate } from '../lib/utils';
+import { initialState } from '../data/data';
 import getHeader from './header';
 
 const getTemplateMap = {
@@ -100,7 +101,7 @@ const addBackLinkClickHandler = ($container, onClick) => {
   resetLink.addEventListener('click', () => onClick());
 };
 
-const screentTypePreparationMap = {
+const screenTypePreparationMap = {
   genre: ($parent, onSubmit) => {
     const form = $parent.querySelector('.game__tracks');
     const checkboxes = [...form.querySelectorAll('.game__input')];
@@ -136,12 +137,12 @@ export default (type, handler) => {
   const { goBack, goForward } = handler;
   const $container = renderElementFromTemplate(getTemplateMap[type]());
 
-  const $header = getHeader();
+  const $header = getHeader(initialState);
   $container.prepend($header);
 
   addBackLinkClickHandler($container, goBack);
 
-  screentTypePreparationMap[type]($container, goForward);
+  screenTypePreparationMap[type]($container, goForward);
 
   return $container;
 };

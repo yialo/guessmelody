@@ -1,4 +1,10 @@
-const QUESTION_DATA = {
+export const initialState = {
+  minutes: 5,
+  seconds: 33,
+  mistakes: 2,
+};
+
+export const questionData = {
   tracksAmount: 5,
   artists: [
     'Пелагея',
@@ -6,5 +12,3 @@ const QUESTION_DATA = {
     'Lorde',
   ],
 };
-
-export default QUESTION_DATA;
