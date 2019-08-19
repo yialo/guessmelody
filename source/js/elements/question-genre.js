@@ -14,7 +14,7 @@ const getTrackTemplate = (index) => {
   );
 };
 
-export const getCaptionText = ({ genreName }) => `Выберите ${genreName} треки`;
+export const getCaptionText = ({ targetGenre }) => `Выберите ${targetGenre} треки`;
 
 export const getContentTemplate = ({ tracksAmount }) => (
   `<form class="game__tracks">

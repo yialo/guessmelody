@@ -555,7 +555,9 @@ rules:
         - $scope
         - staticContext
       props: true
-  no-plusplus: error
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
   no-proto: error
   no-prototype-builtins: error
   no-redeclare: error

@@ -1,4 +1,4 @@
-import { screens } from './data/data';
+import { screens } from './data/mocks';
 import { changeScreen } from './lib/utils';
 import renderWelcomeScreen from './elements/welcome';
 import renderQuestionScreen from './elements/question';

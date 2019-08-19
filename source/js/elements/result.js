@@ -1,4 +1,4 @@
-import { successfulResult } from '../data/data';
+import { successfulResult } from '../data/mocks';
 import { renderElementFromTemplate, changeScreen, getRandomArrayElement } from '../lib/utils';
 
 const failTip = 'Попробовать ещё раз';
