@@ -1,43 +1,59 @@
+import { successfulResult } from '../data/data';
 import { renderElementFromTemplate, changeScreen, getRandomArrayElement } from '../lib/utils';
 
-const template = {
-  success: (
-    `<section class="result">
-      <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
-      <h2 class="result__title">Вы настоящий меломан!</h2>
-      <p class="result__total">За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки</p>
-      <p class="result__text">Вы заняли 2 место из 10. Это лучше чем у 80% игроков</p>
-      <button class="result__replay" type="button">Сыграть ещё раз</button>
-    </section>`
-  ),
-  failTime: (
-    `<section class="result">
-      <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
-      <h2 class="result__title">Увы и ах!</h2>
-      <p class="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
-      <button class="result__replay" type="button">Попробовать ещё раз</button>
-    </section>`
-  ),
-  failTries: (
-    `<section class="result">
-      <div class="result__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
-      </div>
-      <h2 class="result__title">Какая жалость!</h2>
-      <p class="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий раз!</p>
-      <button class="result__replay" type="button">Попробовать ещё раз</button>
-    </section>`
-  ),
+const failTip = 'Попробовать ещё раз';
+const failContentTextMap = {
+  time: 'Время вышло! Вы не успели отгадать все мелодии',
+  tries: 'У вас закончились все попытки. Ничего, повезёт в следующий раз!',
+};
+const getFailContentText = (cause) => (
+  `<p class="result__total result__total--fail">${failContentTextMap[cause]}</p>`
+);
+
+const failTimeResult = {
+  caption: 'Увы и ах!',
+  tip: failTip,
+  content: getFailContentText('time'),
+};
+const failTriesResult = {
+  caption: 'Какая жалость!',
+  tip: failTip,
+  content: getFailContentText('tries'),
 };
 
-const templates = [template.succes, template.failTime, template.failTries];
+const resultGetterMap = {
+  success: () => {
+    const { minutes, seconds, score, quickAnswers, mistakes } = successfulResult;
+    return {
+      caption: 'Вы настоящий меломан!',
+      tip: 'Сыграть ещё раз',
+      content: (
+        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), совершив ${mistakes} ошибки</p>
+        <p class="result__text">Вы заняли 2 место из 10. Это лучше чем у 80% игроков</p>`
+      ),
+    };
+  },
+  failTime: () => failTimeResult,
+  failTries: () => failTriesResult,
+};
 
-export default (buttonClickHandler) => {
-  const resultTemplate = getRandomArrayElement(templates);
-  const container = renderElementFromTemplate(resultTemplate);
+const getTemplate = ({ caption, tip, content }) => (
+  `<section class="result">
+    <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
+    <h2 class="result__title">${caption}</h2>
+    ${content}
+    <button class="result__replay" type="button">${tip}</button>
+  </section>`
+);
 
-  const button = container.querySelector('.result__replay');
-  button.addEventListener('click', buttonClickHandler);
+export default (onButtonClick) => {
+  const resultGetters = [...Object.values(resultGetterMap)];
+  const result = getRandomArrayElement(resultGetters)();
+  const template = getTemplate(result);
+  const $container = renderElementFromTemplate(template);
 
-  changeScreen(container);
+  const $button = $container.querySelector('.result__replay');
+  $button.addEventListener('click', onButtonClick);
+
+  changeScreen($container);
 };

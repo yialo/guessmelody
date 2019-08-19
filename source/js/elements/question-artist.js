@@ -8,7 +8,7 @@ const getArtistTemplate = (index, name) => (
   </div>`
 );
 
-const getContentTemplate = ({ artistList }) => (
+export const getContentTemplate = ({ artistList }) => (
   `<h2 class="game__title">Кто исполняет эту песню?</h2>
   <div class="game__track">
     <button class="track__button track__button--play" type="button"></button>
@@ -19,4 +19,8 @@ const getContentTemplate = ({ artistList }) => (
   </form>`
 );
 
-export default getContentTemplate;
+export const bindHandlers = ($container, onClick) => {
+  const $radioButtons = $container.querySelectorAll('.artist__input');
+
+  $radioButtons.forEach(($el) => $el.addEventListener('click', onClick));
+};

@@ -9,7 +9,7 @@ export const screens = [
     type: 'genre',
     content: {
       genreName: 'инди-рок',
-      tracksAmount: 4,
+      tracks: ['play', 'play', 'pause', 'play'],
     },
   },
   {
@@ -17,9 +17,17 @@ export const screens = [
     content: {
       artistList: [
         'Пелагея',
-        'Краснознаменная дивизия имени моей бабушки',
+        'Краснознамённая дивизия имени моей бабушки',
         'Lorde',
       ],
     },
   },
 ];
+
+export const successfulResult = {
+  minutes: 2,
+  seconds: 15,
+  score: 12,
+  quickAnswers: 8,
+  mistakes: 2,
+};

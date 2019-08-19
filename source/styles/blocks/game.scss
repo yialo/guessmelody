@@ -125,17 +125,6 @@
   background-size: cover;
 
   animation: fadein 1000ms ease-out;
-  animation-iteration-count: 1;
-}
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 .game__artist {
