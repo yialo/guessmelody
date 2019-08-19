@@ -1,148 +1,75 @@
 import { renderElementFromTemplate } from '../lib/utils';
 import { initialState } from '../data/data';
-import getHeader from './header';
+import getHeaderTemplate from './header';
+import getGenreContentTemplate from './question-genre';
+import getAtristContentTemplate from './question-artist';
 
-const getTemplateMap = {
-  genre: () => (
-    `<section class="game game--genre">
-      <section class="game__screen">
-        <h2 class="game__title">Выберите инди-рок треки</h2>
-        <form class="game__tracks">
-          <div class="track">
-            <button class="track__button track__button--play" type="button"></button>
-            <div class="track__status">
-              <audio></audio>
-            </div>
-            <div class="game__answer">
-              <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-1">
-              <label class="game__check" for="answer-1">Отметить</label>
-            </div>
-          </div>
-
-          <div class="track">
-            <button class="track__button track__button--play" type="button"></button>
-            <div class="track__status">
-              <audio></audio>
-            </div>
-            <div class="game__answer">
-              <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-2">
-              <label class="game__check" for="answer-2">Отметить</label>
-            </div>
-          </div>
-
-          <div class="track">
-            <button class="track__button track__button--pause" type="button"></button>
-            <div class="track__status">
-              <audio></audio>
-            </div>
-            <div class="game__answer">
-              <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-3">
-              <label class="game__check" for="answer-3">Отметить</label>
-            </div>
-          </div>
-
-          <div class="track">
-            <button class="track__button track__button--play" type="button"></button>
-            <div class="track__status">
-              <audio></audio>
-            </div>
-            <div class="game__answer">
-              <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id="answer-4">
-              <label class="game__check" for="answer-4">Отметить</label>
-            </div>
-          </div>
-
-          <button class="game__submit button" type="submit">Ответить</button>
-        </form>
-      </section>
-    </section>`
-  ),
-  artist: () => (
-    `<section class="game game--artist">
-      <section class="game__screen">
-        <h2 class="game__title">Кто исполняет эту песню?</h2>
-        <div class="game__track">
-          <button class="track__button track__button--play" type="button"></button>
-          <audio></audio>
-        </div>
-
-        <form class="game__artist">
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1">
-            <label class="artist__name" for="answer-1">
-              <img class="artist__picture" src="http://placehold.it/134x134" alt="Пелагея">
-              Пелагея
-            </label>
-          </div>
-
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2">
-            <label class="artist__name" for="answer-2">
-              <img class="artist__picture" src="http://placehold.it/134x134" alt="Пелагея">
-              Краснознаменная дивизия имени моей бабушки
-            </label>
-          </div>
-
-          <div class="artist">
-            <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3">
-            <label class="artist__name" for="answer-3">
-              <img class="artist__picture" src="http://placehold.it/134x134" alt="Пелагея">
-              Lorde
-            </label>
-          </div>
-        </form>
-      </section>
-    </section>`
-  ),
-};
+const getContainerTemplate = (type, headerTemplate, contentTemplate) => (
+  `<section class="game game--${type}">
+    ${headerTemplate}
+    <section class="game__screen">
+      ${contentTemplate}
+    </section>
+  </section>`
+);
 
 const addBackLinkClickHandler = ($container, onClick) => {
   const resetLink = $container.querySelector('.game__back');
   resetLink.addEventListener('click', () => onClick());
 };
 
-const screenTypePreparationMap = {
-  genre: ($parent, onSubmit) => {
-    const form = $parent.querySelector('.game__tracks');
-    const checkboxes = [...form.querySelectorAll('.game__input')];
-    const submitButton = form.querySelector('.game__submit');
+const questionTypeMap = {
+  genre: {
+    getTemplate: getGenreContentTemplate,
+    bindHandlers: ($container, onSubmit) => {
+      const $form = $container.querySelector('.game__tracks');
+      const $checkboxes = [...$form.querySelectorAll('.game__input')];
+      const $button = $form.querySelector('.game__submit');
 
-    submitButton.setClickabilityState = (isClickable) => {
-      if (isClickable) submitButton.removeAttribute('disabled');
-      else submitButton.setAttribute('disabled', 'disabled');
-    };
-    submitButton.setClickabilityState(false);
+      $button.setClickabilityState = (isClickable) => {
+        if (isClickable) $button.removeAttribute('disabled');
+        else $button.setAttribute('disabled', 'disabled');
+      };
+      $button.setClickabilityState(false);
 
-    const checkSelectedCheckboxPresence = () => checkboxes.some((el) => el.checked);
+      const checkSelectedCheckboxPresence = () => $checkboxes.some(($el) => $el.checked);
 
-    const onCheckboxChange = () => {
-      if (checkSelectedCheckboxPresence()) submitButton.setClickabilityState(true);
-      else submitButton.setClickabilityState(false);
-    };
-    checkboxes.forEach((el) => el.addEventListener('change', onCheckboxChange));
+      const onCheckboxChange = () => {
+        if (checkSelectedCheckboxPresence()) $button.setClickabilityState(true);
+        else $button.setClickabilityState(false);
+      };
+      $checkboxes.forEach(($el) => $el.addEventListener('change', onCheckboxChange));
 
-    form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      onSubmit();
-    });
+      $form.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        onSubmit();
+      });
+    },
   },
-  artist: ($parent, onClick) => {
-    const radioButtons = $parent.querySelectorAll('.artist__input');
+  artist: {
+    getTemplate: getAtristContentTemplate,
+    bindHandlers: ($container, onClick) => {
+      const $radioButtons = $container.querySelectorAll('.artist__input');
 
-    radioButtons.forEach((el) => el.addEventListener('click', onClick));
+      $radioButtons.forEach(($el) => $el.addEventListener('click', onClick));
+    },
   },
 };
 
-export default (type, handler) => {
+export default (question, handler) => {
+  const { type, content } = question;
   const { goBack, goForward } = handler;
-  const $container = renderElementFromTemplate(getTemplateMap[type]());
 
-  const $header = getHeader(initialState);
-  $container.prepend($header);
+  const headerTemplate = getHeaderTemplate(initialState);
+  const contentTemplate = questionTypeMap[type].getTemplate(content);
+
+  const fullTemplate = getContainerTemplate(type, headerTemplate, contentTemplate);
+
+  const $container = renderElementFromTemplate(fullTemplate);
 
   addBackLinkClickHandler($container, goBack);
 
-  screenTypePreparationMap[type]($container, goForward);
+  questionTypeMap[type].bindHandlers($container, goForward);
 
   return $container;
 };

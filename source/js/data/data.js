@@ -1,14 +1,25 @@
 export const initialState = {
   minutes: 5,
-  seconds: 33,
-  mistakes: 2,
+  seconds: 0,
+  mistakes: 0,
 };
 
-export const questionData = {
-  tracksAmount: 5,
-  artists: [
-    'Пелагея',
-    'Краснознаменная дивизия имени моей бабушки',
-    'Lorde',
-  ],
-};
+export const screens = [
+  {
+    type: 'genre',
+    content: {
+      genreName: 'инди-рок',
+      tracksAmount: 4,
+    },
+  },
+  {
+    type: 'artist',
+    content: {
+      artistList: [
+        'Пелагея',
+        'Краснознаменная дивизия имени моей бабушки',
+        'Lorde',
+      ],
+    },
+  },
+];

@@ -1,21 +1,30 @@
-import getWelcomeScreen from './elements/welcome';
-import getQuestionScreen from './elements/question';
-import getResultScreen from './elements/result';
+import { screens } from './data/data';
 import { changeScreen } from './lib/utils';
+import renderWelcomeScreen from './elements/welcome';
+import renderQuestionScreen from './elements/question';
+import renderResultScreen from './elements/result';
+
+const [genreScreen, artistScreen] = screens;
 
 (function init() {
-  const welcomeScreen = getWelcomeScreen(() => {
-    (function getGameGenreScreen() {
-      const gameGenreScreen = getQuestionScreen('genre', {
-        goBack: init,
-        goForward: () => {
-          const gameArtistScreen = getQuestionScreen('artist', {
-            goBack: init,
-            goForward: () => getResultScreen(getGameGenreScreen),
-          });
-          changeScreen(gameArtistScreen);
-        },
-      });
+  const welcomeScreen = renderWelcomeScreen(() => {
+    (function renderGameGenreScreen() {
+      const gameGenreScreen = renderQuestionScreen(
+        genreScreen,
+        {
+          goBack: init,
+          goForward: () => {
+            const gameArtistScreen = renderQuestionScreen(
+              artistScreen,
+              {
+                goBack: init,
+                goForward: () => renderResultScreen(renderGameGenreScreen),
+              }
+            );
+            changeScreen(gameArtistScreen);
+          },
+        }
+      );
       changeScreen(gameGenreScreen);
     }());
   });

@@ -17,8 +17,10 @@ const template = (
 );
 
 export default (onButtonClick) => {
-  const container = renderElementFromTemplate(template);
-  const playButton = container.querySelector('.welcome__button');
+  const $header = renderElementFromTemplate(template);
+
+  const playButton = $header.querySelector('.welcome__button');
   playButton.addEventListener('click', onButtonClick);
-  return container;
+
+  return $header;
 };

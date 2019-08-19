@@ -1,9 +1,10 @@
-import { renderElementFromTemplate } from '../lib/utils';
+const padStartWithZero = (num) => String(num).padStart(2, '0');
 
 const getTemplate = (state) => {
   const { minutes: rawMinutes, seconds: rawSeconds, mistakes } = state;
-  const minutes = String(rawMinutes).padStart(2, '0');
-  const seconds = String(rawSeconds).padStart(2, '0');
+
+  const minutes = padStartWithZero(rawMinutes);
+  const seconds = padStartWithZero(rawSeconds);
 
   return (
     `<header class="game__header">
@@ -29,10 +30,4 @@ const getTemplate = (state) => {
   );
 };
 
-const getHeader = (state) => {
-  const headerTemplate = getTemplate(state);
-
-  return renderElementFromTemplate(headerTemplate);
-};
-
-export default getHeader;
+export default getTemplate;
