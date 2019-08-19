@@ -2,6 +2,10 @@
 
 module.exports = () => {
   $.gulp.task(
+    'watch-files',
+    $.gulp.series('files', 'reload')
+  );
+  $.gulp.task(
     'watch-fonts',
     $.gulp.series('fonts', 'reload')
   );

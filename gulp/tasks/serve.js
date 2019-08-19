@@ -2,6 +2,7 @@
 
 const { series, task, watch } = $.gulp;
 const {
+  files,
   fonts,
   images: { bitmap, vector },
   markup,
@@ -13,6 +14,7 @@ const addWatchers = () => {
   watch(markup, series('markup'));
   watch(styles, series('styles'));
   watch(scripts, series('scripts'));
+  watch(files, series('watch-files'));
   watch(fonts, series('watch-fonts'));
   watch(bitmap, series('watch-bitmaps'));
   watch(vector, series('watch-vector'));

@@ -6,16 +6,20 @@ const Format = {
 };
 
 module.exports = {
+  files: `./source/files/**/*`,
   fonts: `./source/fonts/*.{${Format.FONTS}}`,
   markup: `./source/*.html`,
   images: {
     bitmap: `./source/img/*.{${Format.BITMAP}}`,
     vector: `./source/img/*.svg`,
-    raw: `./resources/raw/**/*.{${Format.BITMAP},svg}`,
   },
   output: {
     root: './build',
     images: './source/img',
+  },
+  raw: {
+    input: `./resources/raw/input/*.{${Format.BITMAP},svg}`,
+    output: `./resources/raw/output`,
   },
   scripts: {
     all: `./source/js/**/*.js`,

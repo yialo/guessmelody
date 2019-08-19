@@ -5,6 +5,7 @@ module.exports = [
   'clean',
   'fonts',
   'images',
+  'files',
   'markup',
   'scripts',
   'styles',

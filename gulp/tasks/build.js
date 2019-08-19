@@ -6,6 +6,7 @@ module.exports = () => (
     $.gulp.series(
       'clean',
       $.gulp.parallel(
+        'files',
         'fonts',
         'images-bitmap',
         'images-vector',

@@ -4,6 +4,14 @@ global.$ = {
   autoprefixer: require('autoprefixer'),
   del: require('del'),
   gulp: require('gulp'),
+  imp: {
+    gifsicle: require('imagemin-gifsicle'),
+    jpegtran: require('imagemin-jpegtran'),
+    mozjpeg: require('imagemin-mozjpeg'),
+    pngquant: require('imagemin-pngquant'),
+    zopfli: require('imagemin-zopfli'),
+    svgo: require('imagemin-svgo'),
+  },
   path: require('./gulp/common/path.js'),
   pl: require('gulp-load-plugins')(),
   rp: {
