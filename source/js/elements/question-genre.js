@@ -1,10 +1,12 @@
-const getTrackTemplate = (index) => {
+import createAudioTemplate from './audio';
+
+const getTrackTemplate = (track, index) => {
   const buttonStateModifier = (index === 0) ? 'pause' : 'play';
   return (
     `<div class="track">
       <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
       <div class="track__status">
-        <audio></audio>
+        ${createAudioTemplate(track)}
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${index}" id="answer-${index}">
@@ -16,9 +18,9 @@ const getTrackTemplate = (index) => {
 
 export const getCaptionText = ({ targetGenre }) => `Выберите ${targetGenre} треки`;
 
-export const getContentTemplate = ({ tracksAmount }) => (
+export const getContentTemplate = ({ trackList }) => (
   `<form class="game__tracks">
-    ${new Array(tracksAmount).fill('').map((it, i) => getTrackTemplate(i)).join('')}
+    ${trackList.map((it, i) => getTrackTemplate(it, i)).join('')}
     <button class="game__submit button" type="submit">Ответить</button>
   </form>`
 );

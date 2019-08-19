@@ -1,4 +1,4 @@
-import { SCREENS_AMOUNT, QuestionSetSize } from '../data/game-config';
+import { QUESTIONS_AMOUNT, QuestionSetSize } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomArrayElement } from './utils';
 
@@ -16,7 +16,7 @@ const screenTypes = ['genre', 'artist'];
 
 const getRandomScreenTypeList = () => {
   const types = [];
-  for (let i = 1; i <= SCREENS_AMOUNT; i++) {
+  for (let i = 1; i <= QUESTIONS_AMOUNT; i++) {
     const type = getRandomArrayElement(screenTypes);
     types.push(type);
   }
@@ -27,9 +27,10 @@ export const randomScreenGetterMap = {
   genre: () => {
     const screen = { type: 'genre' };
 
-    const trackList = getRandomTrackSet(QuestionSetSize.GENRE);
-    const genres = [...trackList.values()].map((it) => it.genre);
-    const targetGenre = getRandomArrayElement(genres);
+    const tracks = getRandomTrackSet(QuestionSetSize.GENRE);
+    const trackList = [...tracks.values()];
+
+    const targetGenre = getRandomArrayElement(trackList).genre;
 
     screen.content = { trackList, targetGenre };
 
@@ -40,11 +41,9 @@ export const randomScreenGetterMap = {
 
     const tracks = getRandomTrackSet(QuestionSetSize.ARTIST);
     const trackList = [...tracks.values()];
-    const artistList = trackList.map((it) => it.aritst);
     const targetTrack = getRandomArrayElement(trackList);
-    const targetArtist = targetTrack.artist;
 
-    screen.content = { artistList, targetArtist };
+    screen.content = { trackList, targetTrack };
 
     return screen;
   },

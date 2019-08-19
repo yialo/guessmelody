@@ -1,7 +1,7 @@
 const extMap = { img: 'jpg', audio: 'mp3' };
 
-const getFilePath = (type, text) => (
-  `./files/${type}/${text.toLowerCase().replace(' ', '_')}.${extMap[type]}`
+export const getFilePath = (type, text) => (
+  `./files/${type}/${text.toLowerCase().replace(/ /g, '_')}.${extMap[type]}`
 );
 
 class Melody {
@@ -13,12 +13,12 @@ class Melody {
     this.getAudio();
   }
 
-  getImage() {
-    return getFilePath('img', this.artist);
+  getAudio() {
+    this.audio = getFilePath('audio', this.name);
   }
 
-  getAudio() {
-    return getFilePath('audio', this.name);
+  getImage() {
+    this.image = getFilePath('img', this.artist);
   }
 }
 

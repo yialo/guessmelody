@@ -1,5 +1,5 @@
 import { renderElementFromTemplate } from '../lib/utils';
-import { INITIAL_STATE } from '../data/game-config';
+import { initialState } from '../data/game-config';
 import getHeaderTemplate from './header';
 import questionTypeMap from './question-type';
 
@@ -22,7 +22,7 @@ export default (question, handler) => {
   const { type, content } = question;
   const typeProps = questionTypeMap[type];
 
-  const headerTemplate = getHeaderTemplate(INITIAL_STATE);
+  const headerTemplate = getHeaderTemplate(initialState);
   const captionText = typeProps.getCaption(content);
   const contentTemplate = typeProps.getTemplate(content);
 
