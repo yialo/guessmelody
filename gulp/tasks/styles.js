@@ -1,5 +1,7 @@
 'use strict';
 
+$.pl.sass.compiler = $.sassCompiler;
+
 module.exports = () => (
   $.gulp.task('styles', () => (
     $.gulp

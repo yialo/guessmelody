@@ -10,7 +10,10 @@ module.exports = {
   fonts: `./source/fonts/*.{${Format.FONTS}}`,
   markup: `./source/*.html`,
   images: {
-    bitmap: `./source/img/*.{${Format.BITMAP}}`,
+    bitmap: [
+      `./source/img/*.{${Format.BITMAP}}`,
+      `./source/*.ico`,
+    ],
     vector: `./source/img/*.svg`,
   },
   output: {

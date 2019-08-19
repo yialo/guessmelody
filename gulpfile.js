@@ -17,6 +17,7 @@ global.$ = {
   rp: {
     commonjs: require('rollup-plugin-commonjs'),
   },
+  sassCompiler: require('node-sass'),
   sassImporter: require('node-sass-magic-importer'),
   server: require('browser-sync').create(),
   tasks: require('./gulp/common/tasks.js'),
