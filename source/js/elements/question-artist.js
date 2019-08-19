@@ -8,6 +8,8 @@ const getArtistTemplate = (index, name) => (
   </div>`
 );
 
+export const getCaptionText = () => 'Кто исполняет эту песню?';
+
 export const getContentTemplate = ({ artistList }) => (
   `<h2 class="game__title">Кто исполняет эту песню?</h2>
   <div class="game__track">

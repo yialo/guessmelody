@@ -3,10 +3,11 @@ import { initialState } from '../data/data';
 import getHeaderTemplate from './header';
 import questionTypeMap from './question-type';
 
-const getContainerTemplate = (type, headerTemplate, contentTemplate) => (
+const getContainerTemplate = (type, headerTemplate, captionText, contentTemplate) => (
   `<section class="game game--${type}">
     ${headerTemplate}
     <div class="game__screen">
+      <h2 class="game__title">${captionText}</h2>
       ${contentTemplate}
     </div>
   </section>`
@@ -19,18 +20,19 @@ const addBackLinkClickHandler = ($container, onClick) => {
 
 export default (question, handler) => {
   const { type, content } = question;
-  const { goBack, goForward } = handler;
+  const typeProps = questionTypeMap[type];
 
   const headerTemplate = getHeaderTemplate(initialState);
-  const contentTemplate = questionTypeMap[type].getTemplate(content);
+  const captionText = typeProps.getCaption(content);
+  const contentTemplate = typeProps.getTemplate(content);
 
-  const fullTemplate = getContainerTemplate(type, headerTemplate, contentTemplate);
+  const fullTemplate = getContainerTemplate(type, headerTemplate, captionText, contentTemplate);
 
   const $container = renderElementFromTemplate(fullTemplate);
 
+  const { goBack, goForward } = handler;
   addBackLinkClickHandler($container, goBack);
-
-  questionTypeMap[type].bindHandlers($container, goForward);
+  typeProps.bindHandlers($container, goForward);
 
   return $container;
 };

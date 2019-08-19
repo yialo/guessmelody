@@ -9,7 +9,7 @@ export const screens = [
     type: 'genre',
     content: {
       genreName: 'инди-рок',
-      tracks: ['play', 'play', 'pause', 'play'],
+      tracksAmount: 4,
     },
   },
   {

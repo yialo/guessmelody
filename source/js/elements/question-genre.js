@@ -1,20 +1,24 @@
-const getTrackTemplate = (index, playState) => (
-  `<div class="track">
-    <button class="track__button track__button--${playState}" type="button"></button>
-    <div class="track__status">
-      <audio></audio>
-    </div>
-    <div class="game__answer">
-      <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${index}" id="answer-${index}">
-      <label class="game__check" for="answer-${index}">Отметить</label>
-    </div>
-  </div>`
-);
+const getTrackTemplate = (index) => {
+  const buttonStateModifier = (index === 0) ? 'pause' : 'play';
+  return (
+    `<div class="track">
+      <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
+      <div class="track__status">
+        <audio></audio>
+      </div>
+      <div class="game__answer">
+        <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${index}" id="answer-${index}">
+        <label class="game__check" for="answer-${index}">Отметить</label>
+      </div>
+    </div>`
+  );
+};
 
-export const getContentTemplate = ({ genreName, tracks }) => (
-  `<h2 class="game__title">Выберите ${genreName} треки</h2>
-  <form class="game__tracks">
-    ${tracks.map((it, i) => getTrackTemplate(i + 1, it)).join('')}
+export const getCaptionText = ({ genreName }) => `Выберите ${genreName} треки`;
+
+export const getContentTemplate = ({ tracksAmount }) => (
+  `<form class="game__tracks">
+    ${new Array(tracksAmount).fill('').map((it, i) => getTrackTemplate(i)).join('')}
     <button class="game__submit button" type="submit">Ответить</button>
   </form>`
 );
