@@ -2,11 +2,12 @@ import { Amount } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomArrayElement } from './utils';
 
-const QuestionSetSize = {
-  GENRE: 4,
-  ARTIST: 3,
+const QUESTION_SET_SIZE = {
+  genre: 4,
+  artist: 3,
 };
 
+// TODO: move to 'getRandomTracklist' method
 const getRandomTrackSet = (size) => {
   const tracks = new Set();
   do {
@@ -28,13 +29,16 @@ const getRandomScreenTypeList = () => {
   return types;
 };
 
+const getRandomTrackList = (type) => {
+  const tracks = getRandomTrackSet(QUESTION_SET_SIZE[type]);
+  return [...tracks.values()];
+};
+
 const randomScreenGetterMap = {
   genre: () => {
     const screen = { type: 'genre' };
 
-    const tracks = getRandomTrackSet(QuestionSetSize.GENRE);
-    const trackList = [...tracks.values()];
-
+    const trackList = getRandomTrackList('genre');
     const targetGenre = getRandomArrayElement(trackList).genre;
 
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
@@ -49,8 +53,7 @@ const randomScreenGetterMap = {
   artist: () => {
     const screen = { type: 'artist' };
 
-    const tracks = getRandomTrackSet(QuestionSetSize.ARTIST);
-    const trackList = [...tracks.values()];
+    const trackList = getRandomTrackList('artist');
     const targetTrack = getRandomArrayElement(trackList);
 
     const correctAnswer = `artist-${trackList.indexOf(targetTrack) + 1}`;
@@ -71,6 +74,8 @@ const getRandomScreens = () => {
     const screen = randomScreenGetterMap[it]();
     screens.push(screen);
   });
+
+  // TODO: add 'nextQuestionType' property
 
   return screens;
 };

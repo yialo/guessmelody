@@ -10,8 +10,6 @@ const updateMistakesCount = (state) => {
   state.mistakes += 1;
 };
 
-const getMistakesCount = (state) => state.mistakes;
-
 const getContainerTemplate = (state, question) => {
   const { type } = question;
 
@@ -51,7 +49,7 @@ export default (state, question, handler) => {
     updateMistakesCount(state);
     header.updateMistakesView(state, $container);
 
-    if (getMistakesCount(state) === Amount.ATTEMPTS) {
+    if (state.mistakes === Amount.ATTEMPTS) {
       Object.assign(state, INITIAL_STATE);
       onFailure();
     }
