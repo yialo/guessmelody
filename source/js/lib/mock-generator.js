@@ -1,4 +1,4 @@
-import { QUESTIONS_AMOUNT } from '../data/game-config';
+import { Amount } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomArrayElement } from './utils';
 
@@ -21,7 +21,7 @@ const screenTypes = ['genre', 'artist'];
 
 const getRandomScreenTypeList = () => {
   const types = [];
-  for (let i = 1; i <= QUESTIONS_AMOUNT; i++) {
+  for (let i = 1; i <= Amount.QUESTIONS; i++) {
     const type = getRandomArrayElement(screenTypes);
     types.push(type);
   }

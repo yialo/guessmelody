@@ -31,11 +31,11 @@ const checkAnswer = (selectedAnswer, question) => {
   return false;
 };
 
-const getClickHandler = (question, onCorrect, onMistake) => (
+const createClickHandler = (question, onCorrect, onMistake) => (
   (evt) => {
     const answer = evt.currentTarget.value;
     const answerStatus = checkAnswer(answer, question);
-    if (answerStatus) onCorrect();
+    if (answerStatus) onCorrect(answerStatus);
     else onMistake();
   }
 );
@@ -44,6 +44,6 @@ export const addAnswerHandler = ($container, question, onCorrect, onMistake) => 
   const $radioButtons = $container.querySelectorAll('.artist__input');
 
   $radioButtons.forEach(($el) => (
-    $el.addEventListener('click', getClickHandler(question, onCorrect, onMistake))
+    $el.addEventListener('click', createClickHandler(question, onCorrect, onMistake))
   ));
 };

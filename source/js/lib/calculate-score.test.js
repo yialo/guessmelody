@@ -44,10 +44,12 @@ describe('Player score calculator', () => {
     [true, 30],
     [false, 30],
   ];
+  const answersData4 = [[true, 30]];
 
   const answers1 = getAnswers(answersData1);
   const answers2 = getAnswers(answersData2);
   const answers3 = getAnswers(answersData3);
+  const answers4 = getAnswers(answersData4);
 
   it('Return -1 if not all questions answered', () => {
     assert.strictEqual(calculateScore(answers3, 3), -1);
@@ -58,6 +60,7 @@ describe('Player score calculator', () => {
     assert.strictEqual(calculateScore(answers1, 3), 10);
     assert.strictEqual(calculateScore(answers1, 2), 8);
     assert.strictEqual(calculateScore(answers1, 1), 6);
+    assert.strictEqual(calculateScore(answers4, 3), 1);
   });
   it('Returns final score providing for attempts remain and some answers are quick', () => {
     assert.strictEqual(calculateScore(answers2, 3), 13);

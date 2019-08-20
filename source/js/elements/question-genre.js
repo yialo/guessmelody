@@ -1,7 +1,7 @@
 import createAudioTemplate from './audio';
 
-const getTrackTemplate = (track, index) => {
-  const buttonStateModifier = (index === 0) ? 'pause' : 'play';
+const getTrackTemplate = (track, number) => {
+  const buttonStateModifier = (number === 1) ? 'pause' : 'play';
   return (
     `<div class="track">
       <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
@@ -9,8 +9,8 @@ const getTrackTemplate = (track, index) => {
         ${createAudioTemplate(track)}
       </div>
       <div class="game__answer">
-        <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${index}" id="answer-${index}">
-        <label class="game__check" for="answer-${index}">Отметить</label>
+        <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${number}" id="answer-${number}">
+        <label class="game__check" for="answer-${number}">Отметить</label>
       </div>
     </div>`
   );
@@ -44,10 +44,10 @@ const getUserAnswers = ($container) => {
   return [...$checkedInputs].map((it) => it.value);
 };
 
-const answerHandler = ($container, question, onCorrect, onMistake) => {
+const onFormSubmit = ($container, question, onCorrect, onMistake) => {
   const answers = getUserAnswers($container);
   const answerStatus = checkAnswer(answers, question);
-  if (answerStatus) onCorrect();
+  if (answerStatus) onCorrect(answerStatus);
   else onMistake();
 };
 
@@ -72,6 +72,6 @@ export const addAnswerHandler = ($container, question, onCorrect, onMistake) => 
 
   $form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    answerHandler($container, question, onCorrect, onMistake);
+    onFormSubmit($container, question, onCorrect, onMistake);
   });
 };

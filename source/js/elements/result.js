@@ -1,5 +1,12 @@
-import successfulResult from '../data/mocks';
+import { Amount } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
+import calculateScore from '../lib/calculate-score';
+
+const __mockUserResult = {
+  minutes: 2,
+  seconds: 15,
+  quickAnswers: 8,
+};
 
 const failTip = 'Попробовать ещё раз';
 const failContentTextMap = {
@@ -22,8 +29,11 @@ const failAttemptsResult = {
 };
 
 const resultGetterMap = {
-  success: () => {
-    const { minutes, seconds, score, quickAnswers, mistakes } = successfulResult;
+  success: (answers, mistakes) => {
+    const attemptsRemain = Amount.ATTEMPTS - mistakes;
+    const score = calculateScore(answers, attemptsRemain);
+
+    const { minutes, seconds, quickAnswers } = __mockUserResult;
     return {
       caption: 'Вы настоящий меломан!',
       tip: 'Сыграть ещё раз',
@@ -37,17 +47,21 @@ const resultGetterMap = {
   failAttempts: () => failAttemptsResult,
 };
 
-const getTemplate = ({ caption, tip, content }) => (
-  `<section class="result">
-    <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
-    <h2 class="result__title">${caption}</h2>
-    ${content}
-    <button class="result__replay" type="button">${tip}</button>
-  </section>`
-);
+const getTemplate = (result) => {
+  const { caption, tip, content } = result;
 
-export default (type, onButtonClick) => {
-  const result = resultGetterMap[type]();
+  return (
+    `<section class="result">
+      <div class="result__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
+      <h2 class="result__title">${caption}</h2>
+      ${content}
+      <button class="result__replay" type="button">${tip}</button>
+    </section>`
+  );
+};
+
+export default (type, onButtonClick, ...resultData) => {
+  const result = resultGetterMap[type](...resultData);
   const template = getTemplate(result);
   const $container = renderElementFromTemplate(template);
 

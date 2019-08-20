@@ -1,4 +1,7 @@
-export const QUESTIONS_AMOUNT = 10;
+export const Amount = {
+  QUESTIONS: 1,
+  ATTEMPTS: 3,
+};
 
 export const initialState = {
   minutes: 5,

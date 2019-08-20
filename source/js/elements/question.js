@@ -1,4 +1,4 @@
-import { QUESTIONS_AMOUNT, initialState } from '../data/game-config';
+import { Amount, initialState } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import * as header from './header';
 import * as genre from './question-genre';
@@ -44,17 +44,19 @@ export default (state, question, handler) => {
 
   const { resetGame, getNextQuestion, onSuccess, onFailure } = handler;
 
-  const onCorrect = () => {
-    if (state.currentQuestionCount === QUESTIONS_AMOUNT - 1) onSuccess();
-    else state.currentQuestionCount += 1;
-    getNextQuestion();
+  const onCorrect = (answer) => {
+    if (state.currentQuestionCount === Amount.QUESTIONS - 1) onSuccess(answer);
+    else {
+      state.currentQuestionCount += 1;
+      getNextQuestion(answer);
+    }
   };
 
   const onMistake = () => {
     updateMistakesCount(state);
     header.updateMistakesView(state, $container);
 
-    if (getMistakesCount(state) === 3) {
+    if (getMistakesCount(state) === Amount.ATTEMPTS) {
       Object.assign(state, initialState);
       onFailure();
     }
