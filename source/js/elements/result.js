@@ -1,5 +1,5 @@
-import { successfulResult } from '../data/mocks';
-import { renderElementFromTemplate, changeScreen, getRandomArrayElement } from '../lib/utils';
+import successfulResult from '../data/mocks';
+import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 
 const failTip = 'Попробовать ещё раз';
 const failContentTextMap = {
@@ -15,7 +15,7 @@ const failTimeResult = {
   tip: failTip,
   content: getFailContentText('time'),
 };
-const failTriesResult = {
+const failAttemptsResult = {
   caption: 'Какая жалость!',
   tip: failTip,
   content: getFailContentText('tries'),
@@ -34,7 +34,7 @@ const resultGetterMap = {
     };
   },
   failTime: () => failTimeResult,
-  failTries: () => failTriesResult,
+  failAttempts: () => failAttemptsResult,
 };
 
 const getTemplate = ({ caption, tip, content }) => (
@@ -46,11 +46,8 @@ const getTemplate = ({ caption, tip, content }) => (
   </section>`
 );
 
-export default (
-  type = getRandomArrayElement([...Object.keys(resultGetterMap)]),
-  onButtonClick
-) => {
-  const result = resultGetterMap[type];
+export default (type, onButtonClick) => {
+  const result = resultGetterMap[type]();
   const template = getTemplate(result);
   const $container = renderElementFromTemplate(template);
 

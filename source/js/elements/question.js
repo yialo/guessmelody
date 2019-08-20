@@ -1,4 +1,5 @@
-import { renderElementFromTemplate } from '../lib/utils';
+import { QUESTIONS_AMOUNT, initialState } from '../data/game-config';
+import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import * as header from './header';
 import * as genre from './question-genre';
 import * as artist from './question-artist';
@@ -41,16 +42,26 @@ export default (state, question, handler) => {
   const template = getContainerTemplate(state, question);
   const $container = renderElementFromTemplate(template);
 
-  const { resetGame, onCorrect, onFail } = handler;
+  const { resetGame, getNextQuestion, onSuccess, onFailure } = handler;
+
+  const onCorrect = () => {
+    if (state.currentQuestionCount === QUESTIONS_AMOUNT - 1) onSuccess();
+    else state.currentQuestionCount += 1;
+    getNextQuestion();
+  };
 
   const onMistake = () => {
     updateMistakesCount(state);
     header.updateMistakesView(state, $container);
-    if (getMistakesCount(state) === 3) onFail();
+
+    if (getMistakesCount(state) === 3) {
+      Object.assign(state, initialState);
+      onFailure();
+    }
   };
 
   addResetHandler($container, resetGame);
   questionMap[question.type].addAnswerHandler($container, question, onCorrect, onMistake);
 
-  return $container;
+  changeScreen($container);
 };

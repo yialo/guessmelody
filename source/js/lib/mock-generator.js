@@ -28,7 +28,7 @@ const getRandomScreenTypeList = () => {
   return types;
 };
 
-export const randomScreenGetterMap = {
+const randomScreenGetterMap = {
   genre: () => {
     const screen = { type: 'genre' };
 
@@ -53,7 +53,7 @@ export const randomScreenGetterMap = {
     const trackList = [...tracks.values()];
     const targetTrack = getRandomArrayElement(trackList);
 
-    const correctAnswer = `answer-${trackList.indexOf(targetTrack) + 1}`;
+    const correctAnswer = `artist-${trackList.indexOf(targetTrack) + 1}`;
 
     screen.trackList = trackList;
     screen.targetTrack = targetTrack;

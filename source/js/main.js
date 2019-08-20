@@ -1,6 +1,5 @@
 import { initialState } from './data/game-config';
-import { screens } from './data/mocks';
-import { changeScreen } from './lib/utils';
+import getRandomScreens from './lib/mock-generator';
 import renderWelcomeScreen from './elements/welcome';
 import renderQuestionScreen from './elements/question';
 import renderResultScreen from './elements/result';
@@ -8,37 +7,20 @@ import renderResultScreen from './elements/result';
 (function init() {
   const gameState = Object.assign({}, initialState);
 
-  const [genreScreen, artistScreen] = screens;
+  const screens = getRandomScreens();
   const userAnswers = [];
 
-  const welcomeScreen = renderWelcomeScreen(() => {
-    (function renderGameGenreScreen() {
-      const gameGenreScreen = renderQuestionScreen(
-        gameState,
-        genreScreen,
-        {
-          resetGame: init,
-          onFail: () => {
-            // alert('Game over!');
-          },
-          onCorrect: () => {
-            const gameArtistScreen = renderQuestionScreen(
-              gameState,
-              artistScreen,
-              {
-                resetGame: init,
-                onFail: () => {
-                  // alert('Game over!');
-                },
-                onCorrect: () => renderResultScreen(renderGameGenreScreen),
-              }
-            );
-            changeScreen(gameArtistScreen);
-          },
-        }
-      );
-      changeScreen(gameGenreScreen);
-    }());
-  });
-  changeScreen(welcomeScreen);
+  const renderNextScreen = () => {
+    const { currentQuestionCount } = gameState;
+    const screen = screens[currentQuestionCount];
+
+    renderQuestionScreen(gameState, screen, {
+      resetGame: init,
+      getNextQuestion: renderNextScreen,
+      onSuccess: () => renderResultScreen('success', init),
+      onFailure: () => renderResultScreen('failAttempts', renderNextScreen),
+    });
+  };
+
+  renderWelcomeScreen(() => renderNextScreen());
 }());
