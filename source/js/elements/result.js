@@ -46,9 +46,11 @@ const getTemplate = ({ caption, tip, content }) => (
   </section>`
 );
 
-export default (onButtonClick) => {
-  const resultGetters = [...Object.values(resultGetterMap)];
-  const result = getRandomArrayElement(resultGetters)();
+export default (
+  type = getRandomArrayElement([...Object.keys(resultGetterMap)]),
+  onButtonClick
+) => {
+  const result = resultGetterMap[type];
   const template = getTemplate(result);
   const $container = renderElementFromTemplate(template);
 

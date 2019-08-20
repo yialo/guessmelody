@@ -12,7 +12,7 @@ export const getTimerTemplate = (state) => {
   );
 };
 
-export const updateTimerView = ($container, state) => {
+export const updateTimerView = (state, $container) => {
   const $timerContainer = $container.querySelector('.timer__value');
   $timerContainer.innerHTML = getTimerTemplate(state);
 };
@@ -25,7 +25,7 @@ export const getMistakesTemplate = (state) => (
   }`
 );
 
-export const updateMistakesView = ($container, state) => {
+export const updateMistakesView = (state, $container) => {
   const $mistakesContainer = $container.querySelector('.game__mistakes');
   $mistakesContainer.innerHTML = getMistakesTemplate(state);
 };

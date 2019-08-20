@@ -5,29 +5,21 @@ import * as artist from './question-artist';
 
 const questionMap = { genre, artist };
 
-const addBackLinkClickHandler = ($container, onClick) => {
-  const resetLink = $container.querySelector('.game__back');
-  resetLink.addEventListener('click', () => onClick());
-};
-
 const updateMistakesCount = (state) => {
   state.mistakes += 1;
 };
 
-const checkMistakesCount = (state) => {
-  if (state.mistakes >= 3) return -1;
-  return 1;
-};
+const getMistakesCount = (state) => state.mistakes;
 
 const getContainerTemplate = (state, question) => {
-  const { type, content } = question;
+  const { type } = question;
 
   const headerTemplate = header.getTemplate(
     header.getTimerTemplate(state),
     header.getMistakesTemplate(state)
   );
-  const captionText = questionMap[type].getCaptionText(content);
-  const contentTemplate = questionMap[type].getContentTemplate(content);
+  const captionText = questionMap[type].getCaptionText(question);
+  const contentTemplate = questionMap[type].getContentTemplate(question);
 
   return (
     `<section class="game game--${type}">
@@ -40,13 +32,25 @@ const getContainerTemplate = (state, question) => {
   );
 };
 
+const addResetHandler = ($container, onClick) => {
+  const resetLink = $container.querySelector('.game__back');
+  resetLink.addEventListener('click', () => onClick());
+};
+
 export default (state, question, handler) => {
   const template = getContainerTemplate(state, question);
   const $container = renderElementFromTemplate(template);
 
-  const { goBack, goForward } = handler;
-  addBackLinkClickHandler($container, goBack);
-  questionMap[question.type].bindHandlers($container, goForward);
+  const { resetGame, onCorrect, onFail } = handler;
+
+  const onMistake = () => {
+    updateMistakesCount(state);
+    header.updateMistakesView(state, $container);
+    if (getMistakesCount(state) === 3) onFail();
+  };
+
+  addResetHandler($container, resetGame);
+  questionMap[question.type].addAnswerHandler($container, question, onCorrect, onMistake);
 
   return $container;
 };

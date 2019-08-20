@@ -40,7 +40,9 @@ export const randomScreenGetterMap = {
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
     const correctAnswers = properTracks.map((it, i) => `answer-${i + 1}`);
 
-    screen.content = { trackList, targetGenre, correctAnswers };
+    screen.trackList = trackList;
+    screen.targetGenre = targetGenre;
+    screen.correctAnswers = correctAnswers;
 
     return screen;
   },
@@ -51,7 +53,11 @@ export const randomScreenGetterMap = {
     const trackList = [...tracks.values()];
     const targetTrack = getRandomArrayElement(trackList);
 
-    screen.content = { trackList, targetTrack };
+    const correctAnswer = `answer-${trackList.indexOf(targetTrack) + 1}`;
+
+    screen.trackList = trackList;
+    screen.targetTrack = targetTrack;
+    screen.correctAnswer = correctAnswer;
 
     return screen;
   },

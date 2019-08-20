@@ -17,14 +17,20 @@ import renderResultScreen from './elements/result';
         gameState,
         genreScreen,
         {
-          goBack: init,
-          goForward: () => {
+          resetGame: init,
+          onFail: () => {
+            // alert('Game over!');
+          },
+          onCorrect: () => {
             const gameArtistScreen = renderQuestionScreen(
               gameState,
               artistScreen,
               {
-                goBack: init,
-                goForward: () => renderResultScreen(renderGameGenreScreen),
+                resetGame: init,
+                onFail: () => {
+                  // alert('Game over!');
+                },
+                onCorrect: () => renderResultScreen(renderGameGenreScreen),
               }
             );
             changeScreen(gameArtistScreen);

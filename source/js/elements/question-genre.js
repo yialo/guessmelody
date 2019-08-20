@@ -18,28 +18,40 @@ const getTrackTemplate = (track, index) => {
 
 export const getCaptionText = (question) => `Выберите ${question.targetGenre} треки`;
 
-export const getContentTemplate = ({ trackList }) => (
+export const getContentTemplate = (question) => (
   `<form class="game__tracks">
-    ${trackList.map((it, i) => getTrackTemplate(it, i + 1)).join('')}
+    ${question.trackList.map((it, i) => getTrackTemplate(it, i + 1)).join('')}
     <button class="game__submit button" type="submit">Ответить</button>
   </form>`
 );
 
-export const checkAnswer = (selectedTracks, question) => {
+const checkAnswer = (selectedAnswers, question) => {
   const { correctAnswers } = question;
 
-  for (const it of selectedTracks) {
+  for (const it of selectedAnswers) {
     if (!correctAnswers.includes(it)) return false;
   }
 
   for (const it of correctAnswers) {
-    if (!selectedTracks.includes(it)) return false;
+    if (!selectedAnswers.includes(it)) return false;
   }
 
   return true;
 };
 
-export const bindHandlers = ($container, onSubmit) => {
+const getUserAnswers = ($container) => {
+  const $checkedInputs = $container.querySelectorAll('input[name=answer]:checked');
+  return [...$checkedInputs].map((it) => it.value);
+};
+
+const answerHandler = ($container, question, onCorrect, onMistake) => {
+  const answers = getUserAnswers($container);
+  const answerStatus = checkAnswer(answers, question);
+  if (answerStatus) onCorrect();
+  else onMistake();
+};
+
+export const addAnswerHandler = ($container, question, onCorrect, onMistake) => {
   const $form = $container.querySelector('.game__tracks');
   const $checkboxes = [...$form.querySelectorAll('.game__input')];
   const $button = $form.querySelector('.game__submit');
@@ -60,6 +72,6 @@ export const bindHandlers = ($container, onSubmit) => {
 
   $form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    onSubmit();
+    answerHandler($container, question, onCorrect, onMistake);
   });
 };
