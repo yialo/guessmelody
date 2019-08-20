@@ -54,3 +54,8 @@ export const getTemplate = (state) => {
     </header>`
   );
 };
+
+export const addLogoClickHandler = ($container, onClick) => {
+  const resetLink = $container.querySelector('.game__back');
+  resetLink.addEventListener('click', () => onClick());
+};
