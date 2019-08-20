@@ -1,24 +1,16 @@
-import { Amount, initialState } from '../data/game-config';
+import { Amount, INITIAL_STATE } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
-import * as header from './header';
+import * as header from './question-header';
+import * as common from './question-common';
 import * as genre from './question-genre';
 import * as artist from './question-artist';
 
 const questionMap = { genre, artist };
 
-const updateMistakesCount = (state) => {
-  state.mistakes += 1;
-};
-
-const getMistakesCount = (state) => state.mistakes;
-
 const getContainerTemplate = (state, question) => {
   const { type } = question;
 
-  const headerTemplate = header.getTemplate(
-    header.getTimerTemplate(state),
-    header.getMistakesTemplate(state)
-  );
+  const headerTemplate = header.getTemplate(state);
   const captionText = questionMap[type].getCaptionText(question);
   const contentTemplate = questionMap[type].getContentTemplate(question);
 
@@ -33,10 +25,7 @@ const getContainerTemplate = (state, question) => {
   );
 };
 
-const addResetHandler = ($container, onClick) => {
-  const resetLink = $container.querySelector('.game__back');
-  resetLink.addEventListener('click', () => onClick());
-};
+// const getGameScreenTemplate = (state, )
 
 export default (state, question, handler) => {
   const { type } = question;
@@ -56,16 +45,16 @@ export default (state, question, handler) => {
   };
 
   const onMistake = () => {
-    updateMistakesCount(state);
+    common.updateMistakesCount(state);
     header.updateMistakesView(state, $container);
 
-    if (getMistakesCount(state) === Amount.ATTEMPTS) {
-      Object.assign(state, initialState);
+    if (common.getMistakesCount(state) === Amount.ATTEMPTS) {
+      Object.assign(state, INITIAL_STATE);
       onFailure();
     }
   };
 
-  addResetHandler($container, resetGame);
+  common.addLogoClickHandler($container, resetGame);
   questionMap[type].addAnswerHandler($container, question, onCorrect, onMistake);
 
   changeScreen($container);

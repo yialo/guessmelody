@@ -3,7 +3,7 @@ export const Amount = {
   ATTEMPTS: 3,
 };
 
-export const initialState = {
+export const INITIAL_STATE = {
   minutes: 5,
   seconds: 0,
   mistakes: 0,

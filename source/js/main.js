@@ -1,4 +1,4 @@
-import { initialState } from './data/game-config';
+import { INITIAL_STATE } from './data/game-config';
 import getRandomScreens from './lib/mock-generator';
 import renderWelcomeScreen from './elements/welcome';
 import renderQuestionScreen from './elements/question';
@@ -7,7 +7,7 @@ import renderResultScreen from './elements/result';
 const __MOCK_ANSWER_TIME = 30;
 
 (function init() {
-  const gameState = Object.assign({}, initialState);
+  const gameState = Object.assign({}, INITIAL_STATE);
 
   const screens = getRandomScreens();
   const userAnswers = [];
