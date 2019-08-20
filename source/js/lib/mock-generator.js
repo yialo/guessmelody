@@ -1,6 +1,11 @@
-import { QUESTIONS_AMOUNT, QuestionSetSize } from '../data/game-config';
+import { QUESTIONS_AMOUNT } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomArrayElement } from './utils';
+
+const QuestionSetSize = {
+  GENRE: 4,
+  ARTIST: 3,
+};
 
 const getRandomTrackSet = (size) => {
   const tracks = new Set();
@@ -32,7 +37,10 @@ export const randomScreenGetterMap = {
 
     const targetGenre = getRandomArrayElement(trackList).genre;
 
-    screen.content = { trackList, targetGenre };
+    const properTracks = trackList.filter((it) => it.genre === targetGenre);
+    const correctAnswers = properTracks.map((it, i) => `answer-${i + 1}`);
+
+    screen.content = { trackList, targetGenre, correctAnswers };
 
     return screen;
   },

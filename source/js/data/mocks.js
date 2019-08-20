@@ -1,4 +1,4 @@
-import { randomScreenGetterMap } from '../lib/mock-generator';
+import getRandomScreens, { randomScreenGetterMap } from '../lib/mock-generator';
 
 export const successfulResult = {
   minutes: 2,

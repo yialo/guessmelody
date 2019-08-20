@@ -4,6 +4,15 @@ export const getFilePath = (type, text) => (
   `./files/${type}/${text.toLowerCase().replace(/ /g, '_')}.${extMap[type]}`
 );
 
+const melodiesData = [
+  ['Kevin MacLeod', 'Long Stroll', 'Jazz'],
+  ['Jingle Punks', 'In the Land of Rhinoplasty', 'Rock'],
+  ['Audionautix', 'Travel Light', 'Country'],
+  ['Riot', 'Level Plane', 'R&B'],
+  ['Jingle Punks', 'Lucky Day', 'Pop'],
+  ['Quincas Moreira', 'Firefly', 'Electronic'],
+];
+
 class Melody {
   constructor(artist, name, genre) {
     this.artist = artist;
@@ -22,11 +31,4 @@ class Melody {
   }
 }
 
-export default [
-  new Melody('Kevin MacLeod', 'Long Stroll', 'Jazz'),
-  new Melody('Jingle Punks', 'In the Land of Rhinoplasty', 'Rock'),
-  new Melody('Audionautix', 'Travel Light', 'Country'),
-  new Melody('Riot', 'Level Plane', 'R&B'),
-  new Melody('Jingle Punks', 'Lucky Day', 'Pop'),
-  new Melody('Quincas Moreira', 'Firefly', 'Electronic'),
-];
+export default melodiesData.map((it) => new Melody(...it));

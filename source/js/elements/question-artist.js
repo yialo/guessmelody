@@ -12,15 +12,24 @@ const getArtistTemplate = (track, index) => (
 
 export const getCaptionText = () => 'Кто исполняет эту песню?';
 
-export const getContentTemplate = ({ trackList, targetTrack }) => (
-  `<div class="game__track">
-    <button class="track__button track__button--play" type="button"></button>
-    ${createAudioTemplate(targetTrack)}
-  </div>
-  <form class="game__artist">
-    ${trackList.map((it, i) => getArtistTemplate(it, i + 1)).join('')}
-  </form>`
-);
+export const getContentTemplate = (question) => {
+  const { trackList, targetTrack } = question;
+
+  return (
+    `<div class="game__track">
+      <button class="track__button track__button--play" type="button"></button>
+      ${createAudioTemplate(targetTrack)}
+    </div>
+    <form class="game__artist">
+      ${trackList.map((it, i) => getArtistTemplate(it, i + 1)).join('')}
+    </form>`
+  );
+};
+
+export const checkAnswer = (selectedArtist, question) => {
+  if (selectedArtist === question.targetTrack.artist) return true;
+  return false;
+};
 
 export const bindHandlers = ($container, onClick) => {
   const $radioButtons = $container.querySelectorAll('.artist__input');

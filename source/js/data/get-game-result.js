@@ -1,4 +1,4 @@
-export default function (playerResult, otherResults) {
+export default (playerResult, otherResults) => {
   if (!playerResult.timeRemain) return 'Время вышло! Вы не успели отгадать все мелодии.';
   if (!playerResult.attemptsRemain) {
     return 'У вас закончились все попытки. Ничего, повезёт в следующий раз!';
@@ -15,4 +15,4 @@ export default function (playerResult, otherResults) {
   const playerRate = Math.floor((playersAmount - lastEqualPlacement) * 100 / playersAmount);
 
   return `Вы заняли ${placement} место из ${playersAmount} игроков. Это лучше, чем у ${playerRate}% игроков.`;
-}
+};

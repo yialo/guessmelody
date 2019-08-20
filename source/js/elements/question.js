@@ -1,38 +1,52 @@
 import { renderElementFromTemplate } from '../lib/utils';
-import { initialState } from '../data/game-config';
-import getHeaderTemplate from './header';
-import questionTypeMap from './question-type';
+import * as header from './header';
+import * as genre from './question-genre';
+import * as artist from './question-artist';
 
-const getContainerTemplate = (type, headerTemplate, captionText, contentTemplate) => (
-  `<section class="game game--${type}">
-    ${headerTemplate}
-    <div class="game__screen">
-      <h2 class="game__title">${captionText}</h2>
-      ${contentTemplate}
-    </div>
-  </section>`
-);
+const questionMap = { genre, artist };
 
 const addBackLinkClickHandler = ($container, onClick) => {
   const resetLink = $container.querySelector('.game__back');
   resetLink.addEventListener('click', () => onClick());
 };
 
-export default (question, handler) => {
+const updateMistakesCount = (state) => {
+  state.mistakes += 1;
+};
+
+const checkMistakesCount = (state) => {
+  if (state.mistakes >= 3) return -1;
+  return 1;
+};
+
+const getContainerTemplate = (state, question) => {
   const { type, content } = question;
-  const typeProps = questionTypeMap[type];
 
-  const headerTemplate = getHeaderTemplate(initialState);
-  const captionText = typeProps.getCaption(content);
-  const contentTemplate = typeProps.getTemplate(content);
+  const headerTemplate = header.getTemplate(
+    header.getTimerTemplate(state),
+    header.getMistakesTemplate(state)
+  );
+  const captionText = questionMap[type].getCaptionText(content);
+  const contentTemplate = questionMap[type].getContentTemplate(content);
 
-  const fullTemplate = getContainerTemplate(type, headerTemplate, captionText, contentTemplate);
+  return (
+    `<section class="game game--${type}">
+      ${headerTemplate}
+      <div class="game__screen">
+        <h2 class="game__title">${captionText}</h2>
+        ${contentTemplate}
+      </div>
+    </section>`
+  );
+};
 
-  const $container = renderElementFromTemplate(fullTemplate);
+export default (state, question, handler) => {
+  const template = getContainerTemplate(state, question);
+  const $container = renderElementFromTemplate(template);
 
   const { goBack, goForward } = handler;
   addBackLinkClickHandler($container, goBack);
-  typeProps.bindHandlers($container, goForward);
+  questionMap[question.type].bindHandlers($container, goForward);
 
   return $container;
 };

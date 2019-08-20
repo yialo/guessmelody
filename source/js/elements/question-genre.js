@@ -16,14 +16,28 @@ const getTrackTemplate = (track, index) => {
   );
 };
 
-export const getCaptionText = ({ targetGenre }) => `Выберите ${targetGenre} треки`;
+export const getCaptionText = (question) => `Выберите ${question.targetGenre} треки`;
 
 export const getContentTemplate = ({ trackList }) => (
   `<form class="game__tracks">
-    ${trackList.map((it, i) => getTrackTemplate(it, i)).join('')}
+    ${trackList.map((it, i) => getTrackTemplate(it, i + 1)).join('')}
     <button class="game__submit button" type="submit">Ответить</button>
   </form>`
 );
+
+export const checkAnswer = (selectedTracks, question) => {
+  const { correctAnswers } = question;
+
+  for (const it of selectedTracks) {
+    if (!correctAnswers.includes(it)) return false;
+  }
+
+  for (const it of correctAnswers) {
+    if (!selectedTracks.includes(it)) return false;
+  }
+
+  return true;
+};
 
 export const bindHandlers = ($container, onSubmit) => {
   const $form = $container.querySelector('.game__tracks');
