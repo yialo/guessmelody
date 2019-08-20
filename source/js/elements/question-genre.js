@@ -1,12 +1,13 @@
-import createAudioTemplate from './audio';
+import getAudioTemplate from './audio';
 
 const getTrackTemplate = (track, number) => {
-  const buttonStateModifier = (number === 1) ? 'pause' : 'play';
+  const buttonStateModifier = (number === 1) ? 'play' : '';
+  const isAudioAutoplay = (number === 1);
   return (
     `<div class="track">
       <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
       <div class="track__status">
-        ${createAudioTemplate(track)}
+        ${getAudioTemplate(track, isAudioAutoplay)}
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${number}" id="answer-${number}">
@@ -14,6 +15,38 @@ const getTrackTemplate = (track, number) => {
       </div>
     </div>`
   );
+};
+
+export const addAudioHandling = ($container) => {
+  const $audioBlocks = $container.querySelectorAll('.track');
+
+  $audioBlocks.forEach(($it) => {
+    $it.$button = $it.querySelector('button');
+    $it.$audio = $it.querySelector('audio');
+  });
+
+  $audioBlocks.forEach(($it) => {
+    const { $audio, $button } = $it;
+    $button.addEventListener('click', () => {
+      const $otherBlocks = new Set([...$audioBlocks]);
+      $otherBlocks.delete($it);
+
+      if ($audio.paused) {
+        $otherBlocks.forEach(($el) => $el.$audio.pause());
+        $audio.play();
+        $button.classList.add(`track__button--play`);
+        $button.classList.remove(`track__button--pause`);
+      } else {
+        $audio.pause();
+        $button.classList.remove(`track__button--play`);
+        $button.classList.add(`track__button--pause`);
+      }
+      $otherBlocks.forEach(($el) => {
+        $el.$button.classList.remove(`track__button--play`);
+        $el.$button.classList.remove(`track__button--pause`);
+      });
+    });
+  });
 };
 
 export const getCaptionText = (question) => `Выберите ${question.targetGenre} треки`;
@@ -51,22 +84,23 @@ const onFormSubmit = ($container, question, onCorrect, onMistake) => {
   else onMistake();
 };
 
+const setClickabilityState = ($el, isClickable) => {
+  if (isClickable) $el.removeAttribute('disabled');
+  else $el.setAttribute('disabled', 'disabled');
+};
+
 export const addAnswerHandler = ($container, question, onCorrect, onMistake) => {
   const $form = $container.querySelector('.game__tracks');
   const $checkboxes = [...$form.querySelectorAll('.game__input')];
   const $button = $form.querySelector('.game__submit');
 
-  $button.setClickabilityState = (isClickable) => {
-    if (isClickable) $button.removeAttribute('disabled');
-    else $button.setAttribute('disabled', 'disabled');
-  };
-  $button.setClickabilityState(false);
+  setClickabilityState($button, false);
 
   const checkSelectedCheckboxPresence = () => $checkboxes.some(($el) => $el.checked);
 
   const onCheckboxChange = () => {
-    if (checkSelectedCheckboxPresence()) $button.setClickabilityState(true);
-    else $button.setClickabilityState(false);
+    if (checkSelectedCheckboxPresence()) setClickabilityState($button, true);
+    else setClickabilityState($button, false);
   };
   $checkboxes.forEach(($el) => $el.addEventListener('change', onCheckboxChange));
 

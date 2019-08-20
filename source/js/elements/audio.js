@@ -1,7 +1,9 @@
-const createAudioTemplate = (track) => (
-  `<audio>
-    <source src="${track.audio}" type="audio/mpeg">
-  </audio>`
-);
+export default (track, isAutoplay = false) => {
+  const autoplayAttribute = isAutoplay ? ` autoplay="autoplay"` : ``;
 
-export default createAudioTemplate;
+  return (
+    `<audio${autoplayAttribute} loop="loop">
+      <source src="${track.audio}" type="audio/mpeg">
+    </audio>`
+  );
+};

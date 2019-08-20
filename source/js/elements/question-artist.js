@@ -1,4 +1,4 @@
-import createAudioTemplate from './audio';
+import getAudioTemplate from './audio';
 
 const getArtistTemplate = (track, index) => (
   `<div class="artist">
@@ -18,12 +18,25 @@ export const getContentTemplate = (question) => {
   return (
     `<div class="game__track">
       <button class="track__button track__button--play" type="button"></button>
-      ${createAudioTemplate(targetTrack)}
+      ${getAudioTemplate(targetTrack, true)}
     </div>
     <form class="game__artist">
       ${trackList.map((it, i) => getArtistTemplate(it, i + 1)).join('')}
     </form>`
   );
+};
+
+export const addAudioHandling = ($container) => {
+  const $audioBlock = $container.querySelector('.game__track');
+  const $button = $audioBlock.querySelector('button');
+  const $audio = $audioBlock.querySelector('audio');
+
+  $button.addEventListener('click', () => {
+    if ($audio.paused) $audio.play();
+    else $audio.pause();
+    $button.classList.toggle(`track__button--play`);
+    $button.classList.toggle(`track__button--pause`);
+  });
 };
 
 const checkAnswer = (selectedAnswer, question) => {

@@ -39,8 +39,11 @@ const addResetHandler = ($container, onClick) => {
 };
 
 export default (state, question, handler) => {
+  const { type } = question;
   const template = getContainerTemplate(state, question);
   const $container = renderElementFromTemplate(template);
+
+  questionMap[type].addAudioHandling($container);
 
   const { resetGame, getNextQuestion, onSuccess, onFailure } = handler;
 
@@ -63,7 +66,7 @@ export default (state, question, handler) => {
   };
 
   addResetHandler($container, resetGame);
-  questionMap[question.type].addAnswerHandler($container, question, onCorrect, onMistake);
+  questionMap[type].addAnswerHandler($container, question, onCorrect, onMistake);
 
   changeScreen($container);
 };
