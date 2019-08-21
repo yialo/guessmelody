@@ -1,4 +1,4 @@
-import { Amount } from '../data/game-config';
+import { GameAmount } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import calculateScore from '../lib/calculate-score';
 
@@ -30,7 +30,7 @@ const failAttemptsResult = {
 
 const resultGetterMap = {
   success: (answers, mistakes) => {
-    const attemptsRemain = Amount.ATTEMPTS - mistakes;
+    const attemptsRemain = GameAmount.ATTEMPTS - mistakes;
     const score = calculateScore(answers, attemptsRemain);
 
     const { minutes, seconds, quickAnswers } = __mockUserResult;

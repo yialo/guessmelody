@@ -1,6 +1,6 @@
 const padStartWithZero = (num) => String(num).padStart(2, '0');
 
-const getTimerPartValue = (state, partial) => {
+const getTimerPart = (state, partial) => {
   const rawValue = state[partial];
   return padStartWithZero(rawValue);
 };
@@ -14,7 +14,7 @@ export const updateTimerView = (state, $container) => {
 
   partialClassNameMap.forEach((value, key) => {
     const $el = $timer.querySelector(`.timer__${value}`);
-    $el.textContent = getTimerPartValue(state, key);
+    $el.textContent = getTimerPart(state, key);
   });
 };
 
@@ -32,7 +32,7 @@ export const updateMistakesView = (state, $container) => {
 };
 
 export const getTemplate = (state) => {
-  const getTimerPart = (partial) => getTimerPartValue(state, partial);
+  const _getTimerPart = (partial) => getTimerPart(state, partial);
 
   return (
     `<header class="game__header">
@@ -46,9 +46,9 @@ export const getTemplate = (state) => {
       </svg>
 
       <div class="timer__value">
-        <span class="timer__mins">${getTimerPart('minutes')}</span>
+        <span class="timer__mins">${_getTimerPart('minutes')}</span>
         <span class="timer__dots">:</span>
-        <span class="timer__secs">${getTimerPart('seconds')}</span>
+        <span class="timer__secs">${_getTimerPart('seconds')}</span>
       </div>
       <div class="game__mistakes">${getMistakesTemplate(state)}</div>
     </header>`

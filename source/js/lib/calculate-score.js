@@ -1,5 +1,6 @@
+import { GameAmount } from '../data/game-config';
+
 const FAILURE_CODE = -1;
-const ATTEMPTS = 3;
 const AnswerPrice = { RIGHT: 1, QUICK: 1, MISTAKE: -2 };
 
 export default (answers, attemptsRemain) => {
@@ -13,7 +14,7 @@ export default (answers, attemptsRemain) => {
     })
     .reduce((sum, it) => sum + it);
 
-  const mistakesDone = ATTEMPTS - attemptsRemain;
+  const mistakesDone = GameAmount.ATTEMPTS - attemptsRemain;
 
   return pointsSum + AnswerPrice.MISTAKE * mistakesDone;
 };

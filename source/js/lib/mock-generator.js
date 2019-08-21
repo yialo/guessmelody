@@ -1,83 +1,83 @@
-import { Amount } from '../data/game-config';
+import { GameAmount } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomArrayElement } from './utils';
 
-const QUESTION_SET_SIZE = {
+const TRACK_LIST_SIZE = {
   genre: 4,
   artist: 3,
 };
+const questionTypes = [...Object.keys(TRACK_LIST_SIZE)];
 
-// TODO: move to 'getRandomTracklist' method
-const getRandomTrackSet = (size) => {
-  const tracks = new Set();
-  do {
-    const track = getRandomArrayElement(melodies);
-    tracks.add(track);
-  } while (tracks.size < size);
+const getRandomQuestionTypeList = () => (
+  new Array(GameAmount.QUESTIONS).fill('')
+    .map(() => getRandomArrayElement(questionTypes))
+);
 
-  return tracks;
-};
-
-const screenTypes = ['genre', 'artist'];
-
-const getRandomScreenTypeList = () => {
-  const types = [];
-  for (let i = 1; i <= Amount.QUESTIONS; i++) {
-    const type = getRandomArrayElement(screenTypes);
-    types.push(type);
-  }
-  return types;
-};
-
-const getRandomTrackList = (type) => {
-  const tracks = getRandomTrackSet(QUESTION_SET_SIZE[type]);
-  return [...tracks.values()];
-};
-
-const randomScreenGetterMap = {
+const randomQuestionGetterMap = {
   genre: () => {
-    const screen = { type: 'genre' };
+    const question = { type: 'genre' };
 
-    const trackList = getRandomTrackList('genre');
+    const getRandomTrackList = () => {
+      const trackSet = new Set();
+
+      do {
+        const track = getRandomArrayElement(melodies);
+        trackSet.add(track);
+      } while (trackSet.size < TRACK_LIST_SIZE.genre);
+
+      return [...trackSet.values()];
+    };
+
+    const trackList = getRandomTrackList();
     const targetGenre = getRandomArrayElement(trackList).genre;
 
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
     const correctAnswers = properTracks.map((it, i) => `answer-${i + 1}`);
 
-    screen.trackList = trackList;
-    screen.targetGenre = targetGenre;
-    screen.correctAnswers = correctAnswers;
+    question.trackList = trackList;
+    question.targetGenre = targetGenre;
+    question.correctAnswers = correctAnswers;
 
-    return screen;
+    return question;
   },
-  artist: () => {
-    const screen = { type: 'artist' };
 
-    const trackList = getRandomTrackList('artist');
+  artist: () => {
+    const question = { type: 'artist' };
+
+    const getRandomTrackList = () => {
+      const trackList = [];
+
+      do {
+        const track = getRandomArrayElement(melodies);
+        const artistList = trackList.map((it) => it.artist);
+
+        if (!artistList.includes(track.artist)) {
+          trackList.push(track);
+        }
+      } while (trackList.length < TRACK_LIST_SIZE.artist);
+
+      return trackList;
+    };
+
+    const trackList = getRandomTrackList();
     const targetTrack = getRandomArrayElement(trackList);
 
     const correctAnswer = `artist-${trackList.indexOf(targetTrack) + 1}`;
 
-    screen.trackList = trackList;
-    screen.targetTrack = targetTrack;
-    screen.correctAnswer = correctAnswer;
+    question.trackList = trackList;
+    question.targetTrack = targetTrack;
+    question.correctAnswer = correctAnswer;
 
-    return screen;
+    return question;
   },
 };
 
-const getRandomScreens = () => {
-  const screens = [];
+const getRandomQuestions = () => {
+  const screenTypeList = getRandomQuestionTypeList();
 
-  const screenTypeList = getRandomScreenTypeList();
-  screenTypeList.forEach((it) => {
-    const screen = randomScreenGetterMap[it]();
-    screens.push(screen);
-  });
+  return screenTypeList.map((it) => randomQuestionGetterMap[it]());
 
   // TODO: add 'nextQuestionType' property
-
-  return screens;
 };
 
-export default getRandomScreens;
+export default getRandomQuestions;

@@ -1,4 +1,4 @@
-export const Amount = {
+export const GameAmount = {
   QUESTIONS: 1,
   ATTEMPTS: 3,
 };
