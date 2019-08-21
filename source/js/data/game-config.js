@@ -1,5 +1,5 @@
 export const GameAmount = {
-  QUESTIONS: 1,
+  QUESTIONS: 2,
   ATTEMPTS: 3,
 };
 

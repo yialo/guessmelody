@@ -63,9 +63,15 @@ const questionTypeGetterMap = {
 const getRandomQuestions = () => {
   const screenTypeList = getRandomQuestionTypeList();
 
-  return screenTypeList.map((it) => questionTypeGetterMap[it]());
+  const questions = screenTypeList.map((it) => questionTypeGetterMap[it]());
 
-  // TODO: add 'nextQuestionType' property
+  questions.forEach((it, i, arr) => {
+    if (i !== questions.length - 1) {
+      it.nextQuestionType = arr[i + 1].type;
+    } else it.nextQuestionType = null;
+  });
+
+  return questions;
 };
 
 export default getRandomQuestions;
