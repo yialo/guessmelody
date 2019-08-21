@@ -13,10 +13,8 @@ const getRandomQuestionTypeList = () => (
     .map(() => getRandomArrayElement(questionTypes))
 );
 
-const randomQuestionGetterMap = {
+const questionTypeGetterMap = {
   genre: () => {
-    const question = { type: 'genre' };
-
     const getRandomTrackList = () => {
       const trackSet = new Set();
 
@@ -34,16 +32,10 @@ const randomQuestionGetterMap = {
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
     const correctAnswers = properTracks.map((it, i) => `answer-${i + 1}`);
 
-    question.trackList = trackList;
-    question.targetGenre = targetGenre;
-    question.correctAnswers = correctAnswers;
-
-    return question;
+    return { type: 'genre', trackList, targetGenre, correctAnswers };
   },
 
   artist: () => {
-    const question = { type: 'artist' };
-
     const getRandomTrackList = () => {
       const trackList = [];
 
@@ -64,18 +56,14 @@ const randomQuestionGetterMap = {
 
     const correctAnswer = `artist-${trackList.indexOf(targetTrack) + 1}`;
 
-    question.trackList = trackList;
-    question.targetTrack = targetTrack;
-    question.correctAnswer = correctAnswer;
-
-    return question;
+    return { type: 'artist', trackList, targetTrack, correctAnswer };
   },
 };
 
 const getRandomQuestions = () => {
   const screenTypeList = getRandomQuestionTypeList();
 
-  return screenTypeList.map((it) => randomQuestionGetterMap[it]());
+  return screenTypeList.map((it) => questionTypeGetterMap[it]());
 
   // TODO: add 'nextQuestionType' property
 };
