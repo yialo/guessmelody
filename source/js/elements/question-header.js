@@ -51,7 +51,7 @@ export const updateMistakesView = ($container, state) => {
   $mistakesContainer.innerHTML = getMistakesTemplate(state);
 };
 
-export const addLogoClickHandler = ($container, onClick) => {
+export const addLinkClickHandler = ($container, onClick) => {
   const resetLink = $container.querySelector('.game__back');
   resetLink.addEventListener('click', () => onClick());
 };

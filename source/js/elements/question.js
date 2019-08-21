@@ -16,17 +16,11 @@ const updateMistakesCount = (currentState) => {
   currentState.mistakes += 1;
 };
 
-const renderQuestion = (state, question, handler) => {
+export default (state, question, handler) => {
   const { resetGame, showNextQuestion, onSuccess, onFailure } = handler;
 
   const $game = renderElementFromTemplate(template.game);
-
-  const $header = renderElementFromTemplate(header.template);
-  header.addLogoClickHandler($header, resetGame);
-
-  const $screen = renderElementFromTemplate(template.screen);
-
-  const updateBemModifier = (newQuestion) => {
+  const update$gameBemMod = (newQuestion) => {
     const newModifier = `game--${newQuestion.type}`;
     const { classList } = $game;
 
@@ -34,7 +28,14 @@ const renderQuestion = (state, question, handler) => {
     else classList.add(newModifier);
   };
 
-  const updateScreen = (newQuestion) => {
+  const $header = renderElementFromTemplate(header.template);
+  const update$header = () => {
+    header.updateTimerView($header, state);
+    header.addLinkClickHandler($header, resetGame);
+  };
+
+  const $screen = renderElementFromTemplate(template.screen);
+  const update$screen = (newQuestion) => {
     const lib = questionMap[newQuestion.type];
 
     const caption = lib.updateCaption(newQuestion);
@@ -50,7 +51,7 @@ const renderQuestion = (state, question, handler) => {
 
   const bindHandlers = (newQuestion) => {
     const lib = questionMap[newQuestion.type];
-    lib.addAudioHandling($game);
+    lib.addAudioHandling($screen);
 
     const onCorrect = (answer) => {
       if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
@@ -62,7 +63,7 @@ const renderQuestion = (state, question, handler) => {
 
     const onMistake = (newState) => {
       updateMistakesCount(newState);
-      header.updateMistakesView(newState, $game);
+      header.updateMistakesView($header, newState);
 
       if (newState.mistakes === GameAmount.ATTEMPTS) {
         Object.assign(newState, INITIAL_STATE);
@@ -70,20 +71,18 @@ const renderQuestion = (state, question, handler) => {
       }
     };
 
-    lib.addAnswerHandler($game, newQuestion, onCorrect, onMistake);
+    lib.addAnswerHandler($screen, newQuestion, onCorrect, onMistake);
   };
 
   const updateQuestion = (newQuestion) => {
-    updateBemModifier(newQuestion);
-    updateScreen(newQuestion);
+    update$gameBemMod(newQuestion);
+    update$screen(newQuestion);
     bindHandlers(newQuestion);
   };
 
-  header.updateTimerView($header, state);
-  $game.append($header, $screen);
-
+  update$header();
   updateQuestion(question);
+
+  $game.append($header, $screen);
   changeScreen($game);
 };
-
-export default renderQuestion;
