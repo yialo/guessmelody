@@ -9,7 +9,7 @@ const __MOCK_ANSWER_TIME = 30;
 const startNewGame = () => {
   const questions = getRandomQuestions();
   const gameState = Object.assign({}, INITIAL_STATE);
-  const userAnswers = [];
+  const answers = [];
 
   const getCurrentQuestion = () => questions[gameState.currentQuestionIndex];
 
@@ -19,7 +19,7 @@ const startNewGame = () => {
       time: __MOCK_ANSWER_TIME,
     };
 
-    userAnswers.push(answer);
+    answers.push(answer);
   };
 
   const handlers = {
@@ -33,9 +33,10 @@ const startNewGame = () => {
     },
   };
 
-  renderWelcomeScreen(() => (
-    renderQuestionScreen(gameState, getCurrentQuestion(), handlers)
-  ));
+  renderWelcomeScreen(() => {
+    const question = getCurrentQuestion();
+    renderQuestionScreen(gameState, question, handlers);
+  });
 };
 
 startNewGame();

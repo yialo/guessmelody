@@ -5,7 +5,7 @@ import * as genre from './question-genre';
 import * as artist from './question-artist';
 
 const questionMap = { genre, artist };
-const gameBemModifiers = [...Object.keys(questionMap)].map((it) => `game--${it}`);
+const bemModifiers = [...Object.keys(questionMap)].map((it) => `game--${it}`);
 
 const template = {
   game: `<section class="game"></section>`,
@@ -28,12 +28,10 @@ const renderQuestion = (state, question, handler) => {
 
   const updateBemModifier = (newQuestion) => {
     const newModifier = `game--${newQuestion.type}`;
+    const { classList } = $game;
 
-    if (!$game.classList.contains(newModifier)) {
-      const modifiersRest = gameBemModifiers.filter((it) => it !== newModifier);
-      modifiersRest.forEach((it) => $game.classList.remove(it));
-      $game.classList.add(newModifier);
-    }
+    if (classList.length > 1) bemModifiers.forEach((it) => classList.toggle(it));
+    else classList.add(newModifier);
   };
 
   const updateScreen = (newQuestion) => {
@@ -82,9 +80,9 @@ const renderQuestion = (state, question, handler) => {
   };
 
   header.updateTimerView($header, state);
-  updateQuestion(question);
-
   $game.append($header, $screen);
+
+  updateQuestion(question);
   changeScreen($game);
 };
 
