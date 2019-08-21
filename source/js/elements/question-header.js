@@ -47,8 +47,7 @@ const getMistakesTemplate = (state) => (
 );
 
 export const updateMistakesView = ($container, state) => {
-  const $mistakesContainer = $container.querySelector(`.game__mistakes`);
-  $mistakesContainer.innerHTML = getMistakesTemplate(state);
+  $container.innerHTML = getMistakesTemplate(state);
 };
 
 export const addLinkClickHandler = ($container, onClick) => {

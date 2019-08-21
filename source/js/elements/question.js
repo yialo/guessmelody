@@ -12,10 +12,6 @@ const template = {
   screen: `<div class="game__screen"></div>`,
 };
 
-const updateMistakesCount = (currentState) => {
-  currentState.mistakes += 1;
-};
-
 export default (state, question, handler) => {
   const { resetGame, showNextQuestion, onSuccess, onFailure } = handler;
 
@@ -29,6 +25,7 @@ export default (state, question, handler) => {
   };
 
   const $header = renderElementFromTemplate(header.template);
+  const $mistakesEl = $header.querySelector(`.game__mistakes`);
   const update$header = () => {
     header.updateTimerView($header, state);
     header.addLinkClickHandler($header, resetGame);
@@ -54,18 +51,16 @@ export default (state, question, handler) => {
       if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
       else {
         state.currentQuestionIndex += 1;
+        // TODO: проверить, какой метод вызывать здесь
         showNextQuestion(answer);
       }
     };
 
-    const onMistake = (newState) => {
-      updateMistakesCount(newState);
-      header.updateMistakesView($header, newState);
+    const onMistake = () => {
+      state.mistakes += 1;
+      header.updateMistakesView($mistakesEl, state);
 
-      if (newState.mistakes === GameAmount.ATTEMPTS) {
-        Object.assign(newState, INITIAL_STATE);
-        onFailure();
-      }
+      if (state.mistakes === GameAmount.ATTEMPTS) onFailure();
     };
 
     const lib = questionMap[newQuestion.type];

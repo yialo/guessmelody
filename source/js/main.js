@@ -29,6 +29,7 @@ const startNewGame = () => {
       renderResultScreen('success');
     },
     onFailure: () => {
+      Object.assign(gameState, INITIAL_STATE);
       renderResultScreen('failAttempts');
     },
   };
