@@ -5,7 +5,7 @@ import * as genre from './question-genre';
 import * as artist from './question-artist';
 
 const questionMap = { genre, artist };
-const bemModifiers = [...Object.keys(questionMap)].map((it) => `game--${it}`);
+const bemModifiers = Object.keys(questionMap).map((it) => `game--${it}`);
 
 const template = {
   game: `<section class="game"></section>`,
@@ -64,10 +64,13 @@ export default (state, question, handler) => {
     lib.addAnswerHandlers($screen, newQuestion, onCorrect, onMistake);
   };
 
-  const updateQuestion = (newQuestion) => {
+  const updateQuestion = (newQuestion, previousQuestion) => {
     update$gameBemMod(newQuestion);
     update$screen(newQuestion);
     bindHandlers(newQuestion, updateQuestion);
+    if (![newQuestion, previousQuestion].every((it) => it.type === 'artist')) {
+      // TODO: добавить момент с обновлением caption
+    }
   };
 
   update$header();

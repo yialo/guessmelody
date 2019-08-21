@@ -6,7 +6,7 @@ const TRACK_LIST_SIZE = {
   genre: 4,
   artist: 3,
 };
-const questionTypes = [...Object.keys(TRACK_LIST_SIZE)];
+const questionTypes = Object.keys(TRACK_LIST_SIZE);
 
 const getRandomQuestionTypeList = () => (
   new Array(GameAmount.QUESTIONS).fill('')
