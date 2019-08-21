@@ -1,4 +1,4 @@
-import { GameAmount, INITIAL_STATE } from '../data/game-config';
+import { GameAmount } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import * as header from './question-header';
 import * as genre from './question-genre';
