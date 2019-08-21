@@ -10,7 +10,7 @@ const getArtistTemplate = (track, index) => (
   </div>`
 );
 
-export const getCaptionText = () => 'Кто исполняет эту песню?';
+export const updateCaption = () => 'Кто исполняет эту песню?';
 
 export const getContentTemplate = (question) => {
   const { trackList, targetTrack } = question;

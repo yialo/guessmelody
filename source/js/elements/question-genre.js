@@ -49,7 +49,7 @@ export const addAudioHandling = ($container) => {
   });
 };
 
-export const getCaptionText = (question) => `Выберите ${question.targetGenre} треки`;
+export const updateCaption = (question) => `Выберите ${question.targetGenre} треки`;
 
 export const getContentTemplate = (question) => (
   `<form class="game__tracks">

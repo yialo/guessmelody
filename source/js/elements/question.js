@@ -5,89 +5,87 @@ import * as genre from './question-genre';
 import * as artist from './question-artist';
 
 const questionMap = { genre, artist };
-const containerModifiers = [...Object.keys(questionMap)].map((it) => `game--${it}`);
-
-const updateMistakesCount = (state) => {
-  state.mistakes += 1;
-};
+const gameBemModifiers = [...Object.keys(questionMap)].map((it) => `game--${it}`);
 
 const template = {
-  container: `<section class="game"></section>`,
+  game: `<section class="game"></section>`,
   screen: `<div class="game__screen"></div>`,
-  caption: `<h2 class="game__title"></h2>`,
 };
 
-// const renderScreen = (question) => {
-//   const { type } = question;
-
-//   const captionText = questionMap[type].getCaptionText(question);
-//   const $caption = renderElementFromTemplate(captionTemplate);
-//   $caption.textContent = captionText;
-
-//   const contentTemplate = questionMap[type].getContentTemplate(question);
-//   const $content = renderElementFromTemplate(contentTemplate);
-
-//   const $screen = renderElementFromTemplate(screenTemplate);
-//   $screen.append($caption, $content);
-
-//   return $screen;
-// };
-
-const updateContainerModifier = ($container, question) => {
-  const newModifier = `game--${question.type}`;
-
-  if (!$container.classList.contains(newModifier)) {
-    const modifiersRest = containerModifiers.filter((it) => it !== newModifier);
-    modifiersRest.forEach((it) => $container.classList.remove(it));
-    $container.classList.add(newModifier);
-  }
+const updateMistakesCount = (currentState) => {
+  currentState.mistakes += 1;
 };
 
-// const bindHandlers = (state, quesiton, handler) => {
+const renderQuestion = (state, question, handler) => {
+  const { resetGame, showNextQuestion, onSuccess, onFailure } = handler;
 
-// };
+  const $game = renderElementFromTemplate(template.game);
 
-export default (state, question, handler) => {
-  const { type } = question;
-
-  const $container = renderElementFromTemplate(template.container);
   const $header = renderElementFromTemplate(header.template);
+  header.addLogoClickHandler($header, resetGame);
+
   const $screen = renderElementFromTemplate(template.screen);
 
-  header.updateTimerView($header, state);
+  const updateBemModifier = (newQuestion) => {
+    const newModifier = `game--${newQuestion.type}`;
 
-  const updateContainer = () => {
-    updateContainerModifier($container, question);
-    // updateScreen(question);
+    if (!$game.classList.contains(newModifier)) {
+      const modifiersRest = gameBemModifiers.filter((it) => it !== newModifier);
+      modifiersRest.forEach((it) => $game.classList.remove(it));
+      $game.classList.add(newModifier);
+    }
   };
 
-  updateContainer();
-  $container.append($header, $screen);
+  const updateScreen = (newQuestion) => {
+    const lib = questionMap[newQuestion.type];
 
-  // questionMap[type].addAudioHandling($container);
+    const caption = lib.updateCaption(newQuestion);
+    const content = lib.getContentTemplate(newQuestion);
 
-  // const { resetGame, getNextQuestion, onSuccess, onFailure } = handler;
+    const markup = (
+      `<h2 class="game__title">${caption}</h2>
+      ${content}`
+    );
 
-  // const onCorrect = (answer) => {
-  //   if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
-  //   else {
-  //     state.currentQuestionIndex += 1;
-  //     getNextQuestion(answer);
-  //   }
-  // };
+    $screen.innerHTML = markup;
+  };
 
-  // const onMistake = () => {
-  //   updateMistakesCount(state);
-  //   header.updateMistakesView(state, $container);
+  const bindHandlers = (newQuestion) => {
+    const lib = questionMap[newQuestion.type];
+    lib.addAudioHandling($game);
 
-  //   if (state.mistakes === GameAmount.ATTEMPTS) {
-  //     Object.assign(state, INITIAL_STATE);
-  //     onFailure();
-  //   }
-  // };
+    const onCorrect = (answer) => {
+      if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
+      else {
+        state.currentQuestionIndex += 1;
+        showNextQuestion(answer);
+      }
+    };
 
-  // header.addLogoClickHandler($container, resetGame);
-  // questionMap[type].addAnswerHandler($container, question, onCorrect, onMistake);
+    const onMistake = (newState) => {
+      updateMistakesCount(newState);
+      header.updateMistakesView(newState, $game);
 
-  changeScreen($container);
+      if (newState.mistakes === GameAmount.ATTEMPTS) {
+        Object.assign(newState, INITIAL_STATE);
+        onFailure();
+      }
+    };
+
+    lib.addAnswerHandler($game, newQuestion, onCorrect, onMistake);
+  };
+
+  const updateQuestion = (newQuestion) => {
+    updateBemModifier(newQuestion);
+    updateScreen(newQuestion);
+    bindHandlers(newQuestion);
+  };
+
+  header.updateTimerView($header, state);
+  updateQuestion(question);
+
+  $game.append($header, $screen);
+  changeScreen($game);
 };
+
+export default renderQuestion;
