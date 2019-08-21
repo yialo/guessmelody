@@ -7,9 +7,8 @@ import renderResultScreen from './elements/result';
 const __MOCK_ANSWER_TIME = 30;
 
 const init = () => {
-  const gameState = Object.assign({}, INITIAL_STATE);
-
   const questions = getRandomQuestions();
+  const gameState = Object.assign({}, INITIAL_STATE);
   const userAnswers = [];
 
   const addAnswerData = (answerStatus) => {
@@ -22,8 +21,8 @@ const init = () => {
   };
 
   const renderNextQuestionView = () => {
-    const { currentQuestionCount } = gameState;
-    const screen = questions[currentQuestionCount];
+    const { currentQuestionIndex } = gameState;
+    const screen = questions[currentQuestionIndex];
 
     renderQuestionScreen(gameState, screen, {
       resetGame: init,

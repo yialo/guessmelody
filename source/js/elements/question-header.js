@@ -1,3 +1,23 @@
+export const template = (
+  `<header class="game__header">
+    <a class="game__back" href="#">
+      <span class="visually-hidden">Сыграть ещё раз</span>
+      <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
+    </a>
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
+      <circle class="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>
+    </svg>
+
+    <div class="timer__value">
+      <span class="timer__mins"></span>
+      <span class="timer__dots">:</span>
+      <span class="timer__secs"></span>
+    </div>
+    <div class="game__mistakes"></div>
+  </header>`
+);
+
 const padStartWithZero = (num) => String(num).padStart(2, '0');
 
 const getTimerPart = (state, partial) => {
@@ -5,10 +25,10 @@ const getTimerPart = (state, partial) => {
   return padStartWithZero(rawValue);
 };
 
-export const updateTimerView = (state, $container) => {
+export const updateTimerView = ($container, state) => {
   const partialClassNameMap = new Map([
-    ['seconds', 'mins'],
-    ['minutes', 'secs'],
+    ['minutes', 'mins'],
+    ['seconds', 'secs'],
   ]);
   const $timer = $container.querySelector(`.timer__value`);
 
@@ -26,33 +46,9 @@ const getMistakesTemplate = (state) => (
   }`
 );
 
-export const updateMistakesView = (state, $container) => {
+export const updateMistakesView = ($container, state) => {
   const $mistakesContainer = $container.querySelector(`.game__mistakes`);
   $mistakesContainer.innerHTML = getMistakesTemplate(state);
-};
-
-export const getTemplate = (state) => {
-  const _getTimerPart = (partial) => getTimerPart(state, partial);
-
-  return (
-    `<header class="game__header">
-      <a class="game__back" href="#">
-        <span class="visually-hidden">Сыграть ещё раз</span>
-        <img class="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию">
-      </a>
-
-      <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
-        <circle class="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"/>
-      </svg>
-
-      <div class="timer__value">
-        <span class="timer__mins">${_getTimerPart('minutes')}</span>
-        <span class="timer__dots">:</span>
-        <span class="timer__secs">${_getTimerPart('seconds')}</span>
-      </div>
-      <div class="game__mistakes">${getMistakesTemplate(state)}</div>
-    </header>`
-  );
 };
 
 export const addLogoClickHandler = ($container, onClick) => {
