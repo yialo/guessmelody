@@ -61,14 +61,15 @@ const questionTypeGetterMap = {
 };
 
 const getRandomQuestions = () => {
-  const screenTypeList = getRandomQuestionTypeList();
+  const questionTypeList = getRandomQuestionTypeList();
 
-  const questions = screenTypeList.map((it) => questionTypeGetterMap[it]());
+  const questions = questionTypeList.map((it, i, arr) => {
+    const question = questionTypeGetterMap[it]();
+    if (i !== GameAmount.QUESTIONS - 1) {
+      question.nextQuestionType = arr[i + 1];
+    } else question.nextQuestionType = null;
 
-  questions.forEach((it, i, arr) => {
-    if (i !== questions.length - 1) {
-      it.nextQuestionType = arr[i + 1].type;
-    } else it.nextQuestionType = null;
+    return question;
   });
 
   return questions;
