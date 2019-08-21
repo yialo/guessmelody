@@ -26,7 +26,7 @@ export const getContentTemplate = (question) => {
   );
 };
 
-export const addAudioHandling = ($container) => {
+export const addAudioHandlers = ($container) => {
   const $audioBlock = $container.querySelector('.game__track');
   const $button = $audioBlock.querySelector('button');
   const $audio = $audioBlock.querySelector('audio');
@@ -39,10 +39,7 @@ export const addAudioHandling = ($container) => {
   });
 };
 
-const checkAnswer = (selectedAnswer, question) => {
-  if (selectedAnswer === question.correctAnswer) return true;
-  return false;
-};
+const checkAnswer = (selectedAnswer, question) => (selectedAnswer === question.correctAnswer);
 
 const createClickHandler = (question, onCorrect, onMistake) => (
   (evt) => {
@@ -53,7 +50,7 @@ const createClickHandler = (question, onCorrect, onMistake) => (
   }
 );
 
-export const addAnswerHandler = ($container, question, onCorrect, onMistake) => {
+export const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
   const $radioButtons = $container.querySelectorAll('.artist__input');
 
   $radioButtons.forEach(($el) => (

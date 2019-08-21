@@ -60,7 +60,7 @@ const questionTypeGetterMap = {
   },
 };
 
-const getRandomQuestions = () => {
+export default () => {
   const questionTypeList = getRandomQuestionTypeList();
 
   const questions = questionTypeList.map((it, i, arr) => {
@@ -74,5 +74,3 @@ const getRandomQuestions = () => {
 
   return questions;
 };
-
-export default getRandomQuestions;

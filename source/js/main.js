@@ -22,7 +22,7 @@ const startNewGame = () => {
     answers.push(answer);
   };
 
-  const handlers = {
+  const handler = {
     resetGame: startNewGame,
     showNextQuestion: () => {},
     onSuccess: () => {
@@ -35,7 +35,7 @@ const startNewGame = () => {
 
   renderWelcomeScreen(() => {
     const question = getCurrentQuestion();
-    renderQuestionScreen(gameState, question, handlers);
+    renderQuestionScreen(gameState, question, handler);
   });
 };
 

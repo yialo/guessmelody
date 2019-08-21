@@ -50,9 +50,6 @@ export default (state, question, handler) => {
   };
 
   const bindHandlers = (newQuestion) => {
-    const lib = questionMap[newQuestion.type];
-    lib.addAudioHandling($screen);
-
     const onCorrect = (answer) => {
       if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
       else {
@@ -71,7 +68,9 @@ export default (state, question, handler) => {
       }
     };
 
-    lib.addAnswerHandler($screen, newQuestion, onCorrect, onMistake);
+    const lib = questionMap[newQuestion.type];
+    lib.addAudioHandlers($screen);
+    lib.addAnswerHandlers($screen, newQuestion, onCorrect, onMistake);
   };
 
   const updateQuestion = (newQuestion) => {

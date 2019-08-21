@@ -17,7 +17,7 @@ const getTrackTemplate = (track, number) => {
   );
 };
 
-export const addAudioHandling = ($container) => {
+export const addAudioHandlers = ($container) => {
   const $audioBlocks = $container.querySelectorAll('.track');
 
   $audioBlocks.forEach(($it) => {
@@ -61,15 +61,10 @@ export const getContentTemplate = (question) => (
 const checkAnswer = (selectedAnswers, question) => {
   const { correctAnswers } = question;
 
-  for (const it of selectedAnswers) {
-    if (!correctAnswers.includes(it)) return false;
-  }
-
-  for (const it of correctAnswers) {
-    if (!selectedAnswers.includes(it)) return false;
-  }
-
-  return true;
+  return (
+    selectedAnswers.every((it) => correctAnswers.includes(it))
+    && correctAnswers.every((it) => selectedAnswers.includes(it))
+  );
 };
 
 const getUserAnswers = ($container) => {
@@ -89,7 +84,7 @@ const setClickabilityState = ($el, isClickable) => {
   else $el.setAttribute('disabled', 'disabled');
 };
 
-export const addAnswerHandler = ($container, question, onCorrect, onMistake) => {
+export const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
   const $form = $container.querySelector('.game__tracks');
   const $checkboxes = [...$form.querySelectorAll('.game__input')];
   const $button = $form.querySelector('.game__submit');
