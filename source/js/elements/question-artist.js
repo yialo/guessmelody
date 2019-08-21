@@ -45,7 +45,7 @@ const createClickHandler = (question, onCorrect, onMistake) => (
   (evt) => {
     const answer = evt.currentTarget.value;
     const answerStatus = checkAnswer(answer, question);
-    if (answerStatus) onCorrect(answerStatus);
+    if (answerStatus) onCorrect();
     else onMistake();
   }
 );

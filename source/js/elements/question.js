@@ -13,7 +13,7 @@ const template = {
 };
 
 export default (state, question, handler) => {
-  const { resetGame, showNextQuestion, onSuccess, onFailure } = handler;
+  const { onReset, onNextQuestion, onSuccess, onFailure } = handler;
 
   const $game = renderElementFromTemplate(template.game);
   const update$gameBemMod = (newQuestion) => {
@@ -28,7 +28,7 @@ export default (state, question, handler) => {
   const $mistakesEl = $header.querySelector(`.game__mistakes`);
   const update$header = () => {
     header.updateTimerView($header, state);
-    header.addLinkClickHandler($header, resetGame);
+    header.addLinkClickHandler($header, onReset);
   };
 
   const $screen = renderElementFromTemplate(template.screen);
@@ -46,14 +46,10 @@ export default (state, question, handler) => {
     $screen.innerHTML = markup;
   };
 
-  const bindHandlers = (newQuestion) => {
-    const onCorrect = (answer) => {
-      if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess(answer);
-      else {
-        state.currentQuestionIndex += 1;
-        // TODO: проверить, какой метод вызывать здесь
-        showNextQuestion(answer);
-      }
+  const bindHandlers = (newQuestion, callback) => {
+    const onCorrect = () => {
+      if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess();
+      else onNextQuestion(callback);
     };
 
     const onMistake = () => {
@@ -71,7 +67,7 @@ export default (state, question, handler) => {
   const updateQuestion = (newQuestion) => {
     update$gameBemMod(newQuestion);
     update$screen(newQuestion);
-    bindHandlers(newQuestion);
+    bindHandlers(newQuestion, updateQuestion);
   };
 
   update$header();

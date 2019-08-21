@@ -75,7 +75,7 @@ const getUserAnswers = ($container) => {
 const onFormSubmit = ($container, question, onCorrect, onMistake) => {
   const answers = getUserAnswers($container);
   const answerStatus = checkAnswer(answers, question);
-  if (answerStatus) onCorrect(answerStatus);
+  if (answerStatus) onCorrect();
   else onMistake();
 };
 

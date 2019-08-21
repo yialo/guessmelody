@@ -13,9 +13,9 @@ const startNewGame = () => {
 
   const getCurrentQuestion = () => questions[gameState.currentQuestionIndex];
 
-  const countAnswer = (answerStatus) => {
+  const countAnswer = () => {
     const answer = {
-      isGuessed: answerStatus,
+      isGuessed: true,
       time: __MOCK_ANSWER_TIME,
     };
 
@@ -23,14 +23,21 @@ const startNewGame = () => {
   };
 
   const handler = {
-    resetGame: startNewGame,
-    showNextQuestion: () => {},
+    onReset: startNewGame,
+    onNextQuestion: (callback) => {
+      gameState.currentQuestionIndex += 1;
+      const question = getCurrentQuestion();
+      callback(question);
+    },
     onSuccess: () => {
-      renderResultScreen('success');
+      countAnswer();
+      renderResultScreen('success', startNewGame, answers, gameState.mistakes);
     },
     onFailure: () => {
       Object.assign(gameState, INITIAL_STATE);
-      renderResultScreen('failAttempts');
+      answers.length = 0;
+      const question = getCurrentQuestion();
+      renderResultScreen('failAttempts', () => renderQuestionScreen(gameState, question, handler));
     },
   };
 
