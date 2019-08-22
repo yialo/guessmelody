@@ -1,16 +1,16 @@
 import { GameAmount } from '../data/game-config';
 import melodies from '../data/melodies';
-import { getRandomArrayElement } from './utils';
+import { getRandomInteger, getRandomArrayElement } from './utils';
 
 const TRACK_LIST_SIZE = {
   genre: 4,
   artist: 3,
 };
-const questionTypes = Object.keys(TRACK_LIST_SIZE);
+const QUESTION_TYPES = Object.keys(TRACK_LIST_SIZE);
 
 const getRandomQuestionTypeList = () => (
   new Array(GameAmount.QUESTIONS).fill('')
-    .map(() => getRandomArrayElement(questionTypes))
+    .map(() => getRandomArrayElement(QUESTION_TYPES))
 );
 
 const questionTypeGetterMap = {
@@ -60,7 +60,33 @@ const questionTypeGetterMap = {
   },
 };
 
-export default () => {
+export const getQuestions = () => {
   const questionTypeList = getRandomQuestionTypeList();
   return questionTypeList.map((type) => questionTypeGetterMap[type]());
+};
+
+const OtherResults = {
+  amount: { MIN: 1, MAX: 9 },
+  score: { MIN: -5, MAX: 1 },
+  mistakesDone: { MIN: 0, MAX: GameAmount.ATTEMPTS - 1 },
+  timeRemain: { MIN: 1, MAX: 250 },
+};
+
+class RandomResult {
+  constructor() {
+    RandomResult.props.forEach((prop) => this.getProp(prop));
+  }
+
+  getProp(propName) {
+    const { MAX, MIN } = OtherResults[propName];
+    this[propName] = getRandomInteger(MAX, MIN);
+  }
+}
+RandomResult.props = ['score', 'mistakesDone', 'timeRemain'];
+
+export const getOtherResults = () => {
+  const { MAX, MIN } = OtherResults.amount;
+  const amount = getRandomInteger(MAX, MIN);
+
+  return new Array(amount).fill('').map(() => new RandomResult());
 };

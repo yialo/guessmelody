@@ -1,6 +1,8 @@
 import { GameAmount } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
+import { getOtherResults } from '../lib/mock-generator';
 import calculateScore from '../lib/calculate-score';
+import getGameResult from '../lib/get-game-result';
 
 const __mockUserResult = {
   minutes: 2,
@@ -10,7 +12,7 @@ const __mockUserResult = {
 
 const failTip = 'Попробовать ещё раз';
 const failContentTextMap = {
-  time: 'Время вышло! Вы не успели отгадать все мелодии',
+  time: 'Время вышло! Вы не успели отгадать все мелодии.',
   tries: 'У вас закончились все попытки. Ничего, повезёт в следующий раз!',
 };
 const getFailContentText = (cause) => (
@@ -28,18 +30,31 @@ const failAttemptsResult = {
   content: getFailContentText('tries'),
 };
 
-const resultGetterMap = {
-  success: (answers, mistakes) => {
-    const attemptsRemain = GameAmount.ATTEMPTS - mistakes;
-    const score = calculateScore(answers, attemptsRemain);
+const getQuickAnswersAmount = (answers) => (
+  answers.filter((it) => it.time < GameAmount.QUICK_THRESHOLD).length
+);
 
-    const { minutes, seconds, quickAnswers } = __mockUserResult;
+const resultGetterMap = {
+  success: (answers, mistakesDone) => {
+    const { minutes, seconds } = __mockUserResult;
+    const score = calculateScore(answers, mistakesDone);
+    const quickAnswers = getQuickAnswersAmount(answers);
+    const userResult = {
+      score,
+      mistakesDone,
+      timeRemain: minutes * 60 + seconds,
+    };
+
+    const otherResults = getOtherResults();
+
+    const gameResult = getGameResult(userResult, otherResults);
+
     return {
       caption: 'Вы настоящий меломан!',
       tip: 'Сыграть ещё раз',
       content: (
-        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), совершив ${mistakes} ошибки</p>
-        <p class="result__text">Вы заняли 2 место из 10. Это лучше чем у 80% игроков</p>`
+        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), совершив ${mistakesDone} ошибки</p>
+        <p class="result__text">${gameResult}</p>`
       ),
     };
   },

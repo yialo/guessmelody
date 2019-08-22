@@ -1,5 +1,5 @@
 import { INITIAL_STATE } from './data/game-config';
-import getRandomQuestions from './lib/mock-generator';
+import { getQuestions as getRandomQuestions } from './lib/mock-generator';
 import renderWelcomeScreen from './elements/welcome';
 import renderQuestionScreen from './elements/question';
 import renderResultScreen from './elements/result';

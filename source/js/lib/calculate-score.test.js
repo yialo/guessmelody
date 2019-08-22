@@ -52,19 +52,19 @@ describe('Player score calculator', () => {
   const answers4 = getAnswers(answersData4);
 
   it('Return -1 if not all questions answered', () => {
-    assert.strictEqual(calculateScore(answers3, 3), -1);
-    assert.strictEqual(calculateScore(answers3, 2), -1);
+    assert.strictEqual(calculateScore(answers3, 0), -1);
     assert.strictEqual(calculateScore(answers3, 1), -1);
+    assert.strictEqual(calculateScore(answers3, 2), -1);
   });
-  it('Returns final score providing for attempts remain and all the answers are slow', () => {
-    assert.strictEqual(calculateScore(answers1, 3), 10);
-    assert.strictEqual(calculateScore(answers1, 2), 8);
-    assert.strictEqual(calculateScore(answers1, 1), 6);
-    assert.strictEqual(calculateScore(answers4, 3), 1);
+  it('Returns final score providing for mistakes done and all the answers are slow', () => {
+    assert.strictEqual(calculateScore(answers1, 0), 10);
+    assert.strictEqual(calculateScore(answers1, 1), 8);
+    assert.strictEqual(calculateScore(answers1, 2), 6);
+    assert.strictEqual(calculateScore(answers4, 0), 1);
   });
-  it('Returns final score providing for attempts remain and some answers are quick', () => {
-    assert.strictEqual(calculateScore(answers2, 3), 13);
-    assert.strictEqual(calculateScore(answers2, 2), 11);
-    assert.strictEqual(calculateScore(answers2, 1), 9);
+  it('Returns final score providing for mistakes done and some answers are quick', () => {
+    assert.strictEqual(calculateScore(answers2, 0), 13);
+    assert.strictEqual(calculateScore(answers2, 1), 11);
+    assert.strictEqual(calculateScore(answers2, 2), 9);
   });
 });
