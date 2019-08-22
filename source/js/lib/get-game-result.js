@@ -1,8 +1,8 @@
-import { GameAmount } from '../data/game-config';
+import { GameOptions } from '../data/game-config';
 
 export default (playerResult, otherResults) => {
   if (!playerResult.timeRemain) return 'Время вышло! Вы не успели отгадать все мелодии.';
-  if (playerResult.mistakesDone === GameAmount.ATTEMPTS) {
+  if (playerResult.mistakesDone === GameOptions.ATTEMPTS) {
     return 'У вас закончились все попытки. Ничего, повезёт в следующий раз!';
   }
 

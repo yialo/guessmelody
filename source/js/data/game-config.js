@@ -1,7 +1,8 @@
-export const GameAmount = {
-  QUESTIONS: 1,
+export const GameOptions = {
+  QUESTIONS: 3,
   ATTEMPTS: 3,
   QUICK_THRESHOLD: 30,
+  IS_DEBUG_ACTIVE: true,
 };
 
 const INITIAL_STATE = {

@@ -1,4 +1,4 @@
-import { GameAmount } from '../data/game-config';
+import { GameOptions } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import * as header from './question-header';
 import * as genre from './question-genre';
@@ -48,7 +48,7 @@ export default (state, question, handler) => {
 
   const bindHandlers = (newQuestion, callback) => {
     const onCorrect = () => {
-      if (state.currentQuestionIndex === GameAmount.QUESTIONS - 1) onSuccess();
+      if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onSuccess();
       else onNextQuestion(callback);
     };
 
@@ -56,7 +56,7 @@ export default (state, question, handler) => {
       state.mistakes += 1;
       header.updateMistakesView($mistakesEl, state);
 
-      if (state.mistakes === GameAmount.ATTEMPTS) onFailure();
+      if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
     };
 
     const lib = questionMap[newQuestion.type];
@@ -64,10 +64,23 @@ export default (state, question, handler) => {
     lib.addAnswerHandlers($screen, newQuestion, onCorrect, onMistake);
   };
 
+  const appendDebugger = (newQuestion) => {
+    if (GameOptions.IS_DEBUG_ACTIVE) {
+      console.group('Вопрос');
+      console.dir(newQuestion);
+      const propName = (newQuestion.type === 'genre')
+        ? 'correctAnswers'
+        : 'correctAnswer';
+      console.info(`Правильный ответ: ${newQuestion[propName]}`);
+      console.groupEnd();
+    }
+  };
+
   const update$game = (newQuestion) => {
     update$gameBemMod(newQuestion);
     update$screen(newQuestion);
     bindHandlers(newQuestion, update$game);
+    appendDebugger(newQuestion);
   };
 
   update$header();

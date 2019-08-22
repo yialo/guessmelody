@@ -1,4 +1,4 @@
-import { GameAmount } from '../data/game-config';
+import { GameOptions } from '../data/game-config';
 import { renderElementFromTemplate, changeScreen } from '../lib/utils';
 import { getOtherResults } from '../lib/mock-generator';
 import calculateScore from '../lib/calculate-score';
@@ -31,7 +31,7 @@ const failAttemptsResult = {
 };
 
 const getQuickAnswersAmount = (answers) => (
-  answers.filter((it) => it.time < GameAmount.QUICK_THRESHOLD).length
+  answers.filter((it) => it.time < GameOptions.QUICK_THRESHOLD).length
 );
 
 const getNotificationPhraseForm = (num) => {

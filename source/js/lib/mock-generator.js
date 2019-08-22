@@ -1,4 +1,4 @@
-import { GameAmount } from '../data/game-config';
+import { GameOptions } from '../data/game-config';
 import melodies from '../data/melodies';
 import { getRandomInteger, getRandomArrayElement } from './utils';
 
@@ -9,7 +9,7 @@ const TRACK_LIST_SIZE = {
 const QUESTION_TYPES = Object.keys(TRACK_LIST_SIZE);
 
 const getRandomQuestionTypeList = () => (
-  new Array(GameAmount.QUESTIONS).fill('')
+  new Array(GameOptions.QUESTIONS).fill('')
     .map(() => getRandomArrayElement(QUESTION_TYPES))
 );
 
@@ -23,14 +23,18 @@ const questionTypeGetterMap = {
         trackSet.add(track);
       } while (trackSet.size < TRACK_LIST_SIZE.genre);
 
-      return [...trackSet.values()];
+      const trackList = [...trackSet.values()];
+      trackList.forEach((track, i) => {
+        track.number = i + 1;
+      });
+      return trackList;
     };
 
     const trackList = getRandomTrackList();
     const targetGenre = getRandomArrayElement(trackList).genre;
 
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
-    const correctAnswers = properTracks.map((it, i) => `answer-${i + 1}`);
+    const correctAnswers = properTracks.map((it) => `answer-${it.number}`);
 
     return { type: 'genre', trackList, targetGenre, correctAnswers };
   },
@@ -68,7 +72,7 @@ export const getQuestions = () => {
 const OtherResults = {
   amount: { MIN: 1, MAX: 9 },
   score: { MIN: -5, MAX: 1 },
-  mistakesDone: { MIN: 0, MAX: GameAmount.ATTEMPTS - 1 },
+  mistakesDone: { MIN: 0, MAX: GameOptions.ATTEMPTS - 1 },
   timeRemain: { MIN: 1, MAX: 250 },
 };
 
