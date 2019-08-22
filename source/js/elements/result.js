@@ -34,6 +34,21 @@ const getQuickAnswersAmount = (answers) => (
   answers.filter((it) => it.time < GameAmount.QUICK_THRESHOLD).length
 );
 
+const getNotificationPhraseForm = (num) => {
+  if (num === 0) {
+    return `не совершив ни одной ошибки`;
+  }
+
+  const lastDigit = +String(num).slice(-1);
+  let wordTerm;
+
+  if (lastDigit === 1) wordTerm = 'ку';
+  else if (lastDigit >= 2 && lastDigit <= 4) wordTerm = 'ки';
+  else wordTerm = 'ок';
+
+  return `совершив ${num} ошиб${wordTerm}`;
+};
+
 const resultGetterMap = {
   success: (answers, mistakesDone) => {
     const { minutes, seconds } = __mockUserResult;
@@ -53,7 +68,7 @@ const resultGetterMap = {
       caption: 'Вы настоящий меломан!',
       tip: 'Сыграть ещё раз',
       content: (
-        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), совершив ${mistakesDone} ошибки</p>
+        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), ${getNotificationPhraseForm(mistakesDone)}.</p>
         <p class="result__text">${gameResult}</p>`
       ),
     };
