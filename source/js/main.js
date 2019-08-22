@@ -25,10 +25,9 @@ const startNewGame = () => {
   const handler = {
     onReset: startNewGame,
     onNextQuestion: (callback) => {
-      const previousQuestion = getCurrentQuestion();
       gameState.currentQuestionIndex += 1;
       const newQuestion = getCurrentQuestion();
-      callback(newQuestion, previousQuestion);
+      callback(newQuestion);
     },
     onSuccess: () => {
       countAnswer();

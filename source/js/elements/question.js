@@ -64,17 +64,14 @@ export default (state, question, handler) => {
     lib.addAnswerHandlers($screen, newQuestion, onCorrect, onMistake);
   };
 
-  const updateQuestion = (newQuestion, previousQuestion) => {
+  const update$game = (newQuestion) => {
     update$gameBemMod(newQuestion);
     update$screen(newQuestion);
-    bindHandlers(newQuestion, updateQuestion);
-    if (![newQuestion, previousQuestion].every((it) => it.type === 'artist')) {
-      // TODO: добавить момент с обновлением caption
-    }
+    bindHandlers(newQuestion, update$game);
   };
 
   update$header();
-  updateQuestion(question);
+  update$game(question);
 
   $game.append($header, $screen);
   changeScreen($game);

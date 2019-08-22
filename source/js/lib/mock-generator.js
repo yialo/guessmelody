@@ -62,15 +62,5 @@ const questionTypeGetterMap = {
 
 export default () => {
   const questionTypeList = getRandomQuestionTypeList();
-
-  const questions = questionTypeList.map((it, i, arr) => {
-    const question = questionTypeGetterMap[it]();
-    if (i !== GameAmount.QUESTIONS - 1) {
-      question.nextQuestionType = arr[i + 1];
-    } else question.nextQuestionType = null;
-
-    return question;
-  });
-
-  return questions;
+  return questionTypeList.map((type) => questionTypeGetterMap[type]());
 };
