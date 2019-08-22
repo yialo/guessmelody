@@ -1,5 +1,5 @@
 export const GameOptions = {
-  QUESTIONS: 3,
+  QUESTIONS: 10,
   ATTEMPTS: 3,
   QUICK_THRESHOLD: 30,
   IS_DEBUG_ACTIVE: true,

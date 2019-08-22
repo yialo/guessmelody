@@ -34,19 +34,39 @@ const getQuickAnswersAmount = (answers) => (
   answers.filter((it) => it.time < GameOptions.QUICK_THRESHOLD).length
 );
 
-const getNotificationPhraseForm = (num) => {
-  if (num === 0) {
-    return `не совершив ни одной ошибки`;
-  }
+const notificationPhraseHandler = {
+  getScore(count) {
+    const term = this.getTerm('score', count);
+    return `балл${term}`;
+  },
+  getMistakes(count) {
+    if (count === 0) {
+      return `не совершив ни единой ошибки`;
+    }
 
-  const lastDigit = +String(num).slice(-1);
-  let wordTerm;
+    const term = this.getTerm('mistakes', count);
+    return `совершив ${count} ошиб${term}`;
+  },
+  getTerm(type, num) {
+    const lastDigit = +String(num).slice(-1);
+    const map = this.map[type];
 
-  if (lastDigit === 1) wordTerm = 'ку';
-  else if (lastDigit >= 2 && lastDigit <= 4) wordTerm = 'ки';
-  else wordTerm = 'ок';
-
-  return `совершив ${num} ошиб${wordTerm}`;
+    if (lastDigit === 1) return map.single;
+    if (lastDigit >= 2 && lastDigit <= 4) return map.less;
+    return map.many;
+  },
+  map: {
+    score: {
+      single: '',
+      less: 'а',
+      many: 'ов',
+    },
+    mistakes: {
+      single: 'ку',
+      less: 'ки',
+      many: 'ок',
+    },
+  },
 };
 
 const resultGetterMap = {
@@ -68,7 +88,11 @@ const resultGetterMap = {
       caption: 'Вы настоящий меломан!',
       tip: 'Сыграть ещё раз',
       content: (
-        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} баллов (${quickAnswers} быстрых), ${getNotificationPhraseForm(mistakesDone)}.</p>
+        `<p class="result__total">За ${minutes} минуты и ${seconds} секунд вы набрали ${score} ${
+          notificationPhraseHandler.getScore(score)
+        } (${quickAnswers} быстрых ответов), ${
+          notificationPhraseHandler.getMistakes(mistakesDone)
+        }.</p>
         <p class="result__text">${gameResult}</p>`
       ),
     };
