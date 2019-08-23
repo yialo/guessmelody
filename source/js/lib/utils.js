@@ -1,10 +1,10 @@
 const $app = document.querySelector('.app');
 export const $main = $app.querySelector('.main');
 
-export const renderElementFromTemplate = (template) => {
-  const $template = document.createElement('template');
-  $template.innerHTML = template;
-  return $template.content.firstChild;
+export const createElementFromTemplate = (template) => {
+  const $container = document.createElement('template');
+  $container.innerHTML = template;
+  return $container.content.firstChild;
 };
 
 export const changeScreen = ($screen) => {

@@ -1,5 +1,5 @@
 import { GameOptions } from '../data/game-config';
-import { renderElementFromTemplate, changeScreen } from '../lib/utils';
+import { createElementFromTemplate, changeScreen } from '../lib/utils';
 import * as header from './question-header';
 import * as genre from './question-genre';
 import * as artist from './question-artist';
@@ -15,7 +15,7 @@ const template = {
 export default (state, question, handler) => {
   const { onReset, onNextQuestion, onSuccess, onFailure } = handler;
 
-  const $game = renderElementFromTemplate(template.game);
+  const $game = createElementFromTemplate(template.game);
   const update$gameBemMod = (newQuestion) => {
     const newModifier = `game--${newQuestion.type}`;
     const { classList } = $game;
@@ -24,14 +24,14 @@ export default (state, question, handler) => {
     else classList.add(newModifier);
   };
 
-  const $header = renderElementFromTemplate(header.template);
+  const $header = createElementFromTemplate(header.template);
   const $mistakesEl = $header.querySelector(`.game__mistakes`);
   const update$header = () => {
     header.updateTimerView($header, state);
     header.addLinkClickHandler($header, onReset);
   };
 
-  const $screen = renderElementFromTemplate(template.screen);
+  const $screen = createElementFromTemplate(template.screen);
   const update$screen = (newQuestion) => {
     const lib = questionMap[newQuestion.type];
 

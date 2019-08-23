@@ -1,5 +1,5 @@
 import { GameOptions } from '../data/game-config';
-import { renderElementFromTemplate, changeScreen } from '../lib/utils';
+import { createElementFromTemplate, changeScreen } from '../lib/utils';
 import { getOtherResults } from '../lib/mock-generator';
 import calculateScore from '../lib/calculate-score';
 import getGameResult from '../lib/get-game-result';
@@ -117,7 +117,7 @@ const getTemplate = (result) => {
 export default (type, onButtonClick, ...resultData) => {
   const result = resultGetterMap[type](...resultData);
   const template = getTemplate(result);
-  const $container = renderElementFromTemplate(template);
+  const $container = createElementFromTemplate(template);
 
   const $button = $container.querySelector('.result__replay');
   $button.addEventListener('click', onButtonClick);

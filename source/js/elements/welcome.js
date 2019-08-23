@@ -1,4 +1,4 @@
-import { changeScreen, renderElementFromTemplate } from '../lib/utils';
+import { changeScreen, createElementFromTemplate } from '../lib/utils';
 
 const template = (
   `<section class="welcome">
@@ -17,7 +17,7 @@ const template = (
 );
 
 export default (onButtonClick) => {
-  const $screen = renderElementFromTemplate(template);
+  const $screen = createElementFromTemplate(template);
 
   const playButton = $screen.querySelector('.welcome__button');
   playButton.addEventListener('click', onButtonClick);
