@@ -17,7 +17,7 @@ const getTrackTemplate = (track, number) => {
   );
 };
 
-export const addAudioHandlers = ($container) => {
+const addAudioHandlers = ($container) => {
   const $audioBlocks = $container.querySelectorAll('.track');
 
   $audioBlocks.forEach(($it) => {
@@ -67,13 +67,12 @@ const checkAnswer = (selectedAnswers, question) => {
   );
 };
 
-const getUserAnswers = ($container) => {
-  const $checkedInputs = $container.querySelectorAll('input[name=answer]:checked');
-  return [...$checkedInputs].map((it) => it.value);
-};
+const getUserAnswers = ($checkboxes) => (
+  [...$checkboxes].filter(($el) => $el.checked).map(($el) => $el.value)
+);
 
-const onFormSubmit = ($container, question, onCorrect, onMistake) => {
-  const answers = getUserAnswers($container);
+const onFormSubmit = ($checkboxes, question, onCorrect, onMistake) => {
+  const answers = getUserAnswers($checkboxes);
   const answerStatus = checkAnswer(answers, question);
   if (answerStatus) onCorrect();
   else onMistake();
@@ -84,23 +83,32 @@ const setClickabilityState = ($el, isClickable) => {
   else $el.setAttribute('disabled', 'disabled');
 };
 
-export const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
+const checkSelectedCheckboxPresence = ($checkboxes) => $checkboxes.some(($el) => $el.checked);
+
+const addCheckboxChangeHandlers = ($checkboxes, $button) => {
+  const onCheckboxChange = () => {
+    if (checkSelectedCheckboxPresence($checkboxes)) setClickabilityState($button, true);
+    else setClickabilityState($button, false);
+  };
+  $checkboxes.forEach(($el) => $el.addEventListener('change', onCheckboxChange));
+};
+
+const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
   const $form = $container.querySelector('.game__tracks');
   const $checkboxes = [...$form.querySelectorAll('.game__input')];
   const $button = $form.querySelector('.game__submit');
 
   setClickabilityState($button, false);
 
-  const checkSelectedCheckboxPresence = () => $checkboxes.some(($el) => $el.checked);
-
-  const onCheckboxChange = () => {
-    if (checkSelectedCheckboxPresence()) setClickabilityState($button, true);
-    else setClickabilityState($button, false);
-  };
-  $checkboxes.forEach(($el) => $el.addEventListener('change', onCheckboxChange));
+  addCheckboxChangeHandlers($checkboxes, $button);
 
   $form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    onFormSubmit($container, question, onCorrect, onMistake);
+    onFormSubmit($checkboxes, question, onCorrect, onMistake);
   });
+};
+
+export const bind = ($container, question, onCorrect, onMistake) => {
+  addAudioHandlers($container);
+  addAnswerHandlers($container, question, onCorrect, onMistake);
 };

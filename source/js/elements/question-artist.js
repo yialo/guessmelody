@@ -26,7 +26,7 @@ export const getContentTemplate = (question) => {
   );
 };
 
-export const addAudioHandlers = ($container) => {
+const addAudioHandlers = ($container) => {
   const $audioBlock = $container.querySelector('.game__track');
   const $button = $audioBlock.querySelector('button');
   const $audio = $audioBlock.querySelector('audio');
@@ -50,10 +50,15 @@ const createClickHandler = (question, onCorrect, onMistake) => (
   }
 );
 
-export const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
+const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
   const $radioButtons = $container.querySelectorAll('.artist__input');
 
   $radioButtons.forEach(($el) => (
     $el.addEventListener('click', createClickHandler(question, onCorrect, onMistake))
   ));
+};
+
+export const bind = ($container, question, onCorrect, onMistake) => {
+  addAudioHandlers($container);
+  addAnswerHandlers($container, question, onCorrect, onMistake);
 };

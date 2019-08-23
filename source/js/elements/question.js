@@ -46,41 +46,37 @@ export default (state, question, handler) => {
     $screen.innerHTML = markup;
   };
 
-  const bindHandlers = (newQuestion, callback) => {
+  const onMistake = () => {
+    state.mistakes += 1;
+    header.updateMistakesView($mistakesEl, state);
+
+    if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
+  };
+
+  const bind = (newQuestion, callback) => {
     const onCorrect = () => {
       if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onSuccess();
       else onNextQuestion(callback);
     };
-
-    const onMistake = () => {
-      state.mistakes += 1;
-      header.updateMistakesView($mistakesEl, state);
-
-      if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
-    };
-
-    const lib = questionMap[newQuestion.type];
-    lib.addAudioHandlers($screen);
-    lib.addAnswerHandlers($screen, newQuestion, onCorrect, onMistake);
+    questionMap[newQuestion.type].bind($screen, newQuestion, onCorrect, onMistake);
   };
 
   const appendDebugger = (newQuestion) => {
-    if (GameOptions.IS_DEBUG_ACTIVE) {
-      console.group('Вопрос');
-      console.dir(newQuestion);
-      const propName = (newQuestion.type === 'genre')
-        ? 'correctAnswers'
-        : 'correctAnswer';
-      console.info(`Правильный ответ: ${newQuestion[propName]}`);
-      console.groupEnd();
-    }
+    console.group('Вопрос');
+    console.dir(newQuestion);
+    const propName = (newQuestion.type === 'genre')
+      ? 'correctAnswers'
+      : 'correctAnswer';
+    console.info(`Правильный ответ: ${newQuestion[propName]}`);
+    console.groupEnd();
   };
 
   const update$game = (newQuestion) => {
     update$gameBemMod(newQuestion);
     update$screen(newQuestion);
-    bindHandlers(newQuestion, update$game);
-    appendDebugger(newQuestion);
+    bind(newQuestion, update$game);
+
+    if (GameOptions.IS_DEBUG_ACTIVE) appendDebugger(newQuestion);
   };
 
   update$header();

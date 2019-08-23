@@ -1,5 +1,5 @@
 const $app = document.querySelector('.app');
-export const $main = $app.querySelector('.main');
+const $main = $app.querySelector('.main');
 
 export const createElementFromTemplate = (template) => {
   const $container = document.createElement('template');
