@@ -41,24 +41,23 @@ const addAudioHandlers = ($container) => {
 
 const checkAnswer = (selectedAnswer, question) => (selectedAnswer === question.correctAnswer);
 
-const createClickHandler = (question, onCorrect, onMistake) => (
+const createClickHandler = (question, callback) => (
   (evt) => {
     const answer = evt.currentTarget.value;
     const answerStatus = checkAnswer(answer, question);
-    if (answerStatus) onCorrect();
-    else onMistake();
+    callback(answerStatus);
   }
 );
 
-const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
+const addAnswerHandler = ($container, question, onAnswer) => {
   const $radioButtons = $container.querySelectorAll('.artist__input');
 
   $radioButtons.forEach(($el) => (
-    $el.addEventListener('click', createClickHandler(question, onCorrect, onMistake))
+    $el.addEventListener('click', createClickHandler(question, onAnswer))
   ));
 };
 
-export const bind = ($container, question, onCorrect, onMistake) => {
+export const bind = ($container, question, onAnswer) => {
   addAudioHandlers($container);
-  addAnswerHandlers($container, question, onCorrect, onMistake);
+  addAnswerHandler($container, question, onAnswer);
 };

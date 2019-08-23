@@ -67,15 +67,12 @@ const checkAnswer = (selectedAnswers, question) => {
   );
 };
 
-const getUserAnswers = ($checkboxes) => (
-  [...$checkboxes].filter(($el) => $el.checked).map(($el) => $el.value)
-);
-
-const onFormSubmit = ($checkboxes, question, onCorrect, onMistake) => {
-  const answers = getUserAnswers($checkboxes);
+const getAnswerStatus = ($checkboxes, question, callback) => {
+  const answers = [...$checkboxes]
+    .filter(($el) => $el.checked)
+    .map(($el) => $el.value);
   const answerStatus = checkAnswer(answers, question);
-  if (answerStatus) onCorrect();
-  else onMistake();
+  callback(answerStatus);
 };
 
 const setClickabilityState = ($el, isClickable) => {
@@ -93,7 +90,7 @@ const addCheckboxChangeHandlers = ($checkboxes, $button) => {
   $checkboxes.forEach(($el) => $el.addEventListener('change', onCheckboxChange));
 };
 
-const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
+const addAnswerHandler = ($container, question, onAnswer) => {
   const $form = $container.querySelector('.game__tracks');
   const $checkboxes = [...$form.querySelectorAll('.game__input')];
   const $button = $form.querySelector('.game__submit');
@@ -104,11 +101,11 @@ const addAnswerHandlers = ($container, question, onCorrect, onMistake) => {
 
   $form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    onFormSubmit($checkboxes, question, onCorrect, onMistake);
+    getAnswerStatus($checkboxes, question, onAnswer);
   });
 };
 
-export const bind = ($container, question, onCorrect, onMistake) => {
+export const bind = ($container, question, onAnswer) => {
   addAudioHandlers($container);
-  addAnswerHandlers($container, question, onCorrect, onMistake);
+  addAnswerHandler($container, question, onAnswer);
 };

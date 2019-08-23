@@ -46,19 +46,20 @@ export default (state, question, handler) => {
     $screen.innerHTML = markup;
   };
 
-  const onMistake = () => {
-    state.mistakes += 1;
-    header.updateMistakesView($mistakesEl, state);
-
-    if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
-  };
-
   const bind = (newQuestion, callback) => {
-    const onCorrect = () => {
-      if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onSuccess();
-      else onNextQuestion(callback);
+    const onAnswer = (isCorrect) => {
+      if (isCorrect) {
+        if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onSuccess();
+        else onNextQuestion(callback);
+      } else {
+        state.mistakes += 1;
+        header.updateMistakesView($mistakesEl, state);
+
+        if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
+      }
     };
-    questionMap[newQuestion.type].bind($screen, newQuestion, onCorrect, onMistake);
+
+    questionMap[newQuestion.type].bind($screen, newQuestion, onAnswer);
   };
 
   const appendDebugger = (newQuestion) => {
