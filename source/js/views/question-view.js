@@ -1,14 +1,19 @@
 import AbstractView from './abstract-view';
+import HeaderView from './header-view';
 
 class QuestionView extends AbstractView {
-  constructor() {
+  constructor(question) {
     super();
-    this._template = `<section class="game"></section>`;
+    this.question = question;
+    this.header = new HeaderView();
   }
 
-  // get template() {
-  //   return;
-  // }
+  get template() {
+    if (!this._template) {
+      this._template = `<section class="game"></section>`;
+    }
+    return this._template;
+  }
 }
 
 export default (question) => {

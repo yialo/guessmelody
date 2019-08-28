@@ -1,9 +1,14 @@
 import AbstractView from './abstract-view';
+import HeaderTimerView from './header-timer-view';
 
 export default class HeaderView extends AbstractView {
   constructor() {
     super();
-    this._template = (
+    this.timer = new HeaderTimerView();
+  }
+
+  get template() {
+    return (
       `<header class="game__header">
         <a class="game__back" href="#">
           <span class="visually-hidden">Сыграть ещё раз</span>
@@ -15,9 +20,7 @@ export default class HeaderView extends AbstractView {
         </svg>
 
         <div class="timer__value">
-          <span class="timer__mins"></span>
-          <span class="timer__dots">:</span>
-          <span class="timer__secs"></span>
+          ${this.timer.template}
         </div>
         <div class="game__mistakes"></div>
       </header>`
