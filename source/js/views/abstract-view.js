@@ -16,8 +16,8 @@ export default class AbstractView {
   get $() {
     if (!this._$) {
       this.render();
+      this.bind();
     }
-    this.bind();
     return this._$;
   }
 }
