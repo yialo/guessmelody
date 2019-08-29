@@ -1,5 +1,4 @@
 import { INITIAL_STATE } from './data/game-config';
-import { changeScreen } from './lib/utils';
 import { getQuestions as getRandomQuestions } from './lib/mock-generator';
 
 import WelcomeView from './views/welcome-view';
@@ -51,7 +50,7 @@ const startNewGame = () => {
     renderQuestionScreen(gameState, question, handler);
   };
 
-  changeScreen(welcomeScreen.$);
+  welcomeScreen.render();
 };
 
 startNewGame();

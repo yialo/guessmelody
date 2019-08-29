@@ -81,6 +81,6 @@ export default (state, question, handler) => {
 
   update$game(question);
 
-  $game.append(headerView.$, $screen);
+  $game.append(headerView.prepared, $screen);
   changeScreen($game);
 };

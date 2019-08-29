@@ -1,14 +1,14 @@
-import AbstractView from './abstract-view';
+import ScreenView from './screen-view';
 import HeaderView from './header-view';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 
-export default class QuestionView extends AbstractView {
+export default class QuestionView extends ScreenView {
   constructor(state, question) {
     super();
     this._state = state;
-    this.question = question;
+    this._question = question;
     this._header = new HeaderView(state);
   }
 

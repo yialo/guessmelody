@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view';
+import View from './view';
 
 const INITIAL_TEMPLATE = (
   `<header class="game__header">
@@ -20,7 +20,7 @@ const INITIAL_TEMPLATE = (
   </header>`
 );
 
-export default class HeaderView extends AbstractView {
+export default class HeaderView extends View {
   constructor(state) {
     super();
     this._state = state;
@@ -53,39 +53,30 @@ export default class HeaderView extends AbstractView {
     );
   }
 
-  get $() {
-    if (!this._$) {
-      this.render();
-      this.updateTimeView();
-      this.bind();
-    }
-    return this._$;
-  }
-
   get $link() {
     if (!this._$link) {
-      this._$link = this._$.querySelector('.game__back');
+      this._$link = this.$.querySelector('.game__back');
     }
     return this._$link;
   }
 
   get $minutes() {
     if (!this._$minutes) {
-      this._$minutes = this._$.querySelector('.timer__mins');
+      this._$minutes = this.$.querySelector('.timer__mins');
     }
     return this._$minutes;
   }
 
   get $seconds() {
     if (!this._$seconds) {
-      this._$seconds = this._$.querySelector('.timer__secs');
+      this._$seconds = this.$.querySelector('.timer__secs');
     }
     return this._$seconds;
   }
 
   get $mistakes() {
     if (!this._$mistakes) {
-      this._$mistakes = this._$.querySelector('.game__mistakes');
+      this._$mistakes = this.$.querySelector('.game__mistakes');
     }
     return this._$mistakes;
   }
@@ -94,17 +85,23 @@ export default class HeaderView extends AbstractView {
     this._onReset = callback;
   }
 
-  bind() {
-    this.$link.addEventListener('click', this._onReset);
-  }
-
-  updateTimeView() {
-    this.$minutes.textContent = HeaderView.addZeroAtLeft(this.minutes);
-    this.$seconds.textContent = HeaderView.addZeroAtLeft(this.seconds);
+  get prepared() {
+    this._bind();
+    this._updateTimeView();
+    return this._$;
   }
 
   updateMistakesView() {
     this.$mistakes.innerHTML = this.mistakesTemplate;
+  }
+
+  _bind() {
+    this.$link.addEventListener('click', this._onReset);
+  }
+
+  _updateTimeView() {
+    this.$minutes.textContent = HeaderView.addZeroAtLeft(this.minutes);
+    this.$seconds.textContent = HeaderView.addZeroAtLeft(this.seconds);
   }
 
   static addZeroAtLeft(num) {

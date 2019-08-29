@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view';
+import ScreenView from './screen-view';
 
 const INITIAL_TEMPLATE = (
   `<section class="welcome">
@@ -16,26 +16,29 @@ const INITIAL_TEMPLATE = (
   </section>`
 );
 
-export default class WelcomeView extends AbstractView {
+export default class WelcomeView extends ScreenView {
   get template() {
-    if (!this._template) {
-      this._template = INITIAL_TEMPLATE;
-    }
+    this._template = INITIAL_TEMPLATE;
     return this._template;
   }
 
   get $button() {
     if (!this._$button) {
-      this._$button = this._$.querySelector('.welcome__button');
+      this._$button = this.$.querySelector('.welcome__button');
     }
     return this._$button;
   }
 
   set onStart(callback) {
-    this._onStart = callback.bind(this);
+    this._onStart = callback;
   }
 
   bind() {
     this.$button.addEventListener('click', this._onStart);
+  }
+
+  render() {
+    this.bind();
+    this.set();
   }
 }
