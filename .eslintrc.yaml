@@ -401,7 +401,7 @@ rules:
   no-confusing-arrow:
     - error
     - allowParens: true
-  no-console: warn
+  no-console: 'off'
   no-const-assign: error
   no-constant-condition: warn
   no-continue: error

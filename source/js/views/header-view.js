@@ -26,10 +26,6 @@ export default class HeaderView extends AbstractView {
     this._state = state;
   }
 
-  get state() {
-    return this._state;
-  }
-
   get minutes() {
     return this._state.minutes;
   }
@@ -43,9 +39,7 @@ export default class HeaderView extends AbstractView {
   }
 
   get template() {
-    if (!this._template) {
-      this._template = INITIAL_TEMPLATE;
-    }
+    this._template = INITIAL_TEMPLATE;
     return this._template;
   }
 
@@ -97,7 +91,7 @@ export default class HeaderView extends AbstractView {
   }
 
   set onReset(callback) {
-    this._onReset = callback.bind(this);
+    this._onReset = callback;
   }
 
   bind() {
