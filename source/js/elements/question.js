@@ -1,7 +1,7 @@
 import { GameOptions } from '../data/game-config';
 import { createElementFromTemplate, changeScreen } from '../lib/utils';
 
-import HeaderView from '../views/header-view';
+import HeaderView from '../views/question-header-view';
 
 import * as genre from './question-genre';
 import * as artist from './question-artist';
@@ -15,7 +15,7 @@ const template = {
 };
 
 export default (state, question, handler) => {
-  const { onReset, onNextQuestion, onSuccess, onFailure } = handler;
+  const { onReset, onNext, onWin, onFail } = handler;
 
   const $game = createElementFromTemplate(template.game);
 
@@ -48,13 +48,13 @@ export default (state, question, handler) => {
   const bind = (newQuestion, callback) => {
     const onAnswer = (isCorrect) => {
       if (isCorrect) {
-        if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onSuccess();
-        else onNextQuestion(callback);
+        if (state.currentQuestionIndex === GameOptions.QUESTIONS - 1) onWin();
+        else onNext(callback);
       } else {
         state.mistakes += 1;
         headerView.updateMistakesView();
 
-        if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
+        if (state.mistakes === GameOptions.ATTEMPTS) onFail();
       }
     };
 
@@ -80,7 +80,6 @@ export default (state, question, handler) => {
   };
 
   update$game(question);
-
   $game.append(headerView.prepared, $screen);
   changeScreen($game);
 };

@@ -2,8 +2,8 @@ import { INITIAL_STATE } from './data/game-config';
 import { getQuestions as getRandomQuestions } from './lib/mock-generator';
 
 import WelcomeView from './views/welcome-view';
+import QuestionView from './views/question-view';
 
-import renderQuestionScreen from './elements/question';
 import renderResultScreen from './elements/result';
 
 const __MOCK_ANSWER_TIME = 30;
@@ -26,28 +26,31 @@ const startNewGame = () => {
 
   const handler = {
     onReset: startNewGame,
-    onNextQuestion: (callback) => {
+    onNext: (callback) => {
       countAnswer();
-      gameState.currentQuestionIndex += 1;
       const newQuestion = getCurrentQuestion();
       callback(newQuestion);
     },
-    onSuccess: () => {
+    onWin: () => {
       countAnswer();
       renderResultScreen('success', startNewGame, answers, gameState.mistakes);
     },
-    onFailure: () => {
+    onFail: () => {
       Object.assign(gameState, INITIAL_STATE);
       answers.length = 0;
       const question = getCurrentQuestion();
-      renderResultScreen('failAttempts', () => renderQuestionScreen(gameState, question, handler));
+      renderResultScreen('failAttempts', () => {
+        const questionScreen = new QuestionView(gameState, question, handler);
+        questionScreen.render();
+      });
     },
   };
 
   const welcomeScreen = new WelcomeView();
   welcomeScreen.onStart = () => {
     const question = getCurrentQuestion();
-    renderQuestionScreen(gameState, question, handler);
+    const questionScreen = new QuestionView(gameState, question, handler);
+    questionScreen.render();
   };
 
   welcomeScreen.render();

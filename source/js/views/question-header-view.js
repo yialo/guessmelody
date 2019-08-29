@@ -20,7 +20,7 @@ const INITIAL_TEMPLATE = (
   </header>`
 );
 
-export default class HeaderView extends View {
+export default class QuestionHeaderView extends View {
   constructor(state) {
     super();
     this._state = state;
@@ -100,8 +100,8 @@ export default class HeaderView extends View {
   }
 
   _updateTimeView() {
-    this.$minutes.textContent = HeaderView.addZeroAtLeft(this.minutes);
-    this.$seconds.textContent = HeaderView.addZeroAtLeft(this.seconds);
+    this.$minutes.textContent = QuestionHeaderView.addZeroAtLeft(this.minutes);
+    this.$seconds.textContent = QuestionHeaderView.addZeroAtLeft(this.seconds);
   }
 
   static addZeroAtLeft(num) {

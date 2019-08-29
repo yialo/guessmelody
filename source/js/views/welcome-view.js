@@ -33,12 +33,12 @@ export default class WelcomeView extends ScreenView {
     this._onStart = callback;
   }
 
-  bind() {
+  _bind() {
     this.$button.addEventListener('click', this._onStart);
   }
 
   render() {
-    this.bind();
-    this.set();
+    this._bind();
+    this._set();
   }
 }

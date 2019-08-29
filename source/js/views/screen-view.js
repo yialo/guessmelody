@@ -3,7 +3,7 @@ import View from './view';
 const $main = document.querySelector('.main');
 
 export default class ScreenView extends View {
-  set() {
+  _set() {
     $main.innerHTML = ``;
     $main.appendChild(this.$);
   }
