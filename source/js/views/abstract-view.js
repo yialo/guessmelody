@@ -3,6 +3,14 @@ export default class AbstractView {
     throw new Error(`${this} method must be redefined in AbstractView class' descendant`);
   }
 
+  get $() {
+    if (!this._$) {
+      this.render();
+      this.bind();
+    }
+    return this._$;
+  }
+
   render() {
     const $container = document.createElement('template');
     $container.innerHTML = this.template;
@@ -11,13 +19,5 @@ export default class AbstractView {
 
   bind() {
     throw new Error(`${this} method must be redefined in AbstractView class' descendant`);
-  }
-
-  get $() {
-    if (!this._$) {
-      this.render();
-      this.bind();
-    }
-    return this._$;
   }
 }

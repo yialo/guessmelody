@@ -1,6 +1,8 @@
 import { GameOptions } from '../data/game-config';
 import { createElementFromTemplate, changeScreen } from '../lib/utils';
-import * as header from './question-header';
+
+import HeaderView from '../views/header-view';
+
 import * as genre from './question-genre';
 import * as artist from './question-artist';
 
@@ -16,6 +18,7 @@ export default (state, question, handler) => {
   const { onReset, onNextQuestion, onSuccess, onFailure } = handler;
 
   const $game = createElementFromTemplate(template.game);
+
   const update$gameBemMod = (newQuestion) => {
     const newModifier = `game--${newQuestion.type}`;
     const { classList } = $game;
@@ -24,12 +27,8 @@ export default (state, question, handler) => {
     else classList.add(newModifier);
   };
 
-  const $header = createElementFromTemplate(header.template);
-  const $mistakesEl = $header.querySelector(`.game__mistakes`);
-  const update$header = () => {
-    header.updateTimerView($header, state);
-    header.addLinkClickHandler($header, onReset);
-  };
+  const headerView = new HeaderView(state);
+  headerView.onReset = onReset;
 
   const $screen = createElementFromTemplate(template.screen);
   const update$screen = (newQuestion) => {
@@ -53,7 +52,7 @@ export default (state, question, handler) => {
         else onNextQuestion(callback);
       } else {
         state.mistakes += 1;
-        header.updateMistakesView($mistakesEl, state);
+        headerView.updateMistakesView();
 
         if (state.mistakes === GameOptions.ATTEMPTS) onFailure();
       }
@@ -80,9 +79,8 @@ export default (state, question, handler) => {
     if (GameOptions.IS_DEBUG_ACTIVE) appendDebugger(newQuestion);
   };
 
-  update$header();
   update$game(question);
 
-  $game.append($header, $screen);
+  $game.append(headerView.$, $screen);
   changeScreen($game);
 };

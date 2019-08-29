@@ -2,10 +2,10 @@ import AbstractView from './abstract-view';
 import HeaderView from './header-view';
 
 class QuestionView extends AbstractView {
-  constructor(question) {
+  constructor(state, question) {
     super();
     this.question = question;
-    this.header = new HeaderView();
+    this.header = new HeaderView(state);
   }
 
   get template() {
