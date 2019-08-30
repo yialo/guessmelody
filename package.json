@@ -53,12 +53,13 @@
   },
   "scripts": {
     "build": "gulp build",
+    "check-all": "npm run lint && gulp test",
     "eslint": "eslint gulpfile.js \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
+    "lint": "npm run stylelint && npm run eslint",
     "start": "gulp",
     "stylelint": "stylelint \"./source/styles/**/*.scss\" --syntax scss",
-    "test": "gulp test",
-    "full-test": "npm run stylelint && npm run eslint && gulp test"
+    "test": "gulp test"
   },
   "version": "5.0.0"
 }
