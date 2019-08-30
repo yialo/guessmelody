@@ -1,46 +1,30 @@
-import { INITIAL_STATE } from './data/game-config';
-import { getQuestions as getRandomQuestions } from './lib/mock-generator';
+import GameModel from './models/game-model';
 
 import WelcomeView from './views/welcome-view';
 import QuestionView from './views/question-view';
 
 import renderResultScreen from './elements/result';
 
-const __MOCK_ANSWER_TIME = 30;
-
 const startNewGame = () => {
-  const questions = getRandomQuestions();
-  const gameState = Object.assign({}, INITIAL_STATE);
-  const answers = [];
-
-  const getCurrentQuestion = () => questions[gameState.currentQuestionIndex];
-
-  const countAnswer = () => {
-    const answer = {
-      isGuessed: true,
-      time: __MOCK_ANSWER_TIME,
-    };
-
-    answers.push(answer);
-  };
+  const gameModel = new GameModel();
 
   const handler = {
     onReset: startNewGame,
     onNext: (callback) => {
-      countAnswer();
-      const newQuestion = getCurrentQuestion();
+      gameModel.countAnswer();
+      const newQuestion = gameModel.currentQuestion;
       callback(newQuestion);
     },
     onWin: () => {
-      countAnswer();
-      renderResultScreen('success', startNewGame, answers, gameState.mistakes);
+      gameModel.countAnswer();
+      renderResultScreen('success', startNewGame, gameModel.answers, gameModel.state.mistakes);
     },
     onFail: () => {
-      Object.assign(gameState, INITIAL_STATE);
-      answers.length = 0;
-      const question = getCurrentQuestion();
+      gameModel.resetState();
+      gameModel.resetAnswers();
+      const question = gameModel.currentQuestion;
       renderResultScreen('failAttempts', () => {
-        const questionScreen = new QuestionView(gameState, question, handler);
+        const questionScreen = new QuestionView(gameModel.state, question, handler);
         questionScreen.render();
       });
     },
@@ -48,8 +32,8 @@ const startNewGame = () => {
 
   const welcomeScreen = new WelcomeView();
   welcomeScreen.onStart = () => {
-    const question = getCurrentQuestion();
-    const questionScreen = new QuestionView(gameState, question, handler);
+    const question = gameModel.currentQuestion;
+    const questionScreen = new QuestionView(gameModel.state, question, handler);
     questionScreen.render();
   };
 

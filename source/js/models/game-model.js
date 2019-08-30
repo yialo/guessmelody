@@ -25,12 +25,24 @@ export default class GameModel {
     this.resetQuestions();
   }
 
-  get currentQuesiton() {
+  get answers() {
+    return this._answers;
+  }
+
+  get currentQuestion() {
     return this._questions[this._state.currentQuestionIndex];
+  }
+
+  get state() {
+    return this._state;
   }
 
   countAnswer() {
     this._answers.push(new Answer());
+  }
+
+  resetAnswers() {
+    this._answers.length = 0;
   }
 
   resetQuestions() {
