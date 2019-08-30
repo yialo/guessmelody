@@ -76,9 +76,11 @@ const OtherResults = {
   timeRemain: { MIN: 1, MAX: 250 },
 };
 
+const RESULT_PROPS = ['score', 'mistakesDone', 'timeRemain'];
+
 class RandomResult {
   constructor() {
-    RandomResult.props.forEach((prop) => this.getProp(prop));
+    RESULT_PROPS.forEach((prop) => this.getProp(prop));
   }
 
   getProp(propName) {
@@ -86,7 +88,6 @@ class RandomResult {
     this[propName] = getRandomInteger(MAX, MIN);
   }
 }
-RandomResult.props = ['score', 'mistakesDone', 'timeRemain'];
 
 export const getOtherResults = () => {
   const { MAX, MIN } = OtherResults.amount;

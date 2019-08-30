@@ -9,7 +9,10 @@ export default class GameController {
     this._game = new GameModel();
 
     this._handler = {
-      onReset: this.start.bind(this),
+      onReset: () => {
+        this._game.resetQuestions();
+        this.start();
+      },
       onNext: (callback) => {
         this._game.countAnswer();
         const newQuestion = this._game.currentQuestion;

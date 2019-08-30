@@ -7,8 +7,8 @@ export default class GameModel {
     this._options = GameOptions;
     this._state = {};
     this._answers = [];
-    this._questions = getRandomQuestions();
 
+    this.resetQuestions();
     this.resetState();
   }
 
@@ -34,6 +34,10 @@ export default class GameModel {
 
   resetAnswers() {
     this._answers.length = 0;
+  }
+
+  resetQuestions() {
+    this._questions = getRandomQuestions();
   }
 
   resetState() {

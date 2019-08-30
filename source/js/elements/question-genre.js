@@ -1,23 +1,4 @@
-import AudioView from '../views/audio-view';
-
-const getTrackTemplate = (track, number) => {
-  const buttonStateModifier = (number === 1) ? 'play' : '';
-  const isAudioAutoplay = (number === 1);
-  const audio = new AudioView(track, isAudioAutoplay);
-
-  return (
-    `<div class="track">
-      <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
-      <div class="track__status">
-        ${audio.template}
-      </div>
-      <div class="game__answer">
-        <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${number}" id="answer-${number}">
-        <label class="game__check" for="answer-${number}">Отметить</label>
-      </div>
-    </div>`
-  );
-};
+import TrackView from '../views/track-view';
 
 const addAudioHandlers = ($container) => {
   const $audioBlocks = $container.querySelectorAll('.track');
@@ -53,12 +34,21 @@ const addAudioHandlers = ($container) => {
 
 export const updateCaption = (question) => `Выберите ${question.targetGenre} треки`;
 
-export const getContentTemplate = (question) => (
-  `<form class="game__tracks">
-    ${question.trackList.map((it, i) => getTrackTemplate(it, i + 1)).join('')}
-    <button class="game__submit button" type="submit">Ответить</button>
-  </form>`
-);
+export const getContentTemplate = (question) => {
+  const formMarkup = question.trackList
+    .map((it, i) => {
+      const track = new TrackView(it, i + 1);
+      return track.template;
+    })
+    .join('');
+
+  return (
+    `<form class="game__tracks">
+      ${formMarkup}
+      <button class="game__submit button" type="submit">Ответить</button>
+    </form>`
+  );
+};
 
 const checkAnswer = (selectedAnswers, question) => {
   const { correctAnswers } = question;
