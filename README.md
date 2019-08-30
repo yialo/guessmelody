@@ -10,17 +10,13 @@
 
     npm start
 
-## Lint CSS and JS code
-
-    npm run lint
-
 ## Run Mocha tests
 
     npm run test
 
-## Run Mocha tests, lint CSS and JS code
+## Lint CSS and JS code
 
-    npm run check-all
+    npm run lint
 
 ## Minimize images
 

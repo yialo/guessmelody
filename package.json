@@ -53,7 +53,6 @@
   },
   "scripts": {
     "build": "gulp build",
-    "check-all": "npm run lint && gulp test",
     "eslint": "eslint gulpfile.js \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "lint": "npm run stylelint && npm run eslint",
