@@ -1,4 +1,4 @@
-import { GameOptions } from '../data/game-config';
+import { GameOptions } from '../models/game-config';
 import { createElementFromTemplate, changeScreen } from '../lib/utils';
 import { getOtherResults } from '../lib/mock-generator';
 import calculateScore from '../lib/calculate-score';

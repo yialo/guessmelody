@@ -1,9 +1,10 @@
-export const GameOptions = {
+const GameOptions = {
   QUESTIONS: 10,
   ATTEMPTS: 3,
   QUICK_THRESHOLD: 30,
   IS_DEBUG_ACTIVE: true,
 };
+Object.freeze(GameOptions);
 
 const INITIAL_STATE = {
   minutes: 5,
@@ -12,4 +13,5 @@ const INITIAL_STATE = {
   currentQuestionIndex: 0,
 };
 Object.freeze(INITIAL_STATE);
-export { INITIAL_STATE };
+
+export { GameOptions, INITIAL_STATE };

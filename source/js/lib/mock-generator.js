@@ -1,5 +1,5 @@
-import { GameOptions } from '../data/game-config';
-import melodies from '../data/melodies';
+import { GameOptions } from '../models/game-config';
+import melodies from '../models/melodies';
 import { getRandomInteger, getRandomArrayElement } from './utils';
 
 const TRACK_LIST_SIZE = {

@@ -1,3 +1,7 @@
+// TODO:
+//  remove unnecessary functions (or all module)
+//  after all 'question' and 'result' elements would become formatted as classes
+
 const $app = document.querySelector('.app');
 const $main = $app.querySelector('.main');
 

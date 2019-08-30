@@ -1,13 +1,15 @@
-import getAudioTemplate from './audio';
+import AudioView from '../views/audio-view';
 
 const getTrackTemplate = (track, number) => {
   const buttonStateModifier = (number === 1) ? 'play' : '';
   const isAudioAutoplay = (number === 1);
+  const audio = new AudioView(track, isAudioAutoplay);
+
   return (
     `<div class="track">
       <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
       <div class="track__status">
-        ${getAudioTemplate(track, isAudioAutoplay)}
+        ${audio.template}
       </div>
       <div class="game__answer">
         <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${number}" id="answer-${number}">

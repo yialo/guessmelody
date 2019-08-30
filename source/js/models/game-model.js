@@ -1,19 +1,6 @@
-import Answer from './answer';
+import Answer from './answer-model';
+import { GameOptions, INITIAL_STATE } from './game-config';
 import { getQuestions as getRandomQuestions } from '../lib/mock-generator';
-
-const GameOptions = {
-  QUESTIONS: 10,
-  ATTEMPTS: 3,
-  QUICK_THRESHOLD: 30,
-  IS_DEBUG_ACTIVE: true,
-};
-
-const INITIAL_STATE = {
-  minutes: 5,
-  seconds: 0,
-  mistakes: 0,
-  currentQuestionIndex: 0,
-};
 
 export default class GameModel {
   constructor() {
@@ -31,6 +18,10 @@ export default class GameModel {
 
   get currentQuestion() {
     return this._questions[this._state.currentQuestionIndex];
+  }
+
+  get options() {
+    return this._options;
   }
 
   get state() {

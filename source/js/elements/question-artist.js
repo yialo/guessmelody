@@ -1,4 +1,4 @@
-import getAudioTemplate from './audio';
+import AudioView from '../views/audio-view';
 
 const getArtistTemplate = (track, index) => (
   `<div class="artist">
@@ -14,11 +14,12 @@ export const updateCaption = () => 'Кто исполняет эту песню?
 
 export const getContentTemplate = (question) => {
   const { trackList, targetTrack } = question;
+  const audio = new AudioView(targetTrack, true);
 
   return (
     `<div class="game__track">
       <button class="track__button track__button--play" type="button"></button>
-      ${getAudioTemplate(targetTrack, true)}
+      ${audio.template}
     </div>
     <form class="game__artist">
       ${trackList.map((it, i) => getArtistTemplate(it, i + 1)).join('')}

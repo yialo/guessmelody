@@ -1,4 +1,3 @@
-import { GameOptions } from '../data/game-config';
 import ScreenView from './screen-view';
 import HeaderView from './question-header-view';
 import BodyView from './question-body-view';
@@ -10,6 +9,7 @@ export default class QuestionView extends ScreenView {
   constructor(model, handler) {
     super();
 
+    this._options = model.options;
     this._state = model.state;
     this._question = model.currentQuestion;
 
@@ -19,7 +19,7 @@ export default class QuestionView extends ScreenView {
     this._body = new BodyView(this._question);
     this._body.onAnswer = (isCorrect) => {
       if (isCorrect) {
-        if (this._state.currentQuestionIndex === GameOptions.QUESTIONS - 1) handler.onWin();
+        if (this._state.currentQuestionIndex === this._options.QUESTIONS - 1) handler.onWin();
         else {
           this._state.currentQuestionIndex += 1;
           handler.onNext(this._update.bind(this));
@@ -29,7 +29,7 @@ export default class QuestionView extends ScreenView {
         this._header.updateMistakesView();
       }
 
-      if (this._state.mistakes === GameOptions.ATTEMPTS) handler.onFail();
+      if (this._state.mistakes === this._options.ATTEMPTS) handler.onFail();
     };
   }
 
@@ -59,7 +59,7 @@ export default class QuestionView extends ScreenView {
     this._updateBemModifier();
     this._body.update(newQuestion);
 
-    if (GameOptions.IS_DEBUG_ACTIVE) this._showConsoleTip();
+    if (this._options.IS_DEBUG_ACTIVE) this._showConsoleTip();
   }
 
   _updateBemModifier() {
