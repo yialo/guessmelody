@@ -22,9 +22,8 @@ const startNewGame = () => {
     onFail: () => {
       gameModel.resetState();
       gameModel.resetAnswers();
-      const question = gameModel.currentQuestion;
       renderResultScreen('failAttempts', () => {
-        const questionScreen = new QuestionView(gameModel.state, question, handler);
+        const questionScreen = new QuestionView(gameModel, handler);
         questionScreen.render();
       });
     },
@@ -32,8 +31,7 @@ const startNewGame = () => {
 
   const welcomeScreen = new WelcomeView();
   welcomeScreen.onStart = () => {
-    const question = gameModel.currentQuestion;
-    const questionScreen = new QuestionView(gameModel.state, question, handler);
+    const questionScreen = new QuestionView(gameModel, handler);
     questionScreen.render();
   };
 

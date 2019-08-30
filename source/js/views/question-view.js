@@ -7,11 +7,11 @@ const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 
 export default class QuestionView extends ScreenView {
-  constructor(state, question, handler) {
+  constructor(model, handler) {
     super();
 
-    this._state = state;
-    this._question = question;
+    this._state = model.state;
+    this._question = model.currentQuestion;
 
     this._header = new HeaderView(this._state);
     this._header.onReset = handler.onReset;
