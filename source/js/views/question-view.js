@@ -38,15 +38,13 @@ export default class QuestionView extends ScreenView {
     return this._template;
   }
 
-  _updateBemModifier() {
-    const newModifier = `game--${this._question.type}`;
-    const { classList } = this.$;
-
-    if (classList.length > 1) BEM_MODIFIERS.forEach((it) => classList.toggle(it));
-    else classList.add(newModifier);
+  render() {
+    this._update();
+    this.$.append(this._header.prepared, this._body.$);
+    this._set();
   }
 
-  _appendDebugger() {
+  _showConsoleTip() {
     console.group('Вопрос');
     console.dir(this._question);
     const propName = (this._question.type === 'genre')
@@ -61,12 +59,14 @@ export default class QuestionView extends ScreenView {
     this._updateBemModifier();
     this._body.update(newQuestion);
 
-    if (GameOptions.IS_DEBUG_ACTIVE) this._appendDebugger();
+    if (GameOptions.IS_DEBUG_ACTIVE) this._showConsoleTip();
   }
 
-  render() {
-    this._update();
-    this.$.append(this._header.prepared, this._body.$);
-    this._set();
+  _updateBemModifier() {
+    const newModifier = `game--${this._question.type}`;
+    const { classList } = this.$;
+
+    if (classList.length > 1) BEM_MODIFIERS.forEach((it) => classList.toggle(it));
+    else classList.add(newModifier);
   }
 }
