@@ -1,11 +1,9 @@
-import TrackView from './track-view';
 import TypeView from './question-type-view';
 
 export default class QuestonGenreView extends TypeView {
-  constructor(...args) {
-    super(TrackView, ...args);
+  constructor(question, onAnswer, $container) {
+    super(question, onAnswer, $container);
 
-    const [question] = args;
     this._correctAnswers = question.correctAnswers;
     this._targetGenre = question.targetGenre;
     this.onCheckboxChange = this._toggleClickabilityState;

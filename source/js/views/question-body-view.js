@@ -26,18 +26,14 @@ export default class QuestionBodyView extends View {
     if (newQuestion) this._question = newQuestion;
 
     const QuestionType = questionMap[this._question.type];
-    const questionType = new QuestionType(this._question, this._onAnswer, this.$);
+    this._questionType = new QuestionType(this._question, this._onAnswer, this.$);
 
     const markup = (
-      `<h2 class="game__title">${questionType.caption}</h2>
-      ${questionType.template}`
+      `<h2 class="game__title">${this._questionType.caption}</h2>
+      ${this._questionType.template}`
     );
 
     this.$.innerHTML = markup;
-    this._bind();
-  }
-
-  _bind() {
-    questionMap[this._question.type].bind(this.$, this._question, this._onAnswer);
+    this._questionType.bind();
   }
 }

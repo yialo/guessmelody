@@ -1,11 +1,19 @@
 import View from './view';
+import ArtistView from './artist-view';
+import TrackView from './track-view';
+
+const formItemMap = {
+  genre: TrackView,
+  artist: ArtistView,
+};
 
 export default class QuestionTypeView extends View {
-  constructor(FormItemClass, question, onAnswer, $container) {
+  constructor(question, onAnswer, $container) {
     super();
+
     this._quesiton = question;
     this._trackList = question.trackList;
-    this._FormItemClass = FormItemClass;
+    this._FormItemClass = formItemMap[question.type];
     this._onAnswer = onAnswer;
     this._$container = $container;
   }
@@ -17,8 +25,8 @@ export default class QuestionTypeView extends View {
   get formMarkup() {
     this._formMarkup = this._trackList
       .map((it, i) => {
-        // TODO: try to remove braces
-        const formItem = new (this._FormItemClass)(it, i + 1);
+        const FormItem = this._FormItemClass;
+        const formItem = new FormItem(it, i + 1);
         return formItem.template;
       })
       .join('');
@@ -26,7 +34,7 @@ export default class QuestionTypeView extends View {
   }
 
   bind() {
-    this._addAnswerHandler();
+    this._addAudioHandlers();
     this._addAnswerHandler();
   }
 

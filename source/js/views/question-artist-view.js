@@ -1,14 +1,12 @@
-import ArtistView from './artist-view';
 import AudioView from './audio-view';
 import TypeView from './question-type-view';
 
 const CAPTION = 'Кто исполняет эту песню?';
 
 export default class QuestonArtistView extends TypeView {
-  constructor(...args) {
-    super(ArtistView, ...args);
+  constructor(question, onAnswer, $container) {
+    super(question, onAnswer, $container);
 
-    const [question] = args;
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
     this._audio = new AudioView(this._targetTrack, true);

@@ -4,6 +4,7 @@ import AudioView from './audio-view';
 export default class TrackView extends View {
   constructor(track, number) {
     super();
+
     this._track = track;
     this._number = number;
 

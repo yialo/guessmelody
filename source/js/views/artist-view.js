@@ -3,6 +3,7 @@ import View from './view';
 export default class ArtistView extends View {
   constructor(track, index) {
     super();
+
     this._track = track;
     this._index = index;
   }
