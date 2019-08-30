@@ -1,9 +1,11 @@
 import View from './view';
+import QuestionGenreView from './question-genre-view';
+import QuestionArtistView from './question-artist-view';
 
-import * as genre from '../elements/question-genre';
-import * as artist from '../elements/question-artist';
-
-const questionMap = { genre, artist };
+const questionMap = {
+  genre: QuestionGenreView,
+  artist: QuestionArtistView,
+};
 
 export default class QuestionBodyView extends View {
   constructor(question) {
@@ -23,14 +25,12 @@ export default class QuestionBodyView extends View {
   update(newQuestion) {
     if (newQuestion) this._question = newQuestion;
 
-    const lib = questionMap[this._question.type];
-
-    const caption = lib.updateCaption(this._question);
-    const content = lib.getContentTemplate(this._question);
+    const QuestionType = questionMap[this._question.type];
+    const questionType = new QuestionType(this._question, this._onAnswer, this.$);
 
     const markup = (
-      `<h2 class="game__title">${caption}</h2>
-      ${content}`
+      `<h2 class="game__title">${questionType.caption}</h2>
+      ${questionType.template}`
     );
 
     this.$.innerHTML = markup;

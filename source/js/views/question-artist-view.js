@@ -1,17 +1,21 @@
-import TypeView from './question-type-view';
 import ArtistView from './artist-view';
 import AudioView from './audio-view';
+import TypeView from './question-type-view';
+
+const CAPTION = 'Кто исполняет эту песню?';
 
 export default class QuestonArtistView extends TypeView {
-  constructor(question, onAnswer) {
-    super(question, onAnswer, ArtistView);
-    this._targetTrack = this._question.targetTrack;
-    this._correctAnswer = this._question.correctAnswer;
+  constructor(...args) {
+    super(ArtistView, ...args);
+
+    const [question] = args;
+    this._targetTrack = question.targetTrack;
+    this._correctAnswer = question.correctAnswer;
     this._audio = new AudioView(this._targetTrack, true);
   }
 
   get caption() {
-    this._caption = 'Кто исполняет эту песню?';
+    this._caption = CAPTION;
     return this._caption;
   }
 
@@ -26,6 +30,27 @@ export default class QuestonArtistView extends TypeView {
       </form>`
     );
     return this._template;
+  }
+
+  _addAnswerHandler() {
+    this._$radioButtons = this._$container.querySelectorAll('.artist__input');
+
+    this._$radioButtons.forEach(($el) => (
+      $el.addEventListener('click', this._createClickHandler(this._question, this._onAnswer))
+    ));
+  }
+
+  _addAudioHandlers() {
+    this._$audioBlock = this._$container.querySelector('.game__track');
+    this._$button = this._$audioBlock.querySelector('button');
+    this._$audio = this._$audioBlock.querySelector('audio');
+
+    this._$button.addEventListener('click', () => {
+      if (this._$audio.paused) this._$audio.play();
+      else this._$audio.pause();
+      this._$button.classList.toggle(`track__button--play`);
+      this._$button.classList.toggle(`track__button--pause`);
+    });
   }
 
   _checkAnswer(selectedAnswer) {

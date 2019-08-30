@@ -1,12 +1,13 @@
 import View from './view';
 
 export default class QuestionTypeView extends View {
-  constructor(question, onAnswer, formItemClass) {
+  constructor(FormItemClass, question, onAnswer, $container) {
     super();
-    this._question = question;
-    this._trackList = this._question.trackList;
-    this._formItemClass = formItemClass;
+    this._quesiton = question;
+    this._trackList = question.trackList;
+    this._FormItemClass = FormItemClass;
     this._onAnswer = onAnswer;
+    this._$container = $container;
   }
 
   get caption() {
@@ -16,8 +17,9 @@ export default class QuestionTypeView extends View {
   get formMarkup() {
     this._formMarkup = this._trackList
       .map((it, i) => {
-        const itemView = new (this._formItemClass)(it, i + 1);
-        return itemView.template;
+        // TODO: try to remove braces
+        const formItem = new (this._FormItemClass)(it, i + 1);
+        return formItem.template;
       })
       .join('');
     return this._formMarkup;
