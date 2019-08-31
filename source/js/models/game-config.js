@@ -1,5 +1,5 @@
 const GameOptions = {
-  QUESTIONS: 10,
+  QUESTIONS: 1,
   ATTEMPTS: 3,
   QUICK_THRESHOLD: 30,
   IS_DEBUG_ACTIVE: true,

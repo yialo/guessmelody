@@ -1,8 +1,8 @@
 import GameModel from '../models/game-model';
 import WelcomeView from '../views/welcome-view';
 import QuestionView from '../views/question-view';
-
-import renderResultScreen from '../elements/result';
+import ResultFailTriesView from '../views/result-fail-tries-view';
+import ResultSuccessView from '../views/result-success-view';
 
 export default class GameController {
   constructor() {
@@ -10,7 +10,7 @@ export default class GameController {
 
     this._handler = {
       onReset: () => {
-        this._game.resetQuestions();
+        this._game.reset();
         this.start();
       },
       onNext: (callback) => {
@@ -20,15 +20,22 @@ export default class GameController {
       },
       onWin: () => {
         this._game.countAnswer();
-        renderResultScreen('success', this.start, this._game.answers, this._game.state.mistakes);
+        const resultScreen = new ResultSuccessView(this._game);
+        resultScreen.onReplay = () => {
+          this._game.reset();
+          this.start();
+        };
+        resultScreen.render();
       },
       onFail: () => {
-        this._game.resetState();
-        this._game.resetAnswers();
-        renderResultScreen('failAttempts', () => {
+        const resultScreen = new ResultFailTriesView();
+        resultScreen.onReplay = () => {
+          this._game.resetState();
+          this._game.resetAnswers();
           const questionScreen = new QuestionView(this._game, this._handler);
           questionScreen.render();
-        });
+        };
+        resultScreen.render();
       },
     };
   }
