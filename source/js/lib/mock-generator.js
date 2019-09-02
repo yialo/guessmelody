@@ -1,4 +1,4 @@
-import { GameOptions } from '../models/game-config';
+import GameOptions from '../models/game-config';
 import melodies from '../models/melodies';
 import { getRandomInteger, getRandomArrayElement } from './utils';
 
