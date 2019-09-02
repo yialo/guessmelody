@@ -4,6 +4,17 @@ import QuestionView from '../views/question-view';
 import ResultFailTriesView from '../views/result-fail-tries-view';
 import ResultSuccessView from '../views/result-success-view';
 
+let game;
+const tick(game) => {
+  game = Object.assign({}, game, {
+    time: game.time - 1;
+  });
+};
+
+const startTimer = () => {};
+
+const stopTimer = () => {};
+
 export default class GameController {
   constructor() {
     this._game = new GameModel();
