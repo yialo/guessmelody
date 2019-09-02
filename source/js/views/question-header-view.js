@@ -87,7 +87,7 @@ export default class QuestionHeaderView extends View {
 
   get prepared() {
     this._bind();
-    this._updateTimeView();
+    this.updateTimeView();
     return this._$;
   }
 
@@ -99,7 +99,7 @@ export default class QuestionHeaderView extends View {
     this.$link.addEventListener('click', this._onReset);
   }
 
-  _updateTimeView() {
+  updateTimeView() {
     this.$minutes.textContent = QuestionHeaderView.addZeroAtLeft(this.minutes);
     this.$seconds.textContent = QuestionHeaderView.addZeroAtLeft(this.seconds);
   }

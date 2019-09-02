@@ -44,6 +44,10 @@ export default class QuestionView extends ScreenView {
     this._set();
   }
 
+  updateHeader() {
+    this._header.updateTimeView();
+  }
+
   _showConsoleTip() {
     console.group('Вопрос');
     console.dir(this._question);

@@ -1,12 +1,21 @@
 import GameOptions from '../models/game-config';
 import melodies from '../models/melodies';
-import { getRandomInteger, getRandomArrayElement } from './utils';
 
 const TRACK_LIST_SIZE = {
   genre: 4,
   artist: 3,
 };
 const QUESTION_TYPES = Object.keys(TRACK_LIST_SIZE);
+
+const getRandomInteger = (max, min = 0) => {
+  const delta = max - min;
+  return min + Math.round(Math.random() * delta);
+};
+
+const getRandomArrayElement = (arr) => {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+};
 
 const getRandomQuestionTypeList = () => (
   new Array(GameOptions.QUESTIONS).fill('')

@@ -4,16 +4,14 @@ import QuestionView from '../views/question-view';
 import ResultFailTriesView from '../views/result-fail-tries-view';
 import ResultSuccessView from '../views/result-success-view';
 
-let game;
-const tick(game) => {
-  game = Object.assign({}, game, {
-    time: game.time - 1;
+const ONE_SECOND = 1000;
+
+const tick = (gameState, questionView) => {
+  Object.assign(gameState, {
+    time: gameState.time - 1,
   });
+  questionView.updateHeader();
 };
-
-const startTimer = () => {};
-
-const stopTimer = () => {};
 
 export default class GameController {
   constructor() {
@@ -51,11 +49,24 @@ export default class GameController {
     };
   }
 
+  startTimer(questionView) {
+    this._timer = setTimeout(() => {
+      tick(this._game.state, questionView);
+      this.startTimer();
+    }, ONE_SECOND);
+  }
+
+  stopTimer() {
+    clearTimeout(this._timer);
+  }
+
+  // FIXME: fix context loss
   start() {
     this._welcomeScreen = new WelcomeView();
     this._welcomeScreen.onStart = () => {
       const questionScreen = new QuestionView(this._game, this._handler);
       questionScreen.render();
+      this.startTimer(questionScreen);
     };
     this._welcomeScreen.render();
   }

@@ -18,10 +18,6 @@ export default class ResultSuccessView extends ResultView {
 
     this._minutes = __mockUserResult.minutes;
     this._seconds = __mockUserResult.seconds;
-
-    // TODO: check this desctructurization way
-    // { minutes: this._minutes, seconds: this._seconds } = __mockUserResult;
-
     this._answers = model.answers;
     this._mistakes = model.state.mistakes;
   }
