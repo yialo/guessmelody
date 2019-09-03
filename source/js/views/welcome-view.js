@@ -17,20 +17,13 @@ const INITIAL_TEMPLATE = (
 );
 
 export default class WelcomeView extends ScreenView {
-  get onButtonClick() {
-    if (!this._onButtonClick) {
-      this._onButtonClick = this._onStart.bind(this);
-    }
-    return this._onButtonClick;
-  }
-
   set onStart(callback) {
     this._onStart = callback;
   }
 
   get template() {
     this._template = INITIAL_TEMPLATE;
-    return this._template;
+    return INITIAL_TEMPLATE;
   }
 
   get $button() {
@@ -46,6 +39,10 @@ export default class WelcomeView extends ScreenView {
   }
 
   _bind() {
-    this.$button.addEventListener('click', this.onButtonClick);
+    this.$button.addEventListener('click', this._onButtonClick);
+  }
+
+  _onButtonClick() {
+    if (typeof this._onStart === 'function') this._onStart();
   }
 }

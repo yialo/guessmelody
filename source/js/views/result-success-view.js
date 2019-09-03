@@ -1,6 +1,6 @@
 import { getOtherResults } from '../lib/mock-generator';
 import NotificationPhrase from '../lib/notification-phrase-handler';
-import GameOptions from '../models/game-config';
+import GameOptions from '../models/game-options';
 import calculateScore from '../lib/calculate-score';
 import getGameResult from '../lib/get-game-result';
 import ResultView from './result-view';

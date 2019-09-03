@@ -1,4 +1,4 @@
-import GameOptions from '../models/game-config';
+import GameOptions from '../models/game-options';
 import melodies from '../models/melodies';
 
 const TRACK_LIST_SIZE = {

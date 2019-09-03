@@ -1,5 +1,5 @@
 import Answer from './answer-model';
-import GameOptions from './game-config';
+import GameOptions from './game-options';
 import { getQuestions as getRandomQuestions } from '../lib/mock-generator';
 
 const INITIAL_STATE = {

@@ -1,4 +1,4 @@
-import GameOptions from '../models/game-config';
+import GameOptions from '../models/game-options';
 
 export default (playerResult, otherResults) => {
   if (!playerResult.timeRemain) return 'Время вышло! Вы не успели отгадать все мелодии.';
