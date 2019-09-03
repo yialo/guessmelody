@@ -26,7 +26,8 @@ module.exports = {
   },
   scripts: {
     all: `./source/js/**/*.js`,
-    main: `./source/js/main.js`,
+    main: `./source/js/index.js`,
+    outputName: 'bundle',
   },
   styles: {
     all: `./source/styles/**/*.scss`,

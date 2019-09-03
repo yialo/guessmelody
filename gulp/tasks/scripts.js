@@ -6,7 +6,13 @@ module.exports = () => (
       .src($.path.scripts.main)
       .pipe($.pl.plumber())
       .pipe($.pl.sourcemaps.init())
-      .pipe($.pl.betterRollup({}, { file: 'bundle.js', format: 'iife' }))
+      .pipe($.pl.betterRollup(
+        {},
+        {
+          file: `${$.path.scripts.outputName}.js`,
+          format: 'iife',
+        }
+      ))
       .pipe($.pl.sourcemaps.write(``))
       .pipe($.gulp.dest(`${$.path.output.root}/js`))
       .pipe($.server.stream())
