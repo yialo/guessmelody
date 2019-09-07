@@ -17,6 +17,12 @@ const INITIAL_TEMPLATE = (
 );
 
 export default class WelcomeView extends ScreenView {
+  constructor() {
+    super();
+
+    this._onButtonClick = this._onButtonClick.bind(this);
+  }
+
   set onStart(callback) {
     this._onStart = callback;
   }
@@ -39,7 +45,6 @@ export default class WelcomeView extends ScreenView {
   }
 
   _bind() {
-    this._onButtonClick = this._onButtonClick.bind(this);
     this.$button.addEventListener('click', this._onButtonClick);
   }
 
