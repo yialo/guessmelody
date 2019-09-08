@@ -60,6 +60,7 @@ export default class QuestionView extends ScreenView {
 
   _update(newQuestion) {
     if (newQuestion) this._question = newQuestion;
+
     this._updateBemModifier();
     this._body.update(newQuestion);
 

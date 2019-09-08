@@ -15,6 +15,14 @@ export default class View {
     return this._$;
   }
 
+  _bind() {
+    console.log(this);
+  }
+
+  _unbind() {
+    console.log(this);
+  }
+
   _createEl() {
     this._$ = View.createEl(this.template);
   }

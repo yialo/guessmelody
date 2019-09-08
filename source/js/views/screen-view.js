@@ -1,10 +1,17 @@
 import View from './view';
 
 const $main = document.querySelector('.main');
+const changeScreen = ($screen) => {
+  $main.innerHTML = ``;
+  $main.appendChild($screen);
+};
 
 export default class ScreenView extends View {
   _set() {
-    $main.innerHTML = ``;
-    $main.appendChild(this.$);
+    changeScreen(this.$);
+  }
+
+  _unset() {
+    this.$.remove();
   }
 }
