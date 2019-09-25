@@ -1,8 +1,13 @@
 env:
   browser: true
   es6: true
-  mocha: true
+extends:
+  - plugin:compat/recommended
 overrides:
+  - env:
+      mocha: true
+    files:
+      - ./source/js/**/*.test.js
   - env:
       node: true
     files:
