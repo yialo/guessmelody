@@ -5,7 +5,12 @@
       {
         "except": ["first-nested"],
         "ignore": ["after-comment"],
-        "ignoreAtRules": ["import", "mixin"]
+        "ignoreAtRules": [
+          "custom-media",
+          "custom-selector",
+          "import",
+          "mixin"
+        ]
       }
     ],
     "at-rule-name-case": "lower",
