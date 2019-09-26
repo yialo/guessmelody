@@ -5,4 +5,5 @@
   --color-text-dark: #230d1a;
   --color-text-grey: #808080;
   --color-correct: #36b742;
+  --color-orange-lighten: color(#ff9749, lightness(15%));
 }

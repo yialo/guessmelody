@@ -4,6 +4,7 @@ const postcssPlugins = [
   $.pc.import(
     $.pc.normalize().postcssImport()
   ),
+  $.pc.color(),
   $.pc.mixins(),
   $.pc.env({
     stage: 3,

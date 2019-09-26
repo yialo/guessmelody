@@ -7,23 +7,26 @@
 }
 
 .artist__picture {
+  margin-bottom: 5px;
   width: 134px;
   height: 134px;
-  margin-bottom: 5px;
-  background-color: var(--color-beige);
-  object-fit: cover;
   border: solid 5px var(--color-text-dark);
   border-radius: 134px;
+  object-fit: cover;
+  background-color: var(--color-beige);
   cursor: pointer;
-}
 
-.artist:hover .artist__picture,
-.artist__input:focus + .artist__name .artist__picture {
-  border-color: var(--color-orange);
-}
+  @nest .artist:hover & {
+    border-color: var(--color-orange);
+  }
 
-.artist:active .artist__picture {
-  border-color: var(--color-hover);
+  @nest .artist__input:focus + .artist__name & {
+    border-color: var(--color-orange);
+  }
+
+  @nest .artist:active & {
+    border-color: var(--color-hover);
+  }
 }
 
 .artist__text {
