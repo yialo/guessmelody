@@ -1,7 +1,6 @@
 'use strict';
 
 global.$ = {
-  autoprefixer: require('autoprefixer'),
   del: require('del'),
   gulp: require('gulp'),
   imp: {
@@ -13,12 +12,17 @@ global.$ = {
     svgo: require('imagemin-svgo'),
   },
   path: require('./gulp/common/path.js'),
+  pc: {
+    autoprefixer: require('autoprefixer'),
+    import: require('postcss-import'),
+    env: require('postcss-preset-env'),
+    mixins: require('postcss-mixins'),
+    nano: require('cssnano'),
+  },
   pl: require('gulp-load-plugins')(),
   rp: {
     commonjs: require('rollup-plugin-commonjs'),
   },
-  sassCompiler: require('node-sass'),
-  sassImporter: require('node-sass-magic-importer'),
   server: require('browser-sync').create(),
   tasks: require('./gulp/common/tasks.js'),
 };

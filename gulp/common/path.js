@@ -30,8 +30,8 @@ module.exports = {
     outputName: 'bundle',
   },
   styles: {
-    all: `./source/styles/**/*.scss`,
-    main: `./source/styles/app.scss`,
+    all: `./source/styles/**/*.css`,
+    main: `./source/styles/app.css`,
   },
   test: `./source/js/**/*.test.js`,
 };

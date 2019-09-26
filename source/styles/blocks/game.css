@@ -1,46 +1,34 @@
-/*
- * Игровые экраны
- */
-
 .game {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   height: 100%;
 }
 
-// Шапка игровых экранов
 .game__header {
   display: flex;
-
-  margin-bottom: 210px;
   width: 100%;
+  margin-bottom: 210px;
 }
 
 .game__back {
   position: relative;
   margin-left: 50px;
   z-index: 1;
-
   width: 260px;
 
   &::before {
     content: "";
-
     position: absolute;
     left: -50px;
     top: 25px;
-
+    transform: rotate(180deg);
     width: 40px;
     height: 40px;
-
     background-image: url("../img/right-arrow.svg");
     background-repeat: no-repeat;
     background-size: 40px;
-
-    transform: rotate(180deg);
   }
 
   &:hover {
@@ -56,26 +44,22 @@
 .game__mistakes {
   display: flex;
   justify-content: flex-end;
-
   width: 260px;
 }
 
-// Общие стили игровых экранов
 .game__screen {
   position: relative;
   z-index: 1;
-
   width: 440px;
   text-align: center;
 }
 
 .game__title {
-  @include italic-title();
+  @mixin italic-title;
 
   margin-bottom: 30px;
 }
 
-// Стили для игры на выбор жанра
 .game__answer {
   width: 35px;
   height: 49px;
@@ -83,15 +67,11 @@
 
 .game__check {
   display: block;
-
   width: 35px;
   height: 49px;
-
   font-size: 0;
-
   background-image: url("../img/sprite.png");
   background-position: -5px -123px;
-
   cursor: pointer;
 }
 
@@ -104,26 +84,20 @@
 }
 
 .game__submit {
-  @include italic-text();
+  @mixin italic-text;
   margin-top: 30px;
   padding: 5px 20px;
-
   font-size: 24px;
 }
 
-// Стили для игры на выбор исполнителя
 .game__track {
-  margin-bottom: 120px;
-
   width: 100%;
   height: 55px;
-
+  margin-bottom: 120px;
   text-align: left;
-
   background-image: url("../img/player-background.png");
   background-repeat: no-repeat;
   background-size: cover;
-
   animation: fadein 1000ms ease-out;
 }
 

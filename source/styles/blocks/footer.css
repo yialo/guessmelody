@@ -1,19 +1,14 @@
-/*
- * Стили для футера сайта
- */
-
 .footer {
   display: flex;
   justify-content: space-between;
   padding-bottom: 10px;
 
-  width: $layout-width;
+  width: var(--layout-width);
 }
 
-// Блок копирайта в футере сайта
 .copyright {
   text-align: right;
-  color: $color-beige;
+  color: var(--color-beige);
   white-space: nowrap;
 }
 
@@ -34,10 +29,10 @@
 }
 
 .copyright__link {
-  color: $color-orange;
+  color: var(--color-orange);
 
   &:hover,
   &:focus {
-    color: $color-hover;
+    color: var(--color-hover);
   }
 }

@@ -1,0 +1,18 @@
+.button {
+  @mixin bold-text;
+  padding: 5px 20px;
+
+  color: var(--color-text-dark);
+  background-color: var(--color-beige);
+  border: 3px solid var(--color-orange);
+  border-radius: 15px;
+
+  &:disabled {
+    color: var(--color-text-grey);
+    border: 4px solid lighten(var(--color-orange), 15%);
+  }
+
+  &:hover {
+    color: var(--color-orange);
+  }
+}

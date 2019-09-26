@@ -1,12 +1,11 @@
 {
-  "plugins": ["stylelint-scss"],
   "rules": {
     "at-rule-empty-line-before": [
       "always",
       {
         "except": ["first-nested"],
         "ignore": ["after-comment"],
-        "ignoreAtRules": ["else", "import", "include"]
+        "ignoreAtRules": ["import", "mixin"]
       }
     ],
     "at-rule-name-case": "lower",
@@ -15,31 +14,16 @@
       true,
       {
         "ignoreAtRules": [
-          "at-root",
-          "content",
-          "debug",
-          "each",
-          "else",
-          "error",
-          "for",
-          "function",
-          "if",
-          "include",
+          "define-mixin",
           "mixin",
-          "return",
-          "warn"
+          "mixin-content"
         ]
       }
     ],
     "at-rule-no-vendor-prefix": true,
     "at-rule-semicolon-newline-after": "always",
     "block-closing-brace-empty-line-before": "never",
-    "block-closing-brace-newline-after": [
-      "always",
-      {
-        "ignoreAtRules": ["if", "else"]
-      }
-    ],
+    "block-closing-brace-newline-after": "always",
     "block-closing-brace-newline-before": "always",
     "block-closing-brace-space-after": "always-single-line",
     "block-closing-brace-space-before": "always-single-line",
@@ -116,13 +100,6 @@
         "ignore": ["after-comment"]
       }
     ],
-    "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
-    "scss/at-else-closing-brace-space-after": "always-intermediate",
-    "scss/at-else-empty-line-before": "never",
-    "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
-    "scss/at-if-closing-brace-space-after": "always-intermediate",
-    "scss/at-mixin-argumentless-call-parentheses": "always",
-    "scss/at-mixin-parentheses-space-before": "never",
     "selector-attribute-brackets-space-inside": "never",
     "selector-attribute-operator-space-after": "never",
     "selector-attribute-operator-space-before": "never",
