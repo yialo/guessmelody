@@ -1,6 +1,5 @@
 *,
-*::before,
-*::after {
+*:--pseudo {
   box-sizing: inherit;
 }
 

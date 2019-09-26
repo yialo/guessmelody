@@ -8,6 +8,7 @@ const postcssPlugins = [
   $.pc.env({
     stage: 3,
     features: {
+      'custom-selectors': true,
       'nesting-rules': true,
     },
   }),

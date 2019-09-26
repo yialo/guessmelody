@@ -1,6 +1,7 @@
 @import "variables/colors.css";
 @import "variables/fonts.css";
 @import "variables/layout.css";
+@import "variables/selectors.css";
 
 @import "mixins/general.css";
 @import "mixins/text.css";
