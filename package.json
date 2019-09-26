@@ -6,20 +6,17 @@
     "last 2 Edge versions",
     "not dead"
   ],
-  "dependencies": {
-    "normalize.css": "8.0.1"
-  },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
     "autoprefixer": "9.6.1",
     "browser-sync": "2.26.7",
     "chai": "4.2.0",
-    "cssnano": "4.1.10",
     "del": "5.1.0",
     "eslint": "6.4.0",
     "eslint-plugin-import": "2.18.2",
     "gulp": "4.0.2",
     "gulp-better-rollup": "4.0.1",
+    "gulp-csso": "3.0.1",
     "gulp-imagemin": "6.1.0",
     "gulp-load-plugins": "2.0.1",
     "gulp-mocha": "7.0.1",
@@ -36,6 +33,7 @@
     "mocha": "6.2.0",
     "postcss-import": "12.0.1",
     "postcss-mixins": "6.2.2",
+    "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "rollup": "1.21.4",
     "rollup-plugin-babel": "4.3.3",

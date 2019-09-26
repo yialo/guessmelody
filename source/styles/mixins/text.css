@@ -1,4 +1,3 @@
-/* Основной текст */
 @define-mixin main-text {
   font-family: var(--font);
   font-style: normal;
@@ -6,21 +5,18 @@
   font-size: 16px;
 }
 
-/* Жирный текст */
 @define-mixin bold-text {
   font-family: var(--font);
   font-style: normal;
   font-weight: 500;
 }
 
-/* Наклонный текст */
 @define-mixin italic-text {
   font-family: var(--font);
   font-style: italic;
   font-weight: 300;
 }
 
-/* Типичный заголовок */
 @define-mixin main-title {
   margin: 0;
   font-family: var(--font);
@@ -30,7 +26,6 @@
   color: var(--color-text-dark);
 }
 
-/* Типичный наклонный заголовок */
 @define-mixin italic-title {
   margin: 0;
   font-family: var(--font);

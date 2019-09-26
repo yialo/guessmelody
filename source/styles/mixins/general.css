@@ -1,4 +1,3 @@
-/* Нестилизованный список */
 @define-mixin list-unstyled {
   margin: 0;
   padding: 0;
