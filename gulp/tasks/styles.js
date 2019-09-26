@@ -1,7 +1,5 @@
 'use strict';
 
-$.pl.sass.compiler = $.sassCompiler;
-
 const postcssPlugins = [
   $.pc.import(),
   $.pc.mixins(),
