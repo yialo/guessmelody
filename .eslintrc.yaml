@@ -1,8 +1,6 @@
 env:
   browser: true
   es6: true
-extends:
-  - plugin:compat/recommended
 overrides:
   - env:
       mocha: true
@@ -722,7 +720,7 @@ rules:
       ignoreImport: false
   no-useless-return: error
   no-var: error
-  no-void: error
+  no-void: 'off'
   no-warning-comments:
     - 'off'
     - location: start

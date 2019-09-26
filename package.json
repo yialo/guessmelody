@@ -1,10 +1,10 @@
 {
   "browserslist": [
-    "last 1 version",
     "last 2 Chrome versions",
     "last 2 Firefox versions",
     "last 2 Opera versions",
-    "last 2 Edge versions"
+    "last 2 Edge versions",
+    "not ie"
   ],
   "dependencies": {
     "normalize.css": "8.0.1"
@@ -16,7 +16,6 @@
     "chai": "4.2.0",
     "del": "5.1.0",
     "eslint": "6.4.0",
-    "eslint-plugin-compat": "3.3.0",
     "eslint-plugin-import": "2.18.2",
     "gulp": "4.0.2",
     "gulp-better-rollup": "4.0.1",
