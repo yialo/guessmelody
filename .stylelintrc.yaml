@@ -1,5 +1,6 @@
 plugins:
   - stylelint-order
+  - stylelint-use-nesting
 rules:
   at-rule-empty-line-before:
     - always
@@ -31,6 +32,7 @@ rules:
   block-opening-brace-newline-after: always
   block-opening-brace-space-after: always-single-line
   block-opening-brace-space-before: always
+  csstools/use-nesting: always
   color-hex-case: lower
   color-hex-length: long
   color-no-invalid-hex: true
