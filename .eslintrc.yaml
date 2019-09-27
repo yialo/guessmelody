@@ -9,7 +9,7 @@ overrides:
   - env:
       node: true
     files:
-      - ./gulpfile.js
+      - ./*.js
       - ./gulp/**/*.js
     globals:
       $: readonly
@@ -227,6 +227,7 @@ rules:
         - '**/gulpfile.js'
         - '**/gulpfile.*.js'
         - '**/Gruntfile{,.js}'
+        - '**/postcss.config.js'
         - '**/protractor.conf.js'
         - '**/protractor.conf.*.js'
       optionalDependencies: false

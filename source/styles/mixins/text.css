@@ -1,23 +1,23 @@
-@define-mixin main-text {
+@mixin main-text() {
   font-family: var(--font);
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
 }
 
-@define-mixin bold-text {
+@mixin bold-text() {
   font-family: var(--font);
   font-style: normal;
   font-weight: 500;
 }
 
-@define-mixin italic-text {
+@mixin italic-text() {
   font-family: var(--font);
   font-style: italic;
   font-weight: 300;
 }
 
-@define-mixin main-title {
+@mixin main-title() {
   margin: 0;
   font-family: var(--font);
   font-style: normal;
@@ -26,7 +26,7 @@
   color: var(--color-text-dark);
 }
 
-@define-mixin italic-title {
+@mixin italic-title() {
   margin: 0;
   font-family: var(--font);
   font-style: italic;

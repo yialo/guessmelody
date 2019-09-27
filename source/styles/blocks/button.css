@@ -1,5 +1,5 @@
 .button {
-  @mixin bold-text;
+  @include bold-text();
 
   border: 3px solid var(--color-orange);
   border-radius: 15px;

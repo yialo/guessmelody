@@ -8,7 +8,6 @@
   ],
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
-    "autoprefixer": "9.6.1",
     "browser-sync": "2.26.7",
     "chai": "4.2.0",
     "del": "5.1.0",
@@ -31,19 +30,22 @@
     "imagemin-svgo": "7.0.0",
     "imagemin-zopfli": "6.0.0",
     "mocha": "6.2.0",
+    "postcss": "7.0.18",
+    "postcss-advanced-variables": "3.0.0",
     "postcss-color-function": "4.1.0",
     "postcss-import": "12.0.1",
-    "postcss-mixins": "6.2.2",
     "postcss-normalize": "8.0.1",
     "postcss-preset-env": "6.7.0",
     "rollup": "1.21.4",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
-    "stylelint": "11.0.0"
+    "stylelint": "11.0.0",
+    "stylelint-order": "3.1.1"
   },
   "engines": {
     "node": "10"
   },
+  "main": "gulpfile.js",
   "name": "guessmelody",
   "private": true,
   "repository": {

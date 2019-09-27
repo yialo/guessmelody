@@ -13,7 +13,7 @@ module.exports = () => (
           format: 'iife',
         }
       ))
-      .pipe($.pl.sourcemaps.write(`.`))
+      .pipe($.pl.sourcemaps.write(`./`))
       .pipe($.gulp.dest(`${$.path.output.root}/js`))
       .pipe($.server.stream())
   ))

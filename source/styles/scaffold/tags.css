@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  @mixin main-text;
+  @include main-text();
 
   display: flex;
   justify-content: center;

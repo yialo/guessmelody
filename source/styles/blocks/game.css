@@ -55,7 +55,7 @@
 }
 
 .game__title {
-  @mixin italic-title;
+  @include italic-title();
 
   margin-bottom: 30px;
 }
@@ -84,7 +84,7 @@
 }
 
 .game__submit {
-  @mixin italic-text;
+  @include italic-text();
   margin-top: 30px;
   padding: 5px 20px;
   font-size: 24px;

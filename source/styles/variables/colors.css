@@ -1,9 +1,11 @@
 :root {
+  $color-orange: #ff9749;
+
   --color-beige: #f0eed5;
-  --color-orange: #ff9749;
+  --color-orange: $color-orange;
   --color-hover: #f00000;
   --color-text-dark: #230d1a;
   --color-text-grey: #808080;
   --color-correct: #36b742;
-  --color-orange-lighten: color(#ff9749, lightness(15%));
+  --color-orange-lighten: color($color-orange lightness(+15%));
 }

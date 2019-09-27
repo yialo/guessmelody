@@ -12,14 +12,6 @@ global.$ = {
     zopfli: require('imagemin-zopfli'),
   },
   path: require('./gulp/common/path.js'),
-  pc: {
-    autoprefixer: require('autoprefixer'),
-    color: require('postcss-color-function'),
-    env: require('postcss-preset-env'),
-    import: require('postcss-import'),
-    mixins: require('postcss-mixins'),
-    normalize: require('postcss-normalize'),
-  },
   pl: require('gulp-load-plugins')(),
   rp: {
     commonjs: require('rollup-plugin-commonjs'),

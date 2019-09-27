@@ -6,7 +6,7 @@
   }
 
   & .result__text {
-    @mixin italic-text;
+    @include italic-text();
 
     margin: 0;
     margin-bottom: 5px;
@@ -34,7 +34,7 @@
 }
 
 .result__list {
-  @mixin list-unstyled;
+  @include list-unstyled();
 
   margin-top: 10px;
   margin-bottom: 20px;

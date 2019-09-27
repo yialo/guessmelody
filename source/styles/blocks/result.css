@@ -13,14 +13,14 @@
 }
 
 .result__title {
-  @mixin italic-title;
+  @include italic-title();
 
   margin-top: 50px;
   text-align: center;
 }
 
 .result__total {
-  @mixin italic-title;
+  @include italic-title();
 
   margin-top: 130px;
   width: 500px;
