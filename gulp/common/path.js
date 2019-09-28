@@ -16,14 +16,11 @@ module.exports = {
     ],
     vector: `./source/img/*.svg`,
   },
-  output: {
-    root: './build',
-    images: './source/img',
-  },
   raw: {
     input: `./resources/raw/input/*.{${Format.BITMAP},svg}`,
     output: `./resources/raw/output`,
   },
+  root: `./build`,
   scripts: {
     all: `./source/js/**/*.js`,
     main: `./source/js/index.js`,

@@ -14,7 +14,7 @@ module.exports = () => (
         }
       ))
       .pipe($.pl.sourcemaps.write(`./`))
-      .pipe($.gulp.dest(`${$.path.output.root}/js`))
+      .pipe($.gulp.dest(`${$.path.root}/js`))
       .pipe($.server.stream())
   ))
 );

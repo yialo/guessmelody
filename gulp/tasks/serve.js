@@ -21,7 +21,7 @@ const addWatchers = () => {
 };
 
 const serverOptions = {
-  server: $.path.output.root,
+  server: $.path.root,
   notify: false,
   open: false,
   port: 3502,

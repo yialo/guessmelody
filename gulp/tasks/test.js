@@ -8,7 +8,7 @@ module.exports = () => (
         { plugins: [$.rp.commonjs()] },
         { format: 'cjs' }
       ))
-      .pipe($.gulp.dest(`${$.path.output.root}/test`))
+      .pipe($.gulp.dest(`${$.path.root}/test`))
       .pipe($.pl.mocha({ ui: 'bdd' }))
   ))
 );
