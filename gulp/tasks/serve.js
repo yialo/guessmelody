@@ -12,7 +12,7 @@ const {
 
 const addWatchers = () => {
   watch(markup, series('markup'));
-  watch(styles, series('styles'));
+  watch([styles, `./postcss.config.js`], series('styles'));
   watch(scripts, series('scripts'));
   watch(files, series('watch-files'));
   watch(fonts, series('watch-fonts'));

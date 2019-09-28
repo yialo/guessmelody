@@ -7,7 +7,6 @@ module.exports = () => (
       .pipe($.pl.plumber())
       .pipe($.pl.sourcemaps.init())
       .pipe($.pl.postcss())
-      .pipe($.pl.csso())
       .pipe($.pl.sourcemaps.write(`./`))
       .pipe($.gulp.dest(`${$.path.output.root}/css`))
       .pipe($.server.stream())
