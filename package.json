@@ -40,7 +40,8 @@
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
     "stylelint": "11.0.0",
-    "stylelint-order": "3.1.1"
+    "stylelint-order": "3.1.1",
+    "stylelint-use-nesting": "1.2.1"
   },
   "engines": {
     "node": "10"
