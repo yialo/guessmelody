@@ -11,13 +11,17 @@
   },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
+    "@babel/types": "7.6.1",
+    "babel-eslint": "10.0.3",
     "browser-sync": "2.26.7",
     "chai": "4.2.0",
     "cssnano": "4.1.10",
     "del": "5.1.0",
     "eslint": "6.5.0",
     "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-sort-class-members": "1.6.0",
     "gulp": "4.0.2",
+    "gulp-babel": "8.0.0",
     "gulp-better-rollup": "4.0.1",
     "gulp-imagemin": "6.1.0",
     "gulp-load-plugins": "2.0.1",
@@ -41,6 +45,8 @@
     "rollup": "1.22.0",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-terser": "5.1.2",
     "stylelint": "11.0.0",
     "stylelint-order": "3.1.1",
     "stylelint-use-nesting": "1.2.1"
@@ -62,7 +68,7 @@
     "lint": "npm run stylelint && npm run eslint",
     "release": "set NODE_ENV=production&&gulp",
     "start": "gulp",
-    "stylelint": "stylelint \"./source/styles/**/*.css\"",
+    "stylelint": "stylelint \"./source/css/**/*.css\"",
     "test": "gulp test"
   },
   "version": "2.0.0"

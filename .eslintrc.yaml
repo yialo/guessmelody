@@ -31,11 +31,13 @@ overrides:
       strict:
         - error
         - safe
+parser: babel-eslint
 parserOptions:
   ecmaVersion: 2018
   sourceType: module
 plugins:
   - import
+  - sort-class-members
 rules:
   accessor-pairs: 'off'
   array-bracket-newline:
@@ -84,9 +86,7 @@ rules:
         ignoreConsecutiveComments: true
         ignoreInlineComments: true
         ignorePattern: .*
-  class-methods-use-this:
-    - error
-    - exceptMethods: []
+  class-methods-use-this: 'off'
   comma-dangle:
     - error
     - arrays: always-multiline
@@ -332,7 +332,7 @@ rules:
   lines-between-class-members:
     - error
     - always
-    - exceptAfterSingleLine: false
+    - exceptAfterSingleLine: true
   max-classes-per-file:
     - 'off'
     - 1
@@ -823,6 +823,21 @@ rules:
   semi-style:
     - error
     - last
+  sort-class-members/sort-class-members:
+    - 2
+    - accessorPairPositioning: getThenSet
+      order:
+        - '[properties]'
+        - '[arrow-function-properties]'
+        - constructor
+        - '[accessor-pairs]'
+        - '[getters]'
+        - '[setters]'
+        - '[methods]'
+        - '[async-methods]'
+        - '[static-properties]'
+        - '[static-methods]'
+      stopAfterFirstProblem: true
   sort-imports:
     - 'off'
     - ignoreCase: false
@@ -880,7 +895,9 @@ rules:
     - after: true
       before: false
   symbol-description: error
-  template-curly-spacing: error
+  template-curly-spacing:
+    - error
+    - never
   template-tag-spacing:
     - error
     - never

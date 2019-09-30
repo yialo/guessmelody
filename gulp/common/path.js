@@ -27,8 +27,8 @@ module.exports = {
     outputName: 'bundle',
   },
   styles: {
-    all: `./source/styles/**/*.css`,
-    main: `./source/styles/app.css`,
+    all: `./source/css/**/*.css`,
+    main: `./source/css/app.css`,
   },
   test: `./source/js/**/*.test.js`,
 };
