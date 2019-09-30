@@ -114,8 +114,8 @@ rules:
         ObjectPattern: false
         VariableDeclaration: false
   complexity:
-    - 'off'
-    - 11
+    - error
+    - max: 10
   computed-property-spacing:
     - error
     - never
