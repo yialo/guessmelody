@@ -119,7 +119,7 @@ rules:
   computed-property-spacing:
     - error
     - never
-  consistent-return: error
+  consistent-return: 'off'
   consistent-this: 'off'
   constructor-super: error
   curly:
