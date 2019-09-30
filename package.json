@@ -57,7 +57,7 @@
   },
   "scripts": {
     "build": "gulp build",
-    "eslint": "eslint ./*.js \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
+    "eslint": "eslint \"./*.js\" \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "lint": "npm run stylelint && npm run eslint",
     "release": "set NODE_ENV=production&&gulp",
