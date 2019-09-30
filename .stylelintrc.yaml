@@ -10,6 +10,8 @@ rules:
         - after-comment
       ignoreAtRules:
         - content
+        - custom-media
+        - custom-selector
         - import
         - include
         - mixin
@@ -48,7 +50,7 @@ rules:
   declaration-block-trailing-semicolon: always
   declaration-colon-space-after: always-single-line
   declaration-colon-space-before: never
-  declaration-no-important: true
+  declaration-no-important: null
   font-family-name-quotes: always-unless-keyword
   font-family-no-duplicate-names: true
   font-family-no-missing-generic-family-keyword: true
