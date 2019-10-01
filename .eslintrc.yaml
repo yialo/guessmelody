@@ -813,13 +813,9 @@ rules:
     - accessorPairPositioning: getThenSet
       order:
         - '[properties]'
+        - 'constructor'
         - '[arrow-function-properties]'
-        - constructor
-        - '[accessor-pairs]'
-        - '[getters]'
-        - '[setters]'
-        - '[methods]'
-        - '[async-methods]'
+        - '[everything-else]'
         - '[static-properties]'
         - '[static-methods]'
       stopAfterFirstProblem: true
