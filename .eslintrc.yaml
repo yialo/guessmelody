@@ -6,6 +6,8 @@ overrides:
       mocha: true
     files:
       - ./source/js/**/*.test.js
+    rules:
+      import/no-extraneous-dependencies: 'off'
   - env:
       node: true
     files:
@@ -20,6 +22,7 @@ overrides:
       global-require: 'off'
       handle-callback-err: 'off'
       import/no-dynamic-require: 'off'
+      import/no-extraneous-dependencies: 'off'
       no-buffer-constructor: error
       no-mixed-requires: 'off'
       no-new-require: error
@@ -208,29 +211,9 @@ rules:
   import/no-dynamic-require: error
   import/no-extraneous-dependencies:
     - error
-    - devDependencies:
-        - test/**
-        - tests/**
-        - spec/**
-        - '**/__tests__/**'
-        - '**/__mocks__/**'
-        - 'test.{js,jsx}'
-        - 'test-*.{js,jsx}'
-        - '**/*{.,_}{test,spec}.{js,jsx}'
-        - '**/jest.config.js'
-        - '**/jest.setup.js'
-        - '**/vue.config.js'
-        - '**/webpack.config.js'
-        - '**/webpack.config.*.js'
-        - '**/rollup.config.js'
-        - '**/rollup.config.*.js'
-        - '**/gulpfile.js'
-        - '**/gulpfile.*.js'
-        - '**/Gruntfile{,.js}'
-        - '**/postcss.config.js'
-        - '**/protractor.conf.js'
-        - '**/protractor.conf.*.js'
+    - devDependencies: false
       optionalDependencies: false
+      peerDependencies: false
   import/no-internal-modules:
     - 'off'
     - allow: []

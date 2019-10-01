@@ -14,7 +14,10 @@ global.$ = {
   path: require('./gulp/common/path.js'),
   pl: require('gulp-load-plugins')(),
   rp: {
+    babel: require('rollup-plugin-babel'),
     commonjs: require('rollup-plugin-commonjs'),
+    resolve: require('rollup-plugin-node-resolve'),
+    terser: require('rollup-plugin-terser').terser,
   },
   server: require('browser-sync').create(),
   tasks: require('./gulp/common/tasks.js'),
