@@ -319,7 +319,7 @@ rules:
     - always
     - exceptAfterSingleLine: true
   max-classes-per-file:
-    - 'off'
+    - error
     - 1
   max-depth:
     - 'off'
