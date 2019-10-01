@@ -39,6 +39,7 @@ parserOptions:
   ecmaVersion: 2018
   sourceType: module
 plugins:
+  - babel
   - import
   - sort-class-members
 rules:
@@ -67,6 +68,7 @@ rules:
     - error
     - after: true
       before: true
+  babel/semi: error
   block-scoped-var: error
   block-spacing:
     - error
