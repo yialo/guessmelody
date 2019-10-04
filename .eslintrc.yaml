@@ -327,7 +327,7 @@ rules:
   max-len:
     - error
     - code: 100
-      ignoreComments: false
+      ignoreComments: true
       ignoreRegExpLiterals: true
       ignoreStrings: true
       ignoreTemplateLiterals: true
@@ -395,7 +395,7 @@ rules:
   no-constant-condition: warn
   no-continue: error
   no-control-regex: error
-  no-debugger: error
+  no-debugger: warn
   no-delete-var: error
   no-div-regex: 'off'
   no-dupe-args: error
@@ -784,7 +784,7 @@ rules:
   prefer-template: error
   quote-props:
     - error
-    - consistent-as-needed
+    - consistent
   quotes:
     - error
     - single
