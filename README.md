@@ -6,18 +6,30 @@
 
     npm install
 
-## Compile and hot-reload for development
+## Compile and run hot-reload for development
 
     npm start
 
-## Run Mocha tests
+## Compile with minification and run hot-reload
 
-    npm run test
+    npm run release
 
-## Lint CSS and JS code
+## Lint styles
+
+    npm run stylelint
+
+## Lint scripts
+
+    npm run eslint
+
+## Lint styles & scripts
 
     npm run lint
 
 ## Minimize images
 
     npm run imagemin
+
+## Run Mocha tests
+
+    npm test
