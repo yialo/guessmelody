@@ -1,51 +1,33 @@
 import ScreenView from '../_common/_screen-view';
-import HeaderView from './game-header-view';
-import BodyView from '../question/question-body-view';
+import GameHeaderView from './game-header-view';
+// import QuestionView from '../question/question-body-view';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 
-export default class QuestionView extends ScreenView {
-  constructor(model, handler) {
-    super();
+export default class GameView extends ScreenView {
+  _headerView = null;
+  _questionView = null;
 
-    this._options = model.options;
-    this._state = model.state;
-    this._question = model.currentQuestion;
+  constructor(model) {
+    super('game');
 
-    this._header = new HeaderView(this._state);
-    this._header.onReset = handler.onReset;
-
-    this._body = new BodyView(this._question);
-    this._body.onAnswer = (isCorrect) => {
-      if (isCorrect) {
-        if (this._state.currentQuestionIndex === this._options.QUESTIONS - 1) handler.onWin();
-        else {
-          this._state.currentQuestionIndex += 1;
-          handler.onNext(this._update.bind(this));
-        }
-      } else {
-        this._state.mistakes += 1;
-        this._header.updateMistakesView();
-      }
-
-      if (this._state.mistakes === this._options.ATTEMPTS) handler.onFail();
-    };
+    this._headerView = new GameHeaderView();
+    // this._questionView = new QuestionView();
   }
 
-  get template() {
-    this._template = `<section class="game"></section>`;
-    return this._template;
+  set onReset(callback) {
+    this._headerView.onReset = callback;
   }
 
-  render() {
-    this._update();
-    this.$.append(this._header.prepared, this._body.$);
-    this._set();
-  }
+  get _contentTemplate() {
+    return (
 
-  updateHeader() {
-    this._header.updateTimeView();
+      `${this._headerView.template}`
+
+    // `${this._headerView.template}
+    // ${this._questionView.template}`
+    );
   }
 
   _showConsoleTip() {
@@ -62,7 +44,7 @@ export default class QuestionView extends ScreenView {
     if (newQuestion) this._question = newQuestion;
 
     this._updateBemModifier();
-    this._body.update(newQuestion);
+    this._questionView.update(newQuestion);
 
     if (this._options.IS_DEBUG_ACTIVE) this._showConsoleTip();
   }
@@ -74,4 +56,14 @@ export default class QuestionView extends ScreenView {
     if (classList.length > 1) BEM_MODIFIERS.forEach((it) => classList.toggle(it));
     else classList.add(newModifier);
   }
+
+  _addHandlers($container) {
+    this._headerView.render($container);
+  }
+
+  _removeHandlers() {
+    this._headerView.unrender();
+  }
+
+  _bindHandlers() {}
 }

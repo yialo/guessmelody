@@ -3,14 +3,11 @@ import View from './_view';
 export default class ScreenView extends View {
   _kind = String();
   _$ = null;
-  _$container = document.querySelector('.main');
 
   constructor(kind) {
     super();
 
     this._kind = kind;
-
-    this._bindHandlers();
   }
 
   get _contentTemplate() {
@@ -27,8 +24,8 @@ export default class ScreenView extends View {
 
   render() {
     this._$ = ScreenView.createEl(this._template);
-    this._addHandlers();
-    this._$container.appendChild(this._$);
+    this._addHandlers(this._$);
+    ScreenView._$container.appendChild(this._$);
   }
 
   unrender() {
@@ -37,15 +34,5 @@ export default class ScreenView extends View {
     this._$ = null;
   }
 
-  _addHandlers() {
-    throw new Error('Method need to be redefined for descendants');
-  }
-
-  _removeHandlers() {
-    throw new Error('Method need to be redefined for descendants');
-  }
-
-  _bindHandlers() {
-    throw new Error('Method need to be redefined for descendants');
-  }
+  static _$container = document.querySelector('.main');
 }

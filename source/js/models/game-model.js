@@ -12,7 +12,7 @@ Object.freeze(INITIAL_STATE);
 
 export default class GameModel {
   constructor() {
-    this._options = GameOptions;
+    this._options = Object.assign({}, GameOptions);
     this._state = {};
     this._answers = [];
 

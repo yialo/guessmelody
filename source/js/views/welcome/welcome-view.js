@@ -31,7 +31,7 @@ export default class WelcomeView extends ScreenView {
   }
 
   _onButtonClick() {
-    if (typeof this._onStart === 'function') this._onStart();
+    this._onStart();
   }
 
   _addButtonHandler() {

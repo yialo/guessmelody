@@ -8,7 +8,8 @@ export default class Router {
   _result;
 
   static init() {
-    this._showWelcome();
+    // this._showWelcome();
+    this._showGame();
   }
 
   static _showWelcome() {
@@ -24,6 +25,13 @@ export default class Router {
 
   static _showGame() {
     this._game = new GameScreen();
+
+    this._game.onReset = () => {
+      this._game.hide();
+      this._showWelcome();
+    };
+
+    this._game.show();
   }
 
   static _showResult() {
