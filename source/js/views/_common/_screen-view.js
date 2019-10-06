@@ -1,14 +1,14 @@
 import View from './_view';
 
 export default class ScreenView extends View {
-  _name = String();
+  _kind = String();
   _$ = null;
   _$container = document.querySelector('.main');
 
-  constructor(name) {
+  constructor(kind) {
     super();
 
-    this._name = name;
+    this._kind = kind;
 
     this._bindHandlers();
   }
@@ -19,7 +19,7 @@ export default class ScreenView extends View {
 
   get _template() {
     return (
-      `<section class="${this._name}">
+      `<section class="${this._kind}">
         ${this._contentTemplate}
       </section>`
     );

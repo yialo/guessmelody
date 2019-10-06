@@ -6,6 +6,9 @@ export default class WelcomeScreen extends Screen {
     super();
 
     this._view = new WelcomeView();
-    this._view.render();
+  }
+
+  set onStart(callback) {
+    this._view.onStart = callback;
   }
 }

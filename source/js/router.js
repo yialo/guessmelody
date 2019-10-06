@@ -7,15 +7,26 @@ export default class Router {
   _game;
   _result;
 
-  static showWelcome() {
-    this._welcome = new WelcomeScreen();
+  static init() {
+    this._showWelcome();
   }
 
-  static showGame() {
+  static _showWelcome() {
+    this._welcome = new WelcomeScreen();
+
+    this._welcome.onStart = () => {
+      this._welcome.hide();
+      this._showGame();
+    };
+
+    this._welcome.show();
+  }
+
+  static _showGame() {
     this._game = new GameScreen();
   }
 
-  static showResult() {
+  static _showResult() {
     this._result = new ResultScreen();
   }
 }

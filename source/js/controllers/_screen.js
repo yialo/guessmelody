@@ -6,10 +6,10 @@ export default class Screen {
   }
 
   show() {
-    throw new Error('Method need to be redefined for descendants');
+    this._view.render();
   }
 
   hide() {
-    throw new Error('Method need to be redefined for descendants');
+    this._view.unrender();
   }
 }
