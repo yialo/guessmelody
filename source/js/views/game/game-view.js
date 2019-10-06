@@ -55,6 +55,7 @@ export default class GameView extends ScreenView {
 
     const QuestionView = questionTypeToClass[this._type];
     this._questionView = new QuestionView(this._question);
+    this._questionView.render(this._$question);
 
     if (this._options.IS_DEBUG_ACTIVE) {
       this._showConsoleTip();

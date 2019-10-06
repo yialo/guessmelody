@@ -2,12 +2,14 @@ import QuestionView from './_question-view';
 import TrackView from '../_common/track-view';
 
 export default class QuestonGenreView extends QuestionView {
+  _FormItemView = TrackView;
   _correctAnswers = [];
   _targetGenre = String();
 
   constructor(question) {
     super();
 
+    this._formList = question.trackList;
     this._correctAnswers = question.correctAnswers;
     this._targetGenre = question.targetGenre;
     this.onCheckboxChange = this._toggleClickabilityState;
@@ -24,7 +26,7 @@ export default class QuestonGenreView extends QuestionView {
   get _contentTemplate() {
     return (
       `<form class="game__tracks">
-        ${this.formMarkup}
+        ${this._formTemplate}
         <button class="game__submit button" type="submit">Ответить</button>
       </form>`
     );

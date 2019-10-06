@@ -1,18 +1,13 @@
 import View from '../_common/_view';
-import ArtistView from '../_common/artist-view';
-import TrackView from '../_common/track-view';
-
-const formItemMap = {
-  'genre': TrackView,
-  'artist': ArtistView,
-};
 
 export default class QuestionView extends View {
+  _question;
+  _$container;
+
   constructor(question) {
     super();
 
     this._question = question;
-    this._FormItemView = formItemMap[this._question.type];
   }
 
   get _caption() {
@@ -23,9 +18,9 @@ export default class QuestionView extends View {
     throw new Error('Method need to be redefined for descendants');
   }
 
-  get _formMarkup() {
+  get _formTemplate() {
     return (
-      this._trackList
+      this._formList
         .map((it, i) => {
           const formItem = new this._FormItemView(it, i + 1);
           return formItem.template;
@@ -41,20 +36,36 @@ export default class QuestionView extends View {
     );
   }
 
+  render($container) {
+    if (!this._$container) {
+      this._$container = $container;
+    }
+
+    this._$ = QuestionView.createEl(this._template);
+    this._addHandlers();
+    this._$container.appendChild(this._$);
+  }
+
+  unrender() {
+    this._$.remove();
+    this._removeHandlers();
+    this._$ = null;
+  }
+
   _addHandlers() {
     this._addAudioHandlers();
     this._addAnswerHandler();
   }
 
   _addAnswerHandler() {
-    throw new Error(`Need to redefine method for ${this}`);
+    throw new Error('Method need to be redefined for descendants');
   }
 
   _addAudioHandlers() {
-    throw new Error(`Need to redefine method for ${this}`);
+    throw new Error('Method need to be redefined for descendants');
   }
 
   _checkAnswer() {
-    throw new Error(`Need to redefine method for ${this}`);
+    throw new Error('Method need to be redefined for descendants');
   }
 }

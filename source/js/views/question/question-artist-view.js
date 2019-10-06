@@ -3,13 +3,20 @@ import QuestionView from './_question-view';
 import ArtistView from '../_common/artist-view';
 
 export default class QuestonArtistView extends QuestionView {
+  _FormItemView = ArtistView;
   _targetTrack = null;
   _correctAnswer = null;
   _audio = null;
 
+  _$radioButtons = [];
+  _$audioBlock = null;
+  _$button = null;
+  _$audio = null;
+
   constructor(question) {
     super();
 
+    this._formList = question.artistList;
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
     this._audio = new AudioView(this._targetTrack, true);
@@ -26,7 +33,7 @@ export default class QuestonArtistView extends QuestionView {
         ${this._audio.template}
       </div>
       <form class="game__artist">
-        ${this.formMarkup}
+        ${this._formTemplate}
       </form>`
     );
   }
