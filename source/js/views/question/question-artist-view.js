@@ -1,24 +1,26 @@
 import AudioView from '../_common/audio-view';
 import QuestionView from './_question-view';
-
-const CAPTION = 'Кто исполняет эту песню?';
+import ArtistView from '../_common/artist-view';
 
 export default class QuestonArtistView extends QuestionView {
-  constructor(question, onAnswer, $container) {
-    super(question, onAnswer, $container);
+  _targetTrack = null;
+  _correctAnswer = null;
+  _audio = null;
+
+  constructor(question) {
+    super();
 
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
     this._audio = new AudioView(this._targetTrack, true);
   }
 
-  get caption() {
-    this._caption = CAPTION;
-    return this._caption;
+  get _caption() {
+    return 'Кто исполняет эту песню?';
   }
 
-  get template() {
-    this._template = (
+  get _contentTemplate() {
+    return (
       `<div class="game__track">
         <button class="track__button track__button--play" type="button"></button>
         ${this._audio.template}
@@ -27,7 +29,6 @@ export default class QuestonArtistView extends QuestionView {
         ${this.formMarkup}
       </form>`
     );
-    return this._template;
   }
 
   _addAnswerHandler() {

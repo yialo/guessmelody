@@ -1,31 +1,33 @@
 import QuestionView from './_question-view';
+import TrackView from '../_common/track-view';
 
 export default class QuestonGenreView extends QuestionView {
-  constructor(question, onAnswer, $container) {
-    super(question, onAnswer, $container);
+  _correctAnswers = [];
+  _targetGenre = String();
+
+  constructor(question) {
+    super();
 
     this._correctAnswers = question.correctAnswers;
     this._targetGenre = question.targetGenre;
     this.onCheckboxChange = this._toggleClickabilityState;
   }
 
-  get caption() {
-    this._caption = `Выберите ${this._targetGenre} треки`;
-    return this._caption;
-  }
-
   set onCheckboxChange(callback) {
-    this._onCheckboxChange = callback.bind(this);
+    this._onCheckboxChange = callback;
   }
 
-  get template() {
-    this._template = (
+  get _caption() {
+    return `Выберите ${this._targetGenre} треки`;
+  }
+
+  get _contentTemplate() {
+    return (
       `<form class="game__tracks">
         ${this.formMarkup}
         <button class="game__submit button" type="submit">Ответить</button>
       </form>`
     );
-    return this._template;
   }
 
   _addAnswerHandler() {
@@ -106,5 +108,9 @@ export default class QuestonGenreView extends QuestionView {
   _toggleClickabilityState() {
     if (this._checkSelectedCheckboxPresence()) this._setClickabilityState(true);
     else this._setClickabilityState(false);
+  }
+
+  _bindHandlers() {
+    this._onCheckboxChange = this._onCheckboxChange.bind(this);
   }
 }

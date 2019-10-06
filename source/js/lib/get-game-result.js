@@ -1,7 +1,10 @@
 import GameOptions from '../models/game-options';
 
 export default (playerResult, otherResults) => {
-  if (!playerResult.timeRemain) return 'Время вышло! Вы не успели отгадать все мелодии.';
+  if (!playerResult.timeRemain) {
+    return 'Время вышло! Вы не успели отгадать все мелодии.';
+  }
+
   if (playerResult.mistakesDone === GameOptions.ATTEMPTS) {
     return 'У вас закончились все попытки. Ничего, повезёт в следующий раз!';
   }

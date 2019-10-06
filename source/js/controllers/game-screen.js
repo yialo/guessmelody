@@ -17,7 +17,9 @@ export default class GameScreen extends Screen {
 
     this._model = new GameModel();
 
-    this._view = new GameView(this._model);
+    this._view = new GameView(this._model.currentQuestion);
+    this._view.render();
+    this._view.update();
   }
 
   set onReset(callback) {

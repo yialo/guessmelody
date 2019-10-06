@@ -3,37 +3,45 @@ import ArtistView from '../_common/artist-view';
 import TrackView from '../_common/track-view';
 
 const formItemMap = {
-  genre: TrackView,
-  artist: ArtistView,
+  'genre': TrackView,
+  'artist': ArtistView,
 };
 
 export default class QuestionView extends View {
-  constructor(question, onAnswer, $container) {
+  constructor(question) {
     super();
 
-    this._quesiton = question;
-    this._trackList = question.trackList;
-    this._FormItemClass = formItemMap[question.type];
-    this._onAnswer = onAnswer;
-    this._$container = $container;
+    this._question = question;
+    this._FormItemView = formItemMap[this._question.type];
   }
 
-  get caption() {
-    throw new Error(`Need to redefine method for ${this}`);
+  get _caption() {
+    throw new Error('Method need to be redefined for descendants');
   }
 
-  get formMarkup() {
-    this._formMarkup = this._trackList
-      .map((it, i) => {
-        const FormItem = this._FormItemClass;
-        const formItem = new FormItem(it, i + 1);
-        return formItem.template;
-      })
-      .join('');
-    return this._formMarkup;
+  get _contentTemplate() {
+    throw new Error('Method need to be redefined for descendants');
   }
 
-  bind() {
+  get _formMarkup() {
+    return (
+      this._trackList
+        .map((it, i) => {
+          const formItem = new this._FormItemView(it, i + 1);
+          return formItem.template;
+        })
+        .join('')
+    );
+  }
+
+  get _template() {
+    return (
+      `<h2 class="game__title">${this._caption}</h2>
+      ${this._contentTemplate}`
+    );
+  }
+
+  _addHandlers() {
     this._addAudioHandlers();
     this._addAnswerHandler();
   }

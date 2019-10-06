@@ -15,14 +15,20 @@ export default class GameView extends ScreenView {
   _headerView = null;
   _questionView = null;
 
-  constructor(model) {
+  constructor(question) {
     super('game');
+
+    this._question = question;
 
     this._headerView = new GameHeaderView();
   }
 
   set onReset(callback) {
     this._headerView.onReset = callback;
+  }
+
+  get _type() {
+    return this._question.type;
   }
 
   get _contentTemplate() {
@@ -44,33 +50,38 @@ export default class GameView extends ScreenView {
     this._destroy();
   }
 
+  update() {
+    this._updateBemModifier();
+
+    const QuestionView = questionTypeToClass[this._type];
+    this._questionView = new QuestionView(this._question);
+
+    if (this._options.IS_DEBUG_ACTIVE) {
+      this._showConsoleTip();
+    }
+  }
+
   _showConsoleTip() {
     console.group('Вопрос');
     console.dir(this._question);
-    const propName = (this._question.type === 'genre')
+    const propName = (this._type === 'genre')
       ? 'correctAnswers'
       : 'correctAnswer';
     console.info(`Правильный ответ: ${this._question[propName]}`);
     console.groupEnd();
   }
 
-  _update(newQuestion) {
-    if (newQuestion) this._question = newQuestion;
-
-    this._updateBemModifier();
-    this._questionView.update(newQuestion);
-
-    if (this._options.IS_DEBUG_ACTIVE) this._showConsoleTip();
-  }
-
   _updateBemModifier() {
-    const newModifier = `game--${this._question.type}`;
-    const { classList } = this.$;
+    const newModifier = `game--${this._type}`;
+    const { classList } = this._$;
 
-    if (classList.length > 1) BEM_MODIFIERS.forEach((it) => {
-      classList.toggle(it);
-    });
-    else classList.add(newModifier);
+    if (classList.length > 1) {
+      BEM_MODIFIERS.forEach((it) => {
+        classList.toggle(it);
+      });
+    } else {
+      classList.add(newModifier);
+    }
   }
 
   _addHandlers($container) {
