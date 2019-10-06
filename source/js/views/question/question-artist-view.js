@@ -1,9 +1,9 @@
 import AudioView from '../_common/audio-view';
-import TypeView from './question-type-view';
+import QuestionView from './_question-view';
 
 const CAPTION = 'Кто исполняет эту песню?';
 
-export default class QuestonArtistView extends TypeView {
+export default class QuestonArtistView extends QuestionView {
   constructor(question, onAnswer, $container) {
     super(question, onAnswer, $container);
 

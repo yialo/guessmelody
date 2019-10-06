@@ -14,6 +14,18 @@ export default class WelcomeView extends ScreenView {
     this._onStart = callback;
   }
 
+  render() {
+    this._create();
+    this._addHandlers(this._$);
+    this._append();
+  }
+
+  unrender() {
+    this._remove();
+    this._removeHandlers();
+    this._destroy();
+  }
+
   get _contentTemplate() {
     return (
       `<div class="welcome__logo">

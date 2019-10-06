@@ -1,6 +1,6 @@
-import TypeView from './question-type-view';
+import QuestionView from './_question-view';
 
-export default class QuestonGenreView extends TypeView {
+export default class QuestonGenreView extends QuestionView {
   constructor(question, onAnswer, $container) {
     super(question, onAnswer, $container);
 

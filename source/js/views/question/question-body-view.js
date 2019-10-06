@@ -1,11 +1,4 @@
 import View from '../_common/_view';
-import QuestionGenreView from './question-genre-view';
-import QuestionArtistView from './question-artist-view';
-
-const questionMap = {
-  genre: QuestionGenreView,
-  artist: QuestionArtistView,
-};
 
 export default class QuestionBodyView extends View {
   constructor(question) {

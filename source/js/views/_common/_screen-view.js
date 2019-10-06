@@ -22,16 +22,20 @@ export default class ScreenView extends View {
     );
   }
 
-  render() {
+  _create() {
     this._$ = ScreenView.createEl(this._template);
-    this._addHandlers(this._$);
+  }
+
+  _destroy() {
+    this._$ = null;
+  }
+
+  _append() {
     ScreenView._$container.appendChild(this._$);
   }
 
-  unrender() {
+  _remove() {
     this._$.remove();
-    this._removeHandlers();
-    this._$ = null;
   }
 
   static _$container = document.querySelector('.main');

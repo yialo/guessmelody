@@ -16,8 +16,8 @@ export default class GameHeaderView extends View {
     this._state = state;
 
     this._logoView = new GameHeaderLogoView();
-    // this._mistakesView = new GameHeaderMistakesView();
-    // this._timerView = new GameHeaderTimerView();
+    this._timerView = new GameHeaderTimerView();
+    this._mistakesView = new GameHeaderMistakesView();
   }
 
   set onReset(callback) {
@@ -28,13 +28,9 @@ export default class GameHeaderView extends View {
     this._template = (
       `<header class="game__header">
         ${this._logoView.template}
+        ${this._timerView.template}
+        ${this._mistakesView.template}
       </header>`
-
-      // `<header class="game__header">
-      //   ${this._logo.template}
-      //   ${this._timer.template}
-      //   ${this._mistakes.template}
-      // </header>`
     );
 
     return this._template;

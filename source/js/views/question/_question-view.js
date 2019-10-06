@@ -7,7 +7,7 @@ const formItemMap = {
   artist: ArtistView,
 };
 
-export default class QuestionTypeView extends View {
+export default class QuestionView extends View {
   constructor(question, onAnswer, $container) {
     super();
 

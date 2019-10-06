@@ -34,10 +34,16 @@ export default class GameHeaderTimerView extends View {
     return this._$seconds;
   }
 
+  render() {}
+
+  unrender() {}
+
   update() {
     this._$minutes.textContent = GameHeaderTimerView.addZeroAtLeft(this._minutes);
     this._$seconds.textContent = GameHeaderTimerView.addZeroAtLeft(this._seconds);
   }
+
+  _bindHandlers() {}
 
   static addZeroAtLeft(num) {
     return String(num).padStart(2, '0');

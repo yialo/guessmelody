@@ -1,9 +1,15 @@
 import ScreenView from '../_common/_screen-view';
 import GameHeaderView from './game-header-view';
-// import QuestionView from '../question/question-body-view';
+import QuestionArtistView from '../question/question-artist-view';
+import QuestionGenreView from '../question/question-genre-view';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
+
+const questionTypeToClass = {
+  'genre': QuestionGenreView,
+  'artist': QuestionArtistView,
+};
 
 export default class GameView extends ScreenView {
   _headerView = null;
@@ -13,7 +19,6 @@ export default class GameView extends ScreenView {
     super('game');
 
     this._headerView = new GameHeaderView();
-    // this._questionView = new QuestionView();
   }
 
   set onReset(callback) {
@@ -22,12 +27,21 @@ export default class GameView extends ScreenView {
 
   get _contentTemplate() {
     return (
-
-      `${this._headerView.template}`
-
-    // `${this._headerView.template}
-    // ${this._questionView.template}`
+      `${this._headerView.template}
+      <div class="game__screen"></div>`
     );
+  }
+
+  render() {
+    this._create();
+    this._$question = this._$.querySelector('.game__screen');
+    this._append();
+  }
+
+  unrender() {
+    this._remove();
+    this._$question = null;
+    this._destroy();
   }
 
   _showConsoleTip() {
@@ -53,7 +67,9 @@ export default class GameView extends ScreenView {
     const newModifier = `game--${this._question.type}`;
     const { classList } = this.$;
 
-    if (classList.length > 1) BEM_MODIFIERS.forEach((it) => classList.toggle(it));
+    if (classList.length > 1) BEM_MODIFIERS.forEach((it) => {
+      classList.toggle(it);
+    });
     else classList.add(newModifier);
   }
 

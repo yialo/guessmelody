@@ -28,4 +28,10 @@ export default class GameHeaderMistakesView extends View {
   update() {
     this._$mistakes.innerHTML = this.mistakesTemplate;
   }
+
+  render() {}
+
+  unrender() {}
+
+  _bindHandlers() {}
 }
