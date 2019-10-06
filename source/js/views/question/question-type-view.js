@@ -1,6 +1,6 @@
-import View from './view';
-import ArtistView from './artist-view';
-import TrackView from './track-view';
+import View from '../_common/_view';
+import ArtistView from '../_common/artist-view';
+import TrackView from '../_common/track-view';
 
 const formItemMap = {
   genre: TrackView,

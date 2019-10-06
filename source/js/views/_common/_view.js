@@ -5,28 +5,12 @@ export default class View {
     }
   }
 
-  get template() {
+  render() {
     throw new Error('Method need to be redefined for descendants');
   }
 
-  get $() {
-    if (!this._$) {
-      this._createEl();
-    }
-
-    return this._$;
-  }
-
-  _bind() {
-    console.log(this);
-  }
-
-  _unbind() {
-    console.log(this);
-  }
-
-  _createEl() {
-    this._$ = View.createEl(this.template);
+  unrender() {
+    throw new Error('Method need to be redefined for descendants');
   }
 
   static createEl(template) {

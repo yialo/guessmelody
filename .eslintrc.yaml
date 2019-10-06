@@ -813,8 +813,8 @@ rules:
     - accessorPairPositioning: getThenSet
       order:
         - '[properties]'
-        - 'constructor'
         - '[arrow-function-properties]'
+        - 'constructor'
         - '[everything-else]'
         - '[static-properties]'
         - '[static-methods]'

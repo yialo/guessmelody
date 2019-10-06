@@ -1,3 +1,3 @@
 import Router from './router';
 
-Router.startGame();
+Router.showWelcome();

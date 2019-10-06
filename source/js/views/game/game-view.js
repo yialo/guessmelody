@@ -1,6 +1,6 @@
-import ScreenView from './screen-view';
-import HeaderView from './question-header-view';
-import BodyView from './question-body-view';
+import ScreenView from '../_common/_screen-view';
+import HeaderView from './game-header-view';
+import BodyView from '../question/question-body-view';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);

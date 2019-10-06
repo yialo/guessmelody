@@ -1,4 +1,4 @@
-import View from './view';
+import View from '../_common/_view';
 import QuestionGenreView from './question-genre-view';
 import QuestionArtistView from './question-artist-view';
 

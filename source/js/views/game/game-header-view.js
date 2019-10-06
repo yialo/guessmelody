@@ -1,4 +1,4 @@
-import View from './view';
+import View from '../_common/_view';
 
 const INITIAL_TEMPLATE = (
   `<header class="game__header">

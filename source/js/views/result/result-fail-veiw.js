@@ -1,4 +1,4 @@
-import ResultView from './result-view';
+import ResultView from './_result-view';
 
 export default class ResultFailView extends ResultView {
   get content() {

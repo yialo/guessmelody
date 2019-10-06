@@ -1,4 +1,4 @@
-import AudioView from './audio-view';
+import AudioView from '../_common/audio-view';
 import TypeView from './question-type-view';
 
 const CAPTION = 'Кто исполняет эту песню?';

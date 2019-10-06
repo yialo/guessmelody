@@ -1,4 +1,4 @@
-import View from './view';
+import View from './_view';
 
 export default class AudioView extends View {
   constructor(track, isAutoplay = false) {

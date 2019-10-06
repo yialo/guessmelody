@@ -1,4 +1,4 @@
-import View from './view';
+import View from './_view';
 import AudioView from './audio-view';
 
 export default class TrackView extends View {

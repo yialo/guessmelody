@@ -1,4 +1,4 @@
-import View from './view';
+import View from './_view';
 
 export default class ArtistView extends View {
   constructor(track, index) {

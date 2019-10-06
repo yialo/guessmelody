@@ -1,4 +1,4 @@
-import ScreenView from './screen-view';
+import ScreenView from '../_common/_screen-view';
 
 export default class ResultView extends ScreenView {
   get caption() {

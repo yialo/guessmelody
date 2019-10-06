@@ -1,26 +1,21 @@
-import GameController from './controllers/game-controller';
-
-// TODO: for next MVC improvement
+import GameScreen from './controllers/game-screen';
+import ResultScreen from './controllers/result-screen';
+import WelcomeScreen from './controllers/welcome-screen';
 
 export default class Router {
-  static startGame() {
-    const game = new GameController();
-    game.start();
+  _welcome;
+  _game;
+  _result;
+
+  static showWelcome() {
+    this._welcome = new WelcomeScreen();
   }
 
-  // static showWelcome() {
-  //   const welcome = new WelcomeScreen(new WelcomeModel());
-  //   changeScreen(welcome);
-  // }
+  static showGame() {
+    this._game = new GameScreen();
+  }
 
-  // static showGame(state) {
-  //   const game = new GameScreen(new QuestionModel(state));
-  //   changeScreen(game);
-  //   game.start();
-  // }
-
-  // static showResult(model) {
-  //   const result = new ResultScreen(model);
-  //   changeScreen(result);
-  // }
+  static showResult() {
+    this._result = new ResultScreen();
+  }
 }
