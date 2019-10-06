@@ -1,12 +1,13 @@
 import GameController from './controllers/game-controller';
 
+// TODO: for next MVC improvement
+
 export default class Router {
   static startGame() {
     const game = new GameController();
     game.start();
   }
 
-  // TODO: for next MVC improvement
   // static showWelcome() {
   //   const welcome = new WelcomeScreen(new WelcomeModel());
   //   changeScreen(welcome);

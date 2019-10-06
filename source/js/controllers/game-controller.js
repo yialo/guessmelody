@@ -1,8 +1,8 @@
 import GameModel from '../models/game-model';
-import WelcomeView from '../views/welcome-view';
-import QuestionView from '../views/question-view';
-import ResultFailTriesView from '../views/result-fail-tries-view';
-import ResultSuccessView from '../views/result-success-view';
+import WelcomeView from '../views/welcome/welcome-view';
+import QuestionView from '../views/question/question-view';
+import ResultFailTriesView from '../views/result/result-fail-tries-view';
+import ResultSuccessView from '../views/result/result-success-view';
 
 const ONE_SECOND = 1000;
 

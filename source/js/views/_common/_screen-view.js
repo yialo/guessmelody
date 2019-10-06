@@ -1,4 +1,4 @@
-import View from './view';
+import View from './_view';
 
 const $main = document.querySelector('.main');
 const changeScreen = ($screen) => {

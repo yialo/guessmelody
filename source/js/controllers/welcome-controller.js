@@ -1,6 +1,5 @@
-// import Router from '../router';
 import WelcomeModel from '../models/welcome-model';
-import WelcomeView from '../views/welcome-view';
+import WelcomeView from '../views/welcome/welcome-view';
 
 export default class WelcomeController {
   constructor() {
@@ -9,7 +8,6 @@ export default class WelcomeController {
 
     this._model.onHide = () => {
       this._view.unrender();
-      // Router.showGame();
     };
     this._view.onStart = this._view.hide();
   }

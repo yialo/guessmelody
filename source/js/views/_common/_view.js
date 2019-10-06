@@ -1,10 +1,12 @@
 export default class View {
   constructor() {
-    if (new.target === View) throw new Error(`Only one's descendants can be invoked`);
+    if (new.target === View) {
+      throw new Error('Instantiation of this class is restricted');
+    }
   }
 
   get template() {
-    throw new Error(`Need to redefine method for ${this}`);
+    throw new Error('Method need to be redefined for descendants');
   }
 
   get $() {
