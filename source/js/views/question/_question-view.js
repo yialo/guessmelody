@@ -4,10 +4,18 @@ export default class QuestionView extends View {
   _question;
   _$container;
 
+  _onAnswer = () => {
+    throw new Error('Callback need to be redefined for every instance');
+  };
+
   constructor(question) {
     super();
 
     this._question = question;
+  }
+
+  set onAnswer(callback) {
+    this._onAnswer = callback;
   }
 
   get _caption() {
@@ -16,17 +24,6 @@ export default class QuestionView extends View {
 
   get _contentTemplate() {
     throw new Error('Method need to be redefined for descendants');
-  }
-
-  get _formTemplate() {
-    return (
-      this._formList
-        .map((it, i) => {
-          const formItem = new this._FormItemView(it, i + 1);
-          return formItem.template;
-        })
-        .join('')
-    );
   }
 
   get _template() {
@@ -52,20 +49,15 @@ export default class QuestionView extends View {
     this._$ = null;
   }
 
-  _addHandlers() {
-    this._addAudioHandlers();
-    this._addAnswerHandler();
+  _checkAnswer() {
+    throw new Error('Method need to be redefined for descendants');
   }
 
   _addAnswerHandler() {
     throw new Error('Method need to be redefined for descendants');
   }
 
-  _addAudioHandlers() {
-    throw new Error('Method need to be redefined for descendants');
-  }
-
-  _checkAnswer() {
+  _addAudioHandler() {
     throw new Error('Method need to be redefined for descendants');
   }
 }

@@ -3,12 +3,12 @@ import QuestionView from './_question-view';
 import ArtistView from '../_common/artist-view';
 
 export default class QuestonArtistView extends QuestionView {
-  _FormItemView = ArtistView;
   _targetTrack = null;
   _correctAnswer = null;
   _audio = null;
 
-  _$radioButtons = [];
+  _artistViews = [];
+
   _$audioBlock = null;
   _$button = null;
   _$audio = null;
@@ -16,7 +16,7 @@ export default class QuestonArtistView extends QuestionView {
   constructor(question) {
     super();
 
-    this._formList = question.artistList;
+    this._artistList = question.artistList;
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
     this._audio = new AudioView(this._targetTrack, true);
@@ -38,22 +38,37 @@ export default class QuestonArtistView extends QuestionView {
     );
   }
 
-  _addAnswerHandler() {
-    this._$radioButtons = this._$container.querySelectorAll('.artist__input');
-
-    this._$radioButtons.forEach(($el) => (
-      $el.addEventListener('click', this._createClickHandler(this._question, this._onAnswer))
-    ));
+  get _formTemplate() {
+    return this._artistViews
+      .map((view) => view.template)
+      .join('');
   }
 
-  _addAudioHandlers() {
+  _createArtistViews() {
+    this._artistViews = this._artistList.map((it, i) => new ArtistView(it, i + 1));
+  }
+
+  _addAnswerHandler() {
+    this._artistViews.forEach((view) => {
+      view.onClick = () => {
+        const answerStatus = this._checkAnswer(view.artistId);
+        this._onAnswer(answerStatus);
+      };
+    });
+  }
+
+  _addAudioHandler() {
     this._$audioBlock = this._$container.querySelector('.game__track');
     this._$button = this._$audioBlock.querySelector('button');
     this._$audio = this._$audioBlock.querySelector('audio');
 
     this._$button.addEventListener('click', () => {
-      if (this._$audio.paused) this._$audio.play();
-      else this._$audio.pause();
+      if (this._$audio.paused) {
+        this._$audio.play();
+      } else {
+        this._$audio.pause();
+      }
+
       this._$button.classList.toggle(`track__button--play`);
       this._$button.classList.toggle(`track__button--pause`);
     });
@@ -63,11 +78,12 @@ export default class QuestonArtistView extends QuestionView {
     return (selectedAnswer === this._correctAnswer);
   }
 
-  _createClickHandler() {
-    return (evt) => {
-      const answer = evt.currentTarget.value;
-      const answerStatus = this._checkAnswer(answer);
-      this._onAnswer(answerStatus);
-    };
+  // TODO: дописать метод
+  _addHandlers() {
+    // this._artistViews.forEach() {
+
+    // }
   }
+
+  _removeHandlers() {}
 }

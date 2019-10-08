@@ -7,16 +7,12 @@ export default class TrackView extends View {
 
     this._track = track;
     this._number = number;
-
-    const isAudioAutoplay = (this._number === 1);
-    this._audio = new AudioView(this._track, isAudioAutoplay);
   }
 
   get template() {
-    const buttonStateModifier = (this._number === 1) ? 'play' : '';
-    this._template = (
+    return (
       `<div class="track">
-        <button class="track__button track__button--${buttonStateModifier}" type="button"></button>
+        <button class="track__button track__button--${this._stateModifier}" type="button"></button>
         <div class="track__status">
           ${this._audio.template}
         </div>
@@ -26,6 +22,17 @@ export default class TrackView extends View {
         </div>
       </div>`
     );
-    return this._template;
+  }
+
+  get _isAutoplay() {
+    return (this._number === 1);
+  }
+
+  get _stateModifier() {
+    return this._isAutoplay ? 'play' : '';
+  }
+
+  get _audio() {
+    return new AudioView(this._track, this._isAudioAutoplay);
   }
 }
