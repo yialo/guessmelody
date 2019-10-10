@@ -7,17 +7,17 @@
     "not dead"
   ],
   "dependencies": {
-    "@babel/runtime-corejs3": "7.6.2",
+    "@babel/runtime-corejs3": "7.6.3",
     "core-js": "3.2.1",
     "postcss-normalize": "8.0.1"
   },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
-    "@babel/core": "7.6.2",
+    "@babel/core": "7.6.4",
     "@babel/plugin-proposal-class-properties": "7.5.5",
     "@babel/plugin-transform-runtime": "7.6.2",
-    "@babel/preset-env": "7.6.2",
-    "@babel/types": "7.6.1",
+    "@babel/preset-env": "7.6.3",
+    "@babel/types": "7.6.3",
     "babel-eslint": "10.0.3",
     "browser-sync": "2.26.7",
     "chai": "4.2.0",
@@ -53,7 +53,7 @@
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
-    "stylelint": "11.0.0",
+    "stylelint": "11.1.1",
     "stylelint-order": "3.1.1",
     "stylelint-use-nesting": "1.2.1"
   },
