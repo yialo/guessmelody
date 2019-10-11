@@ -34,19 +34,15 @@ export default class QuestionView extends View {
   }
 
   render($container) {
-    if (!this._$container) {
-      this._$container = $container;
-    }
+    this._$container = $container;
 
-    this._$ = QuestionView.createEl(this._template);
+    this._$container.innerHTML = this._template;
     this._addHandlers();
-    this._$container.appendChild(this._$);
   }
 
   unrender() {
-    this._$.remove();
     this._removeHandlers();
-    this._$ = null;
+    this._$container.innerHTML = ``;
   }
 
   _checkAnswer() {

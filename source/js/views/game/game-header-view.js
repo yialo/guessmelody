@@ -37,9 +37,7 @@ export default class GameHeaderView extends View {
   }
 
   render($container) {
-    if (!this._$container) {
-      this._$container = $container;
-    }
+    this._$container = $container;
 
     this._logoView.render(this._$container);
   }

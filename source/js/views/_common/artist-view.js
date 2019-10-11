@@ -9,7 +9,7 @@ export default class ArtistView extends View {
   _artist = String();
   _number = Number();
 
-  _onClick = () => {
+  _onSelect = () => {
     throw new Error('Callback need to be redefined for every instance');
   };
 
@@ -21,8 +21,8 @@ export default class ArtistView extends View {
     this._number = number;
   }
 
-  set onClick(callback) {
-    this._onClick = callback;
+  set onSelect(callback) {
+    this._onSelect = callback;
   }
 
   get artistId() {
@@ -42,13 +42,8 @@ export default class ArtistView extends View {
   }
 
   render($container) {
-    if (!this._$container) {
-      this._$container = $container;
-    }
-
-    if (!this._$) {
-      this._$ = $container.querySelector('.artist');
-    }
+    this._$container = $container;
+    this._$ = $container.querySelector('.artist');
 
     this._addHandlers();
   }
@@ -59,16 +54,20 @@ export default class ArtistView extends View {
     this._$ = null;
   }
 
+  _onClick() {
+    this._onSelect();
+  }
+
   _addHandlers() {
     if (!this._$radio) {
       this._$radio = this._$.querySelector('.artist__input');
     }
 
-    this._$radio.addEventListenter('click', this._onClick);
+    this._$radio.addEventListener('click', this._onClick);
   }
 
   _removeHandlers() {
-    this._$radio.removeEventListenter('click', this._onClick);
+    this._$radio.removeEventListener('click', this._onClick);
   }
 
   _bindHandlers() {

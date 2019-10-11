@@ -19,11 +19,14 @@ const getRandomArrayElement = (arr) => {
 
 const getRandomQuestionTypeList = () => (
   new Array(GameOptions.QUESTIONS).fill('')
-    .map(() => getRandomArrayElement(QUESTION_TYPES))
+
+    // STUB:
+    // .map(() => getRandomArrayElement(QUESTION_TYPES))
+    .map(() => 'artist')
 );
 
 const questionTypeGetterMap = {
-  genre: () => {
+  'genre': () => {
     const getRandomTrackList = () => {
       const trackSet = new Set();
 
@@ -48,7 +51,7 @@ const questionTypeGetterMap = {
     return { type: 'genre', trackList, targetGenre, correctAnswers };
   },
 
-  artist: () => {
+  'artist': () => {
     const getRandomTrackList = () => {
       const trackList = [];
 

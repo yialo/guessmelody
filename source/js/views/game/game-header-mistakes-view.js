@@ -19,9 +19,8 @@ export default class GameHeaderMistakesView extends View {
   }
 
   get $mistakes() {
-    if (!this._$mistakes) {
-      this._$mistakes = this.$.querySelector('.game__mistakes');
-    }
+    this._$mistakes = this.$.querySelector('.game__mistakes');
+
     return this._$mistakes;
   }
 

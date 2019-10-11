@@ -47,9 +47,7 @@ export default class WelcomeView extends ScreenView {
   }
 
   _addButtonHandler() {
-    if (!this._$button) {
-      this._$button = this._$.querySelector('.welcome__button');
-    }
+    this._$button = this._$.querySelector('.welcome__button');
 
     this._$button.addEventListener('click', this._onButtonClick);
   }

@@ -18,9 +18,7 @@ export default class GameHeaderLogoView extends View {
   }
 
   render($container) {
-    if (!this._$container) {
-      this._$container = $container;
-    }
+    this._$container = $container;
 
     this._addHandlers();
   }
@@ -38,9 +36,7 @@ export default class GameHeaderLogoView extends View {
   }
 
   _addClickHandler() {
-    if (!this._$logoLink) {
-      this._$logoLink = this._$container.querySelector('.game__back');
-    }
+    this._$logoLink = this._$container.querySelector('.game__back');
 
     this._$logoLink.addEventListener('click', this._onClick);
   }

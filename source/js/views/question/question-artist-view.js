@@ -9,17 +9,20 @@ export default class QuestonArtistView extends QuestionView {
 
   _artistViews = [];
 
-  _$audioBlock = null;
   _$button = null;
   _$audio = null;
 
   constructor(question) {
     super();
 
-    this._artistList = question.artistList;
+    this._artistList = question.trackList;
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
+
     this._audio = new AudioView(this._targetTrack, true);
+    this._createArtistViews();
+
+    this._addAnswerHandler();
   }
 
   get _caption() {
@@ -50,27 +53,10 @@ export default class QuestonArtistView extends QuestionView {
 
   _addAnswerHandler() {
     this._artistViews.forEach((view) => {
-      view.onClick = () => {
+      view.onSelect = () => {
         const answerStatus = this._checkAnswer(view.artistId);
         this._onAnswer(answerStatus);
       };
-    });
-  }
-
-  _addAudioHandler() {
-    this._$audioBlock = this._$container.querySelector('.game__track');
-    this._$button = this._$audioBlock.querySelector('button');
-    this._$audio = this._$audioBlock.querySelector('audio');
-
-    this._$button.addEventListener('click', () => {
-      if (this._$audio.paused) {
-        this._$audio.play();
-      } else {
-        this._$audio.pause();
-      }
-
-      this._$button.classList.toggle(`track__button--play`);
-      this._$button.classList.toggle(`track__button--pause`);
     });
   }
 
@@ -78,12 +64,44 @@ export default class QuestonArtistView extends QuestionView {
     return (selectedAnswer === this._correctAnswer);
   }
 
-  // TODO: дописать метод
-  _addHandlers() {
-    // this._artistViews.forEach() {
+  _onClick() {
+    if (this._audio.paused) {
+      this._audio.play();
+    } else {
+      this._audio.pause();
+    }
 
-    // }
+    this._$button.classList.toggle(`track__button--play`);
+    this._$button.classList.toggle(`track__button--pause`);
   }
 
-  _removeHandlers() {}
+  _addButtonClickHandler() {
+    this._$button = this._$container.querySelector('.track__button');
+    this._$button.addEventListener('click', this._onClick);
+  }
+
+  _removeButtonClickHandler() {
+    this._$button.removeEventListener('click', this._onClick);
+    this._$button = null;
+  }
+
+  _addHandlers() {
+    this._artistViews.forEach((view) => {
+      view.render(this._$container);
+    });
+
+    this._addButtonClickHandler();
+  }
+
+  _removeHandlers() {
+    this._artistViews.forEach((view) => {
+      view.unrender(this._$container);
+    });
+
+    this._removeButtonClickHandler();
+  }
+
+  _bindHandlers() {
+    this._onClick = this._onClick.bind(this);
+  }
 }

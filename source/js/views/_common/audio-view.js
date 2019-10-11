@@ -3,6 +3,7 @@ import View from './_view';
 export default class AudioView extends View {
   constructor(track, isAutoplay = false) {
     super();
+
     this._track = track;
     this._isAutoplay = isAutoplay;
   }
@@ -10,11 +11,34 @@ export default class AudioView extends View {
   get template() {
     const autoplayAttribute = this._isAutoplay ? ` autoplay="autoplay"` : ``;
 
-    this._template = (
+    return (
       `<audio${autoplayAttribute} loop="loop">
         <source src="${this._track.audio}" type="audio/mpeg">
       </audio>`
     );
-    return this._template;
   }
+
+  get isPaused() {
+    return this._$.paused;
+  }
+
+  render($container) {
+    this._$container = $container;
+
+    this._$ = this._$container.querySelector('audio');
+  }
+
+  unrender() {
+    this._$ = null;
+  }
+
+  play() {
+    this._$.play();
+  }
+
+  pause() {
+    this._$.pause();
+  }
+
+  _bindHandlers() {}
 }

@@ -1,3 +1,4 @@
+import GameOptions from '../../models/game-options';
 import ScreenView from '../_common/_screen-view';
 import GameHeaderView from './game-header-view';
 import QuestionArtistView from '../question/question-artist-view';
@@ -40,6 +41,7 @@ export default class GameView extends ScreenView {
 
   render() {
     this._create();
+    this._addHandlers();
     this._$question = this._$.querySelector('.game__screen');
     this._append();
   }
@@ -47,19 +49,28 @@ export default class GameView extends ScreenView {
   unrender() {
     this._remove();
     this._$question = null;
+    this._removeHandlers();
     this._destroy();
   }
 
   update() {
     this._updateBemModifier();
 
+    this._updateQuestionView();
+
+    if (GameOptions.IS_DEBUG_ACTIVE) {
+      this._showConsoleTip();
+    }
+  }
+
+  _updateQuestionView() {
+    if (this._questionView) {
+      this._questionView.unrender();
+    }
+
     const QuestionView = questionTypeToClass[this._type];
     this._questionView = new QuestionView(this._question);
     this._questionView.render(this._$question);
-
-    if (this._options.IS_DEBUG_ACTIVE) {
-      this._showConsoleTip();
-    }
   }
 
   _showConsoleTip() {
@@ -85,8 +96,8 @@ export default class GameView extends ScreenView {
     }
   }
 
-  _addHandlers($container) {
-    this._headerView.render($container);
+  _addHandlers() {
+    this._headerView.render(this._$);
   }
 
   _removeHandlers() {

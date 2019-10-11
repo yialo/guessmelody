@@ -16,14 +16,17 @@ export default class GameScreen extends Screen {
     super();
 
     this._model = new GameModel();
-
     this._view = new GameView(this._model.currentQuestion);
-    this._view.render();
-    this._view.update();
   }
 
   set onReset(callback) {
     this._view.onReset = callback;
+  }
+
+  show() {
+    super.show();
+
+    this._view.update();
   }
 
   startTimer(questionView) {
