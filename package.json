@@ -71,8 +71,8 @@
     "eslint": "eslint \"./*.js\" \"./gulp/**/*.js\" \"./source/js/**/*.js\"",
     "imagemin": "gulp imagemin",
     "lint": "npm run stylelint && npm run eslint",
-    "release": "set NODE_ENV=production&gulp build",
-    "start": "set NODE_ENV=development&gulp",
+    "release": "cross-env NODE_ENV=production gulp build",
+    "start": "cross-env NODE_ENV=development gulp",
     "stylelint": "stylelint \"./source/css/**/*.css\"",
     "test": "gulp test"
   },
