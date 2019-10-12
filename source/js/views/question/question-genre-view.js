@@ -3,7 +3,6 @@ import TrackView from '../_common/track-view';
 
 export default class QuestonGenreView extends QuestionView {
   _trackList = [];
-  _correctAnswers = [];
   _targetGenre = String();
 
   _trackViews = [];
@@ -14,7 +13,6 @@ export default class QuestonGenreView extends QuestionView {
     super();
 
     this._trackList = question.trackList;
-    this._correctAnswers = question.correctAnswers;
     this._targetGenre = question.targetGenre;
 
     this._createTrackViews();
@@ -48,49 +46,21 @@ export default class QuestonGenreView extends QuestionView {
   }
 
   _createTrackViews() {
-    this._trackViews = this._trackList.map((it, i) => new TrackView(it, i + 1));
+    this._trackViews = this._trackList
+      .map((it, i) => new TrackView(it, i + 1));
   }
 
   _addAnswerHandler() {
     this._$submitButton = this._$form.querySelector('.game__submit');
 
-    this._toggleClickabilityState();
+    this._setClickabilityState();
   }
 
   _addAudioHandlers() {
-    this._$audioBlocks = this._$container.querySelectorAll('.track');
-
-    this._$audioBlocks.forEach(($it) => {
-      $it.$button = $it.querySelector('button');
-      $it.$audio = $it.querySelector('audio');
-    });
-
-    this._$audioBlocks.forEach(($it) => {
-      const { $audio, $button } = $it;
-      $button.addEventListener('click', () => {
-        const $otherBlocks = new Set([...this._$audioBlocks]);
-        $otherBlocks.delete($it);
-
-        if ($audio.paused) {
-          $otherBlocks.forEach(($el) => $el.$audio.pause());
-          $audio.play();
-          $button.classList.add(`track__button--play`);
-          $button.classList.remove(`track__button--pause`);
-        } else {
-          $audio.pause();
-          $button.classList.remove(`track__button--play`);
-          $button.classList.add(`track__button--pause`);
-        }
-
-        $otherBlocks.forEach(($el) => {
-          $el.$button.classList.remove(`track__button--play`);
-          $el.$button.classList.remove(`track__button--pause`);
-        });
-      });
-    });
+    // TODO: rework method
   }
 
-  _toggleClickabilityState() {
+  _setClickabilityState() {
     if (this._hasSelectedTracks) {
       this._$submitButton.removeAttribute('disabled');
     } else {

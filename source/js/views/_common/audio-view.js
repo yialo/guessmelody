@@ -2,30 +2,29 @@ import View from './_view';
 
 export default class AudioView extends View {
   _audioSrc = {};
-  _isAutoplay = Boolean();
+  _state = String();
 
   _$container = null;
   _$ = null;
 
-  constructor(track, isAutoplay = false) {
+  constructor(track) {
     super();
 
     this._audioSrc = track.audio;
-    this._isAutoplay = isAutoplay;
+
+    this._state = 'stop';
   }
 
   get template() {
-    const autoplayAttribute = this._isAutoplay ? ` autoplay="autoplay"` : ``;
-
     return (
-      `<audio${autoplayAttribute} loop="loop">
+      `<audio loop="loop">
         <source src="${this._audioSrc}" type="audio/mpeg">
       </audio>`
     );
   }
 
-  get isPaused() {
-    return this._$.paused;
+  get state() {
+    return this._state;
   }
 
   render($container) {
@@ -39,11 +38,22 @@ export default class AudioView extends View {
   }
 
   play() {
-    this._$.play();
+    this._$.play()
+      .catch((err) => {
+        console.log(`Не могу запустить трек. Описание ошибки: ${err.message}`);
+      });
+
+    this._state = 'play';
   }
 
   pause() {
     this._$.pause();
+    this._state = 'pause';
+  }
+
+  stop() {
+    this._$.pause();
+    this._state = 'stop';
   }
 
   _bindHandlers() {}

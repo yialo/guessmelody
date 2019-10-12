@@ -69,7 +69,6 @@
   display: block;
   width: 35px;
   height: 49px;
-  font-size: 0;
   background-image: url("../img/sprite.png");
   background-position: -5px -123px;
   cursor: pointer;
