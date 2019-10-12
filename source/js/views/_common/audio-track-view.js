@@ -11,10 +11,14 @@ export default class AudioTrackView extends View {
 
     this._audio = new AudioView(track);
     this._button = new TrackButtonView();
+
+    this._button.onClick = () => {
+      this._onClick();
+    };
   }
 
-  set onClick(callback) {
-    this._button.onClick = callback;
+  set onButtonClick(callback) {
+    this._onButtonClick = callback;
   }
 
   get state() {
@@ -52,6 +56,19 @@ export default class AudioTrackView extends View {
   stop() {
     this._audio.stop();
     this._button.stop();
+  }
+
+  // TODO: simplify method via mapping
+  _onClick() {
+    if (this.state === 'play') {
+      this.pause();
+    } else if (this.state === 'pause') {
+      this.play();
+    } else if (this.state === 'stop') {
+      this.play();
+    }
+
+    this._onButtonClick();
   }
 
   _addHandlers() {

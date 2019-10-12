@@ -56,10 +56,6 @@ export default class QuestonGenreView extends QuestionView {
     this._setClickabilityState();
   }
 
-  _addAudioHandlers() {
-    // TODO: rework method
-  }
-
   _setClickabilityState() {
     if (this._hasSelectedTracks) {
       this._$submitButton.removeAttribute('disabled');

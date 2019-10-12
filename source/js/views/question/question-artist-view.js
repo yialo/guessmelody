@@ -17,16 +17,6 @@ export default class QuestonArtistView extends QuestionView {
 
     this._audioTrack = new AudioTrackView(this._targetTrack);
 
-    this._audioTrack.onClick = () => {
-      if (this._audioState === 'play') {
-        this._audioTrack.pause();
-      } else if (this._audioState === 'pause') {
-        this._audioTrack.play();
-      } else if (this._audioState === 'stop') {
-        this._audioTrack.play();
-      }
-    };
-
     this._createArtistViews();
     this._addAtristViewHandlers();
   }
@@ -51,10 +41,6 @@ export default class QuestonArtistView extends QuestionView {
     return this._artistViews
       .map((view) => view.template)
       .join('');
-  }
-
-  get _audioState() {
-    return this._audioTrack.state;
   }
 
   _createArtistViews() {
