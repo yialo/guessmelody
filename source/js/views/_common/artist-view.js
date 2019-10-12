@@ -1,13 +1,13 @@
 import View from './_view';
 
 export default class ArtistView extends View {
-  _$container = null;
-  _$ = null;
-  _$radio = null;
-
   _imageSrc = String();
   _artist = String();
   _number = Number();
+
+  _$container = null;
+  _$ = null;
+  _$radio = null;
 
   _onSelect = () => {
     throw new Error('Callback need to be redefined for every instance');
@@ -60,9 +60,7 @@ export default class ArtistView extends View {
   }
 
   _addHandlers() {
-    if (!this._$radio) {
-      this._$radio = this._$.querySelector('.artist__input');
-    }
+    this._$radio = this._$.querySelector('.artist__input');
 
     this._$radio.addEventListener('click', this._onClick);
   }

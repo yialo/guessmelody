@@ -2,11 +2,38 @@ import View from './_view';
 import AudioView from './audio-view';
 
 export default class TrackView extends View {
+  _track = {};
+  _number = Number();
+
+  _audio = null;
+
+  _$container = null;
+  _$ = null;
+  _$checkbox = null;
+
+  _onCheck = () => {
+    throw new Error('Callback need to be redefined for every instance');
+  };
+
+  _onUncheck = () => {
+    throw new Error('Callback need to be redefined for every instance');
+  };
+
   constructor(track, number) {
     super();
 
     this._track = track;
     this._number = number;
+
+    this._audio = new AudioView(this._track, this._isAutoplay);
+  }
+
+  set onCheck(callback) {
+    this._onCheck = callback;
+  }
+
+  set onUnckeck(callback) {
+    this._onUncheck = callback;
   }
 
   get template() {
@@ -32,7 +59,51 @@ export default class TrackView extends View {
     return this._isAutoplay ? 'play' : '';
   }
 
-  get _audio() {
-    return new AudioView(this._track, this._isAudioAutoplay);
+  get _isChecked() {
+    return this._$checkbox.checked;
+  }
+
+  render($container) {
+    this._$container = $container;
+
+    this._$ = this._$container.querySelector('.track');
+
+    this._addHandlers();
+  }
+
+  unrender() {
+    this._removeHandlers();
+
+    this._$ = null;
+  }
+
+  play() {
+    this._audio.play();
+  }
+
+  pause() {
+    this._audio.pauge();
+  }
+
+  _onChange() {
+    if (this._isChecked) {
+      this._onCheck();
+    } else {
+      this._onUncheck();
+    }
+  }
+
+  _addHandlers() {
+    this._$checkbox = this._$.querySelector('.game__input');
+
+    this._$checkbox.addEventListener('change', this._onChange);
+  }
+
+  _removeHandlers() {
+    this._$checkbox.removeEventListener('change', this._onChange);
+  }
+
+  _bindHandlers() {
+    this._onChange = this._onChange.bind(this);
   }
 }

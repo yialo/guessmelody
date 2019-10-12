@@ -9,8 +9,7 @@ export default class QuestonArtistView extends QuestionView {
 
   _artistViews = [];
 
-  _$button = null;
-  _$audio = null;
+  _$audioButton = null;
 
   constructor(question) {
     super();
@@ -71,18 +70,20 @@ export default class QuestonArtistView extends QuestionView {
       this._audio.pause();
     }
 
-    this._$button.classList.toggle(`track__button--play`);
-    this._$button.classList.toggle(`track__button--pause`);
+    this._$audioButton.classList.toggle(`track__button--play`);
+    this._$audioButton.classList.toggle(`track__button--pause`);
   }
 
-  _addButtonClickHandler() {
-    this._$button = this._$container.querySelector('.track__button');
-    this._$button.addEventListener('click', this._onClick);
+  _addAudioHandler() {
+    if (!this._$audioButton) {
+      this._$audioButton = this._$container.querySelector('.track__button');
+    }
+
+    this._$audioButton.addEventListener('click', this._onClick);
   }
 
-  _removeButtonClickHandler() {
-    this._$button.removeEventListener('click', this._onClick);
-    this._$button = null;
+  _removeAudioHandler() {
+    this._$audioButton.removeEventListener('click', this._onClick);
   }
 
   _addHandlers() {
@@ -90,7 +91,7 @@ export default class QuestonArtistView extends QuestionView {
       view.render(this._$container);
     });
 
-    this._addButtonClickHandler();
+    this._addAudioHandler();
   }
 
   _removeHandlers() {
@@ -98,7 +99,7 @@ export default class QuestonArtistView extends QuestionView {
       view.unrender();
     });
 
-    this._removeButtonClickHandler();
+    this._removeAudioHandler();
   }
 
   _bindHandlers() {

@@ -51,12 +51,4 @@ export default class QuestionView extends View {
   _checkAnswer() {
     throw new Error('Method need to be redefined for descendants');
   }
-
-  _addAnswerHandler() {
-    throw new Error('Method need to be redefined for descendants');
-  }
-
-  _addAudioHandler() {
-    throw new Error('Method need to be redefined for descendants');
-  }
 }

@@ -2,8 +2,13 @@ import QuestionView from './_question-view';
 import TrackView from '../_common/track-view';
 
 export default class QuestonGenreView extends QuestionView {
+  _trackList = [];
   _correctAnswers = [];
   _targetGenre = String();
+
+  _trackViews = [];
+
+  _$submitButton = null;
 
   constructor(question) {
     super();
@@ -38,41 +43,18 @@ export default class QuestonGenreView extends QuestionView {
       .join('');
   }
 
+  get _hasSelectedTracks() {
+    return this._trackViews.some((view) => view.isChecked);
+  }
+
   _createTrackViews() {
     this._trackViews = this._trackList.map((it, i) => new TrackView(it, i + 1));
   }
 
   _addAnswerHandler() {
-    this._$form = this._$container.querySelector('.game__tracks');
-    this._$checkboxes = [...this._$form.querySelectorAll('.game__input')];
-    this._$button = this._$form.querySelector('.game__submit');
+    this._$submitButton = this._$form.querySelector('.game__submit');
 
-    this._setClickabilityState(false);
-
-    this._addCheckboxChangeHandlers();
-
-    this._$form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      this._onFormSubmit();
-    });
-  }
-
-  _addCheckboxChangeHandlers() {
-    this._$checkboxes.forEach(($el) => $el.addEventListener('change', this._onCheckboxChange));
-  }
-
-  _checkSelectedCheckboxPresence() {
-    return this._$checkboxes.some(($el) => $el.checked);
-  }
-
-  _onFormSubmit() {
-    const answers = [...this._$checkboxes]
-      .filter(($el) => $el.checked)
-      .map(($el) => $el.value);
-
-    const answerStatus = this._checkAnswer(answers);
-
-    this._onAnswer(answerStatus);
+    this._toggleClickabilityState();
   }
 
   _addAudioHandlers() {
@@ -99,6 +81,7 @@ export default class QuestonGenreView extends QuestionView {
           $button.classList.remove(`track__button--play`);
           $button.classList.add(`track__button--pause`);
         }
+
         $otherBlocks.forEach(($el) => {
           $el.$button.classList.remove(`track__button--play`);
           $el.$button.classList.remove(`track__button--pause`);
@@ -114,24 +97,37 @@ export default class QuestonGenreView extends QuestionView {
     );
   }
 
-  _setClickabilityState(isClickable) {
-    if (isClickable) {
-      this._$button.removeAttribute('disabled');
+  _toggleClickabilityState() {
+    if (this._hasSelectedTracks) {
+      this._$submitButton.removeAttribute('disabled');
     } else {
-      this._$button.setAttribute('disabled', 'disabled');
+      this._$submitButton.setAttribute('disabled', 'disabled');
     }
   }
 
-  _toggleClickabilityState() {
-    if (this._checkSelectedCheckboxPresence()) {
-      this._setClickabilityState(true);
-    } else {
-      this._setClickabilityState(false);
-    }
+  _onFormSubmit(evt) {
+    evt.preventDefault();
+
+    const answers = [...this._$checkboxes]
+      .filter(($el) => $el.checked)
+      .map(($el) => $el.value);
+
+    const answerStatus = this._checkAnswer(answers);
+
+    this._onAnswer(answerStatus);
+  }
+
+  _addHandlers() {
+    this._$form = this._$container.querySelector('.game__tracks');
+
+    this._$form.addEventListener('submit', this._onFormSubmit);
+  }
+
+  _removeHandlers() {
+    this._$form.removeEventListener('submit', this._onFormSubmit);
   }
 
   _bindHandlers() {
-    this._onCheckboxChange = this._onCheckboxChange.bind(this);
     this._onFormSubmit = this._onFormSubmit.bind(this);
   }
 }

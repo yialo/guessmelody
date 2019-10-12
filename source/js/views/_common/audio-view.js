@@ -1,10 +1,16 @@
 import View from './_view';
 
 export default class AudioView extends View {
+  _audioSrc = {};
+  _isAutoplay = Boolean();
+
+  _$container = null;
+  _$ = null;
+
   constructor(track, isAutoplay = false) {
     super();
 
-    this._track = track;
+    this._audioSrc = track.audio;
     this._isAutoplay = isAutoplay;
   }
 
@@ -13,7 +19,7 @@ export default class AudioView extends View {
 
     return (
       `<audio${autoplayAttribute} loop="loop">
-        <source src="${this._track.audio}" type="audio/mpeg">
+        <source src="${this._audioSrc}" type="audio/mpeg">
       </audio>`
     );
   }

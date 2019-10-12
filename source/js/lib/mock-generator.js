@@ -22,7 +22,7 @@ const getRandomQuestionTypeList = () => (
 
     // STUB:
     // .map(() => getRandomArrayElement(QUESTION_TYPES))
-    .map(() => 'artist')
+    .map(() => 'genre')
 );
 
 const questionTypeGetterMap = {
