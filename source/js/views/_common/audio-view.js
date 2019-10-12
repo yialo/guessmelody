@@ -11,7 +11,6 @@ export default class AudioView extends View {
     super();
 
     this._audioSrc = track.audio;
-
     this._state = 'stop';
   }
 

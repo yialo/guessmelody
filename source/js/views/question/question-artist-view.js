@@ -1,16 +1,12 @@
-import AudioView from '../_common/audio-view';
 import QuestionView from './_question-view';
+import AudioTrackView from '../_common/audio-track-view';
 import ArtistView from '../_common/artist-view';
-import TrackButtonView from '../_common/track-button-view';
 
 export default class QuestonArtistView extends QuestionView {
   _targetTrack = null;
 
-  _audio = null;
-  _button = null;
+  _audioTrack = null;
   _artistViews = [];
-
-  _$audioButton = null;
 
   constructor(question) {
     super();
@@ -19,21 +15,17 @@ export default class QuestonArtistView extends QuestionView {
     this._targetTrack = question.targetTrack;
     this._correctAnswer = question.correctAnswer;
 
-    this._button = new TrackButtonView();
-    this._button.onClick = () => {
+    this._audioTrack = new AudioTrackView(this._targetTrack);
+
+    this._audioTrack.onClick = () => {
       if (this._audioState === 'play') {
-        this._audio.pause();
-        this._button.pause();
+        this._audioTrack.pause();
       } else if (this._audioState === 'pause') {
-        this._audio.play();
-        this._button.play();
+        this._audioTrack.play();
       } else if (this._audioState === 'stop') {
-        this._audio.play();
-        this._button.play();
+        this._audioTrack.play();
       }
     };
-
-    this._audio = new AudioView(this._targetTrack, true);
 
     this._createArtistViews();
     this._addAtristViewHandlers();
@@ -46,8 +38,8 @@ export default class QuestonArtistView extends QuestionView {
   get _contentTemplate() {
     return (
       `<div class="game__track">
-        ${this._button.template}
-        ${this._audio.template}
+        ${this._audioTrack.buttonTemplate}
+        ${this._audioTrack.audioTemplate}
       </div>
       <form class="game__artist">
         ${this._formTemplate}
@@ -62,7 +54,7 @@ export default class QuestonArtistView extends QuestionView {
   }
 
   get _audioState() {
-    return this._audio.state;
+    return this._audioTrack.state;
   }
 
   _createArtistViews() {
@@ -85,11 +77,8 @@ export default class QuestonArtistView extends QuestionView {
       view.render(this._$container);
     });
 
-    this._audio.render(this._$container);
-    this._audio.play();
-
-    this._button.render(this._$container);
-    this._button.play();
+    this._audioTrack.render(this._$container);
+    this._audioTrack.play();
   }
 
   _removeHandlers() {
@@ -97,8 +86,7 @@ export default class QuestonArtistView extends QuestionView {
       view.unrender();
     });
 
-    this._audio.unrender();
-    this._button.unrender();
+    this._audioTrack.unrender();
   }
 
   _bindHandlers() {}

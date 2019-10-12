@@ -1,17 +1,14 @@
 import View from './_view';
-import AudioView from './audio-view';
-import TrackButtonView from './track-button-view';
+import AudioTrackView from './audio-track-view';
 
 export default class TrackView extends View {
   _track = {};
   _number = Number();
 
-  _audio = null;
-  _button = null;
+  _audioTrack = null;
 
   _$container = null;
   _$ = null;
-  _$button = null;
   _$checkbox = null;
 
   _onCheck = () => {
@@ -28,8 +25,7 @@ export default class TrackView extends View {
     this._track = track;
     this._number = number;
 
-    this._audio = new AudioView(this._track);
-    this._button = new TrackButtonView();
+    this._audioTrack = new AudioTrackView(this._track);
   }
 
   set onCheck(callback) {
@@ -47,9 +43,9 @@ export default class TrackView extends View {
   get template() {
     return (
       `<div class="track">
-        ${this._button.template}
+        ${this._audioTrack.buttonTemplate}
         <div class="track__status">
-          ${this._audio.template}
+          ${this._audioTrack.audioTemplate}
         </div>
         <div class="game__answer">
           <input class="game__input visually-hidden" type="checkbox" name="answer" value="answer-${this._number}" id="answer-${this._number}">
@@ -57,11 +53,6 @@ export default class TrackView extends View {
         </div>
       </div>`
     );
-  }
-
-  // FIXME: заменить на автостарт 1-го трека через state компонентов AudioView и TrackButtonView
-  get _isAutoplay() {
-    return (this._number === 1);
   }
 
   get _isChecked() {
@@ -83,18 +74,15 @@ export default class TrackView extends View {
   }
 
   play() {
-    this._audio.play();
-    this._button.play();
+    this._audioTrack.play();
   }
 
   pause() {
-    this._audio.pause();
-    this._button.pause();
+    this._audioTrack.pause();
   }
 
   stop() {
-    this._audio.stop();
-    this._button.stop();
+    this._audioTrack.stop();
   }
 
   _onChange() {
@@ -109,10 +97,18 @@ export default class TrackView extends View {
     this._$checkbox = this._$.querySelector('.game__input');
 
     this._$checkbox.addEventListener('change', this._onChange);
+
+    this._audioTrack.render(this._$);
+
+    if (this._number === 1) {
+      this._audioTrack.play();
+    }
   }
 
   _removeHandlers() {
     this._$checkbox.removeEventListener('change', this._onChange);
+
+    this._audioTrack.unrender();
   }
 
   _bindHandlers() {
