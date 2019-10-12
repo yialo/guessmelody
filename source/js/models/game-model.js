@@ -36,6 +36,10 @@ export default class GameModel {
     return this._state;
   }
 
+  get _type() {
+    return this.currentQuestion.type;
+  }
+
   countAnswer() {
     this._answers.push(new Answer());
   }
@@ -52,6 +56,26 @@ export default class GameModel {
 
   resetState() {
     Object.assign(this._state, INITIAL_STATE);
+  }
+
+  // TODO: заменить на Symbol.iterator
+  toNextQuestion() {
+    this._state.currentQuestionIndex += 1;
+  }
+
+  checkAnswer(answerData) {
+    if (this._type === 'genre') {
+      const { correctAnswers } = this.currentQuestion;
+
+      return (
+        answerData.every((it) => correctAnswers.includes(it))
+        && correctAnswers.every((it) => answerData.includes(it))
+      );
+    }
+
+    if (this._type === 'artist') {
+      return (answerData === this.currentQuestion.correctAnswer);
+    }
   }
 
   _resetQuestions() {

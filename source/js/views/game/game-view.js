@@ -18,10 +18,8 @@ export default class GameView extends ScreenView {
 
   _$question = null;
 
-  constructor(question) {
+  constructor() {
     super('game');
-
-    this._question = question;
 
     this._headerView = new GameHeaderView();
   }
@@ -59,7 +57,9 @@ export default class GameView extends ScreenView {
     this._destroyEl();
   }
 
-  update() {
+  update(question) {
+    this._question = question;
+
     this._updateBemModifier();
 
     this._updateQuestionView();

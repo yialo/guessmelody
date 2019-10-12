@@ -36,6 +36,10 @@ export default class TrackView extends View {
     this._onUncheck = callback;
   }
 
+  get answer() {
+    return this._$checkbox.value;
+  }
+
   get template() {
     return (
       `<div class="track">

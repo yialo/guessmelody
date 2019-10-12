@@ -21,7 +21,7 @@ export default class QuestonArtistView extends QuestionView {
     this._audio = new AudioView(this._targetTrack, true);
     this._createArtistViews();
 
-    this._addAnswerHandler();
+    this._addAnswerHandlers();
   }
 
   get _caption() {
@@ -50,17 +50,14 @@ export default class QuestonArtistView extends QuestionView {
     this._artistViews = this._artistList.map((it, i) => new ArtistView(it, i + 1));
   }
 
-  _addAnswerHandler() {
+  _addAnswerHandlers() {
     this._artistViews.forEach((view) => {
       view.onSelect = () => {
-        const answerStatus = this._checkAnswer(view.artistId);
-        this._onAnswer(answerStatus);
+        const answer = view.artistId;
+
+        this._onAnswer(answer);
       };
     });
-  }
-
-  _checkAnswer(selectedAnswer) {
-    return (selectedAnswer === this._correctAnswer);
   }
 
   _onClick() {

@@ -90,13 +90,6 @@ export default class QuestonGenreView extends QuestionView {
     });
   }
 
-  _checkAnswer(selectedAnswers) {
-    return (
-      selectedAnswers.every((it) => this._correctAnswers.includes(it))
-      && this._correctAnswers.every((it) => selectedAnswers.includes(it))
-    );
-  }
-
   _toggleClickabilityState() {
     if (this._hasSelectedTracks) {
       this._$submitButton.removeAttribute('disabled');
@@ -108,13 +101,11 @@ export default class QuestonGenreView extends QuestionView {
   _onFormSubmit(evt) {
     evt.preventDefault();
 
-    const answers = [...this._$checkboxes]
-      .filter(($el) => $el.checked)
-      .map(($el) => $el.value);
+    const answers = this._trackViews
+      .filter((view) => view.checked)
+      .map((view) => view.answer);
 
-    const answerStatus = this._checkAnswer(answers);
-
-    this._onAnswer(answerStatus);
+    this._onAnswer(answers);
   }
 
   _addHandlers() {
