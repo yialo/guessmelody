@@ -22,11 +22,11 @@ export default class ScreenView extends View {
     );
   }
 
-  _create() {
+  _createEl() {
     this._$ = ScreenView.createEl(this._template);
   }
 
-  _destroy() {
+  _destroyEl() {
     this._$ = null;
   }
 

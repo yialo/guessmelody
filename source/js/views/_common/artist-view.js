@@ -43,7 +43,8 @@ export default class ArtistView extends View {
 
   render($container) {
     this._$container = $container;
-    this._$ = $container.querySelector('.artist');
+
+    this._$ = this._$container.querySelector('.artist');
 
     this._addHandlers();
   }

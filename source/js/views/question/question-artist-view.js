@@ -95,7 +95,7 @@ export default class QuestonArtistView extends QuestionView {
 
   _removeHandlers() {
     this._artistViews.forEach((view) => {
-      view.unrender(this._$container);
+      view.unrender();
     });
 
     this._removeButtonClickHandler();

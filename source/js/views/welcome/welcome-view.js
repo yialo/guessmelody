@@ -2,6 +2,7 @@ import ScreenView from '../_common/_screen-view';
 
 export default class WelcomeView extends ScreenView {
   _$button = null;
+
   _onStart = () => {
     throw new Error('Callback need to be redefined for every instance');
   };
@@ -15,7 +16,7 @@ export default class WelcomeView extends ScreenView {
   }
 
   render() {
-    this._create();
+    this._createEl();
     this._addHandlers(this._$);
     this._append();
   }
@@ -23,7 +24,7 @@ export default class WelcomeView extends ScreenView {
   unrender() {
     this._remove();
     this._removeHandlers();
-    this._destroy();
+    this._destroyEl();
   }
 
   get _contentTemplate() {

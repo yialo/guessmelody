@@ -16,6 +16,8 @@ export default class GameView extends ScreenView {
   _headerView = null;
   _questionView = null;
 
+  _$question = null;
+
   constructor(question) {
     super('game');
 
@@ -40,17 +42,21 @@ export default class GameView extends ScreenView {
   }
 
   render() {
-    this._create();
-    this._addHandlers();
+    this._createEl();
+
     this._$question = this._$.querySelector('.game__screen');
+    this._addHandlers();
+
     this._append();
   }
 
   unrender() {
     this._remove();
-    this._$question = null;
+
     this._removeHandlers();
-    this._destroy();
+    this._$question = null;
+
+    this._destroyEl();
   }
 
   update() {
@@ -75,11 +81,15 @@ export default class GameView extends ScreenView {
 
   _showConsoleTip() {
     console.group('Вопрос');
+
     console.dir(this._question);
+
     const propName = (this._type === 'genre')
       ? 'correctAnswers'
       : 'correctAnswer';
+
     console.info(`Правильный ответ: ${this._question[propName]}`);
+
     console.groupEnd();
   }
 

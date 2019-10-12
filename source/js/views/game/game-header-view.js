@@ -4,7 +4,6 @@ import GameHeaderMistakesView from './game-header-mistakes-view';
 import GameHeaderTimerView from './game-header-timer-view';
 
 export default class GameHeaderView extends View {
-  _template = String();
   _state = {};
 
   _logoView = null;
@@ -25,15 +24,13 @@ export default class GameHeaderView extends View {
   }
 
   get template() {
-    this._template = (
+    return (
       `<header class="game__header">
         ${this._logoView.template}
         ${this._timerView.template}
         ${this._mistakesView.template}
       </header>`
     );
-
-    return this._template;
   }
 
   render($container) {

@@ -1,8 +1,9 @@
 import View from '../_common/_view';
 
 export default class QuestionView extends View {
-  _question;
-  _$container;
+  _question = {};
+
+  _$container = null;
 
   _onAnswer = () => {
     throw new Error('Callback need to be redefined for every instance');
@@ -37,11 +38,13 @@ export default class QuestionView extends View {
     this._$container = $container;
 
     this._$container.innerHTML = this._template;
+
     this._addHandlers();
   }
 
   unrender() {
     this._removeHandlers();
+
     this._$container.innerHTML = ``;
   }
 

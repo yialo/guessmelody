@@ -8,7 +8,10 @@ export default class Router {
   _result;
 
   static init() {
-    this._showWelcome();
+    // this._showWelcome();
+
+    // STUB:
+    this._showGame();
   }
 
   static _showWelcome() {
