@@ -68,7 +68,9 @@ export default class AudioTrackView extends View {
       this.play();
     }
 
-    this._onButtonClick();
+    if (typeof this._onButtonClick === 'function') {
+      this._onButtonClick();
+    }
   }
 
   _addHandlers() {
