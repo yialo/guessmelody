@@ -2,9 +2,17 @@ import View from './_view';
 import AudioView from './audio-view';
 import TrackButtonView from './track-button-view';
 
+const STATE_ACTION_MAP = {
+  'play': 'pause',
+  'pause': 'play',
+  'stop': 'play',
+};
+
 export default class AudioTrackView extends View {
   _audio = null;
   _button = null;
+
+  _onButtonClick = () => {};
 
   constructor(track) {
     super();
@@ -58,15 +66,9 @@ export default class AudioTrackView extends View {
     this._button.stop();
   }
 
-  // TODO: simplify method via mapping
   _onClick() {
-    if (this.state === 'play') {
-      this.pause();
-    } else if (this.state === 'pause') {
-      this.play();
-    } else if (this.state === 'stop') {
-      this.play();
-    }
+    const action = STATE_ACTION_MAP[this.state];
+    this[action]();
 
     if (typeof this._onButtonClick === 'function') {
       this._onButtonClick();
