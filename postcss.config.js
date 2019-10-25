@@ -4,7 +4,7 @@ const normalize = require('postcss-normalize');
 
 const importConfig = normalize().postcssImport();
 
-module.exports = (ctx) => ({
+module.exports = {
   plugins: {
     'postcss-import': importConfig,
     'postcss-advanced-variables': {
@@ -19,6 +19,17 @@ module.exports = (ctx) => ({
         'nesting-rules': true,
       },
     },
-    'cssnano': ctx.env === 'production' ? {} : false,
+    'cssnano': (
+      process.env.NODE_ENV === 'production'
+        ? {
+          preset: [
+            'default',
+            {
+              discardComments: true,
+            },
+          ],
+        }
+        : false
+    ),
   },
-});
+};

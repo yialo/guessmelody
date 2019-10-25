@@ -1,5 +1,5 @@
 import Screen from './_screen';
-import GameModel from '../models/game-model';
+import GameModel from '../models/game-model/game-model';
 import GameView from '../views/game/game-view';
 
 const ONE_SECOND = 1000;

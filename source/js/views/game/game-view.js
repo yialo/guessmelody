@@ -1,4 +1,4 @@
-import GameOptions from '../../models/game-options';
+import GameOptions from '../../utils/game-options';
 import ScreenView from '../_common/_screen-view';
 import GameHeaderView from './game-header-view';
 import QuestionArtistView from '../question/question-artist-view';
