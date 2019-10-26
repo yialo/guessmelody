@@ -1,6 +1,5 @@
 plugins:
-  - stylelint-order
-  - stylelint-use-nesting
+  - stylelint-scss
 rules:
   at-rule-empty-line-before:
     - always
@@ -9,24 +8,30 @@ rules:
       ignore:
         - after-comment
       ignoreAtRules:
-        - content
         - custom-media
         - custom-selector
+        - else
         - import
         - include
-        - mixin
   at-rule-name-case: lower
   at-rule-name-space-after: always-single-line
   at-rule-no-unknown:
     - true
     - ignoreAtRules:
         - content
+        - each
+        - else
+        - for
+        - if
         - include
         - mixin
   at-rule-no-vendor-prefix: true
   at-rule-semicolon-newline-after: always
   block-closing-brace-empty-line-before: never
-  block-closing-brace-newline-after: always
+  block-closing-brace-newline-after:
+    - always
+    - ignoreAtRules:
+        - if
   block-closing-brace-newline-before: always
   block-closing-brace-space-after: always-single-line
   block-closing-brace-space-before: always-single-line
@@ -34,7 +39,6 @@ rules:
   block-opening-brace-newline-after: always
   block-opening-brace-space-after: always-single-line
   block-opening-brace-space-before: always
-  csstools/use-nesting: always
   color-hex-case: lower
   color-hex-length: long
   color-no-invalid-hex: true
@@ -50,10 +54,11 @@ rules:
   declaration-block-trailing-semicolon: always
   declaration-colon-space-after: always-single-line
   declaration-colon-space-before: never
-  declaration-no-important: null
+  declaration-no-important: true
   font-family-name-quotes: always-unless-keyword
   font-family-no-duplicate-names: true
   font-family-no-missing-generic-family-keyword: true
+  font-weight-notation: numeric
   function-calc-no-unspaced-operator: true
   function-comma-newline-after: always-multi-line
   function-comma-newline-before: never-multi-line
@@ -106,6 +111,13 @@ rules:
         - first-nested
       ignore:
         - after-comment
+  scss/at-else-closing-brace-newline-after: always-last-in-chain
+  scss/at-else-closing-brace-space-after: always-intermediate
+  scss/at-else-empty-line-before: never
+  scss/at-if-closing-brace-newline-after: always-last-in-chain
+  scss/at-if-closing-brace-space-after: always-intermediate
+  scss/at-mixin-argumentless-call-parentheses: always
+  scss/at-mixin-parentheses-space-before: never
   selector-attribute-brackets-space-inside: never
   selector-attribute-operator-space-after: never
   selector-attribute-operator-space-before: never

@@ -1,6 +1,6 @@
-import GameScreen from './controllers/game-screen';
-import ResultScreen from './controllers/result-screen';
-import WelcomeScreen from './controllers/welcome-screen';
+import GameScreen from '../controllers/game-screen';
+import ResultScreen from '../controllers/result-screen';
+import WelcomeScreen from '../controllers/welcome-screen';
 
 export default class Router {
   _welcome;
