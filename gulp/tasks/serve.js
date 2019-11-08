@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 const { series, task, watch } = $.gulp;
 const {
   files,
@@ -10,14 +12,29 @@ const {
   styles: { all: styles },
 } = $.path;
 
+const onFileDelete = (filepath) => {
+  const srcAbsPath = path.resolve('./source');
+  const filePathFromSrc = path.relative(srcAbsPath, filepath);
+  const destFilePath = path.resolve($.path.dist, filePathFromSrc);
+
+  $.del.sync(destFilePath);
+};
+
 const addWatchers = () => {
   watch(markup, series('markup'));
   watch([styles, `./postcss.config.js`], series('styles'));
   watch(scripts, series('scripts'));
-  watch(files, series('renew:files'));
-  watch(fonts, series('renew:fonts'));
-  watch(bitmap, series('renew:bitmaps'));
-  watch(vector, series('renew:vector'));
+
+  const staticWatchers = [
+    watch(files, series('renew:files')),
+    watch(fonts, series('renew:fonts')),
+    watch(bitmap, series('renew:bitmaps')),
+    watch(vector, series('renew:vector')),
+  ];
+
+  staticWatchers.forEach((watcher) => {
+    watcher.on('unlink', onFileDelete);
+  });
 };
 
 const serverOptions = {
