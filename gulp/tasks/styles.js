@@ -1,14 +1,22 @@
 'use strict';
 
-module.exports = () => (
+const isProduction = (process.env.NODE_ENV === 'production');
+
+module.exports = () => {
   $.gulp.task('styles', () => (
     $.gulp
       .src($.path.styles.main)
       .pipe($.pl.plumber())
-      .pipe($.pl.sourcemaps.init())
+      .pipe($.pl.if(
+        !isProduction,
+        $.pl.sourcemaps.init()
+      ))
       .pipe($.pl.postcss())
-      .pipe($.pl.sourcemaps.write(`./`))
-      .pipe($.gulp.dest(`${$.path.root}/css`))
+      .pipe($.pl.if(
+        !isProduction,
+        $.pl.sourcemaps.write('.')
+      ))
+      .pipe($.gulp.dest(`${$.path.dist}/css`))
       .pipe($.server.stream())
-  ))
-);
+  ));
+};

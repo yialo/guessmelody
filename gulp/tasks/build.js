@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => (
+module.exports = () => {
   $.gulp.task(
     'build',
     $.gulp.series(
@@ -8,12 +8,12 @@ module.exports = () => (
       $.gulp.parallel(
         'files',
         'fonts',
-        'images-bitmap',
-        'images-vector',
+        'images:bitmap',
+        'images:vector',
         'markup',
         'scripts',
         'styles'
       )
     )
-  )
-);
+  );
+};

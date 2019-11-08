@@ -47,7 +47,7 @@ const svgoPlugins = [
   { sortAttrs: false },
 ];
 
-module.exports = () => (
+module.exports = () => {
   $.gulp.task('imagemin', () => (
     $.gulp
       .src($.path.raw.input)
@@ -62,5 +62,5 @@ module.exports = () => (
         ])
       )
       .pipe($.gulp.dest($.path.raw.output))
-  ))
-);
+  ));
+};

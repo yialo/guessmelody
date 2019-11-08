@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => (
+module.exports = () => {
   $.gulp.task('test', () => (
     $.gulp
       .src($.path.test)
@@ -8,7 +8,7 @@ module.exports = () => (
         { plugins: [$.rp.commonjs()] },
         { format: 'cjs' }
       ))
-      .pipe($.gulp.dest(`${$.path.root}/test`))
+      .pipe($.gulp.dest(`${$.path.dist}/test`))
       .pipe($.pl.mocha({ ui: 'bdd' }))
-  ))
-);
+  ));
+};

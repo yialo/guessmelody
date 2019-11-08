@@ -2,19 +2,19 @@
 
 module.exports = () => {
   $.gulp.task(
-    'watch-files',
+    'renew:files',
     $.gulp.series('files', 'reload')
   );
   $.gulp.task(
-    'watch-fonts',
+    'renew:fonts',
     $.gulp.series('fonts', 'reload')
   );
   $.gulp.task(
-    'watch-bitmaps',
-    $.gulp.series('images-bitmap', 'reload')
+    'renew:bitmaps',
+    $.gulp.series('images:bitmap', 'reload')
   );
   $.gulp.task(
-    'watch-vector',
-    $.gulp.series('images-vector', 'reload')
+    'renew:vector',
+    $.gulp.series('images:vector', 'reload')
   );
 };

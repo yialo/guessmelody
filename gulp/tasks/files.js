@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = () => (
+module.exports = () => {
   $.gulp.task('files', () => (
     $.gulp
       .src($.path.files, { base: `./source` }, { since: $.gulp.lastRun('files') })
-      .pipe($.gulp.dest($.path.root))
-  ))
-);
+      .pipe($.gulp.dest($.path.dist))
+  ));
+};

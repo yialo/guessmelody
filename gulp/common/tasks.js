@@ -10,7 +10,7 @@ module.exports = [
   'scripts',
   'styles',
   'reload',
-  'watch',
+  'renew',
   'serve',
   'build',
   'imagemin',

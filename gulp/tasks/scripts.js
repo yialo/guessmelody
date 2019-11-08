@@ -1,12 +1,14 @@
 'use strict';
 
+const isProduction = (process.env.NODE_ENV === 'production');
+
 const rollupOptions = [
   {
     plugins: [
       $.rp.babel({ runtimeHelpers: true }),
       $.rp.commonjs(),
       $.rp.resolve({ browser: true }),
-      process.env.NODE_ENV === 'production' ? $.rp.terser() : false,
+      isProduction ? $.rp.terser() : false,
     ],
   },
   {
@@ -15,15 +17,21 @@ const rollupOptions = [
   },
 ];
 
-module.exports = () => (
+module.exports = () => {
   $.gulp.task('scripts', () => (
     $.gulp
       .src($.path.scripts.main)
       .pipe($.pl.plumber())
-      .pipe($.pl.sourcemaps.init())
+      .pipe($.pl.if(
+        !isProduction,
+        $.pl.sourcemaps.init()
+      ))
       .pipe($.pl.betterRollup(...rollupOptions))
-      .pipe($.pl.sourcemaps.write(`./`))
-      .pipe($.gulp.dest(`${$.path.root}/js`))
+      .pipe($.pl.if(
+        !isProduction,
+        $.pl.sourcemaps.write('.')
+      ))
+      .pipe($.gulp.dest(`${$.path.dist}/js`))
       .pipe($.server.stream())
-  ))
-);
+  ));
+};

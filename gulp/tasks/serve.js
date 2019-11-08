@@ -14,23 +14,23 @@ const addWatchers = () => {
   watch(markup, series('markup'));
   watch([styles, `./postcss.config.js`], series('styles'));
   watch(scripts, series('scripts'));
-  watch(files, series('watch-files'));
-  watch(fonts, series('watch-fonts'));
-  watch(bitmap, series('watch-bitmaps'));
-  watch(vector, series('watch-vector'));
+  watch(files, series('renew:files'));
+  watch(fonts, series('renew:fonts'));
+  watch(bitmap, series('renew:bitmaps'));
+  watch(vector, series('renew:vector'));
 };
 
 const serverOptions = {
-  server: $.path.root,
+  server: $.path.dist,
   notify: false,
   open: false,
   port: 3502,
   ui: false,
 };
 
-module.exports = () => (
+module.exports = () => {
   task('serve', () => {
     $.server.init(serverOptions);
     addWatchers();
-  })
-);
+  });
+};

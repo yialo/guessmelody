@@ -20,7 +20,7 @@ module.exports = {
     input: `./resources/raw/input/*.{${Format.BITMAP},svg}`,
     output: `./resources/raw/output`,
   },
-  root: `./build`,
+  dist: `./build`,
   scripts: {
     all: `./source/js/**/*.js`,
     main: `./source/js/index.js`,
