@@ -41,7 +41,6 @@ parserOptions:
 plugins:
   - babel
   - import
-  - sort-class-members
 rules:
   accessor-pairs: 'off'
   array-bracket-newline:
@@ -798,9 +797,7 @@ rules:
   rest-spread-spacing:
     - error
     - never
-  semi:
-    - error
-    - always
+  semi: 'off'
   semi-spacing:
     - error
     - after: true
@@ -808,17 +805,6 @@ rules:
   semi-style:
     - error
     - last
-  sort-class-members/sort-class-members:
-    - 2
-    - accessorPairPositioning: getThenSet
-      order:
-        - '[properties]'
-        - '[arrow-function-properties]'
-        - 'constructor'
-        - '[everything-else]'
-        - '[static-properties]'
-        - '[static-methods]'
-      stopAfterFirstProblem: true
   sort-imports:
     - 'off'
     - ignoreCase: false
