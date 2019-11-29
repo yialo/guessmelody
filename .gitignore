@@ -14,7 +14,6 @@ bash.exe.stackdump
 # NPM files
 node_modules/
 npm-debug.*
-package-lock.json
 
 # Директория с собранными файлами проекта
 build/

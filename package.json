@@ -7,21 +7,22 @@
     "not dead"
   ],
   "dependencies": {
-    "@babel/runtime-corejs3": "7.7.2",
+    "@babel/runtime-corejs3": "7.7.4",
+    "core-js": "3.4.5",
     "postcss-normalize": "8.0.1"
   },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
-    "@babel/core": "7.7.2",
-    "@babel/plugin-proposal-class-properties": "7.7.0",
-    "@babel/plugin-transform-runtime": "7.6.2",
-    "@babel/preset-env": "7.7.1",
+    "@babel/core": "7.7.4",
+    "@babel/plugin-proposal-class-properties": "7.7.4",
+    "@babel/plugin-transform-runtime": "7.7.4",
+    "@babel/preset-env": "7.7.4",
     "babel-eslint": "10.0.3",
     "browser-sync": "2.26.7",
     "chai": "4.2.0",
     "cssnano": "4.1.10",
     "del": "5.1.0",
-    "eslint": "6.6.0",
+    "eslint": "6.7.1",
     "eslint-plugin-babel": "5.3.0",
     "eslint-plugin-import": "2.18.2",
     "gulp": "4.0.2",
@@ -42,21 +43,21 @@
     "imagemin-svgo": "7.0.0",
     "imagemin-zopfli": "6.0.0",
     "mocha": "6.2.2",
-    "postcss": "7.0.21",
+    "postcss": "7.0.23",
     "postcss-advanced-variables": "3.0.0",
     "postcss-color-function": "4.1.0",
     "postcss-import": "12.0.1",
     "postcss-preset-env": "6.7.0",
-    "rollup": "1.27.0",
+    "rollup": "1.27.5",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-terser": "5.1.2",
-    "stylelint": "11.1.1",
-    "stylelint-scss": "3.12.1"
+    "stylelint": "12.0.0",
+    "stylelint-scss": "3.13.0"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "main": "gulpfile.js",
   "name": "guessmelody",
@@ -68,11 +69,11 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production gulp build",
     "dev": "cross-env NODE_ENV=development gulp",
-    "eslint": "eslint ./*.js ./gulp/**/*.js ./source/js/**/*.js",
     "imagemin": "gulp imagemin",
-    "lint": "npm run stylelint && npm run eslint",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:css": "stylelint ./source/css/**/*.css",
+    "lint:js": "eslint ./*.js ./gulp/**/*.js ./source/js/**/*.js",
     "start": "npm run dev",
-    "stylelint": "stylelint ./source/css/**/*.css",
     "test": "gulp test"
   },
   "version": "2.0.0"
