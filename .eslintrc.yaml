@@ -16,7 +16,7 @@ overrides:
     globals:
       $: readonly
     parserOptions:
-      sourceType: script
+      impliedStrict: true
     rules:
       callback-return: 'off'
       global-require: 'off'
@@ -31,9 +31,6 @@ overrides:
       no-process-exit: 'off'
       no-restricted-modules: 'off'
       no-sync: 'off'
-      strict:
-        - error
-        - safe
 parser: babel-eslint
 parserOptions:
   ecmaVersion: 2018
@@ -243,9 +240,7 @@ rules:
   import/order:
     - error
     - groups:
-        - - builtin
-          - external
-          - internal
+      - builtin
   import/prefer-default-export: error
   import/unambiguous: 'off'
   indent:
@@ -889,9 +884,10 @@ rules:
 settings:
   import/core-modules: []
   import/extensions:
+    - error
     - .js
-    - .jsx
-    - .mjs
+      .jsx
+      .mjs
   import/ignore:
     - node_modules
     - \\.(coffee|scss|css|less|hbs|svg|json)$

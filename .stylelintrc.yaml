@@ -98,11 +98,6 @@ rules:
   no-missing-end-of-source-newline: true
   number-leading-zero: always
   number-no-trailing-zeros: true
-  order/order:
-    - dollar-variables
-    - custom-properties
-    - declarations
-    - rules
   property-case: lower
   property-no-vendor-prefix: true
   rule-empty-line-before:

@@ -1,5 +1,3 @@
-'use strict';
-
 const normalize = require('postcss-normalize');
 
 const importConfig = normalize().postcssImport();

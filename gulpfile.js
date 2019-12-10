@@ -1,4 +1,15 @@
-'use strict';
+/** TODO:
+ * Check these packages:
+ * gulp-debug
+ * gulp-if
+ * gulp-remember
+ * gulp-newer/gulp-changed
+ * gulp-cached (more effective replacement for gulp.src(..., { since() }))
+ * gulp-cache (cache results of stream handling to disk)
+ * gulp-notify
+ * gulp-plumber
+ * pump
+ */
 
 global.$ = {
   del: require('del'),

@@ -6,21 +6,21 @@
 
     npm install
 
-## Compile and run hot-reload for development
+## Compile and run live-update for development
 
-    npm start
+    npm run dev
 
-## Compile with minification and run hot-reload
+## Compile with minification
 
-    npm run release
+    npm run build
 
 ## Lint styles
 
-    npm run stylelint
+    npm run lint:css
 
 ## Lint scripts
 
-    npm run eslint
+    npm run lint:js
 
 ## Lint styles & scripts
 
