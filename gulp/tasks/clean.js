@@ -1,3 +1,3 @@
-'use strict';
-
-module.exports = () => $.gulp.task('clean', () => $.del($.path.dist));
+module.exports = () => (
+  $.gulp.task('clean', () => $.del($.path.dist))
+);

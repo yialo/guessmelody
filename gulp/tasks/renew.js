@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = () => {
   $.gulp.task(
     'renew:files',

@@ -1,5 +1,3 @@
-'use strict';
-
 const Format = {
   BITMAP: 'gif,jpeg,jpg,png',
   FONTS: 'woff,woff2',
@@ -17,8 +15,8 @@ module.exports = {
     vector: `./source/img/*.svg`,
   },
   raw: {
-    input: `./resources/raw/input/*.{${Format.BITMAP},svg}`,
-    output: `./resources/raw/output`,
+    input: `./extra/raw/input/*.{${Format.BITMAP},svg}`,
+    output: `./extra/raw/output`,
   },
   dist: `./build`,
   scripts: {
@@ -28,7 +26,7 @@ module.exports = {
   },
   styles: {
     all: `./source/css/**/*.css`,
-    main: `./source/css/app.css`,
+    main: `./source/css/index.css`,
   },
   test: `./source/js/**/*.test.js`,
 };

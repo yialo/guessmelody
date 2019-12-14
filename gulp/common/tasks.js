@@ -1,6 +1,3 @@
-'use strict';
-
-// Order matters!
 module.exports = [
   'clean',
   'fonts',

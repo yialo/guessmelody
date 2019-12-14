@@ -1,5 +1,3 @@
-'use strict';
-
 const isProduction = (process.env.NODE_ENV === 'production');
 
 module.exports = () => {
@@ -16,6 +14,7 @@ module.exports = () => {
         !isProduction,
         $.pl.sourcemaps.write('.')
       ))
+      .pipe($.pl.rename('app.css'))
       .pipe($.gulp.dest(`${$.path.dist}/css`))
       .pipe($.server.stream())
   ));

@@ -1,4 +1,4 @@
-/* @import "@csstools/normalize.css"; */
+@import "@csstools/normalize.css";
 
 @import "variables/colors.css";
 @import "variables/fonts.css";

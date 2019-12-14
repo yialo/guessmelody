@@ -1,5 +1,3 @@
-'use strict';
-
 const svgoPlugins = [
   { addAttributesToSVGElement: false },
   { addClassesToSVGElement: false },
