@@ -1,4 +1,4 @@
-@charset "utf-8";
+/* @import "@csstools/normalize.css"; */
 
 @import "variables/colors.css";
 @import "variables/fonts.css";
@@ -7,8 +7,6 @@
 
 @import "mixins/general.css";
 @import "mixins/text.css";
-
-@import "normalize.css";
 
 @import "scaffold/fonts.css";
 @import "scaffold/animations.css";
