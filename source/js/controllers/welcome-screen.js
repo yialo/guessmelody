@@ -1,7 +1,7 @@
-import Screen from './_screen';
+import AbstractScreen from './_abstract-screen';
 import WelcomeView from '../views/welcome/welcome-view';
 
-export default class WelcomeScreen extends Screen {
+export default class WelcomeScreen extends AbstractScreen {
   constructor() {
     super();
 

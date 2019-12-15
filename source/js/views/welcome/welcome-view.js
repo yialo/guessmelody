@@ -1,71 +1,61 @@
-import ScreenView from '../_common/_screen-view';
+import AbstractView from '../_abstract-view';
 
-export default class WelcomeView extends ScreenView {
-  _$button = null;
-
-  _onStart = () => {
-    throw new Error('Callback need to be redefined for every instance');
-  };
-
+export default class WelcomeView extends AbstractView {
   constructor() {
-    super('welcome');
+    super();
+
+    this._$button = null;
   }
 
   set onStart(callback) {
     this._onStart = callback;
   }
 
-  render() {
-    this._createEl();
-    this._addHandlers(this._$);
-    this._append();
-  }
-
-  unrender() {
-    this._remove();
-    this._removeHandlers();
-    this._destroyEl();
-  }
-
-  get _contentTemplate() {
+  get _template() {
     return (
-      `<div class="welcome__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
-      </div>
-      <button class="welcome__button" aria-label="Начать игру"></button>
-      <h2 class="welcome__rules-title">Правила игры</h2>
-      <p class="welcome__text">Правила просты:</p>
-      <ul class="welcome__rules-list">
-        <li>За 5 минут нужно ответить на все вопросы.</li>
-        <li>Можно допустить 3 ошибки.</li>
-      </ul>
-      <p class="welcome__text">Удачи!</p>`
+      `<section class="welcome">
+        <div class="welcome__logo">
+          <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83">
+        </div>
+        <button class="welcome__button" aria-label="Начать игру"></button>
+        <h2 class="welcome__rules-title">Правила игры</h2>
+        <p class="welcome__text">Правила просты:</p>
+        <ul class="welcome__rules-list">
+          <li>За 5 минут нужно ответить на все вопросы.</li>
+          <li>Можно допустить 3 ошибки.</li>
+        </ul>
+        <p class="welcome__text">Удачи!</p>
+      </section>`
     );
   }
 
-  _onButtonClick() {
-    this._onStart();
+  defineChildren() {
+    if (!this._$button) {
+      this._$button = this.$.querySelector('.welcome__button');
+    }
   }
 
-  _addButtonHandler() {
-    this._$button = this._$.querySelector('.welcome__button');
+  undefineChildren() {
+    this._$button = null;
+  }
 
+  activate() {
     this._$button.addEventListener('click', this._onButtonClick);
   }
 
-  _removeButtonHandler() {
+  deactivate() {
     this._$button.removeEventListener('click', this._onButtonClick);
   }
 
-  _addHandlers() {
-    this._addButtonHandler();
+  _onButtonClick() {
+    if (typeof this._onStart === 'function') {
+      this._onStart();
+    }
+
+    this.unmount();
   }
 
-  _removeHandlers() {
-    this._removeButtonHandler();
-  }
-
-  _bindHandlers() {
+  _bind() {
     this._onButtonClick = this._onButtonClick.bind(this);
   }
 }

@@ -1,3 +1,5 @@
 import Router from './router/router';
 
-Router.init();
+const app = new Router();
+
+app.init();

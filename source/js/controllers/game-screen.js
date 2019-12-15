@@ -1,4 +1,4 @@
-import Screen from './_screen';
+import AbstractScreen from './_abstract-screen';
 import GameModel from '../models/game-model/game-model';
 import GameView from '../views/game/game-view';
 
@@ -11,7 +11,7 @@ const tick = (gameState, questionView) => {
   questionView.updateHeader();
 };
 
-export default class GameScreen extends Screen {
+export default class GameScreen extends AbstractScreen {
   constructor() {
     super();
 
