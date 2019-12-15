@@ -51,8 +51,6 @@ export default class WelcomeView extends AbstractView {
     if (typeof this._onStart === 'function') {
       this._onStart();
     }
-
-    this.unmount();
   }
 
   _bind() {

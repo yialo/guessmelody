@@ -1,16 +1,15 @@
-import QuestionView from './_question-view';
+import AbstractView from '../_abstract-view';
 import TrackView from '../_common/track-view';
 
-export default class QuestonGenreView extends QuestionView {
-  _trackList = [];
-  _targetGenre = String();
-
-  _trackViews = [];
-
-  _$submitButton = null;
-
+export default class QuestonGenreView extends AbstractView {
   constructor(question) {
     super();
+
+    this._$form = null;
+    this._$submitButton = null;
+
+    // TODO: is next statement necessary?
+    this._question = question;
 
     this._trackList = question.trackList;
     this._targetGenre = question.targetGenre;
@@ -22,16 +21,15 @@ export default class QuestonGenreView extends QuestionView {
     this._onCheckboxChange = callback;
   }
 
-  get _caption() {
-    return `Выберите ${this._targetGenre} треки`;
-  }
-
-  get _contentTemplate() {
+  get _template() {
     return (
-      `<form class="game__tracks">
-        ${this._formTemplate}
-        <button class="game__submit button" type="submit">Ответить</button>
-      </form>`
+      `<div class="game__screen">
+        <h2 class="game__title">Выберите ${this._targetGenre} треки</h2>
+        <form class="game__tracks">
+          ${this._formTemplate}
+          <button class="game__submit button" type="submit">Ответить</button>
+        </form>
+      </div>`
     );
   }
 
@@ -74,17 +72,25 @@ export default class QuestonGenreView extends QuestionView {
     this._onAnswer(answers);
   }
 
-  _addHandlers() {
-    this._$form = this._$container.querySelector('.game__tracks');
+  defineChildren() {
+    if (!this._$form) {
+      this._$form = this._$container.querySelector('.game__tracks');
+    }
+  }
 
+  undefineChildren() {
+    this._$form = null;
+  }
+
+  activate() {
     this._$form.addEventListener('submit', this._onFormSubmit);
   }
 
-  _removeHandlers() {
+  deactivate() {
     this._$form.removeEventListener('submit', this._onFormSubmit);
   }
 
-  _bindHandlers() {
+  _bind() {
     this._onFormSubmit = this._onFormSubmit.bind(this);
   }
 }

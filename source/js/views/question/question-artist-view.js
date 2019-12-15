@@ -1,15 +1,13 @@
-import QuestionView from './_question-view';
+import AbstractView from '../_abstract-view';
 import AudioTrackView from '../_common/audio-track-view';
 import ArtistView from '../_common/artist-view';
 
-export default class QuestonArtistView extends QuestionView {
-  _targetTrack = null;
-
-  _audioTrack = null;
-  _artistViews = [];
-
+export default class QuestonArtistView extends AbstractView {
   constructor(question) {
     super();
+
+    // TODO: is next statement necessary?
+    this._question = question;
 
     this._artistList = question.trackList;
     this._targetTrack = question.targetTrack;
@@ -21,19 +19,18 @@ export default class QuestonArtistView extends QuestionView {
     this._addAtristViewHandlers();
   }
 
-  get _caption() {
-    return 'Кто исполняет эту песню?';
-  }
-
-  get _contentTemplate() {
+  get _template() {
     return (
-      `<div class="game__track">
-        ${this._audioTrack.buttonTemplate}
-        ${this._audioTrack.audioTemplate}
-      </div>
-      <form class="game__artist">
-        ${this._formTemplate}
-      </form>`
+      `<div class="game__screen">
+        <h2 class="game__title">Кто исполняет эту песню?</h2>
+        <div class="game__track">
+          ${this._audioTrack.buttonTemplate}
+          ${this._audioTrack.audioTemplate}
+        </div>
+        <form class="game__artist">
+          ${this._formTemplate}
+        </form>
+      </div>`
     );
   }
 
@@ -74,6 +71,4 @@ export default class QuestonArtistView extends QuestionView {
 
     this._audioTrack.unrender();
   }
-
-  _bindHandlers() {}
 }

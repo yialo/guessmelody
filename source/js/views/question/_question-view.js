@@ -5,10 +5,6 @@ export default class QuestionView extends View {
 
   _$container = null;
 
-  _onAnswer = () => {
-    throw new Error('Callback need to be redefined for every instance');
-  };
-
   constructor(question) {
     super();
 
@@ -17,10 +13,6 @@ export default class QuestionView extends View {
 
   set onAnswer(callback) {
     this._onAnswer = callback;
-  }
-
-  get _caption() {
-    throw new Error('Method need to be redefined for descendants');
   }
 
   get _contentTemplate() {

@@ -1,28 +1,28 @@
 import GameOptions from '../../utils/game-options';
-import ScreenView from '../_common/_screen-view';
-import GameHeaderView from './game-header-view';
-import QuestionArtistView from '../question/question-artist-view';
-import QuestionGenreView from '../question/question-genre-view';
+import AbstractView from '../_abstract-view';
+// import GameHeaderView from './game-header-view';
+// import QuestionArtistView from '../question/question-artist-view';
+// import QuestionGenreView from '../question/question-genre-view';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 
-const questionTypeToClass = {
-  'genre': QuestionGenreView,
-  'artist': QuestionArtistView,
-};
+// const questionTypeToClass = {
+//   'genre': QuestionGenreView,
+//   'artist': QuestionArtistView,
+// };
 
-export default class GameView extends ScreenView {
+export default class GameView extends AbstractView {
   _headerView = null;
   _questionView = null;
 
   _$question = null;
 
-  constructor() {
-    super('game');
+  // constructor() {
+  //   super();
 
-    this._headerView = new GameHeaderView();
-  }
+  //   this._headerView = new GameHeaderView();
+  // }
 
   set onReset(callback) {
     this._headerView.onReset = callback;
@@ -37,6 +37,10 @@ export default class GameView extends ScreenView {
       `${this._headerView.template}
       <div class="game__screen"></div>`
     );
+  }
+
+  get _template() {
+    return `<section class="game"></section>`;
   }
 
   render() {
@@ -113,6 +117,4 @@ export default class GameView extends ScreenView {
   _removeHandlers() {
     this._headerView.unrender();
   }
-
-  _bindHandlers() {}
 }

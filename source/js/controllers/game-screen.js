@@ -18,17 +18,16 @@ export default class GameScreen extends AbstractScreen {
     this._model = new GameModel();
     this._view = new GameView();
 
-    this._view.onAnswer = (answer) => {
-      const answerStatus = this._model.checkAnswer(answer);
+    // this._view.onAnswer = (answer) => {
+    //   const answerStatus = this._model.checkAnswer(answer);
 
-      if (answerStatus) {
-        this._model.toNextQuestion();
-        this._update();
-      } else {
-        // STUB:
-        console.log('Ошибка!');
-      }
-    };
+    //   if (answerStatus) {
+    //     this._model.toNextQuestion();
+    //     this._update();
+    //   } else {
+    //     console.log('Ошибка!');
+    //   }
+    // };
   }
 
   set onReset(callback) {
@@ -38,7 +37,7 @@ export default class GameScreen extends AbstractScreen {
   show() {
     super.show();
 
-    this._update();
+    // this._update();
   }
 
   startTimer(questionView) {

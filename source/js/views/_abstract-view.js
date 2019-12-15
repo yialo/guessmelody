@@ -77,5 +77,7 @@ export default class AbstractView {
     $children.fill(null);
   }
 
+  update() {}
+
   _bind() {}
 }
