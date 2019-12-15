@@ -8,15 +8,17 @@
   </head>
   <body>
     <main class="app">
-      <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: -1200em;">
-        <filter id="blur">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
-          <feOffset dx="0" dy="0"></feOffset>
-          <feMerge>
-            <feMergeNode></feMergeNode>
-            <feMergeNode in="SourceGraphic"></feMergeNode>
-          </feMerge>
-        </filter>
+      <svg class="visually-hidden" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="blur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
+            <feOffset dx="0" dy="0"></feOffset>
+            <feMerge>
+              <feMergeNode></feMergeNode>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+        </defs>
       </svg>
 
       <div class="main"></div>
