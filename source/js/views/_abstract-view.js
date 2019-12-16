@@ -1,12 +1,6 @@
 import errorUtil from '../utils/errors';
 
 export default class AbstractView {
-  static createElements(template) {
-    const $container = document.createElement('template');
-    $container.innerHTML = template;
-    return [...$container.content.childNodes];
-  }
-
   constructor() {
     if (new.target === AbstractView) {
       errorUtil.restrictAbstractCall();
@@ -42,7 +36,7 @@ export default class AbstractView {
 
   createElement() {
     this._$ = document.createElement('template');
-    this._$.innerHTML = this._template;
+    this._$.innerHTML = this._template.trim();
   }
 
   destroyElement() {
