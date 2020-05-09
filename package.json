@@ -1,10 +1,6 @@
 {
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Opera versions",
-    "last 2 Edge versions",
-    "not dead"
+    "defaults"
   ],
   "dependencies": {
     "@babel/core": "7.8.7",
@@ -14,52 +10,25 @@
     "@babel/runtime-corejs3": "7.8.7",
     "@csstools/normalize.css": "10.1.0",
     "core-js": "3.6.4",
-    "cross-env": "7.0.2",
     "cssnano": "4.1.10",
-    "del": "5.1.0",
-    "gulp": "4.0.2",
-    "gulp-better-rollup": "4.0.1",
-    "gulp-debug": "4.0.0",
-    "gulp-if": "3.0.0",
-    "gulp-imagemin": "7.1.0",
-    "gulp-mocha": "7.0.2",
-    "gulp-plumber": "1.2.1",
-    "gulp-postcss": "8.0.0",
-    "gulp-rename": "2.0.0",
-    "gulp-sourcemaps": "2.6.5",
-    "imagemin-gifsicle": "7.0.0",
-    "imagemin-jpegtran": "6.0.0",
-    "imagemin-mozjpeg": "8.0.0",
-    "imagemin-pngquant": "8.0.0",
-    "imagemin-svgo": "7.1.0",
-    "imagemin-zopfli": "6.0.0",
     "postcss": "7.0.27",
     "postcss-advanced-variables": "3.0.1",
     "postcss-color-function": "4.1.0",
     "postcss-import": "12.0.1",
-    "postcss-preset-env": "6.7.0",
-    "rollup": "1.27.13",
-    "rollup-plugin-babel": "4.3.3",
-    "rollup-plugin-commonjs": "10.1.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-terser": "5.1.3"
+    "postcss-preset-env": "6.7.0"
   },
   "description": "Личный проект «Угадай Мелодию» от HTML Academy",
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "browser-sync": "2.26.7",
-    "chai": "4.2.0",
     "eslint": "6.8.0",
     "eslint-plugin-babel": "5.3.0",
     "eslint-plugin-import": "2.20.1",
-    "mocha": "7.1.0",
     "nodemon": "2.0.2",
     "stylelint": "13.2.0"
   },
   "engines": {
     "node": "12"
   },
-  "main": "gulpfile.js",
   "name": "guessmelody",
   "private": true,
   "repository": {
@@ -67,14 +36,9 @@
     "url": "git+https://github.com:yialo/guessmelody.git"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production gulp build",
-    "dev": "cross-env NODE_ENV=development gulp",
-    "imagemin": "gulp imagemin",
     "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint ./source/css/**/*.css",
-    "lint:js": "eslint ./*.js ./gulp/**/*.js ./source/js/**/*.js",
-    "start": "npm run dev",
-    "test": "gulp test"
+    "lint:js": "eslint ./*.js ./gulp/**/*.js ./source/js/**/*.js"
   },
   "version": "2.0.0"
 }
