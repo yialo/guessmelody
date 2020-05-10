@@ -1,0 +1,29 @@
+@import "@csstools/normalize.css/normalize.css";
+
+@import "variables/_colors.scss";
+@import "variables/_fonts.scss";
+@import "variables/_layout.scss";
+@import "variables/_selectors.scss";
+
+@import "mixins/_general.scss";
+@import "mixins/_text.scss";
+
+@import "scaffold/_fonts.scss";
+@import "scaffold/_animations.scss";
+@import "scaffold/_tags.scss";
+@import "scaffold/_common.scss";
+
+@import "blocks/_artist.scss";
+@import "blocks/_button.scss";
+@import "blocks/_footer.scss";
+@import "blocks/_game.scss";
+@import "blocks/_logo.scss";
+@import "blocks/_mistake.scss";
+@import "blocks/_modal.scss";
+@import "blocks/_result-artist.scss";
+@import "blocks/_result-genre.scss";
+@import "blocks/_result-list.scss";
+@import "blocks/_result.scss";
+@import "blocks/_timer.scss";
+@import "blocks/_track.scss";
+@import "blocks/_welcome.scss";
