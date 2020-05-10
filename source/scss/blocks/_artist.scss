@@ -16,15 +16,15 @@
   background-color: var(--color-beige);
   cursor: pointer;
 
-  @nest .artist:hover & {
+  .artist:hover & {
     border-color: var(--color-orange);
   }
 
-  @nest .artist__input:focus + .artist__name & {
+  .artist__input:focus + .artist__name & {
     border-color: var(--color-orange);
   }
 
-  @nest .artist:active & {
+  .artist:active & {
     border-color: var(--color-hover);
   }
 }

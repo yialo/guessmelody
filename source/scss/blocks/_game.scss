@@ -73,11 +73,11 @@
   background-position: -5px -123px;
   cursor: pointer;
 
-  @nest .game__input:checked + & {
+  .game__input:checked + & {
     background-position: -5px -5px;
   }
 
-  @nest .game__input:focus + & {
+  .game__input:focus + & {
     outline: -webkit-focus-ring-color auto 5px;
   }
 }
