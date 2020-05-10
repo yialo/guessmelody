@@ -15,5 +15,8 @@ bash.exe.stackdump
 node_modules/
 npm-debug.*
 
-# Директория с собранными файлами проекта
+# Parcel files
+.cache/
+
+# Output directory
 build/
