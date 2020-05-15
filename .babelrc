@@ -16,7 +16,7 @@
       {
         "corejs": 3,
         "loose": false,
-        "modules": false,
+        "modules": "auto",
         "useBuiltIns": "usage"
       }
     ]
