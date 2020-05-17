@@ -1,10 +1,10 @@
-import { getOtherResults } from '../../mocks/mock-generator';
-import NotificationPhrase from '../../utils/notification-phrase-handler/notification-phrase-handler';
-import GameOptions from '../../utils/game-options';
-import calculateScore from '../../utils/calculate-score/calculate-score';
-import getGameResult from '../../utils/get-game-result/get-game-result';
-import ResultView from './_result-view';
-import UserResultModel from '../../models/user-result-model/user-result-model';
+import { getOtherResults } from '../../mocks/mock-generator.js';
+import NotificationPhrase from '../../utils/notification-phrase-handler/notification-phrase-handler.js';
+import GameOptions from '../../utils/game-options.js';
+import calculateScore from '../../utils/calculate-score/calculate-score.js';
+import getGameResult from '../../utils/get-game-result/get-game-result.js';
+import ResultView from './_result-view.js';
+import UserResultModel from '../../models/user-result-model/user-result-model.js';
 
 const __mockUserResult = {
   minutes: 2,

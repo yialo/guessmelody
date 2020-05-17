@@ -1,6 +1,6 @@
-import View from './_view';
-import AudioView from './audio-view';
-import TrackButtonView from './track-button-view';
+import View from './_view.js';
+import AudioView from './audio-view.js';
+import TrackButtonView from './track-button-view.js';
 
 const STATE_ACTION_MAP = {
   'play': 'pause',

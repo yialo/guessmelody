@@ -1,5 +1,5 @@
-import AbstractScreen from './_abstract-screen';
-import WelcomeView from '../views/welcome/welcome-view';
+import AbstractScreen from './_abstract-screen.js';
+import WelcomeView from '../views/welcome/welcome-view.js';
 
 export default class WelcomeScreen extends AbstractScreen {
   constructor() {

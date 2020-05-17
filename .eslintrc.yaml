@@ -1,22 +1,25 @@
 env:
   browser: true
   es6: true
+ignorePatterns:
+  - '*.html'
+  - /build/
+  - /node_modules/
 overrides:
   - env:
-      mocha: true
+      jest: true
     files:
-      - ./source/js/**/*.test.js
+      - ./source/js/**/*.{test,spec}.js
     rules:
       import/no-extraneous-dependencies: 'off'
   - env:
       node: true
     files:
       - ./*.js
-      - ./gulp/**/*.js
     globals:
       $: readonly
     parserOptions:
-      impliedStrict: true
+      sourceType: script
     rules:
       callback-return: 'off'
       global-require: 'off'
@@ -33,7 +36,7 @@ overrides:
       no-sync: 'off'
 parser: babel-eslint
 parserOptions:
-  ecmaVersion: 2018
+  ecmaVersion: 2019
   sourceType: module
 plugins:
   - babel
@@ -178,9 +181,6 @@ rules:
   import/extensions:
     - error
     - ignorePackages
-    - js: never
-      jsx: never
-      mjs: never
   import/first: error
   import/group-exports: 'off'
   import/imports-first: 'off'
@@ -228,7 +228,8 @@ rules:
   import/no-unassigned-import: 'off'
   import/no-unresolved:
     - error
-    - caseSensitive: true
+    - amd: false
+      caseSensitive: true
       commonjs: true
   import/no-unused-modules:
     - 'off'
@@ -851,7 +852,7 @@ rules:
           - '!'
   strict:
     - error
-    - never
+    - safe
   switch-colon-spacing:
     - error
     - after: true

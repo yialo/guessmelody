@@ -1,4 +1,4 @@
-import GameOptions from '../game-options';
+import GameOptions from '../game-options.js';
 
 export default (playerResult, otherResults) => {
   if (!playerResult.timeRemain) {

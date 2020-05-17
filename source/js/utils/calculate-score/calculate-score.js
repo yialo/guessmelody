@@ -1,4 +1,4 @@
-import GameOptions from '../game-options';
+import GameOptions from '../game-options.js';
 
 const FAILURE_CODE = -1;
 const AnswerPrice = { RIGHT: 1, QUICK: 1, MISTAKE: -2 };

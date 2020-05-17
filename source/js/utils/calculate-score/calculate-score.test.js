@@ -1,5 +1,4 @@
-import { assert } from 'chai';
-import calculateScore from './calculate-score';
+import calculateScore from './calculate-score.js';
 
 describe('Player score calculator', () => {
   const Answer = function (isGuessed, time) {

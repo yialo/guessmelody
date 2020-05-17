@@ -1,5 +1,4 @@
-import { assert } from 'chai';
-import { getFilePath } from './melodies';
+import { getFilePath } from './melodies.js';
 
 describe('Returns file path', () => {
   it('Returns corrent address for audio track', () => {

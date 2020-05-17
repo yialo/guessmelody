@@ -1,6 +1,6 @@
-import GameScreen from '../controllers/game-screen';
-// import ResultScreen from '../controllers/result-screen';
-import WelcomeScreen from '../controllers/welcome-screen';
+import GameScreen from '../controllers/game-screen.js';
+// import ResultScreen from '../controllers/result-screen.js';
+import WelcomeScreen from '../controllers/welcome-screen.js';
 
 export default class Router {
   constructor() {

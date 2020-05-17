@@ -1,8 +1,8 @@
-import GameOptions from '../../utils/game-options';
-import AbstractView from '../_abstract-view';
-// import GameHeaderView from './game-header-view';
-// import QuestionArtistView from '../question/question-artist-view';
-// import QuestionGenreView from '../question/question-genre-view';
+import GameOptions from '../../utils/game-options.js';
+import AbstractView from '../_abstract-view.js';
+// import GameHeaderView from './game-header-view.js';
+// import QuestionArtistView from '../question/question-artist-view.js';
+// import QuestionGenreView from '../question/question-genre-view.js';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);

@@ -1,4 +1,4 @@
-import errorUtil from '../utils/errors';
+import errorUtil from '../utils/errors.js';
 
 const $screenRoot = document.getElementById('app');
 

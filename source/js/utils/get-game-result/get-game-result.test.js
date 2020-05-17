@@ -1,5 +1,4 @@
-import { assert } from 'chai';
-import getPlayerResult from './get-game-result';
+import getPlayerResult from './get-game-result.js';
 
 describe('Game result', () => {
   const Result = function (score, mistakesDone, timeRemain) {

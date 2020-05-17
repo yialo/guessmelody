@@ -1,6 +1,6 @@
-import AbstractScreen from './_abstract-screen';
-import GameModel from '../models/game-model/game-model';
-import GameView from '../views/game/game-view';
+import AbstractScreen from './_abstract-screen.js';
+import GameModel from '../models/game-model/game-model.js';
+import GameView from '../views/game/game-view.js';
 
 const ONE_SECOND = 1000;
 

@@ -1,5 +1,5 @@
-import AbstractView from '../_abstract-view';
-import TrackView from '../_common/track-view';
+import AbstractView from '../_abstract-view.js';
+import TrackView from '../_common/track-view.js';
 
 export default class QuestonGenreView extends AbstractView {
   constructor(question) {

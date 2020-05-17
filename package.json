@@ -44,7 +44,7 @@
     "build": "parcel build ./source/index.html -d build",
     "dev": "parcel ./source/index.html -d build --port 3502",
     "lint": "npm run lint:styles && npm run lint:scripts",
-    "lint:styles": "stylelint ./source/scss/**/*.scss",
+    "lint:styles": "stylelint --id **/*.{css,scss}",
     "lint:scripts": "eslint ./*.js ./source/js/**/*.js",
     "test": "jest"
   },

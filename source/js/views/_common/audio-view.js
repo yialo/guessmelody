@@ -1,4 +1,4 @@
-import View from './_view';
+import View from './_view.js';
 
 export default class AudioView extends View {
   _audioSrc = {};

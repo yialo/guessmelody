@@ -1,5 +1,5 @@
-import GameOptions from '../utils/game-options';
-import melodies from './melodies/melodies';
+import GameOptions from '../utils/game-options.js';
+import melodies from './melodies/melodies.js';
 
 const TRACK_LIST_SIZE = {
   genre: 4,

@@ -1,4 +1,4 @@
-import ResultFailView from './result-fail-veiw';
+import ResultFailView from './result-fail-veiw.js';
 
 export default class ResultFailTriesView extends ResultFailView {
   get caption() {

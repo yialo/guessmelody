@@ -1,6 +1,6 @@
-import AbstractView from '../_abstract-view';
-import AudioTrackView from '../_common/audio-track-view';
-import ArtistView from '../_common/artist-view';
+import AbstractView from '../_abstract-view.js';
+import AudioTrackView from '../_common/audio-track-view.js';
+import ArtistView from '../_common/artist-view.js';
 
 export default class QuestonArtistView extends AbstractView {
   constructor(question) {

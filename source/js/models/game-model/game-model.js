@@ -1,6 +1,6 @@
-import Answer from '../answer-model/answer-model';
-import GameOptions from '../../utils/game-options';
-import { getQuestions as getRandomQuestions } from '../../mocks/mock-generator';
+import Answer from '../answer-model/answer-model.js';
+import GameOptions from '../../utils/game-options.js';
+import { getQuestions as getRandomQuestions } from '../../mocks/mock-generator.js';
 
 const INITIAL_STATE = {
   minutes: 5,

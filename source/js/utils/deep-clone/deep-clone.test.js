@@ -1,5 +1,4 @@
-import { assert } from 'chai';
-import deepClone from './deep-clone';
+import deepClone from './deep-clone.js';
 
 describe('Create deep clone of object', () => {
   it('should throw an error if try to clone a function', () => {

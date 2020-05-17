@@ -1,7 +1,7 @@
-import View from '../_common/_view';
-import GameHeaderLogoView from './game-header-logo-view';
-import GameHeaderMistakesView from './game-header-mistakes-view';
-import GameHeaderTimerView from './game-header-timer-view';
+import View from '../_common/_view.js';
+import GameHeaderLogoView from './game-header-logo-view.js';
+import GameHeaderMistakesView from './game-header-mistakes-view.js';
+import GameHeaderTimerView from './game-header-timer-view.js';
 
 export default class GameHeaderView extends View {
   _state = {};

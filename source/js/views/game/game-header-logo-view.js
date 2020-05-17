@@ -1,4 +1,4 @@
-import View from '../_common/_view';
+import View from '../_common/_view.js';
 
 export default class GameHeaderLogoView extends View {
   _$container = null;

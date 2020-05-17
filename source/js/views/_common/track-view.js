@@ -1,5 +1,5 @@
-import View from './_view';
-import AudioTrackView from './audio-track-view';
+import View from './_view.js';
+import AudioTrackView from './audio-track-view.js';
 
 export default class TrackView extends View {
   _track = {};

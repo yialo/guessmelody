@@ -1,4 +1,4 @@
-import View from '../_common/_view';
+import View from '../_common/_view.js';
 
 export default class GameHeaderTimerView extends View {
   _minutes = Number();

@@ -117,7 +117,7 @@
 //   }
 // }
 
-import errorUtil from '../utils/errors';
+import errorUtil from '../utils/errors.js';
 
 export default class AbstractView {
   constructor() {
