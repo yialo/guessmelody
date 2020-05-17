@@ -12,6 +12,44 @@ export default class AbstractView {
     }
   }
 
+  get _template() {
+    return ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  get $() {
+    return this._$.content;
+  }
+
+  create() {
+    this._$ = document.createElement('template');
+    this._$.innerHTML = this._template;
+  }
+
+  destroy() {
+    this._$ = null;
+  }
+
+  defineChildren() {
+    return ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  undefineChildren() {
+    return ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  mount($root) {
+    if (!this._$root) {
+      this._$root = $root;
+    }
+    this._$root.append(...this.$.childNodes);
+  }
+
+  unmount() {
+    [...this._$root.childNodes].forEach(($child) => {
+      $child.remove();
+    });
+  }
+
   render($root) {
     this.create();
     if (typeof this.defineChildren === 'function') {
@@ -32,35 +70,5 @@ export default class AbstractView {
       this.undefineChildren();
     }
     this.destroy();
-  }
-
-  get _template() {
-    return ErrorUtils.claimAbstractMethodDefinition();
-  }
-
-  get $() {
-    return this._$.content;
-  }
-
-  create() {
-    this._$ = document.createElement('template');
-    this._$.innerHTML = this._template;
-  }
-
-  destroy() {
-    this._$ = null;
-  }
-
-  mount($root) {
-    if (!this._$root) {
-      this._$root = $root;
-    }
-    this._$root.append(...this.$.childNodes);
-  }
-
-  unmount() {
-    [...this._$root.childNodes].forEach(($child) => {
-      $child.remove();
-    });
   }
 }
