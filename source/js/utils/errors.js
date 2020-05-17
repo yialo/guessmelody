@@ -1,3 +1,5 @@
+// TODO: remove redundant code
+
 // export default {
 //   restrictConstructorCall: () => {
 //     throw new Error('Abstract class contructor call restricted');
@@ -21,7 +23,7 @@ export default {
     throw new Error('Instantiation of abstract class is restricted');
   },
 
-  claimMethodRedefinition() {
+  claimAbstractMethodDefinition() {
     throw new Error('Method need to be redefined for descendants');
   },
 };

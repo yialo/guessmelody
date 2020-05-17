@@ -1,4 +1,4 @@
-import AbstractScreen from './_abstract-screen.js';
+import AbstractController from './_abstract.js';
 import GameModel from '../models/game-model/game-model.js';
 import GameView from '../views/game/game-view.js';
 
@@ -11,7 +11,7 @@ const tick = (gameState, questionView) => {
   questionView.updateHeader();
 };
 
-export default class GameScreen extends AbstractScreen {
+export default class GameScreen extends AbstractController {
   constructor() {
     super();
 
