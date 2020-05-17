@@ -1,6 +1,6 @@
-import AbstractView from '../_abstract.js';
+import AbstractView from './_Abstract.js';
 
-import LogoSrc from '../../../img/melody-logo.png';
+import LogoSrc from '@/img/melody-logo.png';
 
 export default class WelcomeView extends AbstractView {
   _$button = null;

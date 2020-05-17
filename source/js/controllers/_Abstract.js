@@ -1,16 +1,20 @@
 import errorUtil from '../utils/errors.js';
 
-const $screenRoot = document.getElementById('app');
+const $appRoot = document.getElementById('app');
 
-class AbstractScreen {
+class AbstractController {
+  static $root = $appRoot;
+
+  _view = null;
+
   constructor() {
-    if (new.target === AbstractScreen) {
+    if (new.target === AbstractController) {
       errorUtil.restrictAbstractCall();
     }
   }
 
   show() {
-    this._view.render(AbstractScreen.$root);
+    this._view.render(AbstractController.$root);
   }
 
   hide() {
@@ -18,8 +22,4 @@ class AbstractScreen {
   }
 }
 
-Object.defineProperty(AbstractScreen, '$root', {
-  value: $screenRoot,
-});
-
-export default AbstractScreen;
+export default AbstractController;

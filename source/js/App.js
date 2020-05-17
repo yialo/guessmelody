@@ -23,16 +23,14 @@ export default class App {
   }
 
   _showWelcome() {
-    console.log('Game screen is shown');
+    this._welcome = new WelcomeController();
 
-    // this._welcome = new WelcomeController();
+    this._welcome.setOnStart(() => {
+      this._welcome.hide();
+      this._showGame();
+    });
 
-    // this._welcome.onStart = () => {
-    //   this._welcome.hide();
-    //   this._showGame();
-    // };
-
-    // this._welcome.show();
+    this._welcome.show();
   }
 
   _showGame() {

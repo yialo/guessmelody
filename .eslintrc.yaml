@@ -15,35 +15,70 @@ overrides:
       node: true
     files:
       - ./*.js
-    globals:
-      $: readonly
+    parser: espree
     parserOptions:
+      ecmaVersion: 2019
       sourceType: script
     rules:
-      callback-return: 'off'
-      global-require: 'off'
-      handle-callback-err: 'off'
-      import/no-dynamic-require: 'off'
+      import/no-commonjs: 'off'
       import/no-extraneous-dependencies: 'off'
-      no-buffer-constructor: error
-      no-mixed-requires: 'off'
-      no-new-require: error
-      no-path-concat: error
-      no-process-env: 'off'
-      no-process-exit: 'off'
-      no-restricted-modules: 'off'
-      no-sync: 'off'
+      import/no-nodejs-modules: 'off'
+      node/handle-callback-err: 'off'
+      node/no-callback-literal: 'off'
+      node/no-exports-assign: error
+      node/no-extraneous-import: error
+      node/no-extraneous-require: error
+      node/no-missing-import: error
+      node/no-missing-require: error
+      node/no-new-require: error
+      node/no-path-concat: error
+      node/no-process-exit: error
+      node/no-unpublished-bin: error
+      node/no-unpublished-import: error
+      node/no-unpublished-require: error
+      node/no-unsupported-features/es-builtins: error
+      node/no-unsupported-features/es-syntax: error
+      node/no-unsupported-features/node-builtins: error
+      node/process-exit-as-throw: 'off'
+      node/shebang: error
+      node/no-deprecated-api: error
+      node/callback-return: 'off'
+      node/exports-style:
+        - error
+        - module.exports
+      node/file-extension-in-import:
+        - error
+        - always
+      node/global-require: 'off'
+      node/no-mixed-requires: 'off'
+      node/no-process-env: 'off'
+      node/no-restricted-import: 'off'
+      node/no-restricted-require: 'off'
+      node/no-sync: 'off'
+      node/prefer-global/buffer: 'off'
+      node/prefer-global/console: 'off'
+      node/prefer-global/process: 'off'
+      node/prefer-global/text-decoder: 'off'
+      node/prefer-global/text-encoder: 'off'
+      node/prefer-global/url-search-params: 'off'
+      node/prefer-global/url: 'off'
+      node/prefer-promises/dns: 'off'
+      node/prefer-promises/fs: 'off'
+    settings:
+      import/resolver: node
 parser: babel-eslint
 parserOptions:
-  ecmaVersion: 2019
+  allowImportExportEverywhere: false
   sourceType: module
 plugins:
   - babel
   - import
+  - node
+  - promise
 rules:
   accessor-pairs: 'off'
   array-bracket-newline:
-    - 'off'
+    - error
     - consistent
   array-bracket-spacing:
     - error
@@ -52,13 +87,9 @@ rules:
     - error
     - allowImplicit: true
   array-element-newline:
-    - 'off'
-    - minItems: 3
-      multiline: true
-  arrow-body-style:
     - error
-    - as-needed
-    - requireReturnForObjectLiteral: false
+    - consistent
+  arrow-body-style: 'off'
   arrow-parens:
     - error
     - always
@@ -77,18 +108,10 @@ rules:
     - allowSingleLine: true
   camelcase:
     - error
-    - properties: never
-  capitalized-comments:
-    - 'off'
-    - never
-    - block:
-        ignoreConsecutiveComments: true
-        ignoreInlineComments: true
-        ignorePattern: .*
-      line:
-        ignoreConsecutiveComments: true
-        ignoreInlineComments: true
-        ignorePattern: .*
+    - ignoreDestructuring: false
+      ignoreImports: false
+      properties: never
+  capitalized-comments: 'off'
   class-methods-use-this: 'off'
   comma-dangle:
     - error
@@ -116,9 +139,7 @@ rules:
         ObjectExpression: false
         ObjectPattern: false
         VariableDeclaration: false
-  complexity:
-    - error
-    - max: 10
+  complexity: 'off'
   computed-property-spacing:
     - error
     - never
@@ -131,6 +152,7 @@ rules:
   default-case:
     - error
     - commentPattern: ^no default$
+  default-param-last: error
   dot-notation:
     - error
     - allowKeywords: true
@@ -146,12 +168,8 @@ rules:
     - error
     - never
   func-name-matching: 'off'
-  func-names:
-    - error
-    - as-needed
-  func-style:
-    - 'off'
-    - expression
+  func-names: 'off'
+  func-style: 'off'
   function-paren-newline:
     - error
     - consistent
@@ -162,7 +180,9 @@ rules:
   getter-return:
     - error
     - allowImplicit: true
-  global-require: error
+  grouped-accessor-pairs:
+    - error
+    - getBeforeSet
   guard-for-in: error
   id-blacklist: 'off'
   id-length: 'off'
@@ -170,11 +190,8 @@ rules:
   implicit-arrow-linebreak:
     - error
     - beside
-  import/default: 'off'
-  import/dynamic-import-chunkname:
-    - 'off'
-    - importFunctions: []
-      webpackChunknameFormat: '[0-9a-zA-Z-_/.]+'
+  import/default: error
+  import/dynamic-import-chunkname: 'off'
   import/export: error
   import/exports-last: 'off'
   import/extensions:
@@ -182,73 +199,67 @@ rules:
     - ignorePackages
   import/first: error
   import/group-exports: 'off'
-  import/imports-first: 'off'
-  import/max-dependencies:
-    - 'off'
-    - max: 10
+  import/max-dependencies: 'off'
   import/named: error
-  import/namespace: 'off'
+  import/namespace: error
   import/newline-after-import: error
   import/no-absolute-path: error
   import/no-amd: error
-  import/no-anonymous-default-export:
-    - 'off'
-    - allowAnonymousClass: false
-      allowAnonymousFunction: false
-      allowArray: false
-      allowArrowFunction: false
-      allowLiteral: false
-      allowObject: false
-  import/no-commonjs: 'off'
-  import/no-cycle:
+  import/no-anonymous-default-export: 'off'
+  import/no-commonjs:
     - error
+    - allowConditionalRequire: false
+      allowPrimitiveModules: false
+      allowRequire: false
+  import/no-cycle: error
   import/no-default-export: 'off'
-  import/no-deprecated: 'off'
-  import/no-duplicates: error
-  import/no-dynamic-require: error
+  import/no-deprecated: error
+  import/no-duplicates:
+    - error
+    - considerQueryString: true
+  import/no-dynamic-require: 'off'
   import/no-extraneous-dependencies:
     - error
-    - devDependencies: false
+    - bundledDependencies: false
+      devDependencies: false
       optionalDependencies: false
       peerDependencies: false
-  import/no-internal-modules:
-    - 'off'
-    - allow: []
+  import/no-internal-modules: 'off'
   import/no-mutable-exports: error
   import/no-named-as-default: error
   import/no-named-as-default-member: error
   import/no-named-default: error
   import/no-named-export: 'off'
   import/no-namespace: 'off'
-  import/no-nodejs-modules: 'off'
+  import/no-nodejs-modules: error
   import/no-relative-parent-imports: 'off'
   import/no-restricted-paths: 'off'
   import/no-self-import: error
-  import/no-unassigned-import: 'off'
+  import/no-unassigned-import:
+    - error
+    - allow:
+        - '**/*.{css,ico,jp?(e)g,png,svg,woff2}'
+        - '**/*.test.js'
   import/no-unresolved:
     - error
     - amd: false
       caseSensitive: true
       commonjs: true
-  import/no-unused-modules:
-    - 'off'
-    - ignoreExports: []
-      missingExports: true
-      unusedExports: true
-  import/no-useless-path-segments: error
-  import/no-webpack-loader-syntax: error
-  import/order:
+  import/no-unused-modules: 'off'
+  import/no-useless-path-segments:
     - error
-    - groups:
-      - builtin
-  import/prefer-default-export: error
+    - commonjs: true
+      noUselessIndex: false
+  import/no-webpack-loader-syntax: error
+  import/order: 'off'
+  import/prefer-default-export: 'off'
   import/unambiguous: 'off'
   indent:
     - error
     - 2
     - ArrayExpression: 1
       CallExpression:
-        arguments: 1
+        arguments: 2
       FunctionDeclaration:
         body: 1
         parameters: 1
@@ -261,24 +272,10 @@ rules:
       VariableDeclarator: 1
       flatTernaryExpressions: false
       ignoreComments: false
-      ignoredNodes:
-        - JSXElement
-        - JSXElement > *
-        - JSXAttribute
-        - JSXIdentifier
-        - JSXNamespacedName
-        - JSXMemberExpression
-        - JSXSpreadAttribute
-        - JSXExpressionContainer
-        - JSXOpeningElement
-        - JSXClosingElement
-        - JSXText
-        - JSXEmptyExpression
-        - JSXSpreadChild
       outerIIFEBody: 1
   init-declarations: 'off'
   jsx-quotes:
-    - 'off'
+    - error
     - prefer-double
   key-spacing:
     - error
@@ -295,19 +292,11 @@ rules:
           after: true
         throw:
           after: true
-  line-comment-position:
-    - 'off'
-    - applyDefaultPatterns: true
-      ignorePattern: ''
-      position: above
+  line-comment-position: 'off'
   linebreak-style:
     - error
     - unix
   lines-around-comment: 'off'
-  lines-around-directive:
-    - error
-    - after: always
-      before: always
   lines-between-class-members:
     - error
     - always
@@ -315,9 +304,7 @@ rules:
   max-classes-per-file:
     - error
     - 1
-  max-depth:
-    - 'off'
-    - 4
+  max-depth: 'off'
   max-len:
     - error
     - code: 100
@@ -326,56 +313,31 @@ rules:
       ignoreStrings: true
       ignoreTemplateLiterals: true
       ignoreUrls: true
-  max-lines:
-    - 'off'
-    - max: 300
-      skipBlankLines: true
-      skipComments: true
-  max-lines-per-function:
-    - 'off'
-    - IIFEs: true
-      max: 50
-      skipBlankLines: true
-      skipComments: true
+  max-lines: 'off'
+  max-lines-per-function: 'off'
   max-nested-callbacks: 'off'
-  max-params:
-    - 'off'
-    - 3
-  max-statements:
-    - 'off'
-    - 10
+  max-params: 'off'
+  max-statements: 'off'
   max-statements-per-line:
-    - 'off'
+    - error
     - max: 1
-  multiline-comment-style:
-    - 'off'
-    - starred-block
-  multiline-ternary:
-    - 'off'
-    - never
+  multiline-comment-style: 'off'
+  multiline-ternary: 'off'
   new-cap:
     - error
     - capIsNew: false
-      capIsNewExceptions:
-        - Immutable.Map
-        - Immutable.Set
-        - Immutable.List
       newIsCap: true
-      newIsCapExceptions: []
   new-parens: error
-  newline-after-var: 'off'
-  newline-before-return: 'off'
   newline-per-chained-call:
     - error
     - ignoreChainWithDepth: 4
   no-alert: warn
   no-array-constructor: error
-  no-async-promise-executor: 'off'
+  no-async-promise-executor: error
   no-await-in-loop: error
   no-bitwise: error
   no-caller: error
   no-case-declarations: error
-  no-catch-shadow: 'off'
   no-class-assign: error
   no-compare-neg-zero: error
   no-cond-assign:
@@ -387,13 +349,15 @@ rules:
   no-console: 'off'
   no-const-assign: error
   no-constant-condition: warn
+  no-constructor-return: 'off'
   no-continue: error
   no-control-regex: error
-  no-debugger: warn
+  no-debugger: 'off'
   no-delete-var: error
   no-div-regex: 'off'
   no-dupe-args: error
   no-dupe-class-members: error
+  no-dupe-else-if: error
   no-dupe-keys: error
   no-duplicate-case: error
   no-duplicate-imports: 'off'
@@ -416,29 +380,16 @@ rules:
   no-extra-bind: error
   no-extra-boolean-cast: error
   no-extra-label: error
-  no-extra-parens:
-    - 'off'
-    - all
-    - conditionalAssign: true
-      enforceForArrowConditionals: false
-      ignoreJSX: all
-      nestedBinaryExpressions: false
-      returnAssign: false
+  no-extra-parens: 'off'
   no-extra-semi: error
   no-fallthrough: error
   no-floating-decimal: error
   no-func-assign: error
-  no-global-assign:
-    - error
-    - exceptions: []
-  no-implicit-coercion:
-    - 'off'
-    - allow: []
-      boolean: false
-      number: true
-      string: true
+  no-global-assign: error
+  no-implicit-coercion: 'off'
   no-implicit-globals: 'off'
   no-implied-eval: error
+  no-import-assign: error
   no-inline-comments: 'off'
   no-inner-declarations: error
   no-invalid-regexp: error
@@ -453,13 +404,8 @@ rules:
   no-lone-blocks: error
   no-lonely-if: error
   no-loop-func: error
-  no-magic-numbers:
-    - 'off'
-    - detectObjects: false
-      enforceConst: true
-      ignore: []
-      ignoreArrayIndexes: true
-  no-misleading-character-class: 'off'
+  no-magic-numbers: 'off'
+  no-misleading-character-class: error
   no-mixed-operators:
     - error
     - allowSamePrecedence: false
@@ -474,18 +420,10 @@ rules:
           - '*'
         - - '%'
           - /
-        - - '**'
-          - +
-        - - '**'
-          - '-'
-        - - '**'
+        - - /
           - '*'
-        - - '**'
-          - /
         - - '&'
           - '|'
-          - ^
-          - '~'
           - '<<'
           - '>>'
           - '>>>'
@@ -493,17 +431,10 @@ rules:
           - '!='
           - ===
           - '!=='
-          - '>'
-          - '>='
-          - <
-          - <=
         - - '&&'
           - '||'
-        - - in
-          - instanceof
   no-mixed-spaces-and-tabs: error
-  no-multi-assign:
-    - error
+  no-multi-assign: error
   no-multi-spaces:
     - error
     - ignoreEOLComments: false
@@ -511,10 +442,9 @@ rules:
   no-multiple-empty-lines:
     - error
     - max: 2
+      maxBOF: 0
       maxEOF: 0
-  no-native-reassign: 'off'
-  no-negated-condition: 'off'
-  no-negated-in-lhs: 'off'
+  no-negated-condition: error
   no-nested-ternary: error
   no-new: error
   no-new-func: error
@@ -596,10 +526,7 @@ rules:
     - stop
     - toolbar
     - top
-  no-restricted-imports:
-    - 'off'
-    - paths: []
-      patterns: []
+  no-restricted-imports: 'off'
   no-restricted-properties:
     - error
     - message: arguments.callee is deprecated
@@ -646,12 +573,12 @@ rules:
     - props: false
   no-self-compare: error
   no-sequences: error
+  no-setter-return: error
   no-shadow: error
   no-shadow-restricted-names: error
-  no-spaced-func: error
   no-sparse-arrays: error
   no-tabs: error
-  no-template-curly-in-string: error
+  no-template-curly-in-string: 'off'
   no-ternary: 'off'
   no-this-before-super: error
   no-throw-literal: error
@@ -686,9 +613,9 @@ rules:
     - error
     - classes: true
       functions: true
-      variables: true
+      variables: false
   no-useless-call: 'off'
-  no-useless-catch: 'off'
+  no-useless-catch: error
   no-useless-computed-key: error
   no-useless-concat: error
   no-useless-constructor: error
@@ -701,19 +628,12 @@ rules:
   no-useless-return: error
   no-var: error
   no-void: 'off'
-  no-warning-comments:
-    - 'off'
-    - location: start
-      terms:
-        - todo
-        - fixme
-        - xxx
+  no-warning-comments: 'off'
   no-whitespace-before-property: error
   no-with: error
   nonblock-statement-body-position:
     - error
     - beside
-    - overrides: {}
   object-curly-newline:
     - error
     - consistent: true
@@ -766,16 +686,32 @@ rules:
         array: false
         object: true
     - enforceForRenamedProperties: false
+  prefer-exponentiation-operator: error
   prefer-named-capture-group: 'off'
   prefer-numeric-literals: error
-  prefer-object-spread: 'off'
+  prefer-object-spread: error
   prefer-promise-reject-errors:
     - error
     - allowEmptyReject: true
-  prefer-reflect: 'off'
   prefer-rest-params: error
   prefer-spread: error
   prefer-template: error
+  promise/always-return: 'off'
+  promise/avoid-new: 'off'
+  promise/catch-or-return:
+    - error
+    - allowFinally: true
+  promise/no-callback-in-promise: 'off'
+  promise/no-native: 'off'
+  promise/no-nesting: error
+  promise/no-new-statics: error
+  promise/no-promise-in-callback: 'off'
+  promise/no-return-in-finally: error
+  promise/no-return-wrap: error
+  promise/param-names: error
+  promise/prefer-await-to-callbacks: 'off'
+  promise/prefer-await-to-then: 'off'
+  promise/valid-params: error
   quote-props:
     - error
     - consistent
@@ -785,8 +721,7 @@ rules:
     - allowTemplateLiterals: true
   radix: error
   require-atomic-updates: 'off'
-  require-await: 'off'
-  require-jsdoc: 'off'
+  require-await: error
   require-unicode-regexp: 'off'
   require-yield: error
   rest-spread-spacing:
@@ -800,21 +735,8 @@ rules:
   semi-style:
     - error
     - last
-  sort-imports:
-    - 'off'
-    - ignoreCase: false
-      ignoreDeclarationSort: false
-      ignoreMemberSort: false
-      memberSyntaxSortOrder:
-        - none
-        - all
-        - multiple
-        - single
-  sort-keys:
-    - 'off'
-    - asc
-    - caseSensitive: false
-      natural: true
+  sort-imports: 'off'
+  sort-keys: 'off'
   sort-vars: 'off'
   space-before-blocks: error
   space-before-function-paren:
@@ -829,7 +751,6 @@ rules:
   space-unary-ops:
     - error
     - nonwords: false
-      overrides: {}
       words: true
   spaced-comment:
     - error
@@ -842,6 +763,8 @@ rules:
         markers:
           - =
           - '!'
+          - ':'
+          - '::'
       line:
         exceptions:
           - '-'
@@ -867,7 +790,6 @@ rules:
     - error
     - never
   use-isnan: error
-  valid-jsdoc: 'off'
   valid-typeof:
     - error
     - requireStringLiterals: true
@@ -882,18 +804,12 @@ rules:
     - after
   yoda: error
 settings:
-  import/core-modules: []
   import/extensions:
-    - error
     - .js
-      .jsx
-      .mjs
   import/ignore:
     - node_modules
-    - \\.(coffee|scss|css|less|hbs|svg|json)$
+    - \\.(s?css|jpe?g|json|png|svg)$
   import/resolver:
-    node:
-      extensions:
-        - .js
-        - .json
-        - .mjs
+    webpack:
+      env:
+        purpose: development

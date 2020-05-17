@@ -179,12 +179,6 @@ module.exports = (env) => {
       publicPath,
     },
 
-    resolve: {
-      alias: {
-        '@': PATH.SRC,
-      },
-    },
-
     plugins: [
       new CaseSensitivePathsPlugin(),
       new CleanPlugin({
@@ -199,6 +193,12 @@ module.exports = (env) => {
         template: PATH.TEMPLATE,
       }),
     ],
+
+    resolve: {
+      alias: {
+        '@': PATH.SRC,
+      },
+    },
 
     stats: (() => {
       const statsConfig = {
