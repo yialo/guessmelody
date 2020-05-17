@@ -34,6 +34,8 @@ export default class App {
   }
 
   _showGame() {
+    console.log('Game screen is shown');
+
     // this._game = new GameController();
 
     // this._game.onReset = () => {
