@@ -1,17 +1,15 @@
 import ErrorUtils from '../utils/errors.js';
 
+// TODO: define pseudo-private methods to simplify next TypeScript migration
+
 export default class AbstractView {
-  $ = null;
+  _$ = null;
   _$root = null;
 
   constructor() {
     if (new.target === AbstractView) {
       ErrorUtils.restrictAbstractCall();
     }
-  }
-
-  _getTemplate() {
-    ErrorUtils.claimAbstractMethodDefinition();
   }
 
   render($root) {
@@ -36,32 +34,33 @@ export default class AbstractView {
     this.destroy();
   }
 
+  get _template() {
+    return ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  get $() {
+    return this._$.content;
+  }
+
   create() {
-    this.$ = document.createElement('template');
-    this.$.innerHTML = this._getTemplate().trim();
+    this._$ = document.createElement('template');
+    this._$.innerHTML = this._template;
   }
 
   destroy() {
-    this.$ = null;
+    this._$ = null;
   }
 
   mount($root) {
     if (!this._$root) {
       this._$root = $root;
     }
-
-    const $children = [...this.$.childNodes];
-    $children.forEach(($child) => {
-      this._$root.appendChild($child);
-    });
+    this._$root.append(...this.$.childNodes);
   }
 
   unmount() {
-    const $children = [...this._$root.childNodes];
-
     [...this._$root.childNodes].forEach(($child) => {
       $child.remove();
     });
-    $children.fill(null);
   }
 }

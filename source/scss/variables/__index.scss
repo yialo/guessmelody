@@ -1,0 +1,9 @@
+@use "colors";
+@use "fonts";
+@use "layout";
+
+:root {
+  @include colors.color();
+  @include fonts.font();
+  @include layout.layout();
+}

@@ -7,7 +7,7 @@ export default class WelcomeController extends AbstractController {
     this._view = new WelcomeView();
   }
 
-  setOnStart(callback) {
-    this._view.setOnStart(callback);
+  set onStart(callback) {
+    this._view.onStart = callback;
   }
 }

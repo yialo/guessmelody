@@ -1,11 +1,13 @@
-:root {
+@use "sass:color";
+
+@mixin color {
   $color-orange: #ff9749;
 
-  --color-beige: #f0eed5;
-  --color-orange: $color-orange;
-  --color-hover: #f00000;
-  --color-text-dark: #230d1a;
-  --color-text-grey: #808080;
-  --color-correct: #36b742;
-  --color-orange-lighten: color($color-orange lightness(+15%));
+  --color_beige: #f0eed5;
+  --color_orange: #{$color-orange};
+  --color_hover: #f00000;
+  --color_text-dark: #230d1a;
+  --color_text-grey: #808080;
+  --color_correct: #36b742;
+  --color_orange-lighten: #{color.scale($color-orange, $lightness: +15%)};
 }

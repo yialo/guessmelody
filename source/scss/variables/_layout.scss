@@ -1,4 +1,4 @@
-:root {
-  --layout-height: 850px;
-  --layout-width: 780px;
+@mixin layout {
+  --layout_width: 780px;
+  --layout_height: 850px;
 }

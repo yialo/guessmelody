@@ -1,7 +1,7 @@
 .artist {
   position: relative;
   width: 134px;
-  color: var(--color-text-dark);
+  color: var(--color_text-dark);
   text-align: center;
   cursor: pointer;
 }
@@ -10,22 +10,22 @@
   margin-bottom: 5px;
   width: 134px;
   height: 134px;
-  border: solid 5px var(--color-text-dark);
+  border: solid 5px var(--color_text-dark);
   border-radius: 134px;
   object-fit: cover;
-  background-color: var(--color-beige);
+  background-color: var(--color_beige);
   cursor: pointer;
 
   .artist:hover & {
-    border-color: var(--color-orange);
+    border-color: var(--color_orange);
   }
 
   .artist__input:focus + .artist__name & {
-    border-color: var(--color-orange);
+    border-color: var(--color_orange);
   }
 
   .artist:active & {
-    border-color: var(--color-hover);
+    border-color: var(--color_hover);
   }
 }
 

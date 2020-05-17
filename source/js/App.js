@@ -25,10 +25,10 @@ export default class App {
   _showWelcome() {
     this._welcome = new WelcomeController();
 
-    this._welcome.setOnStart(() => {
+    this._welcome.onStart = () => {
       this._welcome.hide();
       this._showGame();
-    });
+    };
 
     this._welcome.show();
   }

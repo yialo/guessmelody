@@ -3,12 +3,12 @@
   justify-content: space-between;
   padding-bottom: 10px;
 
-  width: var(--layout-width);
+  width: var(--layout_width);
 }
 
 .copyright {
   text-align: right;
-  color: var(--color-beige);
+  color: var(--color_beige);
   white-space: nowrap;
 }
 
@@ -29,10 +29,10 @@
 }
 
 .copyright__link {
-  color: var(--color-orange);
+  color: var(--color_orange);
 
   &:hover,
   &:focus {
-    color: var(--color-hover);
+    color: var(--color_hover);
   }
 }

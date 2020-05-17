@@ -44,7 +44,7 @@
   border: none;
   padding: 0;
   padding-right: 40px;
-  color: var(--color-orange);
+  color: var(--color_orange);
   font-size: 30px;
   background: transparent;
 
@@ -62,7 +62,7 @@
 
   &:hover,
   &:focus {
-    color: var(--color-hover);
+    color: var(--color_hover);
 
     &::after {
       background-position: -5px -392px;
