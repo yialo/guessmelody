@@ -4,7 +4,6 @@ env:
 ignorePatterns:
   - '*.html'
   - /build/
-  - /node_modules/
 overrides:
   - env:
       jest: true
