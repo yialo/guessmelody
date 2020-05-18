@@ -2,6 +2,7 @@
 
 const path = require('path');
 
+const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const sass = require('sass');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -79,6 +80,9 @@ module.exports = (env) => {
             {
               loader: 'postcss-loader',
               options: {
+                plugins: [
+                  autoprefixer(),
+                ],
                 sourceMap: true,
               },
             },

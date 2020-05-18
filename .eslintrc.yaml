@@ -238,7 +238,7 @@ rules:
   import/no-unassigned-import:
     - error
     - allow:
-        - '**/*.{css,ico,jp?(e)g,png,svg,woff2}'
+        - '**/*.{?(s)css,ico,jp?(e)g,png,svg,woff2}'
         - '**/*.test.js'
   import/no-unresolved:
     - error
