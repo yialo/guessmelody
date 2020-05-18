@@ -44,6 +44,7 @@ module.exports = (env) => {
       hot: false,
       inline: true,
       overlay: true,
+      writeToDisk: true,
     } : {},
 
     devtool: isDevelopment ? 'eval-source-map' : false,
@@ -114,11 +115,11 @@ module.exports = (env) => {
           }),
           getFileLoaderRule({
             testRegexp: /\.(jpe?g|png|svg)$/,
-            outputSubdir: 'img',
+            outputPath: 'img',
           }),
           getFileLoaderRule({
             testRegexp: /\.woff2?$/,
-            outputSubdir: 'fonts',
+            outputPath: 'fonts',
           }),
         ];
       })(),
