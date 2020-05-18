@@ -16,20 +16,16 @@
 
 ## Lint styles
 
-    npm run lint:css
+    npm run lint:styles
 
 ## Lint scripts
 
-    npm run lint:js
+    npm run lint:scripts
 
 ## Lint styles & scripts
 
     npm run lint
 
-## Minimize images
-
-    npm run imagemin
-
-## Run Mocha tests
+## Run Jest tests
 
     npm test
