@@ -44,7 +44,6 @@ module.exports = (env) => {
       hot: false,
       inline: true,
       overlay: true,
-      writeToDisk: true,
     } : {},
 
     devtool: isDevelopment ? 'eval-source-map' : false,
