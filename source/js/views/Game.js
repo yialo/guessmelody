@@ -20,7 +20,11 @@ class GameView extends AbstractView {
   }
 
   _$logo = null;
+  _$minutes = null;
+  _$seconds = null;
+  _$mistakes = null;
   _$question = null;
+  _$timer = null;
 
   constructor(props = {}) {
     const {
@@ -98,6 +102,9 @@ class GameView extends AbstractView {
 const activationAndChildrenMixin = {
   _defineChildren() {
     this._$logo = this._$content.querySelector('.game__back');
+    this._$timer = this._$content.querySelector('.timer');
+    this._$minutes = this._$content.querySelector('.timer__mins');
+    this._$seconds = this._$content.querySelector('.timer__secs');
   },
   _undefineChildren() {
     this._$logo = null;

@@ -34,4 +34,8 @@ export default class GameModel {
   get seconds() {
     return this._state.seconds;
   }
+
+  get mistakes() {
+    return this._state.mistakes;
+  }
 }
