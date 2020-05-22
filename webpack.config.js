@@ -59,6 +59,9 @@ module.exports = (env) => {
         const scriptLoaderRule = {
           test: /\.jsx?$/,
           loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
         };
 
         const templateLoaderRule = {
