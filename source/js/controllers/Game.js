@@ -17,17 +17,6 @@ export default class GameScreen extends AbstractController {
 
     this._model = new GameModel();
     this._view = new GameView();
-
-    // this._view.onAnswer = (answer) => {
-    //   const answerStatus = this._model.checkAnswer(answer);
-
-    //   if (answerStatus) {
-    //     this._model.toNextQuestion();
-    //     this._update();
-    //   } else {
-    //     console.log('Ошибка!');
-    //   }
-    // };
   }
 
   set onReset(callback) {
