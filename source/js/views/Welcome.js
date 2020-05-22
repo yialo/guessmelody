@@ -1,6 +1,7 @@
 import AbstractView from './_Abstract.js';
 
 import LogoSrc from '@/img/melody-logo.png';
+import formatTemplate from '@/js/utils/formatTemplate.js';
 
 export default class WelcomeView extends AbstractView {
   _$button = null;
@@ -11,7 +12,7 @@ export default class WelcomeView extends AbstractView {
   }
 
   get _template() {
-    return (
+    const template = (
       `<section class="welcome">
         <div class="welcome__logo">
           <img src="${LogoSrc}" alt="Угадай мелодию" width="186" height="83">
@@ -26,6 +27,7 @@ export default class WelcomeView extends AbstractView {
         <p class="welcome__text">Удачи!</p>
       </section>`
     );
+    return formatTemplate(template);
   }
 
   set onStart(callback) {
