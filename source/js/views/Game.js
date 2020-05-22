@@ -26,25 +26,32 @@ class GameView extends AbstractView {
   _$question = null;
   _$timer = null;
 
-  constructor(props = {}) {
-    const {
-      mistakes = 0,
-      minutes = 0,
-      seconds = 0,
-      question = null,
-    } = props;
-
+  constructor(model = {}) {
     super();
-    this._mistakes = mistakes;
-    this._minutes = GameView.addZero(minutes);
-    this._seconds = GameView.addZero(seconds);
-    this._question = question;
-
+    this._model = model;
     this._onLogoClick = this._onLogoClick.bind(this);
   }
 
   set onReset(callback) {
     this._onReset = callback;
+  }
+
+  updateTimer() {
+    this._$minutes.textContent = GameView.addZero(this._minutes);
+    this._$seconds.textContent = GameView.addZero(this._seconds);
+  }
+
+  updateMistakes() {
+    const mistakesList = GameView.formatTemplate(this._mistakesList);
+    this._$mistakes.innerHTML = mistakesList;
+  }
+
+  get _minutes() {
+    return GameView.addZero(this._model.minutes);
+  }
+
+  get _seconds() {
+    return GameView.addZero(this._model.seconds);
   }
 
   get _logoTemplate() {
@@ -56,11 +63,14 @@ class GameView extends AbstractView {
     );
   }
 
+  get _mistakesList() {
+    return new Array(this._model.mistakes).fill(`<div class="wrong"></div>`).join('');
+  }
+
   get _mistakesTemplate() {
-    const mistakeList = new Array(this._mistakes).fill(`<div class="wrong"></div>`).join('');
     return (
       `<div class="game__mistakes">
-        ${mistakeList}
+        ${this._mistakesList}
       </div>`
     );
   }
@@ -105,6 +115,8 @@ const activationAndChildrenMixin = {
     this._$timer = this._$content.querySelector('.timer');
     this._$minutes = this._$content.querySelector('.timer__mins');
     this._$seconds = this._$content.querySelector('.timer__secs');
+    this._$mistakes = this._$content.querySelector('.game__mistakes');
+    this._$question = this._$content.querySelector('.game__screen');
   },
   _undefineChildren() {
     this._$logo = null;
