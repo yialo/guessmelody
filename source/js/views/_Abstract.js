@@ -24,29 +24,33 @@ export default class AbstractView {
     return ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  create() {
+  _getTemplate() {
+    return AbstractView.formatTemplate(this._template);
+  }
+
+  _create() {
     const $template = document.createElement('template');
-    $template.innerHTML = this._template;
+    $template.innerHTML = this._getTemplate();
     this._$content = $template.content;
   }
 
-  defineChildren() {
+  _defineChildren() {
     ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  undefineChildren() {
+  _undefineChildren() {
     ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  activate() {
+  _activate() {
     ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  deactivate() {
+  _deactivate() {
     ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  mount($root) {
+  _mount($root) {
     if (!this._$root) {
       this._$root = $root;
     }
@@ -54,28 +58,20 @@ export default class AbstractView {
     this._$content = null;
   }
 
-  unmount() {
+  _unmount() {
     this._$root.innerHTML = '';
   }
 
   render($root) {
-    this.create();
-    if (typeof this.defineChildren === 'function') {
-      this.defineChildren();
-    }
-    if (typeof this.activate === 'function') {
-      this.activate();
-    }
-    this.mount($root);
+    this._create();
+    this._defineChildren();
+    this._activate();
+    this._mount($root);
   }
 
   unrender() {
-    this.unmount();
-    if (typeof this.deactivate === 'function') {
-      this.deactivate();
-    }
-    if (typeof this.undefineChildren === 'function') {
-      this.undefineChildren();
-    }
+    this._unmount();
+    this._deactivate();
+    this._undefineChildren();
   }
 }

@@ -11,7 +11,7 @@ export default class WelcomeView extends AbstractView {
   }
 
   get _template() {
-    const template = (
+    return (
       `<section class="welcome">
         <div class="welcome__logo">
           <img src="${LogoSrc}" alt="Угадай мелодию" width="186" height="83">
@@ -26,28 +26,27 @@ export default class WelcomeView extends AbstractView {
         <p class="welcome__text">Удачи!</p>
       </section>`
     );
-    return WelcomeView.formatTemplate(template);
   }
 
   set onStart(callback) {
     this._onStart = callback;
   }
 
-  defineChildren() {
+  _defineChildren() {
     if (!this._$button) {
       this._$button = this._$content.querySelector('.welcome__button');
     }
   }
 
-  undefineChildren() {
+  _undefineChildren() {
     this._$button = null;
   }
 
-  activate() {
+  _activate() {
     this._$button.addEventListener('click', this._onButtonClick);
   }
 
-  deactivate() {
+  _deactivate() {
     this._$button.removeEventListener('click', this._onButtonClick);
   }
 
