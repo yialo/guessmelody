@@ -9,13 +9,9 @@ export default class GameHeaderMistakesView extends View {
   }
 
   get mistakesTemplate() {
-    return (
-      `${
-        new Array(this._mistakes)
-          .fill(`<div class="wrong"></div>`)
-          .join('')
-      }`
-    );
+    return new Array(this._mistakes)
+      .fill(`<div class="wrong"></div>`)
+      .join('');
   }
 
   get $mistakes() {

@@ -1,8 +1,9 @@
 import { GAME_OPTIONS } from '../../constants.js';
 import AbstractView from '../_Abstract.js';
-// import GameHeaderView from './game-header-view.js';
 // import QuestionArtistView from '../question/question-artist-view.js';
 // import QuestionGenreView from '../question/question-genre-view.js';
+
+import GameLogoSrc from '@/img/melody-logo-ginger.png';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
@@ -13,99 +14,147 @@ const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 // };
 
 export default class GameView extends AbstractView {
-  _headerView = null;
-  _questionView = null;
+  static addZero(num) {
+    return String(num).padStart(2, '0');
+  }
+
+  _$logo = null;
   _$question = null;
 
-  // constructor() {
-  //   super();
+  constructor(props = {}) {
+    const {
+      mistakes = 0,
+      minutes = 0,
+      seconds = 0,
+      question = null,
+    } = props;
 
-  //   this._headerView = new GameHeaderView();
-  // }
+    super();
+    this._mistakes = mistakes;
+    this._minutes = GameView.addZero(minutes);
+    this._seconds = GameView.addZero(seconds);
+    this._question = question;
+
+    this._onLogoClick = this._onLogoClick.bind(this);
+  }
 
   set onReset(callback) {
-    this._headerView.onReset = callback;
+    this._onReset = callback;
   }
 
-  get _type() {
-    return this._question.type;
-  }
-
-  get _contentTemplate() {
+  get _logoTemplate() {
     return (
-      `${this._headerView.template}
-      <div class="game__screen"></div>`
+      `<a class="game__back" href="#">
+        <span class="visually-hidden">Сыграть ещё раз</span>
+        <img class="game__logo" src="${GameLogoSrc}" alt="Угадай мелодию">
+      </a>`
+    );
+  }
+
+  get _mistakesTemplate() {
+    const mistakeList = new Array(this._mistakes).fill(`<div class="wrong"></div>`).join('');
+    return (
+      `<div class="game__mistakes">
+        ${mistakeList}
+      </div>`
+    );
+  }
+
+  get _timerTemplate() {
+    return (
+      `<svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
+        <circle class="timer__line" cx="390" cy="390" r="370" style="filter: url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center;"/>
+      </svg>
+      <div class="timer__value">
+        <span class="timer__mins">${this._minutes}</span>
+        <span class="timer__dots">:</span>
+        <span class="timer__secs">${this._seconds}</span>
+      </div>`
     );
   }
 
   get _template() {
-    return `<section class="game"></section>`;
+    return (
+      `<section class="game">
+        <header class="game__header">
+          ${this._logoTemplate}
+          ${this._timerTemplate}
+          ${this._mistakesTemplate}
+        </header>
+        <div class="game__screen"></div>
+      </section>`
+    );
   }
 
-  render() {
-    this._createEl();
-
-    this._$question = this._$.querySelector('.game__screen');
-    this._addHandlers();
-
-    this._append();
+  _defineChildren() {
+    this._$logo = this._$content.querySelector('.game__back');
   }
 
-  unrender() {
-    this._remove();
-
-    this._removeHandlers();
-    this._$question = null;
-
-    this._destroyEl();
+  _undefineChildren() {
+    this._$logo = null;
   }
 
-  update(question) {
-    this._question = question;
+  _activate() {
+    this._$logo.addEventListener('click', this._onLogoClick);
+  }
 
-    this._updateBemModifier();
+  _deactivate() {
 
-    this._updateQuestionView();
+  }
 
-    if (GAME_OPTIONS.IS_DEBUG_ACTIVE) {
-      this._showConsoleTip();
+  _onLogoClick(evt) {
+    evt.preventDefault();
+    if (typeof this._onReset === 'function') {
+      this._onReset();
     }
   }
 
-  _updateQuestionView() {
-    if (this._questionView) {
-      this._questionView.unrender();
-    }
+  // update(question) {
+  //   this._question = question;
 
-    const QuestionView = questionTypeToClass[this._type];
-    this._questionView = new QuestionView(this._question);
-    this._questionView.render(this._$question);
-  }
+  //   this._updateBemModifier();
 
-  _showConsoleTip() {
-    console.group('Вопрос');
+  //   this._updateQuestionView();
 
-    console.dir(this._question);
+  //   if (GAME_OPTIONS.IS_DEBUG_ACTIVE) {
+  //     this._showConsoleTip();
+  //   }
+  // }
 
-    const propName = (this._type === 'genre')
-      ? 'correctAnswers'
-      : 'correctAnswer';
+  // _updateQuestionView() {
+  //   if (this._questionView) {
+  //     this._questionView.unrender();
+  //   }
 
-    console.info(`Правильный ответ: ${this._question[propName]}`);
+  //   const QuestionView = questionTypeToClass[this._type];
+  //   this._questionView = new QuestionView(this._question);
+  //   this._questionView.render(this._$question);
+  // }
 
-    console.groupEnd();
-  }
+  // _showConsoleTip() {
+  //   console.group('Вопрос');
 
-  _updateBemModifier() {
-    const newModifier = `game--${this._type}`;
-    const { classList } = this._$;
+  //   console.dir(this._question);
 
-    if (classList.length > 1) {
-      BEM_MODIFIERS.forEach((it) => {
-        classList.toggle(it);
-      });
-    } else {
-      classList.add(newModifier);
-    }
-  }
+  //   const propName = (this._type === 'genre')
+  //     ? 'correctAnswers'
+  //     : 'correctAnswer';
+
+  //   console.info(`Правильный ответ: ${this._question[propName]}`);
+
+  //   console.groupEnd();
+  // }
+
+  // _updateBemModifier() {
+  //   const newModifier = `game--${this._type}`;
+  //   const { classList } = this._$;
+
+  //   if (classList.length > 1) {
+  //     BEM_MODIFIERS.forEach((it) => {
+  //       classList.toggle(it);
+  //     });
+  //   } else {
+  //     classList.add(newModifier);
+  //   }
+  // }
 }

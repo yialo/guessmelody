@@ -1,5 +1,5 @@
 import GameController from './controllers/Game.js';
-// import ResultController from '../controllers/result.js';
+// import ResultController from '../controllers/Result.js';
 import WelcomeController from './controllers/Welcome.js';
 
 export default class App {
@@ -36,10 +36,10 @@ export default class App {
   _showGame() {
     this._game = new GameController();
 
-    // this._game.onReset = () => {
-    //   this._game.hide();
-    //   this._showWelcome();
-    // };
+    this._game.onReset = () => {
+      this._game.hide();
+      this._showWelcome();
+    };
 
     this._game.show();
   }

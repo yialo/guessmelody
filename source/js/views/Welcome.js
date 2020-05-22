@@ -33,9 +33,7 @@ export default class WelcomeView extends AbstractView {
   }
 
   _defineChildren() {
-    if (!this._$button) {
-      this._$button = this._$content.querySelector('.welcome__button');
-    }
+    this._$button = this._$content.querySelector('.welcome__button');
   }
 
   _undefineChildren() {
