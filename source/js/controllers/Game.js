@@ -1,6 +1,6 @@
 import AbstractController from './_Abstract.js';
 import GameModel from '../models/Game.js';
-import GameView from '../views/Game/index.js';
+import GameView from '../views/Game.js';
 
 const ONE_SECOND = 1000;
 

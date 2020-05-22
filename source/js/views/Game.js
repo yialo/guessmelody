@@ -1,5 +1,5 @@
-import { GAME_OPTIONS } from '../../constants.js';
-import AbstractView from '../_Abstract.js';
+import { GAME_OPTIONS } from '../constants.js';
+import AbstractView from './_Abstract.js';
 // import QuestionArtistView from '../question/question-artist-view.js';
 // import QuestionGenreView from '../question/question-genre-view.js';
 
