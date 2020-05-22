@@ -1,5 +1,5 @@
-import GameOptions from '../utils/game-options.js';
-import melodies from './melodies/melodies.js';
+import { GAME_OPTIONS } from '@/js/constants.js';
+import MELODIES from './melodies/melodies.js';
 
 const TRACK_LIST_SIZE = {
   genre: 4,
@@ -18,7 +18,7 @@ const getRandomArrayElement = (arr) => {
 };
 
 const getRandomQuestionTypeList = () => (
-  new Array(GameOptions.QUESTIONS).fill('')
+  new Array(GAME_OPTIONS.QUESTIONS).fill('')
 
     // STUB:
     // .map(() => getRandomArrayElement(QUESTION_TYPES))
@@ -26,12 +26,12 @@ const getRandomQuestionTypeList = () => (
 );
 
 const questionTypeGetterMap = {
-  'genre': () => {
+  genre: () => {
     const getRandomTrackList = () => {
       const trackSet = new Set();
 
       do {
-        const track = getRandomArrayElement(melodies);
+        const track = getRandomArrayElement(MELODIES);
         trackSet.add(track);
       } while (trackSet.size < TRACK_LIST_SIZE.genre);
 
@@ -51,12 +51,12 @@ const questionTypeGetterMap = {
     return { type: 'genre', trackList, targetGenre, correctAnswers };
   },
 
-  'artist': () => {
+  artist: () => {
     const getRandomTrackList = () => {
       const trackList = [];
 
       do {
-        const track = getRandomArrayElement(melodies);
+        const track = getRandomArrayElement(MELODIES);
         const artistList = trackList.map((it) => it.artist);
 
         if (!artistList.includes(track.artist)) {
@@ -84,7 +84,7 @@ export const getQuestions = () => {
 const OtherResults = {
   amount: { MIN: 1, MAX: 9 },
   score: { MIN: -5, MAX: 1 },
-  mistakesDone: { MIN: 0, MAX: GameOptions.ATTEMPTS - 1 },
+  mistakesDone: { MIN: 0, MAX: GAME_OPTIONS.ATTEMPTS - 1 },
   timeRemain: { MIN: 1, MAX: 250 },
 };
 

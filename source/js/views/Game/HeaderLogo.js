@@ -1,8 +1,13 @@
-import View from '../_common/_view.js';
+import AbstractView from '../_Abstract.js';
 
-export default class GameHeaderLogoView extends View {
+export default class GameHeaderLogoView extends AbstractView {
   _$container = null;
   _$logoLink = null;
+
+  constructor() {
+    super();
+    this._onClick = this._onClick.bind(this);
+  }
 
   set onReset(callback) {
     this._onReset = callback;
@@ -27,10 +32,6 @@ export default class GameHeaderLogoView extends View {
     this._removeHandlers();
   }
 
-  bindHandlers() {
-    this._bindHandlers();
-  }
-
   _onClick() {
     this._onReset();
   }
@@ -51,9 +52,5 @@ export default class GameHeaderLogoView extends View {
 
   _removeHandlers() {
     this._removeClickHandler();
-  }
-
-  _bindHandlers() {
-    this._onClick = this._onClick.bind(this);
   }
 }

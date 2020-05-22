@@ -1,4 +1,4 @@
-// import GameController from './controllers/game.js';
+import GameController from './controllers/Game.js';
 // import ResultController from '../controllers/result.js';
 import WelcomeController from './controllers/Welcome.js';
 
@@ -34,16 +34,14 @@ export default class App {
   }
 
   _showGame() {
-    console.log('Game screen is shown');
-
-    // this._game = new GameController();
+    this._game = new GameController();
 
     // this._game.onReset = () => {
     //   this._game.hide();
     //   this._showWelcome();
     // };
 
-    // this._game.show();
+    this._game.show();
   }
 
   // _showResult() {

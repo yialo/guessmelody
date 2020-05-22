@@ -1,6 +1,6 @@
-import AbstractController from './_abstract.js';
-import GameModel from '../models/game-model/game-model.js';
-import GameView from '../views/game/game-view.js';
+import AbstractController from './_Abstract.js';
+import GameModel from '../models/Game.js';
+import GameView from '../views/Game/index.js';
 
 const ONE_SECOND = 1000;
 
@@ -34,12 +34,6 @@ export default class GameScreen extends AbstractController {
     this._view.onReset = callback;
   }
 
-  show() {
-    super.show();
-
-    // this._update();
-  }
-
   startTimer(questionView) {
     this._timer = setTimeout(() => {
       tick(this._game.state, questionView);
@@ -49,9 +43,5 @@ export default class GameScreen extends AbstractController {
 
   stopTimer() {
     clearTimeout(this._timer);
-  }
-
-  _update() {
-    this._view.update(this._model.currentQuestion);
   }
 }

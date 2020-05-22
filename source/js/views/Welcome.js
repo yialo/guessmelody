@@ -1,7 +1,6 @@
 import AbstractView from './_Abstract.js';
 
 import LogoSrc from '@/img/melody-logo.png';
-import formatTemplate from '@/js/utils/formatTemplate.js';
 
 export default class WelcomeView extends AbstractView {
   _$button = null;
@@ -27,7 +26,7 @@ export default class WelcomeView extends AbstractView {
         <p class="welcome__text">Удачи!</p>
       </section>`
     );
-    return formatTemplate(template);
+    return WelcomeView.formatTemplate(template);
   }
 
   set onStart(callback) {
@@ -36,7 +35,7 @@ export default class WelcomeView extends AbstractView {
 
   defineChildren() {
     if (!this._$button) {
-      this._$button = this.$.querySelector('.welcome__button');
+      this._$button = this._$content.querySelector('.welcome__button');
     }
   }
 

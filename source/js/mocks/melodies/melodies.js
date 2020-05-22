@@ -1,10 +1,10 @@
-const extMap = { img: 'jpg', audio: 'mp3' };
+const EXTENSION_MAP = { img: 'jpg', audio: 'mp3' };
 
 export const getFilePath = (type, text) => (
-  `./files/${type}/${text.toLowerCase().replace(/ /g, '_')}.${extMap[type]}`
+  `./files/${type}/${text.toLowerCase().replace(/ /g, '_')}.${EXTENSION_MAP[type]}`
 );
 
-const melodiesData = [
+const MELODY_DATA_LIST = [
   ['Kevin MacLeod', 'Long Stroll', 'Jazz'],
   ['Jingle Punks', 'In the Land of Rhinoplasty', 'Rock'],
   ['Audionautix', 'Travel Light', 'Country'],
@@ -14,21 +14,15 @@ const melodiesData = [
 ];
 
 class Melody {
-  constructor(artist, name, genre) {
+  constructor(melodyDataTuple) {
+    const [artist, name, genre] = melodyDataTuple;
+
     this.artist = artist;
     this.name = name;
     this.genre = genre;
-    this.getImage();
-    this.getAudio();
-  }
-
-  getAudio() {
     this.audio = getFilePath('audio', this.name);
-  }
-
-  getImage() {
     this.image = getFilePath('img', this.artist);
   }
 }
 
-export default melodiesData.map((it) => new Melody(...it));
+export default MELODY_DATA_LIST.map((it) => new Melody(it));

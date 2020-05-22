@@ -1,5 +1,5 @@
-import GameOptions from '../../utils/game-options.js';
-import AbstractView from '../_abstract-view.js';
+import { GAME_OPTIONS } from '../../constants.js';
+import AbstractView from '../_Abstract.js';
 // import GameHeaderView from './game-header-view.js';
 // import QuestionArtistView from '../question/question-artist-view.js';
 // import QuestionGenreView from '../question/question-genre-view.js';
@@ -15,7 +15,6 @@ const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 export default class GameView extends AbstractView {
   _headerView = null;
   _questionView = null;
-
   _$question = null;
 
   // constructor() {
@@ -68,7 +67,7 @@ export default class GameView extends AbstractView {
 
     this._updateQuestionView();
 
-    if (GameOptions.IS_DEBUG_ACTIVE) {
+    if (GAME_OPTIONS.IS_DEBUG_ACTIVE) {
       this._showConsoleTip();
     }
   }
@@ -108,13 +107,5 @@ export default class GameView extends AbstractView {
     } else {
       classList.add(newModifier);
     }
-  }
-
-  _addHandlers() {
-    this._headerView.render(this._$);
-  }
-
-  _removeHandlers() {
-    this._headerView.unrender();
   }
 }

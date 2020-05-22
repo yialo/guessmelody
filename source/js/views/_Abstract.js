@@ -1,9 +1,17 @@
 import ErrorUtils from '../utils/errors.js';
 
-// TODO: define pseudo-private methods to simplify next TypeScript migration
+/**
+ * TODO: TypeScript migration:
+ * - define pseudo-private methods
+ * - define stubbed methods in interface
+ */
 
 export default class AbstractView {
-  _$ = null;
+  static formatTemplate(rawTemplate) {
+    return rawTemplate.replace(/\n */g, '');
+  }
+
+  _$content = null;
   _$root = null;
 
   constructor() {
@@ -16,38 +24,38 @@ export default class AbstractView {
     return ErrorUtils.claimAbstractMethodDefinition();
   }
 
-  get $() {
-    return this._$.content;
-  }
-
   create() {
-    this._$ = document.createElement('template');
-    this._$.innerHTML = this._template;
-  }
-
-  destroy() {
-    this._$ = null;
+    const $template = document.createElement('template');
+    $template.innerHTML = this._template;
+    this._$content = $template.content;
   }
 
   defineChildren() {
-    return ErrorUtils.claimAbstractMethodDefinition();
+    ErrorUtils.claimAbstractMethodDefinition();
   }
 
   undefineChildren() {
-    return ErrorUtils.claimAbstractMethodDefinition();
+    ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  activate() {
+    ErrorUtils.claimAbstractMethodDefinition();
+  }
+
+  deactivate() {
+    ErrorUtils.claimAbstractMethodDefinition();
   }
 
   mount($root) {
     if (!this._$root) {
       this._$root = $root;
     }
-    this._$root.append(...this.$.childNodes);
+    this._$root.append(...this._$content.childNodes);
+    this._$content = null;
   }
 
   unmount() {
-    [...this._$root.childNodes].forEach(($child) => {
-      $child.remove();
-    });
+    this._$root.innerHTML = '';
   }
 
   render($root) {
@@ -69,6 +77,5 @@ export default class AbstractView {
     if (typeof this.undefineChildren === 'function') {
       this.undefineChildren();
     }
-    this.destroy();
   }
 }

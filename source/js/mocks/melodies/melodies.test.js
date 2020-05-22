@@ -1,12 +1,12 @@
 import { getFilePath } from './melodies.js';
 
-describe('Returns file path', () => {
-  it('Returns corrent address for audio track', () => {
+describe('Returns asset file path', () => {
+  it('Should return address for audio track', () => {
     const answer = './files/audio/in_the_land_of_rhinoplasty.mp3';
-    assert.strictEqual(getFilePath('audio', 'In the Land of Rhinoplasty'), answer);
+    expect(getFilePath('audio', 'In the Land of Rhinoplasty')).toBe(answer);
   });
-  it('Returns corrent address for image', () => {
+  it('Should return address for image', () => {
     const answer = './files/img/kevin_macleod.jpg';
-    assert.strictEqual(getFilePath('img', 'Kevin MacLeod'), answer);
+    expect(getFilePath('img', 'Kevin MacLeod')).toBe(answer);
   });
 });
