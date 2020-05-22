@@ -1,8 +1,8 @@
-import AbstractView from './_Abstract.js';
-
 import LogoSrc from '@/img/melody-logo.png';
 
-export default class WelcomeView extends AbstractView {
+import AbstractView from './_Abstract.js';
+
+class WelcomeView extends AbstractView {
   _$button = null;
 
   constructor() {
@@ -32,25 +32,32 @@ export default class WelcomeView extends AbstractView {
     this._onStart = callback;
   }
 
-  _defineChildren() {
-    this._$button = this._$content.querySelector('.welcome__button');
-  }
-
-  _undefineChildren() {
-    this._$button = null;
-  }
-
-  _activate() {
-    this._$button.addEventListener('click', this._onButtonClick);
-  }
-
-  _deactivate() {
-    this._$button.removeEventListener('click', this._onButtonClick);
-  }
-
   _onButtonClick() {
     if (typeof this._onStart === 'function') {
       this._onStart();
     }
   }
 }
+
+const activationAndChildrenMixin = {
+  _defineChildren() {
+    this._$button = this._$content.querySelector('.welcome__button');
+  },
+  _undefineChildren() {
+    this._$button = null;
+  },
+  _activate() {
+    this._$button.addEventListener('click', this._onButtonClick);
+  },
+  _deactivate() {
+    this._$button.removeEventListener('click', this._onButtonClick);
+  },
+};
+
+Object.assign(
+    WelcomeView.prototype,
+    WelcomeView.activationAndChildrenRenderMixin,
+    activationAndChildrenMixin
+);
+
+export default WelcomeView;

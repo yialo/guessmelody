@@ -27,7 +27,11 @@ export default class GameModel {
     this._state = cloneDeep(needMock ? INITIAL_STATE : MOCK_INITIAL_STATE);
   }
 
-  get state() {
-    return this._state;
+  get minutes() {
+    return this._state.minutes;
+  }
+
+  get seconds() {
+    return this._state.seconds;
   }
 }

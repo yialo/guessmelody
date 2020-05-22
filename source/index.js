@@ -1,6 +1,7 @@
 /**
  * TODO:
  * - Fix test files
+ * - Rework abstract classes with composition, because of Interface segregation principle
  */
 
 import App from './js/App.js';

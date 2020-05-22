@@ -1,9 +1,10 @@
-import { GAME_OPTIONS } from '../constants.js';
+import GameLogoSrc from '@/img/melody-logo-ginger.png';
+import { GAME_OPTIONS } from '@/js/constants.js';
+
 import AbstractView from './_Abstract.js';
+
 // import QuestionArtistView from '../question/question-artist-view.js';
 // import QuestionGenreView from '../question/question-genre-view.js';
-
-import GameLogoSrc from '@/img/melody-logo-ginger.png';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
@@ -13,7 +14,7 @@ const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 //   'artist': QuestionArtistView,
 // };
 
-export default class GameView extends AbstractView {
+class GameView extends AbstractView {
   static addZero(num) {
     return String(num).padStart(2, '0');
   }
@@ -86,22 +87,6 @@ export default class GameView extends AbstractView {
     );
   }
 
-  _defineChildren() {
-    this._$logo = this._$content.querySelector('.game__back');
-  }
-
-  _undefineChildren() {
-    this._$logo = null;
-  }
-
-  _activate() {
-    this._$logo.addEventListener('click', this._onLogoClick);
-  }
-
-  _deactivate() {
-
-  }
-
   _onLogoClick(evt) {
     evt.preventDefault();
     if (typeof this._onReset === 'function') {
@@ -109,3 +94,26 @@ export default class GameView extends AbstractView {
     }
   }
 }
+
+const activationAndChildrenMixin = {
+  _defineChildren() {
+    this._$logo = this._$content.querySelector('.game__back');
+  },
+  _undefineChildren() {
+    this._$logo = null;
+  },
+  _activate() {
+    this._$logo.addEventListener('click', this._onLogoClick);
+  },
+  _deactivate() {
+    this._$logo.removeEventListener('click', this._onLogoClick);
+  },
+};
+
+Object.assign(
+    GameView.prototype,
+    GameView.activationAndChildrenRenderMixin,
+    activationAndChildrenMixin
+);
+
+export default GameView;

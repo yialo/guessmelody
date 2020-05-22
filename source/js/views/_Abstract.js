@@ -1,9 +1,17 @@
-import ErrorUtils from '../utils/errors.js';
+import {
+  claimAbstractMethodDefinition,
+  restrictAbstractCall,
+} from '@/js/utils/errors.js';
+
+import {
+  activationRender,
+  childrenRender,
+  activationAndChildrenRender,
+} from './_mixins/render.js';
 
 /**
  * TODO: TypeScript migration:
  * - define pseudo-private methods
- * - define stubbed methods in interface
  */
 
 export default class AbstractView {
@@ -11,17 +19,21 @@ export default class AbstractView {
     return rawTemplate.replace(/\n */g, '');
   }
 
+  static activationRenderMixin = activationRender;
+  static childrenRenderMixin = childrenRender;
+  static activationAndChildrenRenderMixin = activationAndChildrenRender;
+
   _$content = null;
   _$root = null;
 
   constructor() {
     if (new.target === AbstractView) {
-      ErrorUtils.restrictAbstractCall();
+      restrictAbstractCall();
     }
   }
 
   get _template() {
-    return ErrorUtils.claimAbstractMethodDefinition();
+    return claimAbstractMethodDefinition();
   }
 
   _getTemplate() {
@@ -34,22 +46,6 @@ export default class AbstractView {
     this._$content = $template.content;
   }
 
-  _defineChildren() {
-    ErrorUtils.claimAbstractMethodDefinition();
-  }
-
-  _undefineChildren() {
-    ErrorUtils.claimAbstractMethodDefinition();
-  }
-
-  _activate() {
-    ErrorUtils.claimAbstractMethodDefinition();
-  }
-
-  _deactivate() {
-    ErrorUtils.claimAbstractMethodDefinition();
-  }
-
   _mount($root) {
     if (!this._$root) {
       this._$root = $root;
@@ -60,18 +56,5 @@ export default class AbstractView {
 
   _unmount() {
     this._$root.innerHTML = '';
-  }
-
-  render($root) {
-    this._create();
-    this._defineChildren();
-    this._activate();
-    this._mount($root);
-  }
-
-  unrender() {
-    this._unmount();
-    this._deactivate();
-    this._undefineChildren();
   }
 }

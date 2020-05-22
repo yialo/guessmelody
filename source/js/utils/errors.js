@@ -18,12 +18,10 @@
 //   },
 // };
 
-export default {
-  restrictAbstractCall() {
-    throw new Error('Instantiation of abstract class is restricted');
-  },
+export const restrictAbstractCall = () => {
+  throw new Error('Instantiation of abstract class is restricted');
+};
 
-  claimAbstractMethodDefinition() {
-    throw new Error('Method need to be redefined for descendants');
-  },
+export const claimAbstractMethodDefinition = () => {
+  throw new Error('Method need to be redefined for descendants');
 };

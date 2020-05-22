@@ -1,15 +1,13 @@
-import errorUtil from '../utils/errors.js';
-
-const $appRoot = document.getElementById('app');
+import { restrictAbstractCall } from '@/js/utils/errors.js';
 
 class AbstractController {
-  static $root = $appRoot;
+  static $root = document.getElementById('app');
 
   _view = null;
 
   constructor() {
     if (new.target === AbstractController) {
-      errorUtil.restrictAbstractCall();
+      restrictAbstractCall();
     }
   }
 

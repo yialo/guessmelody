@@ -1,5 +1,5 @@
-import AbstractScreen from './_abstract-screen.js';
+import AbstractController from './_Abstract.js';
 
-export default class ResultScreen extends AbstractScreen {
+export default class ResultController extends AbstractController {
 
 }

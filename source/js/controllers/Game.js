@@ -11,16 +11,21 @@ const tick = (gameState, questionView) => {
   questionView.updateHeader();
 };
 
-export default class GameScreen extends AbstractController {
+export default class GameController extends AbstractController {
+  _view = null;
+
   constructor() {
     super();
-
     this._model = new GameModel();
-    this._view = new GameView();
+    this._view = new GameView(this._model);
   }
 
   set onReset(callback) {
     this._view.onReset = callback;
+  }
+
+  updateView() {
+    this._view.unrender();
   }
 
   startTimer(questionView) {
