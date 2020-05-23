@@ -119,6 +119,7 @@ class GameView extends AbstractView {
     for (let i = 0; i < classList.length; i++) {
       if (classList[i].includes('game--') && classList[i] !== actualModifier) {
         classList[i] = actualModifier;
+        break;
       }
     }
   }
