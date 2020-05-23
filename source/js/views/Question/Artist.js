@@ -1,6 +1,4 @@
 import AbstractView from '../_Abstract.js';
-// import AudioTrackView from '../_common/audio-track-view.js';
-// import ArtistView from '../_common/artist-view.js';
 
 export default class QuestonArtistView extends AbstractView {
   _question = null;
@@ -15,17 +13,37 @@ export default class QuestonArtistView extends AbstractView {
     this._question = question;
   }
 
+  _getArtistTemplate(artist, index) {
+    const { name, imgSrc } = artist;
+    const number = index + 1;
+    return (`
+      <div class="artist">
+        <input class="artist__input visually-hidden" type="radio" name="answer" value="artist-${number}" id="answer-${number}">
+        <label class="artist__name" for="answer-${number}">
+          <img class="artist__picture" src="${imgSrc}" alt="${name}">
+          ${name}
+        </label>
+      </div>
+    `);
+  }
+
+  get _artistListTemplate() {
+    return this._question.artistList
+      .map((artist, i) => this._getArtistTemplate(artist, i))
+      .join('');
+  }
+
   get _template() {
     return (`
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
         <button class="track__button" type="button"></button>
         <audio loop="loop">
-          <source src="${process.env.PUBLIC_PATH}files/audio/firefly.mp3" type="audio/mpeg">
+          <source src="${this._question.trackSrc}" type="audio/mpeg">
         </audio>
       </div>
       <form class="game__artist">
-        {this._formTemplate}
+        ${this._artistListTemplate}
       </form>
     `);
   }

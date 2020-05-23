@@ -1,8 +1,6 @@
 import cloneDeep from 'lodash.clonedeep';
 
-import Answer from './Answer.js';
 import { GAME_OPTIONS } from '@/js/constants.js';
-import { getQuestions as getRandomQuestions } from '../mocks/mockGenerator.js';
 
 const INITIAL_STATE = {
   minutes: 5,
@@ -12,11 +10,31 @@ const INITIAL_STATE = {
   questionIndex: 0,
 };
 
+const ARTIST_QUESTION_MOCK = {
+  type: 'artist',
+  trackSrc: `${process.env.PUBLIC_PATH}files/audio/long_stroll.mp3`,
+  artistList: [
+    {
+      name: 'Kevin MacLeod',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/kevin_macleod.jpg`,
+    },
+    {
+      name: 'Jingle Punks',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/jingle_punks.jpg`,
+    },
+    {
+      name: 'Audionautix',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/audionautix.jpg`,
+    },
+  ],
+  answer: 0,
+};
+
 const MOCK_INITIAL_STATE = {
   minutes: 5,
   seconds: 0,
   mistakes: 0,
-  questions: getRandomQuestions(),
+  questions: new Array(GAME_OPTIONS.QUESTIONS).fill(ARTIST_QUESTION_MOCK),
   questionIndex: 0,
 };
 
