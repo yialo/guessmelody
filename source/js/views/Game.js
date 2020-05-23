@@ -149,7 +149,7 @@ export default class GameView extends AbstractView {
     this._questionView.render(this._$question);
 
     // NOTE: remove after test
-    console.log(this._model.question);
+    console.log('Question:', this._model.question);
   }
 
   _defineChildren() {

@@ -14,6 +14,10 @@
   cursor: pointer;
 }
 
+.track__button:disabled {
+  opacity: 0.5;
+}
+
 .track__button--play {
   background-position: -5px -241px;
 }

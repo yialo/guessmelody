@@ -5,9 +5,17 @@ export default class QuestonArtistView extends AbstractView {
   _$audio = null;
   _$playerButton = null;
 
+  _state = {
+    isFirstPlay: true,
+  };
+
+  // FIXME: replace corrupted MP3 files
   constructor(question) {
     super();
     this._question = question;
+
+    this._onAudioPlaying = this._onAudioPlaying.bind(this);
+    this._onAudioPause = this._onAudioPause.bind(this);
     this._onPlayerButtonClick = this._onPlayerButtonClick.bind(this);
   }
 
@@ -35,8 +43,8 @@ export default class QuestonArtistView extends AbstractView {
     return (`
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
-        <button class="track__button" type="button"></button>
-        <audio loop="loop">
+        <button class="track__button" type="button" disabled></button>
+        <audio loop autoplay>
           <source src="${this._question.trackSrc}" type="audio/mpeg">
         </audio>
       </div>
@@ -46,33 +54,23 @@ export default class QuestonArtistView extends AbstractView {
     `);
   }
 
-  _onPlayerButtonClick() {
-    if (this._$audio.paused) {
-      const playPromise = this._$audio.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log('Playback started!');
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    } else {
-      this._$audio.pause();
-    }
+  _onAudioPlaying() {
+    this._$playerButton.classList.add('track__button--pause');
+    this._$playerButton.classList.remove('track__button--play');
+    this._$playerButton.disabled = false;
   }
 
-  _playAudio() {
-    const playPromise = this._$audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          console.log('Playback started!');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  _onAudioPause() {
+    this._$playerButton.classList.remove('track__button--pause');
+    this._$playerButton.classList.add('track__button--play');
+  }
+
+  _onPlayerButtonClick() {
+    if (this._$audio.paused) {
+      this._$playerButton.disabled = true;
+      this._$audio.play();
+    } else {
+      this._$audio.pause();
     }
   }
 
@@ -87,14 +85,22 @@ export default class QuestonArtistView extends AbstractView {
   }
 
   _activate() {
+    this._$audio.addEventListener('play', this._onAudioPlaying);
+    this._$audio.addEventListener('pause', this._onAudioPause);
     this._$playerButton.addEventListener('click', this._onPlayerButtonClick);
+
+    this._$audio.addEventListener('error', (evt) => {
+      console.log(evt);
+      this._$playerButton.disabled = false;
+    });
   }
 
   _deactivate() {
+    this._$audio.removeEventListener('play', this._onAudioPlaying);
+    this._$audio.removeEventListener('pause', this._onAudioPause);
     this._$playerButton.removeEventListener('click', this._onPlayerButtonClick);
   }
 
-  // TODO: add audio autoplay
   render($root) {
     this._create();
     this._defineChildren();
