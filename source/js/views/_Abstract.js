@@ -3,12 +3,6 @@ import {
   restrictAbstractCall,
 } from '@/js/utils/errors.js';
 
-import {
-  activationRender,
-  childrenRender,
-  activationAndChildrenRender,
-} from './_mixins/render.js';
-
 /**
  * TODO: TypeScript migration:
  * - define pseudo-private methods
@@ -18,10 +12,6 @@ export default class AbstractView {
   static formatTemplate(rawTemplate) {
     return rawTemplate.replace(/\n */g, '');
   }
-
-  static activationRenderMixin = activationRender;
-  static childrenRenderMixin = childrenRender;
-  static activationAndChildrenRenderMixin = activationAndChildrenRender;
 
   _$children = null;
   _$fragment = null;
@@ -47,6 +37,22 @@ export default class AbstractView {
     this._$fragment = $template.content;
   }
 
+  _defineChildren() {
+    claimAbstractMethodDefinition();
+  }
+
+  _undefineChildren() {
+    claimAbstractMethodDefinition();
+  }
+
+  _activate() {
+    claimAbstractMethodDefinition();
+  }
+
+  _deactivate() {
+    claimAbstractMethodDefinition();
+  }
+
   _mount($root) {
     this._$children = [...this._$fragment.childNodes];
     this._$fragment = null;
@@ -61,5 +67,13 @@ export default class AbstractView {
       $child.remove();
     });
     this._$children = null;
+  }
+
+  _render() {
+    claimAbstractMethodDefinition();
+  }
+
+  _unrender() {
+    claimAbstractMethodDefinition();
   }
 }

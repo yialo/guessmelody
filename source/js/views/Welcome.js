@@ -2,7 +2,7 @@ import LogoSrc from '@/img/melody-logo.png';
 
 import AbstractView from './_Abstract.js';
 
-class WelcomeView extends AbstractView {
+export default class WelcomeView extends AbstractView {
   _$button = null;
 
   constructor() {
@@ -11,8 +11,8 @@ class WelcomeView extends AbstractView {
   }
 
   get _template() {
-    return (
-      `<section class="welcome">
+    return (`
+      <section class="welcome">
         <div class="welcome__logo">
           <img src="${LogoSrc}" alt="Угадай мелодию" width="186" height="83">
         </div>
@@ -24,8 +24,8 @@ class WelcomeView extends AbstractView {
           <li>Можно допустить 3 ошибки.</li>
         </ul>
         <p class="welcome__text">Удачи!</p>
-      </section>`
-    );
+      </section>
+    `);
   }
 
   set onStart(callback) {
@@ -37,27 +37,33 @@ class WelcomeView extends AbstractView {
       this._onStart();
     }
   }
-}
 
-const activationAndChildrenMixin = {
   _defineChildren() {
     this._$button = this._$fragment.querySelector('.welcome__button');
-  },
+  }
+
   _undefineChildren() {
     this._$button = null;
-  },
+  }
+
   _activate() {
     this._$button.addEventListener('click', this._onButtonClick);
-  },
+  }
+
   _deactivate() {
     this._$button.removeEventListener('click', this._onButtonClick);
-  },
-};
+  }
 
-Object.assign(
-    WelcomeView.prototype,
-    WelcomeView.activationAndChildrenRenderMixin,
-    activationAndChildrenMixin
-);
+  render($root) {
+    this._create();
+    this._defineChildren();
+    this._activate();
+    this._mount($root);
+  }
 
-export default WelcomeView;
+  unrender() {
+    this._unmount();
+    this._deactivate();
+    this._undefineChildren();
+  }
+}
