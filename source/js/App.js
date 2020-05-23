@@ -19,10 +19,10 @@ export default class App {
   }
 
   init() {
-    this._showWelcome();
+    // this._showWelcome();
 
     // STUB:
-    // this._showGame();
+    this._showGame();
   }
 
   _showWelcome() {

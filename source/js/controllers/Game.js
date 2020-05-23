@@ -12,6 +12,8 @@ const tick = (gameState, questionView) => {
 };
 
 export default class GameController extends AbstractController {
+  _model = null;
+  _timer = null;
   _view = null;
 
   constructor() {
@@ -26,7 +28,7 @@ export default class GameController extends AbstractController {
 
   startTimer(questionView) {
     this._timer = setTimeout(() => {
-      tick(this._game.state, questionView);
+      tick(this._game.model, questionView);
       this.startTimer();
     }, ONE_SECOND);
   }

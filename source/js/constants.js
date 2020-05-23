@@ -4,3 +4,5 @@ export const GAME_OPTIONS = {
   QUICK_THRESHOLD: 30,
   IS_DEBUG_ACTIVE: true,
 };
+
+export const QUESTION_TYPES = ['genre', 'artist'];

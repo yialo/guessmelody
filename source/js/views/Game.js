@@ -2,13 +2,10 @@ import GameLogoSrc from '@/img/melody-logo-ginger.png';
 import { GAME_OPTIONS } from '@/js/constants.js';
 
 import AbstractView from './_Abstract.js';
-import QuestonView from './Question/Artist.js';
+import QuestionView from './Question/Artist.js';
 
 // import QuestionArtistView from './Question/Artist.js';
 // import QuestionGenreView from './Question/Genre.js';
-
-const QUESTION_TYPES = ['genre', 'artist'];
-const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
 
 // const questionTypeToClass = {
 //   'genre': QuestionGenreView,
@@ -20,6 +17,7 @@ export default class GameView extends AbstractView {
     return String(num).padStart(2, '0');
   }
 
+  _questionView = null;
   _$game = null;
   _$logo = null;
   _$minutes = null;
@@ -31,7 +29,6 @@ export default class GameView extends AbstractView {
   constructor(model = {}) {
     super();
     this._model = model;
-    this._questionView = new QuestonView(this._model.question);
     this._onLogoClick = this._onLogoClick.bind(this);
   }
 
@@ -51,7 +48,7 @@ export default class GameView extends AbstractView {
 
   updateQuestion() {
     this._updateBemModifier();
-    this._questionView.render(this._$question);
+    this._updateQuestionView();
   }
 
   get _minutes() {
@@ -126,29 +123,55 @@ export default class GameView extends AbstractView {
     for (let i = 0; i < classList.length; i++) {
       if (classList[i].includes('game--') && classList[i] !== actualModifier) {
         classList[i] = actualModifier;
-        break;
+        return;
       }
     }
   }
 
+  _removeBemModifier() {
+    const { classList } = this._$game;
+    for (let i = 0; i < classList.length; i++) {
+      if (classList[i].includes('game--')) {
+        classList.remove(classList[i]);
+        return;
+      }
+    }
+  }
+
+  _updateQuestionView() {
+    if (this._questionView) {
+      this._questionView.unrender();
+    }
+    this._questionView = new QuestionView(this._model.question);
+    this._questionView.render(this._$question);
+  }
+
   _defineChildren() {
     this._$game = this._$fragment.querySelector('.game');
+    this._updateBemModifier();
+
     this._$logo = this._$fragment.querySelector('.game__back');
     this._$timer = this._$fragment.querySelector('.timer');
     this._$minutes = this._$fragment.querySelector('.timer__mins');
     this._$seconds = this._$fragment.querySelector('.timer__secs');
     this._$mistakes = this._$fragment.querySelector('.game__mistakes');
+
     this._$question = this._$fragment.querySelector('.game__screen');
+    this._updateQuestionView();
   }
 
   _undefineChildren() {
-    this._$game = null;
+    this._questionView.unrender();
+    this._$question = null;
+
     this._$logo = null;
     this._$minutes = null;
     this._$seconds = null;
     this._$mistakes = null;
-    this._$question = null;
     this._$timer = null;
+
+    this._removeBemModifier();
+    this._$game = null;
   }
 
   _activate() {
@@ -164,7 +187,6 @@ export default class GameView extends AbstractView {
     this._defineChildren();
     this._activate();
     this._mount($root);
-    this.updateQuestion();
   }
 
   unrender() {
