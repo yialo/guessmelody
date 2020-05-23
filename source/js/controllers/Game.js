@@ -24,8 +24,8 @@ export default class GameController extends AbstractController {
     this._view.onReset = callback;
   }
 
-  updateView() {
-    this._view.unrender();
+  updateQuestion() {
+    this._view.updateQuestion();
   }
 
   startTimer(questionView) {

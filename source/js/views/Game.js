@@ -3,8 +3,8 @@ import { GAME_OPTIONS } from '@/js/constants.js';
 
 import AbstractView from './_Abstract.js';
 
-// import QuestionArtistView from '../question/question-artist-view.js';
-// import QuestionGenreView from '../question/question-genre-view.js';
+// import QuestionArtistView from './Question/Artist.js';
+// import QuestionGenreView from './Question/Genre.js';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const BEM_MODIFIERS = QUESTION_TYPES.map((it) => `game--${it}`);
@@ -19,6 +19,7 @@ class GameView extends AbstractView {
     return String(num).padStart(2, '0');
   }
 
+  _$game = null;
   _$logo = null;
   _$minutes = null;
   _$seconds = null;
@@ -44,6 +45,10 @@ class GameView extends AbstractView {
   updateMistakes() {
     const mistakesList = GameView.formatTemplate(this._mistakesList);
     this._$mistakes.innerHTML = mistakesList;
+  }
+
+  updateQuestion() {
+    this._updateBemModifier();
   }
 
   get _minutes() {
@@ -90,7 +95,7 @@ class GameView extends AbstractView {
 
   get _template() {
     return (
-      `<section class="game">
+      `<section class="game game--${this._model.question.type}">
         <header class="game__header">
           ${this._logoTemplate}
           ${this._timerTemplate}
@@ -107,10 +112,21 @@ class GameView extends AbstractView {
       this._onReset();
     }
   }
+
+  _updateBemModifier() {
+    const { classList } = this._$game;
+    const actualModifier = `game--${this._model.question.type}`;
+    for (let i = 0; i < classList.length; i++) {
+      if (classList[i].includes('game--') && classList[i] !== actualModifier) {
+        classList[i] = actualModifier;
+      }
+    }
+  }
 }
 
 const activationAndChildrenMixin = {
   _defineChildren() {
+    this._$game = this._$fragment.querySelector('.game');
     this._$logo = this._$fragment.querySelector('.game__back');
     this._$timer = this._$fragment.querySelector('.timer');
     this._$minutes = this._$fragment.querySelector('.timer__mins');
@@ -119,6 +135,7 @@ const activationAndChildrenMixin = {
     this._$question = this._$fragment.querySelector('.game__screen');
   },
   _undefineChildren() {
+    this._$game = null;
     this._$logo = null;
     this._$minutes = null;
     this._$seconds = null;

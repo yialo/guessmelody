@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   minutes: 5,
   seconds: 0,
   mistakes: 0,
-  question: [],
+  questions: [],
   questionIndex: 0,
 };
 
@@ -16,7 +16,7 @@ const MOCK_INITIAL_STATE = {
   minutes: 5,
   seconds: 0,
   mistakes: 0,
-  question: getRandomQuestions(),
+  questions: getRandomQuestions(),
   questionIndex: 0,
 };
 
@@ -37,5 +37,9 @@ export default class GameModel {
 
   get mistakes() {
     return this._state.mistakes;
+  }
+
+  get question() {
+    return this._state.questions[this._state.questionIndex];
   }
 }

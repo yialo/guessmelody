@@ -1,11 +1,11 @@
 import { GAME_OPTIONS } from '@/js/constants.js';
 import MELODIES from './melodies/melodies.js';
 
+const QUESTION_TYPES = ['genre', 'artist'];
 const TRACK_LIST_SIZE = {
   genre: 4,
   artist: 3,
 };
-const QUESTION_TYPES = Object.keys(TRACK_LIST_SIZE);
 
 const getRandomInteger = (max, min = 0) => {
   const delta = max - min;
@@ -44,7 +44,6 @@ const questionTypeGetterMap = {
 
     const trackList = getRandomTrackList();
     const targetGenre = getRandomArrayElement(trackList).genre;
-
     const properTracks = trackList.filter((it) => it.genre === targetGenre);
     const correctAnswers = properTracks.map((it) => `answer-${it.number}`);
 
@@ -69,7 +68,6 @@ const questionTypeGetterMap = {
 
     const trackList = getRandomTrackList();
     const targetTrack = getRandomArrayElement(trackList);
-
     const correctAnswer = `artist-${trackList.indexOf(targetTrack) + 1}`;
 
     return { type: 'artist', trackList, targetTrack, correctAnswer };
