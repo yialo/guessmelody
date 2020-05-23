@@ -41,7 +41,7 @@ class WelcomeView extends AbstractView {
 
 const activationAndChildrenMixin = {
   _defineChildren() {
-    this._$button = this._$content.querySelector('.welcome__button');
+    this._$button = this._$fragment.querySelector('.welcome__button');
   },
   _undefineChildren() {
     this._$button = null;

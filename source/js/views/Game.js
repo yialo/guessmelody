@@ -111,15 +111,20 @@ class GameView extends AbstractView {
 
 const activationAndChildrenMixin = {
   _defineChildren() {
-    this._$logo = this._$content.querySelector('.game__back');
-    this._$timer = this._$content.querySelector('.timer');
-    this._$minutes = this._$content.querySelector('.timer__mins');
-    this._$seconds = this._$content.querySelector('.timer__secs');
-    this._$mistakes = this._$content.querySelector('.game__mistakes');
-    this._$question = this._$content.querySelector('.game__screen');
+    this._$logo = this._$fragment.querySelector('.game__back');
+    this._$timer = this._$fragment.querySelector('.timer');
+    this._$minutes = this._$fragment.querySelector('.timer__mins');
+    this._$seconds = this._$fragment.querySelector('.timer__secs');
+    this._$mistakes = this._$fragment.querySelector('.game__mistakes');
+    this._$question = this._$fragment.querySelector('.game__screen');
   },
   _undefineChildren() {
     this._$logo = null;
+    this._$minutes = null;
+    this._$seconds = null;
+    this._$mistakes = null;
+    this._$question = null;
+    this._$timer = null;
   },
   _activate() {
     this._$logo.addEventListener('click', this._onLogoClick);

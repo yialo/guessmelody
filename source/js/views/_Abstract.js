@@ -23,7 +23,8 @@ export default class AbstractView {
   static childrenRenderMixin = childrenRender;
   static activationAndChildrenRenderMixin = activationAndChildrenRender;
 
-  _$content = null;
+  _$children = null;
+  _$fragment = null;
   _$root = null;
 
   constructor() {
@@ -43,18 +44,22 @@ export default class AbstractView {
   _create() {
     const $template = document.createElement('template');
     $template.innerHTML = this._getTemplate();
-    this._$content = $template.content;
+    this._$fragment = $template.content;
   }
 
   _mount($root) {
+    this._$children = [...this._$fragment.childNodes];
+    this._$fragment = null;
     if (!this._$root) {
       this._$root = $root;
     }
-    this._$root.append(...this._$content.childNodes);
-    this._$content = null;
+    this._$root.append(...this._$children);
   }
 
   _unmount() {
-    this._$root.innerHTML = '';
+    this._$children.forEach(($child) => {
+      $child.remove();
+    });
+    this._$children = null;
   }
 }
