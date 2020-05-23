@@ -69,11 +69,11 @@ export default class AbstractView {
     this._$children = null;
   }
 
-  _render() {
+  render() {
     claimAbstractMethodDefinition();
   }
 
-  _unrender() {
+  unrender() {
     claimAbstractMethodDefinition();
   }
 }

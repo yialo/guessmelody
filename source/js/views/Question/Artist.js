@@ -2,15 +2,13 @@ import AbstractView from '../_Abstract.js';
 
 export default class QuestonArtistView extends AbstractView {
   _question = null;
-  _$track = null;
-  _$artist = null;
-  _state = {
-    audio: 'stop',
-  };
+  _$audio = null;
+  _$playerButton = null;
 
   constructor(question) {
     super();
     this._question = question;
+    this._onPlayerButtonClick = this._onPlayerButtonClick.bind(this);
   }
 
   _getArtistTemplate(artist, index) {
@@ -29,7 +27,7 @@ export default class QuestonArtistView extends AbstractView {
 
   get _artistListTemplate() {
     return this._question.artistList
-      .map((artist, i) => this._getArtistTemplate(artist, i))
+      .map(this._getArtistTemplate)
       .join('');
   }
 
@@ -48,22 +46,65 @@ export default class QuestonArtistView extends AbstractView {
     `);
   }
 
+  _onPlayerButtonClick() {
+    if (this._$audio.paused) {
+      const playPromise = this._$audio.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('Playback started!');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    } else {
+      this._$audio.pause();
+    }
+  }
+
+  _playAudio() {
+    const playPromise = this._$audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log('Playback started!');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   _defineChildren() {
-    this._$track = this._$fragment.querySelector('.game__track');
-    this._$artist = this._$fragment.querySelector('.game__artist');
+    this._$audio = this._$fragment.querySelector('.game__track audio');
+    this._$playerButton = this._$fragment.querySelector('.track__button');
   }
 
   _undefineChildren() {
-    this._$track = null;
-    this._$artist = null;
+    this._$audio = null;
+    this._$playerButton = null;
   }
 
+  _activate() {
+    this._$playerButton.addEventListener('click', this._onPlayerButtonClick);
+  }
+
+  _deactivate() {
+    this._$playerButton.removeEventListener('click', this._onPlayerButtonClick);
+  }
+
+  // TODO: add audio autoplay
   render($root) {
     this._create();
+    this._defineChildren();
+    this._activate();
     this._mount($root);
   }
 
   unrender() {
     this._unmount();
+    this._deactivate();
+    this._undefineChildren();
   }
 }

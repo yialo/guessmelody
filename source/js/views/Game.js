@@ -2,19 +2,22 @@ import GameLogoSrc from '@/img/melody-logo-ginger.png';
 import { GAME_OPTIONS } from '@/js/constants.js';
 
 import AbstractView from './_Abstract.js';
-import QuestionView from './Question/Artist.js';
 
-// import QuestionArtistView from './Question/Artist.js';
-// import QuestionGenreView from './Question/Genre.js';
+import QuestionArtistView from './Question/Artist.js';
+import QuestionGenreView from './Question/Genre.js';
 
-// const questionTypeToClass = {
-//   'genre': QuestionGenreView,
-//   'artist': QuestionArtistView,
-// };
+const questionTypeClassMap = {
+  'genre': QuestionGenreView,
+  'artist': QuestionArtistView,
+};
 
 export default class GameView extends AbstractView {
   static addZero(num) {
     return String(num).padStart(2, '0');
+  }
+
+  get _QuestionView() {
+    return questionTypeClassMap[this._model.question.type];
   }
 
   _questionView = null;
@@ -142,8 +145,10 @@ export default class GameView extends AbstractView {
     if (this._questionView) {
       this._questionView.unrender();
     }
-    this._questionView = new QuestionView(this._model.question);
+    this._questionView = new this._QuestionView(this._model.question);
     this._questionView.render(this._$question);
+
+    // NOTE: remove after test
     console.log(this._model.question);
   }
 

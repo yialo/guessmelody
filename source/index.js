@@ -1,5 +1,6 @@
 /**
  * TODO:
+ * - Возможно, выделить шаблоны в отдельные файлы
  * - Fix test files
  * - Rework abstract classes with composition, because of Interface segregation principle
  */

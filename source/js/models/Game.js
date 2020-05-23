@@ -30,11 +30,30 @@ const ARTIST_QUESTION_MOCK = {
   answer: 0,
 };
 
+const GENRE_QUESTION_MOCK = {
+  type: 'genre',
+  trackList: [
+    {
+      audioSrc: `${process.env.PUBLIC_PATH}files/audio/firefly.mp3`,
+    },
+    {
+      audioSrc: `${process.env.PUBLIC_PATH}files/audio/in_the_land_of_rhinoplasty.mp3`,
+    },
+    {
+      audioSrc: `${process.env.PUBLIC_PATH}files/audio/level_plane.mp3`,
+    },
+    {
+      audioSrc: `${process.env.PUBLIC_PATH}files/audio/long_stroll.mp3`,
+    },
+  ],
+  targetGenre: 'Jazz',
+};
+
 const MOCK_INITIAL_STATE = {
   minutes: 5,
   seconds: 0,
   mistakes: 0,
-  questions: new Array(GAME_OPTIONS.QUESTIONS).fill(ARTIST_QUESTION_MOCK),
+  questions: [ARTIST_QUESTION_MOCK, GENRE_QUESTION_MOCK],
   questionIndex: 0,
 };
 
