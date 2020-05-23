@@ -1,7 +1,9 @@
 const EXTENSION_MAP = { img: 'jpg', audio: 'mp3' };
 
 export const getFilePath = (type, text) => (
-  `./files/${type}/${text.toLowerCase().replace(/ /g, '_')}.${EXTENSION_MAP[type]}`
+  `${process.env.PUBLIC_PATH}files/${type}/${
+    text.toLowerCase().replace(/ /g, '_')
+  }.${EXTENSION_MAP[type]}`
 );
 
 const MELODY_DATA_LIST = [

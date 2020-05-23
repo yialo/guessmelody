@@ -8,10 +8,11 @@ const sass = require('sass');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CssExtractPlugin = require('mini-css-extract-plugin');
 const CssOptimizationPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin: CleanPlugin } = require('clean-webpack-plugin');
-const { ProgressPlugin } = require('webpack');
+const { DefinePlugin, ProgressPlugin } = require('webpack');
 
 const distPath = path.join(__dirname, 'build');
 const srcPath = path.join(__dirname, 'source');
@@ -20,6 +21,8 @@ const PATH = {
   DIST: distPath,
   SRC: srcPath,
   ENTRY: path.join(srcPath, 'index.js'),
+  STATIC_INPUT: path.join(srcPath, 'files'),
+  STATIC_OUTPUT: path.join(distPath, 'files'),
   TEMPLATE: path.join(srcPath, 'index.ejs'),
 };
 
@@ -44,6 +47,7 @@ module.exports = (env) => {
       hot: false,
       inline: true,
       overlay: true,
+      writeToDisk: true,
     } : {},
 
     devtool: isDevelopment ? 'eval-source-map' : false,
@@ -99,30 +103,33 @@ module.exports = (env) => {
           ],
         };
 
-        const getFileLoaderRule = ({ testRegexp, outputPath }) => ({
-          test: testRegexp,
-          loader: 'file-loader',
-          options: {
-            name: `[name]${assetHash}.[ext]`,
-            outputPath,
-          },
-        });
-
         return [
           scriptLoaderRule,
           templateLoaderRule,
           styleLoaderRule,
-          getFileLoaderRule({
-            testRegexp: /\.ico$/,
-          }),
-          getFileLoaderRule({
-            testRegexp: /\.(jpe?g|png|svg)$/,
-            outputPath: 'img',
-          }),
-          getFileLoaderRule({
-            testRegexp: /\.woff2?$/,
-            outputPath: 'fonts',
-          }),
+          {
+            test: /\.ico$/,
+            loader: 'file-loader',
+            options: {
+              name: `[name]${assetHash}.[ext]`,
+            },
+          },
+          {
+            test: /\.(jpe?g|png|svg)$/,
+            loader: 'file-loader',
+            options: {
+              name: `[name]${assetHash}.[ext]`,
+              outputPath: 'img',
+            },
+          },
+          {
+            test: /\.woff2?$/,
+            loader: 'file-loader',
+            options: {
+              name: `[name]${assetHash}.[ext]`,
+              outputPath: 'fonts',
+            },
+          },
         ];
       })(),
     },
@@ -191,6 +198,14 @@ module.exports = (env) => {
       new CleanPlugin({
         cleanStaleWebpackAssets: false,
       }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: PATH.STATIC_INPUT,
+            to: PATH.STATIC_OUTPUT,
+          },
+        ],
+      }),
       new ProgressPlugin(),
       new CssExtractPlugin({
         filename: `css/[name]${assetHash}.css`,
@@ -198,6 +213,9 @@ module.exports = (env) => {
       new HtmlPlugin({
         filename: 'index.html',
         template: PATH.TEMPLATE,
+      }),
+      new DefinePlugin({
+        'process.env.PUBLIC_PATH': JSON.stringify(publicPath),
       }),
     ],
 

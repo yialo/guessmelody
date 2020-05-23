@@ -1,6 +1,8 @@
 env:
   browser: true
   es6: true
+globals:
+  process: readonly
 ignorePatterns:
   - '*.html'
   - /build/
