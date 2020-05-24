@@ -9,8 +9,6 @@ const INITIAL_STATE = {
 };
 
 export default class GameModel {
-  _options = { ...GAME_OPTIONS };
-
   constructor(questions) {
     this._state = { ...INITIAL_STATE, questions };
   }
