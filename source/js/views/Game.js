@@ -2,7 +2,6 @@ import GameLogoSrc from '@/img/melody-logo-ginger.png';
 import { GAME_OPTIONS } from '@/js/constants.js';
 
 import AbstractView from './_Abstract.js';
-
 import QuestionArtistView from './Question/Artist.js';
 import QuestionGenreView from './Question/Genre.js';
 

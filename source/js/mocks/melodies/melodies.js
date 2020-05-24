@@ -1,29 +1,37 @@
-const EXTENSION_MAP = { img: 'jpg', audio: 'mp3' };
+import MELODY_DATA from './melodies.json';
 
-export const getFilePath = (type, text) => (
-  `${process.env.PUBLIC_PATH}files/${type}/${
-    text.toLowerCase().replace(/ /g, '_')
-  }.${EXTENSION_MAP[type]}`
-);
+const MELODY_DATA_LIST = MELODY_DATA.melodies;
+const FILE_TYPE_MAP = {
+  image: {
+    dir: 'img',
+    ext: 'jpg',
+  },
+  audio: {
+    dir: 'audio',
+    ext: 'mp3',
+  },
+};
 
-const MELODY_DATA_LIST = [
-  ['Kevin MacLeod', 'Long Stroll', 'Jazz'],
-  ['Jingle Punks', 'In the Land of Rhinoplasty', 'Rock'],
-  ['Audionautix', 'Travel Light', 'Country'],
-  ['Riot', 'Level Plane', 'R&B'],
-  ['Jingle Punks', 'Lucky Day', 'Pop'],
-  ['Quincas Moreira', 'Firefly', 'Electronic'],
-];
+const getFilePath = (type, filename) => {
+  const { dir, ext } = FILE_TYPE_MAP[type];
+  return `${process.env.PUBLIC_PATH}files/${dir}/${filename}.${ext}`;
+};
 
 class Melody {
-  constructor(melodyDataTuple) {
-    const [artist, name, genre] = melodyDataTuple;
+  constructor(melodyData) {
+    const {
+      artist,
+      title,
+      genre,
+      image,
+      audio,
+    } = melodyData;
 
     this.artist = artist;
-    this.name = name;
+    this.title = title;
     this.genre = genre;
-    this.audio = getFilePath('audio', this.name);
-    this.image = getFilePath('img', this.artist);
+    this.audio = getFilePath('audio', audio);
+    this.image = getFilePath('image', image);
   }
 }
 

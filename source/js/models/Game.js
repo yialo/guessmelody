@@ -12,19 +12,19 @@ const INITIAL_STATE = {
 
 const ARTIST_QUESTION_MOCK = {
   type: 'artist',
-  trackSrc: `${process.env.PUBLIC_PATH}files/audio/long_stroll.mp3`,
+  trackSrc: `${process.env.PUBLIC_PATH}files/audio/muse__map_of_the_problematique.mp3`,
   artistList: [
     {
-      name: 'Kevin MacLeod',
-      imgSrc: `${process.env.PUBLIC_PATH}files/img/kevin_macleod.jpg`,
+      name: 'Muse',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/muse.jpg`,
     },
     {
-      name: 'Jingle Punks',
-      imgSrc: `${process.env.PUBLIC_PATH}files/img/jingle_punks.jpg`,
+      name: 'The Prodigy',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/the_prodigy.jpg`,
     },
     {
-      name: 'Audionautix',
-      imgSrc: `${process.env.PUBLIC_PATH}files/img/audionautix.jpg`,
+      name: 'Blackmore\'s Night',
+      imgSrc: `${process.env.PUBLIC_PATH}files/img/blackmore's_night.jpg`,
     },
   ],
   answer: 0,
