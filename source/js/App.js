@@ -5,7 +5,7 @@ import GameController from './controllers/Game.js';
 // import ResultController from '../controllers/Result.js';
 import WelcomeController from './controllers/Welcome.js';
 
-const mockedQuestions = [
+const getMockedQuestions = () => [
   new ArtistQuestionMock([0, 1, 2], 0),
   new GenreQuestionMock([0, 1, 2, 3], 0),
 ];
@@ -47,7 +47,8 @@ export default class App {
 
     this._welcome.show();
     this._fetchQuestions()
-      .then(() => {
+      .then((questions) => {
+        this._questions = questions;
         this._welcome.enable();
       })
       .catch(() => {
@@ -56,7 +57,7 @@ export default class App {
   }
 
   _showGame() {
-    this._game = new GameController(mockedQuestions);
+    this._game = new GameController(this._questions);
 
     this._game.onReset = () => {
       this._game.disableBackLink();
@@ -95,8 +96,8 @@ export default class App {
   _fetchQuestions() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        this._questions = mockedQuestions;
-        resolve();
+        const questions = getMockedQuestions();
+        resolve(questions);
       }, 500);
     });
   }
