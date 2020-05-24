@@ -43,7 +43,7 @@ export default class QuestonArtistView extends AbstractView {
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
         <button class="track__button" type="button" disabled></button>
-        <audio autoplay loop>
+        <audio loop autoplay>
           <source src="${this._question.trackSrc}" type="audio/mpeg">
         </audio>
       </div>
@@ -86,13 +86,6 @@ export default class QuestonArtistView extends AbstractView {
   _activate() {
     this._$audio.addEventListener('playing', this._onAudioPlaying);
     this._$audio.addEventListener('pause', this._onAudioPause);
-
-    // TODO: make handler removable
-    this._$audio.addEventListener('error', (evt) => {
-      // TODO: add external handler to show error info in modal
-      this._$playerButton.disabled = false;
-    });
-
     this._$playerButton.addEventListener('click', this._onPlayerButtonClick);
   }
 

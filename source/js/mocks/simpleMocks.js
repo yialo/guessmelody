@@ -14,7 +14,7 @@ export class ArtistQuestionMock {
     this.artistList = melodyIndexList.map((index) => {
       const melody = MELODIES[index];
       return {
-        name: melody.title,
+        name: melody.artist,
         imgSrc: melody.image,
       };
     });
