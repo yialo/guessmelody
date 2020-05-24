@@ -3,35 +3,35 @@
     {
       "artist": "Muse",
       "title": "Map of the Problematique",
-      "genre": "rock",
+      "genre": "Rock",
       "image": "muse",
       "audio": "muse__map_of_the_problematique"
     },
     {
       "artist": "The Prodigy ",
       "title": "Firestarter",
-      "genre": "electronic",
+      "genre": "Electronic",
       "image": "the_prodigy",
       "audio": "the_prodigy__firestarter"
     },
     {
       "artist": "Blackmore's Night",
       "title": "Wish You Were Here",
-      "genre": "folk",
+      "genre": "Folk",
       "image": "blackmore's_night",
       "audio": "blackmore's_night_wish_you_were_here"
     },
     {
       "artist": "Depeche Mode",
       "title": "In Your Room",
-      "genre": "synthpop",
+      "genre": "Synthpop",
       "image": "depeche_mode",
       "audio": "depeche_mode__in_your_room"
     },
     {
       "artist": "Desiderii Marginis",
       "title": "Constant Like the Northern Star",
-      "genre": "dark ambient",
+      "genre": "Dark Ambient",
       "image": "desiderii_marginis",
       "audio": "desiderii_marginis__constant_like_the_northern_star"
     }
