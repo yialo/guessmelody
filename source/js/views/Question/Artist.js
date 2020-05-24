@@ -9,7 +9,6 @@ export default class QuestonArtistView extends AbstractView {
     isFirstPlay: true,
   };
 
-  // FIXME: replace corrupted MP3 files
   constructor(question) {
     super();
     this._question = question;
@@ -44,7 +43,7 @@ export default class QuestonArtistView extends AbstractView {
       <h2 class="game__title">Кто исполняет эту песню?</h2>
       <div class="game__track">
         <button class="track__button" type="button" disabled></button>
-        <audio loop autoplay>
+        <audio autoplay loop>
           <source src="${this._question.trackSrc}" type="audio/mpeg">
         </audio>
       </div>
@@ -85,18 +84,20 @@ export default class QuestonArtistView extends AbstractView {
   }
 
   _activate() {
-    this._$audio.addEventListener('play', this._onAudioPlaying);
+    this._$audio.addEventListener('playing', this._onAudioPlaying);
     this._$audio.addEventListener('pause', this._onAudioPause);
-    this._$playerButton.addEventListener('click', this._onPlayerButtonClick);
 
+    // TODO: make handler removable
     this._$audio.addEventListener('error', (evt) => {
-      console.log(evt);
+      // TODO: add external handler to show error info in modal
       this._$playerButton.disabled = false;
     });
+
+    this._$playerButton.addEventListener('click', this._onPlayerButtonClick);
   }
 
   _deactivate() {
-    this._$audio.removeEventListener('play', this._onAudioPlaying);
+    this._$audio.removeEventListener('playing', this._onAudioPlaying);
     this._$audio.removeEventListener('pause', this._onAudioPause);
     this._$playerButton.removeEventListener('click', this._onPlayerButtonClick);
   }
