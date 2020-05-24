@@ -32,6 +32,10 @@ export default class WelcomeView extends AbstractView {
     this._onStart = callback;
   }
 
+  enableButton() {
+    this._$button.disabled = false;
+  }
+
   _onButtonClick() {
     if (typeof this._onStart === 'function') {
       this._onStart();

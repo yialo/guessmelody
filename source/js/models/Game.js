@@ -1,8 +1,4 @@
-import cloneDeep from 'lodash.clonedeep';
-
 import { GAME_OPTIONS } from '@/js/constants.js';
-
-import { ArtistQuestionMock, GenreQuestionMock } from '../mocks/simpleMocks.js';
 
 const INITIAL_STATE = {
   minutes: 5,
@@ -12,24 +8,11 @@ const INITIAL_STATE = {
   questionIndex: 0,
 };
 
-const mockedQuestions = [
-  new ArtistQuestionMock([0, 1, 2], 0),
-  new GenreQuestionMock([0, 1, 2, 3], 0),
-];
-
-const MOCK_INITIAL_STATE = {
-  minutes: 5,
-  seconds: 0,
-  mistakes: 0,
-  questions: mockedQuestions,
-  questionIndex: 0,
-};
-
 export default class GameModel {
   _options = { ...GAME_OPTIONS };
 
-  constructor(needMock) {
-    this._state = cloneDeep(needMock ? INITIAL_STATE : MOCK_INITIAL_STATE);
+  constructor(questions) {
+    this._state = { ...INITIAL_STATE, questions };
   }
 
   get minutes() {

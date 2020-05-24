@@ -1,11 +1,11 @@
-import GameOptions from '../game-options.js';
+import { GAME_OPTIONS } from '@/js/constants.js';
 
 export default (playerResult, otherResults) => {
   if (!playerResult.timeRemain) {
     return 'Время вышло! Вы не успели отгадать все мелодии.';
   }
 
-  if (playerResult.mistakesDone === GameOptions.ATTEMPTS) {
+  if (playerResult.mistakesDone === GAME_OPTIONS.ATTEMPTS) {
     return 'У вас закончились все попытки. Ничего, повезёт в следующий раз!';
   }
 

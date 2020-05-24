@@ -28,14 +28,33 @@ export default class GameView extends AbstractView {
   _$question = null;
   _$timer = null;
 
+  _state = {
+    isLogoLinkEnabled: true,
+  };
+
   constructor(model = {}) {
     super();
     this._model = model;
+
     this._onLogoClick = this._onLogoClick.bind(this);
   }
 
   set onReset(callback) {
     this._onReset = callback;
+  }
+
+  disableLogoLink() {
+    this._state = {
+      ...this._state,
+      isLogoLinkEnabled: false,
+    };
+  }
+
+  enableLogoLink() {
+    this._state = {
+      ...this._state,
+      isLogoLinkEnabled: true,
+    };
   }
 
   updateTimer() {
@@ -110,7 +129,7 @@ export default class GameView extends AbstractView {
 
   _onLogoClick(evt) {
     evt.preventDefault();
-    if (typeof this._onReset === 'function') {
+    if (this._state.isLogoLinkEnabled && typeof this._onReset === 'function') {
       this._onReset();
     }
   }

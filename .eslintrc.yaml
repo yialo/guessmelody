@@ -408,7 +408,7 @@ rules:
   no-misleading-character-class: error
   no-mixed-operators:
     - error
-    - allowSamePrecedence: false
+    - allowSamePrecedence: true
       groups:
         - - '%'
           - '**'

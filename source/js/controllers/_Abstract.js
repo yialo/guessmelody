@@ -1,6 +1,6 @@
 import { restrictAbstractCall } from '@/js/utils/errors.js';
 
-class AbstractController {
+export default class AbstractController {
   static $root = document.getElementById('app');
 
   _view = null;
@@ -19,5 +19,3 @@ class AbstractController {
     this._view.unrender();
   }
 }
-
-export default AbstractController;

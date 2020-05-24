@@ -16,14 +16,22 @@ export default class GameController extends AbstractController {
   _timer = null;
   _view = null;
 
-  constructor() {
+  constructor(questions) {
     super();
-    this._model = new GameModel();
+    this._model = new GameModel(questions);
     this._view = new GameView(this._model);
   }
 
   set onReset(callback) {
     this._view.onReset = callback;
+  }
+
+  disableBackLink() {
+    this._view.disableLogoLink();
+  }
+
+  enableBackLink() {
+    this._view.enableLogoLink();
   }
 
   startTimer(questionView) {

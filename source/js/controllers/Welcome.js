@@ -10,4 +10,8 @@ export default class WelcomeController extends AbstractController {
   set onStart(callback) {
     this._view.onStart = callback;
   }
+
+  enable() {
+    this._view.enableButton();
+  }
 }
