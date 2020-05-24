@@ -25,11 +25,15 @@
   border-left-color: var(--color_orange);
   border-width: 70px 0 70px 100px;
 
-  &:hover {
+  &:disabled {
+    border-left-color: var(--color_orange-grayscale);
+  }
+
+  &:not(:disabled):hover {
     transform: scale(1.05);
   }
 
-  &:active {
+  &:not(:disabled):active {
     transform: scale(1.04);
   }
 }

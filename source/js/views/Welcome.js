@@ -16,7 +16,7 @@ export default class WelcomeView extends AbstractView {
         <div class="welcome__logo">
           <img src="${LogoSrc}" alt="Угадай мелодию" width="186" height="83">
         </div>
-        <button class="welcome__button" aria-label="Начать игру"></button>
+        <button class="welcome__button" aria-label="Начать игру" disabled></button>
         <h2 class="welcome__rules-title">Правила игры</h2>
         <p class="welcome__text">Правила просты:</p>
         <ul class="welcome__rules-list">

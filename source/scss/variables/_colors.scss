@@ -10,4 +10,5 @@
   --color_text-grey: #808080;
   --color_correct: #36b742;
   --color_orange-lighten: #{color.scale($color-orange, $lightness: +15%)};
+  --color_orange-grayscale: #{color.grayscale($color-orange)};
 }
