@@ -18,7 +18,7 @@ module.exports = {
       {
         corejs: 3,
         loose: false,
-        modules: 'auto',
+        modules: (process.env.BABEL_ENV === 'test' ? 'auto' : false),
         useBuiltIns: 'usage',
       },
     ],
