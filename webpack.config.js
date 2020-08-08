@@ -26,7 +26,7 @@ const PATH = {
   TEMPLATE: path.join(srcPath, 'index.ejs'),
 };
 
-module.exports = (env) => {
+module.exports = (env = {}) => {
   const { target } = env;
 
   process.env.BABEL_ENV = target;
@@ -68,11 +68,6 @@ module.exports = (env) => {
           },
         };
 
-        const templateLoaderRule = {
-          test: /\.ejs$/,
-          loader: 'ejs-loader',
-        };
-
         const styleLoaderRule = {
           test: /\.s?css$/,
           use: [
@@ -105,7 +100,6 @@ module.exports = (env) => {
 
         return [
           scriptLoaderRule,
-          templateLoaderRule,
           styleLoaderRule,
           {
             test: /\.ico$/,
@@ -223,6 +217,10 @@ module.exports = (env) => {
       alias: {
         '@': PATH.SRC,
       },
+      extensions: [
+        '.js',
+        '.ts',
+      ],
     },
 
     stats: (() => {
