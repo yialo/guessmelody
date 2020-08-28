@@ -7,31 +7,21 @@ module.exports = {
   },
   ignorePatterns: [
     '*.html',
-    '/dist/',
-    '/extra/',
+    '/build/',
   ],
-  parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
-  },
   overrides: [
     {
-      files: ['./**/*.{spec,test}.ts?(x)'],
-      extends: ['yialo/preset-web-ts-check-jest'],
+      files: ['./**/*.{spec,test}.js'],
+      extends: ['yialo/preset-web-babel-jest'],
     },
     {
       files: [
         './*.js',
-        './scripts/**/*.js',
       ],
       extends: ['yialo/preset-node'],
       settings: {
         'import/resolver': 'node',
       },
-    },
-    {
-      files: ['./src/**/*.ts?(x)'],
-      extends: ['yialo/preset-web-ts-check'],
     },
   ],
   rules: {
