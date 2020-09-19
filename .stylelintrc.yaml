@@ -1,6 +1,7 @@
 ---
   extends:
-    - stylelint-config-yialo
+    - stylelint-config-yialo/base
+    - stylelint-config-yialo/scss
   ignoreFiles:
     - '**/*.html'
     - ./build/**

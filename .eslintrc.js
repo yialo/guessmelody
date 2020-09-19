@@ -24,14 +24,6 @@ module.exports = {
       },
     },
   ],
-  rules: {
-    'import/no-unassigned-import': [
-      'error',
-      {
-        allow: ['**/*.{?(s)css,jp?(e)g,png,svg}'],
-      },
-    ],
-  },
   settings: {
     'import/resolver': 'webpack',
   },
