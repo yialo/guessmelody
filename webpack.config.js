@@ -43,8 +43,9 @@ module.exports = (env = {}) => {
     devServer: isDevelopment ? {
       host: '127.0.0.1',
       port: 3502,
-      hot: false,
+      hot: true,
       inline: true,
+      open: true,
       overlay: true,
       writeToDisk: false,
     } : {},
