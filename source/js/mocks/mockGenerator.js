@@ -1,5 +1,5 @@
 import { GAME_OPTIONS } from '@/js/constants.js';
-import MELODIES from './melodies/melodies.js';
+import MELODIES from './melodies.js';
 
 const QUESTION_TYPES = ['genre', 'artist'];
 const TRACK_LIST_SIZE = {
@@ -7,9 +7,9 @@ const TRACK_LIST_SIZE = {
   artist: 3,
 };
 
-const getRandomInteger = (max, min = 0) => {
-  const delta = max - min;
-  return min + Math.round(Math.random() * delta);
+const getRandomInteger = ({ min = 0, max }) => {
+  const scaledRandom = min + Math.random() * (max - min + 1);
+  return Math.floor(scaledRandom);
 };
 
 const getRandomArrayElement = (arr) => {
